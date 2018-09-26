@@ -33,7 +33,7 @@ pipeline {
                             
                    dir ('/home/CustDeploy') {
                
-                  sh "unzip /home/CustDeploy/CusDeploy/wcbd-deploy-server-local-$apptype-$label.zip
+                  sh "unzip /home/CustDeploy/CusDeploy/wcbd-deploy-server-local-$apptype-$label.zip"
              
               }
                     
