@@ -50,7 +50,7 @@
 	<wcf:param name="pageGroup" value="${pageGroup}"/>
 </wcf:rest>
 
-<c:set var="pageTitle" value="GITHUBTEST1" />
+<c:set var="pageTitle" value="GITHUBTESTING" />
 <c:set var="metaDescription" value="${page.metaDescription}" />
 <c:set var="metaKeyword" value="${page.metaKeyword}" />
 <c:set var="fullImageAltDescription" value="${page.fullImageAltDescription}" scope="request" />
