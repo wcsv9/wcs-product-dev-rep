@@ -41,7 +41,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/home/CustDeploy') {
-                    sh "docker build -f Dockerfile . -t  crs-app:9.0.0.1"
+                    sh "docker build -f Dockerfile . -t  commerce/crs-app:9.0.0.1"
                     
                     }
             }
