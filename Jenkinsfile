@@ -30,7 +30,7 @@ pipeline {
                 steps { 
                             
                    dir ('/home/') {
-               
+                   sh 'rm -rf /home/CustDeploy/CusDeploy/*'
                   sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /home/CustDeploy/CusDeploy/'
              
               }
