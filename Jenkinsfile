@@ -4,7 +4,7 @@ pipeline {
         stage('checking out') {
             agent { label 'wcsv9' }
             steps { 
-             echo "Checking out to Mounted Repo"
+             echo "Checking out to Mounted Volume"
               
             }
         }
@@ -37,7 +37,17 @@ pipeline {
                     
             }
             }
-			         stage('Starting Container ') {
+		 stage('Updating Image with Changes ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/home/CustDeploy') {
+                    sh "docker build -f Dockerfile . -t  crs-app:9.0.0.1"
+                    
+                    }
+            }
+            }	        
+		
+		stage('Starting Container ') {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/home/') {
