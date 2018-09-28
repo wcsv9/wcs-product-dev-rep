@@ -40,7 +40,7 @@ pipeline {
 		 stage('Updating Image with Changes ') {
             agent { label 'wcsv9' }
                 steps { 
-                    dir ('opt/Deploy/CustDeploy') {
+                    dir ('/opt/Deploy/CustDeploy') {
                     sh 'docker build -f Dockerfile . -t  gcr.io/coastal-antler-216919/crs-app:9.0.0."$image"'
                     
                     }
