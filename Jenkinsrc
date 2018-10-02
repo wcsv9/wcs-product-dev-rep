@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent { label 'wcsv9' }
         stages {
         stage('checking out') {
             agent { label 'wcsv9' }
