@@ -20,7 +20,7 @@ pipeline {
             stage('Copying Package to Deploy Folder') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'docker cp -L 688c31fce3fa:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /opt/Deploy/'
+                   sh 'docker cp -L 688c31fce3fa:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /data/Deploy'
                   
                     
             }
