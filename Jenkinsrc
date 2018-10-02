@@ -40,7 +40,7 @@ pipeline {
 		 stage('Updating Image with Changes ') {
             agent { label 'wcsv9' }
                 steps { 
-                    dir ('/data/Deploy/CustDeploy/CustDeploy') {
+                    dir ('/data/Deploy/CustDeploy/') {
                     sh 'docker build -f Dockerfile . -t  192.168.17.92:5000/crs-app:9.0.0."$image"'
                     
                     }
