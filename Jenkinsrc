@@ -59,8 +59,8 @@ pipeline {
 			stage('Updating Pod') {
             agent { label 'wcsv9' }
                 steps { 
-		   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf'
-                   sh 'kubectl set image deployment/demoqaauthcrs-app crs-app=192.168.17.92:5000/crs-app:9.0.0."$image"'
+		   
+                    sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauthcrs-app crs-app=192.168.17.92:5000/crs-app:9.0.0."$image"'
                   
                     
             }
