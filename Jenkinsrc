@@ -52,6 +52,7 @@ pipeline {
                 steps { 
                     dir ('/data/Deploy/CustDeploy/CustDeploy') {
                     echo "Pushing"
+		    sh 'docker push 192.168.17.92:5000/crs-app:9.0.0."$image"'
                     
                     }
             }
