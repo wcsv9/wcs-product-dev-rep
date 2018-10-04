@@ -6,7 +6,7 @@ pipeline {
             agent { label 'wcsv9' }
             steps { 
              echo "Checking out to Mounted Volume"
-              
+              checkout scm
             }
         }
             stage('Creating WCB Commerce Build') {
