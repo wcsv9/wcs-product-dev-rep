@@ -32,7 +32,7 @@ pipeline {
                    dir ('/data/Deploy') {
                    sh 'rm -rf /data/Deploy/CustDeploy/CustDeploy/*'
 		   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauthcrs-app crs-app=192.168.17.92:5000/crs-app:9.0.0."$image"'
-                  sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /data/Deploy/CustDeploy/CustDeploy'
+                  
              
               }
                     
@@ -42,7 +42,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/data/Deploy/CustDeploy/') {
-                    sh 'docker build -f Dockerfile . -t  192.168.17.92:5000/crs-app:9.0.0."$image"'
+                    sh 'docker images |grep crs-app'
                     
                     }
             }
@@ -53,7 +53,7 @@ pipeline {
                 steps { 
                     dir ('/data/Deploy/CustDeploy/CustDeploy') {
                     echo "Pushing"
-		    sh 'docker push 192.168.17.92:5000/crs-app:9.0.0."$image"'
+		    sh 'docker ps'
                     
                     }
             }
