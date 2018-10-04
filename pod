@@ -1,11 +1,68 @@
 pipeline {
     agent none
         stages {
- stage('Updating Pod') {
+        stage('checking out') {
+            agent { label 'wcsv9' }
+            steps { 
+             echo "Checking out to Mounted Volume"
+              
+            }
+        }
+            stage('Creating WCB Commerce Build') {
+            agent { label 'wcsv9' }
+                steps { 
+             echo "Building Image in Utility Container"
+                    sh 'docker exec -i 688c31fce3fa bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
+              
+            }
+            }
+			
+            stage('Copying Package to Deploy Folder') {
+            agent { label 'wcsv9' }
+                steps { 
+                   sh 'docker cp -L 688c31fce3fa:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /data/Deploy'
+                  
+                    
+            }
+            }
+			   stage('Unpacking Deploy package') {
+            agent { label 'wcsv9' }
+                steps { 
+                            
+                   dir ('/data/Deploy') {
+                   sh 'rm -rf /data/Deploy/CustDeploy/CustDeploy/*'
+		   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauthcrs-app crs-app=192.168.17.92:5000/crs-app:9.0.0."$image"'
+                  sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /data/Deploy/CustDeploy/CustDeploy'
+             
+              }
+                    
+            }
+            }
+		 stage('Updating Image with Changes ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/data/Deploy/CustDeploy/') {
+                    sh 'docker build -f Dockerfile . -t  192.168.17.92:5000/crs-app:9.0.0."$image"'
+                    
+                    }
+            }
+            }	        
+		
+		stage('Pushing to Repo ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/data/Deploy/CustDeploy/CustDeploy') {
+                    echo "Pushing"
+		    sh 'docker push 192.168.17.92:5000/crs-app:9.0.0."$image"'
+                    
+                    }
+            }
+            }
+			stage('Updating Pod') {
             agent { label 'wcsv9' }
                 steps { 
 		   
-                   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauthcrs-app crs-app=192.168.17.92:5000/crs-app:9.0.0."$image"'
+                   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl rollout status -w deployment demoqaauthcrs-app'
                   
                     
             }
