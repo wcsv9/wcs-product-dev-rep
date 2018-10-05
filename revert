@@ -1,0 +1,35 @@
+pipeline {
+    agent none
+    options { skipDefaultCheckout() }
+        stages {
+        
+           
+			
+            stage('Reverting') {
+            agent { label 'wcsv9' }
+                steps { 
+                            
+                   dir ('/data/Deploy') {
+                   
+		   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauthcrs-app crs-app=192.168.17.92:5000/crs-app:9.0.0."$image"'
+                  
+             
+              }
+                    
+            }
+            }
+		 	        
+			stage('Updating and Checking Status of Image') {
+            agent { label 'wcsv9' }
+                steps { 
+		   
+                   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl rollout status -w deployment demoqaauthcrs-app'
+                  
+                    
+            }
+            }
+            
+            
+            
+        }
+}
