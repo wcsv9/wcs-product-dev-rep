@@ -63,7 +63,7 @@ pipeline {
             agent { label 'wcsv96' }
                 steps { 
 		   
-                   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl rollout status -w deployment demoqaauthcrs-app'
+                   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl rollout status -w deployment demoqaauthcrs-app &'
                   
                     
             }
