@@ -27,7 +27,7 @@ pipeline {
             }
             }
 			   stage('Unpacking Deploy package') {
-            agent { label 'wcsv9' }
+            agent { label 'wcsv96' }
                 steps { 
                             
                    dir ('/data/Deploy') {
@@ -40,7 +40,7 @@ pipeline {
             }
             }
 		 stage('Updating Image with Changes ') {
-            agent { label 'wcsv9' }
+            agent { label 'wcsv96' }
                 steps { 
                     dir ('/data/Deploy/CustDeploy/') {
                     sh 'docker images'
@@ -50,7 +50,7 @@ pipeline {
             }	        
 		
 		stage('Pushing to Repo ') {
-            agent { label 'wcsv9' }
+            agent { label 'wcsv96' }
                 steps { 
                     dir ('/data/Deploy/CustDeploy/CustDeploy') {
                     echo "Pushing"
@@ -60,7 +60,7 @@ pipeline {
             }
             }
 			stage('Updating Pod') {
-            agent { label 'wcsv9' }
+            agent { label 'wcsv96' }
                 steps { 
 		   
                    sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl rollout status -w deployment demoqaauthcrs-app'
