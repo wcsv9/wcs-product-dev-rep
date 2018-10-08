@@ -4,12 +4,12 @@
     git 'https://github.com/wcsv9/wcs-product-dev-rep.git'
   }
    stage('SonarQube analysis') {
-   ws('/var/lib/jenkins/workspace/sonartest/') {
+   
     // requires SonarQube Scanner 2.8+
     def scannerHome = tool 'sonar';
     withSonarQubeEnv('sonar') {
       sh "${scannerHome}/bin/sonar-scanner scan -Dsonar.host.url=http://192.168.17.99:9000 -Dproject.settings=/var/lib/jenkins/workspace/sonar/sonar-scanner.properties"
-    }
+    
   }
 }
 }
