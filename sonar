@@ -1,6 +1,5 @@
-pipeline  {
-   agent { label 'master' }
-   stage('SCM') {
+node ('master') {
+    stage('SCM') {
     git 'https://github.com/wcsv9/wcs-product-dev-rep.git'
   }
   stage('SonarQube analysis') {
