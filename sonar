@@ -1,6 +1,7 @@
 node {
-  agent { label 'wcsv9' }
+  agent none
   stage('SCM') {
+    agent { label 'wcsv9' }
     git 'https://github.com/wcsv9/wcs-product-dev-rep.git'
   }
   stage('SonarQube analysis') {
