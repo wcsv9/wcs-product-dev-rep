@@ -1,6 +1,6 @@
 node ('master') {
     stage('SCM') {
-   #### git 'https://github.com/wcsv9/wcs-product-dev-rep.git'
+   
   }
   stage('SonarQube analysis') {
     withSonarQubeEnv('sonar') {
