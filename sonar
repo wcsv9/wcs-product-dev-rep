@@ -1,4 +1,4 @@
-node {
+node ('Jenkins') {
    stage('SCM') {
     git 'https://github.com/wcsv9/wcs-product-dev-rep.git'
   }
