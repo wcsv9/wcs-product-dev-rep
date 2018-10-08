@@ -1,5 +1,8 @@
 
  node ('master') {
+ stage('SCM') {
+    git 'https://github.com/wcsv9/wcs-product-dev-rep.git'
+  }
    stage('SonarQube analysis') {
    ws('/var/lib/jenkins/workspace/sonar/sonar-scanner.properties') {
     // requires SonarQube Scanner 2.8+
