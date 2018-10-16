@@ -130,7 +130,7 @@
 			<!-- value to remote store preview context root -->
 			<_config:property name="wc.store.remote.previewContextPath" value="/webapp/remote/preview/servlet"/>
 			<!-- value to kafka servers connection string -->
-			<_config:property name="wc.store.remote.kafka" value=""/>
+			<_config:property name="wc.store.remote.kafka" value="192.168.7.202:9092"/>
 			<!-- value to kafka servers topic prefix -->
 			<_config:property name="wc.store.remote.kafka.topicPrefix" value="sampleprefix"/>
 			<!-- value to remote store web alias -->
@@ -143,9 +143,9 @@
 
 		<_config:configgrouping name="TransactionKafkaConfiguration">
 			<!-- value to kafka servers connection string -->
-			<_config:property name="wc.remote.kafka" value=""/>
+			<_config:property name="wc.remote.kafka" value="192.168.7.202:9092"/>
 			<!-- value to kafka servers connection string -->
-			<_config:property name="wc.remote.zookeeper" value=""/>
+			<_config:property name="wc.remote.zookeeper" value="192.168.7.202:2181"/>
 			<!-- value to kafka servers topic prefix -->
 			<_config:property name="wc.remote.kafka.topicPrefix" value="sampleprefix"/>
 		</_config:configgrouping>
