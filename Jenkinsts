@@ -6,6 +6,7 @@ pipeline {
             agent { label 'wcsv9' }
             steps { 
              echo "Checking out to Mounted Volume"
+	     checkout scm
               
             }
         }
@@ -21,7 +22,7 @@ pipeline {
             stage('Copying Package to Deploy Folder') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'docker cp -L ac9dccabb431:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /data/Deploy'
+                   sh 'docker cp -L ac9dccabb431:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /home/'
                   
                     
             }
@@ -30,7 +31,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                             
-                   dir ('/home/ts-app/CustDeploy') {
+                   dir ('/home/') {
                    sh 'rm -rf /home/ts-app/CustDeploy/*'
                   sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /home/ts-app/CustDeploy'
              
