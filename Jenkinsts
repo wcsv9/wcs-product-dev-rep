@@ -1,0 +1,64 @@
+pipeline {
+    agent none
+        stages {
+        stage('checking out') {
+            agent { label 'wcsv9' }
+            steps { 
+             echo "Checking out to Mounted Volume"
+              
+            }
+        }
+            stage('Creating WCB Commerce Build') {
+            agent { label 'wcsv9' }
+                steps { 
+             echo "Building Image in Utility Container"
+                    sh 'docker exec -i ac9dccabb431 bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
+              
+            }
+            }
+			
+            stage('Copying Package to Deploy Folder') {
+            agent { label 'wcsv9' }
+                steps { 
+                   sh 'docker cp -L ac9dccabb431:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /data/Deploy'
+                  
+                    
+            }
+            }
+			   stage('Unpacking Deploy package') {
+            agent { label 'wcsv9' }
+                steps { 
+                            
+                   dir ('/home/ts-app/CustDeploy') {
+                   sh 'rm -rf /home/ts-app/CustDeploy/*'
+                  sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /home/ts-app/CustDeploy'
+             
+              }
+                    
+            }
+            }
+		 stage('Updating Image with Changes ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/home/ts-app/') {
+                    sh "docker build -f Dockerfile . -t commerce/ts-app:demo
+                    
+                    }
+            }
+            }	        
+		
+		stage('Starting Container ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/home/ts-app/') {
+                    sh "docker-compose -f docker-compose-auth-extdb.yml up -d"
+                    
+                    }
+            }
+            }
+		
+            
+            
+            
+        }
+}
