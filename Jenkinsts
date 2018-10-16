@@ -41,7 +41,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/home/ts-app/') {
-                    sh "docker build -f Dockerfile . -t commerce/ts-app:demo
+                    sh "docker build -f Dockerfile . -t commerce/ts-app:demo"
                     
                     }
             }
