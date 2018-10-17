@@ -11,7 +11,7 @@ pipeline {
                             
                    dir ('/data/Deploy') {
                    
-		   sh ' sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauth"$apptype"-app "$apptype"-app=192.168.17.92:5000/"$apptype"-app:"$image"''
+		   sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauth"$apptype"-app "$apptype"-app=192.168.17.92:5000/"$apptype"-app:"$image"'
                   
              
               }
