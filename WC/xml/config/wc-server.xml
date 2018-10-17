@@ -306,8 +306,7 @@
     <WorkspaceChangeHistoryEnabled enable="true"/>
     <BaseChangeHistoryEnabled enable="false"/>
     <AccessWorkspaceByRoleOrganization enable="false"/>
-    <CrossTransactionCache ... invalidationJobInterval="5">
-</CrossTransactionCache>
+    <CrossTransactionCache ... invalidationJobInterval="5" />
   </InstanceProperties>
   <Components>
     <component compClassName="com.ibm.commerce.content.dynacache.ContentCacheInvalComponent" enable="true" name="ContentCacheInvalComponent">
