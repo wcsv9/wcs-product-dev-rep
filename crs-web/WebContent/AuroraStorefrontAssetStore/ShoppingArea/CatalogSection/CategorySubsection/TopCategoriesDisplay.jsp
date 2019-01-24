@@ -50,7 +50,7 @@
 	<wcf:param name="pageGroup" value="${pageGroup}"/>
 </wcf:rest>
 
-<c:set var="pageTitle" value="Royal Cyber Demo CI/CD" />
+<c:set var="pageTitle" value="Royal Cyber Demo CI/CD....." />
 <c:set var="metaDescription" value="${page.metaDescription}" />
 <c:set var="metaKeyword" value="${page.metaKeyword}" />
 <c:set var="fullImageAltDescription" value="${page.fullImageAltDescription}" scope="request" />
