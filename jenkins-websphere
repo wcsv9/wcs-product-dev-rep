@@ -7,6 +7,12 @@ pipeline {
              echo "Checking out to Mounted Volume"
             }
         }
+        stage('creating directories') {
+            agent { label 'wcsv9' }
+            steps { 
+             sh 'mkdir -p /opt/deploy/CustDeploy/CustDeploy'
+            }
+        }
             stage('Creating WCB Commerce Build') {
             agent { label 'wcsv9' }
                 steps { 
