@@ -5,7 +5,6 @@ pipeline {
             agent { label 'wcsv9' }
             steps { 
              echo "Checking out to Mounted Volume"
-              
             }
         }
             stage('Creating WCB Commerce Build') {
@@ -13,28 +12,21 @@ pipeline {
                 steps { 
              echo "Building Image in Utility Container"
                     sh 'docker exec -i wcbd-server bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
-              
             }
             }
-      
             stage('Copying Package to Deploy Folder') {
             agent { label 'wcsv9' }
                 steps { 
                    sh 'docker cp -L wcbd-server:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /home/Deploy/'
-                  
-                    
             }
             }
          stage('Unpacking Deploy package') {
             agent { label 'wcsv9' }
                 steps { 
-                            
                    dir ('/home/Deploy') {
                    sh 'rm -rf /home/Deploy/CustDeploy/CustDeploy/*'
                   sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /home/Deploy/CustDeploy/CustDeploy/'
-             
               }
-                    
             }
             }
      stage('Updating Image with Changes ') {
@@ -42,17 +34,14 @@ pipeline {
                 steps { 
                     dir ('/home/Deploy/CustDeploy') {
                     sh 'docker build -f Dockerfile . -t  gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
-                    
                     }
             }
             }         
-    
     stage('Pushing to Repo ') {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/home/Deploy/CustDeploy/CustDeploy') {
                     sh 'docker push gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
-                    
                     }
             }
             }
@@ -60,12 +49,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                    sh 'kubectl set image deployment/demoqaauthcrs-app crs-app=gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
-                  
-                    
             }
             }
-            
-            
-            
         }
 }
