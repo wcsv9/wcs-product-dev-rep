@@ -17,22 +17,22 @@ pipeline {
             stage('Copying Package to Deploy Folder') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'docker cp -L wcbd-server:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /home/Deploy/'
+                   sh 'docker cp -L wcbd-server:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /opt/Deploy/'
             }
             }
          stage('Unpacking Deploy package') {
             agent { label 'wcsv9' }
                 steps { 
-                   dir ('/home/Deploy') {
-                   sh 'rm -rf /home/Deploy/CustDeploy/CustDeploy/*'
-                  sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /home/Deploy/CustDeploy/CustDeploy/'
+                   dir ('/opt/Deploy') {
+                   sh 'rm -rf /opt/Deploy/CustDeploy/CustDeploy/*'
+                  sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /opt/Deploy/CustDeploy/CustDeploy/'
               }
             }
             }
      stage('Updating Image with Changes ') {
             agent { label 'wcsv9' }
                 steps { 
-                    dir ('/home/Deploy/CustDeploy') {
+                    dir ('/opt/Deploy/CustDeploy') {
                     sh 'docker build -f Dockerfile . -t  gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
                     }
             }
@@ -40,7 +40,7 @@ pipeline {
     stage('Pushing to Repo ') {
             agent { label 'wcsv9' }
                 steps { 
-                    dir ('/home/Deploy/CustDeploy/CustDeploy') {
+                    dir ('/opt/Deploy/CustDeploy/CustDeploy') {
                     sh 'docker push gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
                     }
             }
