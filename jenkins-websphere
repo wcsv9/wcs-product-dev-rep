@@ -1,16 +1,16 @@
 pipeline {
     agent none
         stages {
-        stage('checking out') {
+        stage('GIT Checkout') {
             agent { label 'wcsv9' }
             steps { 
-             echo "Checking out to Mounted Volume"
+             echo "GIT Checkout on Mounted Volume"
             }
         }
-        stage('creating directories') {
+        stage('Creating Directories') {
             agent { label 'wcsv9' }
             steps { 
-             sh 'mkdir -p /opt/deploy/CustDeploy/CustDeploy'
+             sh 'mkdir -p /opt/deploy/CustDeploy/CustDeploy && cp /opt/deploy/Dockerfile /opt/deploy/CustDeploy/'
             }
         }
             stage('Creating WCB Commerce Build') {
