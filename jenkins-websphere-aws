@@ -1,0 +1,53 @@
+pipeline {
+    agent none
+        stages {
+        stage('GIT Checkout') {
+            steps { 
+             echo "GIT Checkout on Mounted Volume"
+            }
+        }
+        stage('Creating Directories') {
+            steps { 
+             sh 'mkdir -p /opt/deploy/CustDeploy/CustDeploy && cp /opt/deploy/Dockerfile /opt/deploy/CustDeploy/'
+            }
+        }
+            stage('Creating WCB Commerce Build') {
+                steps { 
+             echo "Building Image in Utility Container"
+                    sh 'docker exec -i wcbd-server bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
+            }
+            }
+            stage('Copying Package to Deploy Folder') {
+                steps { 
+                   sh 'docker cp -L wcbd-server:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /opt/deploy/'
+            }
+            }
+         stage('Unpacking Deploy package') {
+                steps { 
+                   dir ('/opt/deploy') {
+                   sh 'rm -rf /opt/deploy/CustDeploy/CustDeploy/*'
+                  sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /opt/deploy/CustDeploy/CustDeploy/'
+              }
+            }
+            }
+     stage('Updating Image with Changes ') {
+                steps { 
+                    dir ('/opt/deploy/CustDeploy') {
+                    sh 'docker build -f Dockerfile . -t  gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
+                    }
+            }
+            }         
+    stage('Pushing to Repo ') {
+                steps { 
+                    dir ('/opt/deploy/CustDeploy/CustDeploy') {
+                    sh 'docker push gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
+                    }
+            }
+            }
+      stage('Updating Pod') {
+                steps { 
+                   sh 'kubectl set image deployment/demoqaauthcrs-app crs-app=gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
+            }
+            }
+        }
+}
