@@ -1,27 +1,33 @@
 pipeline {
+    agent none
         stages {
         stage('GIT Checkout') {
+            agent { label 'wcsv9' }
             steps { 
              echo "GIT Checkout on Mounted Volume"
             }
         }
         stage('Creating Directories') {
+            agent { label 'wcsv9' }
             steps { 
              sh 'mkdir -p /opt/deploy/CustDeploy/CustDeploy && cp /opt/deploy/Dockerfile /opt/deploy/CustDeploy/'
             }
         }
             stage('Creating WCB Commerce Build') {
+            agent { label 'wcsv9' }
                 steps { 
              echo "Building Image in Utility Container"
                     sh 'docker exec -i wcbd-server bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
             }
             }
             stage('Copying Package to Deploy Folder') {
+            agent { label 'wcsv9' }
                 steps { 
                    sh 'docker cp -L wcbd-server:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /opt/deploy/'
             }
             }
          stage('Unpacking Deploy package') {
+            agent { label 'wcsv9' }
                 steps { 
                    dir ('/opt/deploy') {
                    sh 'rm -rf /opt/deploy/CustDeploy/CustDeploy/*'
@@ -30,6 +36,7 @@ pipeline {
             }
             }
      stage('Updating Image with Changes ') {
+            agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/deploy/CustDeploy') {
                     sh 'docker build -f Dockerfile . -t  gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
@@ -37,6 +44,7 @@ pipeline {
             }
             }         
     stage('Pushing to Repo ') {
+            agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/deploy/CustDeploy/CustDeploy') {
                     sh 'docker push gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
@@ -44,6 +52,7 @@ pipeline {
             }
             }
       stage('Updating Pod') {
+            agent { label 'wcsv9' }
                 steps { 
                    sh 'kubectl set image deployment/demoqaauthcrs-app crs-app=gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
             }
