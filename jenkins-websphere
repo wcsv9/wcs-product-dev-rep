@@ -39,7 +39,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/deploy/CustDeploy') {
-                    sh 'docker build -f Dockerfile . -t  gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
+                    sh 'docker build -f Dockerfile . -t  gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
                     }
             }
             }         
@@ -54,7 +54,7 @@ pipeline {
       stage('Updating Pod') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'kubectl set image deployment/demoqaauthcrs-app crs-app=gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
+                   sh 'kubectl set image deployment/demoqaauthcrs-app crs-app=gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
             }
             }
         }
