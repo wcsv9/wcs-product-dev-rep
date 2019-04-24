@@ -54,7 +54,7 @@ pipeline {
       stage('Updating Pod') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'kubectl set image deployment/demoqaauthcrs-app crs-app=gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
+                   sh 'export PATH=$PATH:/root/bin && kubectl set image deployment/demoqaauthcrs-app crs-app=gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
             }
             }
         }
