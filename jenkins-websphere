@@ -47,7 +47,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/deploy/CustDeploy/CustDeploy') {
-                    sh 'docker push gcr.io/rc-devops/commerce/crs-app:9.0.0."$image"'
+                    sh 'docker push gcr.io/tj-devops/commerce/crs-app:9.0.0."$image"'
                     }
             }
             }
