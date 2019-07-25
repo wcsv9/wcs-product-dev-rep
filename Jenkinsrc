@@ -14,7 +14,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
              echo "Building Image in Utility Container"
-                    sh 'docker exec -i utilsdep bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
+                    sh 'docker exec -i wcbd-server-1 bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
               
             }
             }
@@ -22,7 +22,7 @@ pipeline {
             stage('Copying Package to Deploy Folder') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'docker cp -L utilsdep:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /data/Deploy'
+                   sh 'docker cp -L wcbd-server-1:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /data/Deploy'
                   
                     
             }
