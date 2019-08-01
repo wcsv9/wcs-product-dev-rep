@@ -43,7 +43,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/data/Deploy/CustDeploy/') {
-                    sh 'docker build -f Dockerfile."$apptype" . -t 192.168.17.92:5000/"$apptype"-app:"$image"'
+                    sh 'docker build -f Dockerfile."$apptype" . -t 192.168.17.96:5000/"$apptype"-app:"$image"'
                     
                     }
             }
@@ -53,7 +53,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/data/Deploy/CustDeploy/CustDeploy') {
-                    sh 'docker push 192.168.17.92:5000/"$apptype"-app:"$image"'
+                    sh 'docker push 192.168.17.96:5000/"$apptype"-app:"$image"'
 		   
                     
                     }
@@ -63,7 +63,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
 		   
-                    sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauth"$apptype"-app "$apptype"-app=192.168.17.92:5000/"$apptype"-app:"$image"'
+                    sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauth"$apptype"-app "$apptype"-app=192.168.17.96:5000/"$apptype"-app:"$image"'
                   
                     
             }
