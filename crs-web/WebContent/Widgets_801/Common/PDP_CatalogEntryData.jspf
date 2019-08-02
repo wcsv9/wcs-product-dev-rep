@@ -20,8 +20,9 @@
 		<c:set var="productId" value="${WCParam.productId}" />
 	</c:when>
 </c:choose>
+<%--Only the Item need to retrieve the parent product information --%>
 
-<c:if test="${!empty parentCatEntryId}" >
+<c:if test="${!empty parentCatEntryId && queryParent eq 'true'}" >
 	<c:set var="productId" value="${parentCatEntryId}" />		
 </c:if>
 
@@ -200,7 +201,7 @@
 		<c:if test="${empty maximumItemPrice}">
 			<c:set var="maximumPrice" value=""  />
 			<c:choose>
-				<c:when test="${type eq 'product'}">
+				<c:when test="${type eq 'product' || type eq 'variant'}">
 				 	<c:catch>
 						<wcf:rest var="entitledPricesResult" url="/store/{storeId}/price">
 							<wcf:var name="storeId" value="${WCParam.storeId}" />
@@ -357,7 +358,7 @@
 			<c:if test="${!isSubscription || (fulfillmentFrequency != '' && paymentFrequency != '' && aValidTimePeriod != '')}" >
 				<c:choose>
 					<%-- If it is a product iterate through all its SKUs --%>
-					<c:when test="${type eq 'product'}">
+					<c:when test="${type eq 'product' || type eq 'variant'}">
 						<c:forEach var="entitledItem" items="${entitledItems}">
 							<c:if test = "${entitledItem.buyable eq 'true'}">
 								<c:set var="productAvailable" value="true"/> <%-- We have one item which is marked as buyable..Show AddToCart button --%>

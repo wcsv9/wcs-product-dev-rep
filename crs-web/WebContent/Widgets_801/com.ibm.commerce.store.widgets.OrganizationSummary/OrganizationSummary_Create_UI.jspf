@@ -12,6 +12,52 @@
  =================================================================
 --%>
 <div class="pageSection">
+	<%-- Organization Contact Info Details --%>
+	<div class="pageSectionTitle">
+		<p><wcst:message bundle="${widgetText}" key="ORG_CONTACT_INFO"/></p>
+	</div>
+
+	<div class="editField col12 row">
+		<c:forEach items = "${contactInfoFieldsForOrg}" var = "fieldName" varStatus="counter">
+			<c:set var="ariaRequiredAttribute" value=""/>
+			<c:if test="${fn:contains(mandatoryFields, fieldName)}">
+				<c:set var="ariaRequiredAttribute">aria-required="true"</c:set>
+			</c:if>
+			<c:if test="${(counter.count - 1) % 3 eq 0}"> 
+				<div class="row">
+			</c:if>
+				<div class="col12 row formField">
+					<div class="field col12 row ">
+						<div class="col5"><span><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/>
+						<c:if test="${fn:contains(mandatoryFields, fieldName)}"></span>
+						
+						</c:if>
+							<c:if test="${fieldName eq 'email1'}">
+								<span class="required">*</span>
+							</c:if>
+							<c:if test="${fieldName eq 'phone1'}">
+								<span class="required">*</span>
+							</c:if>
+						</div>
+						
+						<span class="spanacce">
+							<label for="${fieldName}">
+								<wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/>
+							</label>
+						</span>
+						
+						<div class="col7">
+							<input type="text" name="${fieldName}" id="${fieldName}"/>
+						</div>
+					</div>
+				</div>
+			<c:if test="${counter.count % 3 eq 0 || counter.last}">
+				</div>
+			</c:if>
+		</c:forEach>
+	</div>
+</div>
+<div class="pageSection">
 	<div class="pageSectionTitle">
 		<h2 id="OrgAddressLabel"><wcst:message bundle="${widgetText}" key="ORG_ADDRESS"/></h2>
 	</div>
@@ -20,15 +66,15 @@
 		<div class="editField">
 			<c:forEach items = "${addressFieldOrderForOrgEdit}" var = "fieldName" varStatus="counter">
 				<c:if test="${counter.count % 2 ne 0}">
-					<div class="row">
+			<div class="row">
 				</c:if>
-						<div class="col4 formField">
-							<div class="field">
+						<div class="col12 row formField">
+							<div class="field col12 row">
 								<c:set var="ariaRequiredAttribute" value=""/>
 								<c:if test="${fn:contains(mandatoryFields, fieldName)}">
 									<c:set var="ariaRequiredAttribute">aria-required="true"</c:set>
 								</c:if>
-								<p><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/><c:if test="${fn:contains(mandatoryFields, fieldName)}"><span class="required">&nbsp;*</span></c:if></p>
+								<div class="col5"><span><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/><c:if test="${fn:contains(mandatoryFields, fieldName)}"></span><span class="required">&nbsp;*</span></c:if></div>
 								<c:choose>
 									<c:when test="${fieldName eq 'address1'}">
 										<span class="spanacce">
@@ -36,7 +82,7 @@
 												<wcst:message bundle="${widgetText}" key="STREET_ADDRESS_LINE_1"/>
 											</label>
 										</span>
-										<input type="text" name="${fieldName}" id="${fieldName}" style="margin-bottom:4px;" ${ariaRequiredAttribute}/>
+										<div class="col7"><input type="text" name="${fieldName}" id="${fieldName}" style="margin-bottom:4px;" ${ariaRequiredAttribute}/></div>
 									</c:when>
 									<c:when test="${fieldName eq 'country'}">
 										<span class="spanacce">
@@ -45,13 +91,15 @@
 											</label>
 										</span>
 										<c:set var="selectOptions" value='{"wcMenuClass": "wcSelectMenu"}' />
-										<select data-widget-type="wc.Select" class="wcSelect" data-widget-options="${fn:escapeXml(selectOptions)}" forceWidth="true" maxHeight="400" ${ariaRequiredAttribute} id="WC_UserAddress_Form_Input_country" name="country"		onChange="javascript:AddressHelper.loadAddressFormStatesUI(this.form.name, '','stateDiv','WC_UserAddress_Form_Input_state', 'true', '', true)">
+										<div class="col7"><select data-widget-type="wc.Select" class="wcSelect" data-widget-options="${fn:escapeXml(selectOptions)}" forceWidth="true" maxHeight="400" ${ariaRequiredAttribute} id="WC_UserAddress_Form_Input_country" name="country"		onChange="javascript:AddressHelper.loadAddressFormStatesUI(this.form.name, '','stateDiv','WC_UserAddress_Form_Input_state', 'true', '', true)">
 											<c:forEach var="country" items="${countryBean.countries}">
+												<c:if test="${country.displayName eq 'Australia' || country.displayName eq 'New Zealand'}">
 												<option value='<c:out value="${country.code}"/>'  <c:if test="${country.code eq selectedCountryCode }">selected="selected"</c:if>>
 													<c:out value="${country.displayName}"/>
 												</option>
+												</c:if>
 											</c:forEach>
-										</select>
+										</select></div>
 									</c:when>
 									<c:when test="${fieldName eq 'state'}">
 										<span class="spanacce">
@@ -59,12 +107,17 @@
 												<wcst:message bundle="${widgetText}" key="REG_STATE"/>
 											</label>
 										</span>
+										<c:forEach var="country1" items="${countryBean.countries}"  varStatus='outerStatus'>
+											<c:if test="${country1.code eq 'AU'}">
+												<c:set var="countryCodeStates1" value="${country1.states}"/>
+											</c:if>
+										</c:forEach>
 										<c:choose>
-											<c:when test="${!empty countryBean.countryCodeStates}">
-												<div id="stateDiv">
+											<c:when test="${!empty countryCodeStates1}">
+												<div class="col7" id="stateDiv">
 													<c:set var="selectOptions" value='{"wcMenuClass": "wcSelectMenu"}' />							
 													<select data-widget-type="wc.Select" class="wcSelect" data-widget-options="${fn:escapeXml(selectOptions)}" forceWidth="true" maxHeight="400" id="WC_UserAddress_Form_Input_state" name="state" ${ariaRequiredAttribute}>
-														<c:forEach var="state" items="${countryBean.countryCodeStates}">
+														<c:forEach var="state" items="${countryCodeStates1}">
 															<option value='<c:out value="${state.code}"/>' >
 																<c:out value="${state.displayName}"/>
 															</option>
@@ -73,7 +126,7 @@
 												</div>
 											</c:when>
 											<c:otherwise>
-												<div id="stateDiv">
+												<div class="col7" id="stateDiv">
 													<input type="text" id="WC_UserAddress_Form_Input_state" name="state" ${ariaRequiredAttribute}/>
 												</div>
 											</c:otherwise>
@@ -85,7 +138,7 @@
 												<wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/>
 											</label>
 										</span>
-										<div>
+										<div class="col7">
 											<input type="text" name="${fieldName}" id="${fieldName}" ${ariaRequiredAttribute}/>
 										</div>
 									</c:otherwise>
@@ -100,37 +153,3 @@
 	</form>
 </div>
 
-<div class="pageSection">
-	<%-- Organization Contact Info Details --%>
-	<div class="pageSectionTitle">
-		<p><wcst:message bundle="${widgetText}" key="ORG_CONTACT_INFO"/></p>
-	</div>
-
-	<div class="editField">
-		<c:forEach items = "${contactInfoFieldsForOrg}" var = "fieldName" varStatus="counter">
-			<c:set var="ariaRequiredAttribute" value=""/>
-			<c:if test="${fn:contains(mandatoryFields, fieldName)}">
-				<c:set var="ariaRequiredAttribute">aria-required="true"</c:set>
-			</c:if>
-			<c:if test="${(counter.count - 1) % 3 eq 0}"> 
-				<div class="row">
-			</c:if>
-				<div class="col4 formField">
-					<div class="field">
-						<p><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/><c:if test="${fn:contains(mandatoryFields, fieldName)}"><span class="required" ${ariaRequiredAttribute} >&nbsp;*</span></c:if></p>
-						<span class="spanacce">
-							<label for="${fieldName}">
-								<wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/>
-							</label>
-						</span>
-						<div>
-							<input type="text" name="${fieldName}" id="${fieldName}"/>
-						</div>
-					</div>
-				</div>
-			<c:if test="${counter.count % 3 eq 0 || counter.last}">
-				</div>
-			</c:if>
-		</c:forEach>
-	</div>
-</div>

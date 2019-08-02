@@ -20,14 +20,25 @@
 <c:choose>
 	<%-- Show different sections for editing organizaiton information --%>
 	<c:when test="${param.orgSummaryType eq 'edit'}">
-		<c:if test="${param.orgSummaryBasicEdit eq 'true'}">
-			<%@ include file="OrganizationSummary_UI.jspf" %>
+		
+		<c:if test="${param.orgSummaryContactInfoEdit eq 'true'}">
+			<%@ include file="OrganizationSummary_ContactInfo_UI.jspf" %>
 		</c:if>
 		<c:if test="${param.orgSummaryAddressEdit eq 'true'}">
 			<%@ include file="OrganizationSummary_Address_UI.jspf" %>
 		</c:if>
-		<c:if test="${param.orgSummaryContactInfoEdit eq 'true'}">
-			<%@ include file="OrganizationSummary_ContactInfo_UI.jspf" %>
+		</fieldset>
+		
+		<c:if test="${param.orgSummaryBasicEdit eq 'true'}">
+			<div class="col12">
+				<fieldset class="orgSystemDetails">
+					<legend>Parent Organization</legend>
+					<div class="col12 row">
+						<%@ include file="OrganizationSummary_UI.jspf"%>
+					</div>
+				</fieldset>
+			</div>
+			</div>
 		</c:if>
 	</c:when>
 	<%-- Show organization create section --%>

@@ -273,6 +273,9 @@ ShipmodeSelectionExtJS = {
 			urlRequestParams["orderItemId"] = this.orderItemId;
 			urlRequestParams["orderId"] = ".";
 			urlRequestParams["storeId"] = this.storeId;
+			//JR60345: explicit checkout scenario
+			urlRequestParams["isCheckout"] = "true";
+
 			postRefreshHandlerParameters.push({"URL":billingShippingPageURLForOnline,"requestType":"GET", "requestParams":{}}); 
 			var service = getCustomServiceForURLChaining(initialURL,postRefreshHandlerParameters,null);
 			service.invoke(urlRequestParams);

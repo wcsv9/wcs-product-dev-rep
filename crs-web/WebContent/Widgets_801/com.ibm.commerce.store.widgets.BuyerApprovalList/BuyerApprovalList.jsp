@@ -21,7 +21,22 @@
 	<wcf:param name="catalogId" value="${WCParam.catalogId}"/>
 	<wcf:param name="ajaxStoreImageDir" value="${jspStoreImgDir}" />
 </wcf:url>
-
+<div class="row headInsideMenu">
+		<div class="col1">&nbsp;</div>
+		<div class="col10 userIconLine">
+			<div class="organizationAndUserIcon"> </div>
+			<hr>
+		</div>
+		<div class="col1">&nbsp;</div>
+	<div class="col12"><p><fmt:message key="MYACCOUNT_BUYER_APPROVAL" bundle="${storeText}"/></p></div>
+	<div class="col12 links">
+		<div class="normalMenu" id="accDetailMenu">
+			<%out.flush();%>
+		        <c:import url="${env_jspStoreDir}Common/MyAccountPageURLs.jsp"/>
+		    <%out.flush();%>
+		</div>
+	</div>
+	</div>
 <div id="BuyerApproval_table_summary" class="hidden_summary" aria-hidden="true">
 	<wcst:message key="BUYERAPPROVAL_TABLE_SUMMARY" bundle="${widgetText}"/>
 </div>

@@ -350,6 +350,7 @@ OrderListJS = {
         cursor_wait();
 
         var params = {
+            orderId: "null",
             subscriptionId: subscriptionId,
             URL: "",
             storeId: OrderListServicesDeclarationJS.storeId,

@@ -36,7 +36,7 @@
 			<%@ include file="/Widgets_801/Common/ProductDescription/ProductDescription_Data.jspf" %>
 		</c:when>
 		<c:otherwise>
-			<c:if test="${param.showAddToCart == 'true'}">
+			<c:if test="${enableSKUListView != 'true'}">
 				<%-- <%@ include file="/Widgets_801/Common/PDP_CatalogEntryData.jspf" %> --%>
 				<%@ include file="/Widgets_801/Common/ProductDescription/ProductDescription_Data.jspf" %>
 			</c:if>
@@ -45,7 +45,7 @@
 	</c:choose>
 </c:if>
 
-<div class="product">
+<div class="product row">
 <c:if test="${env_inPreview && !env_storePreviewLink}">
 	<div class="caption" style="display:none"></div>
 	<div class="ESpotInfo">
@@ -88,6 +88,7 @@
 <c:remove var="maximumPriceString"/>
 <c:remove var="isDKPreConfigured"/>		
 <c:remove var="isDKConfigurable"/>
+<c:remove var="discountsMap"/>
 
 <jsp:useBean id="CatalogEntry_TimeStamp" class="java.util.Date" scope="request"/>
 

@@ -215,14 +215,7 @@
 <c:set var = "cssServerPath" value=""/>
 
 <%-- URL pointing to the shared image directory.  Use this to reference images --%>
-<c:choose>
-<c:when test="${not empty param.ajaxStoreImageDir }" >
-	<c:set var="jspStoreImgDir" scope="request"><c:out value="${param.ajaxStoreImageDir}"/> </c:set>
-</c:when>
-<c:otherwise>
-	<c:set var="jspStoreImgDir" value="${jsServerPath}${sdb.jspStoreDirFilePath}" scope="request"/>
-</c:otherwise>
-</c:choose>
+<c:set var="jspStoreImgDir" value="${jsServerPath}${sdb.jspStoreDirFilePath}" scope="request"/>
 
 <%-- WebAsset directory of the shared file directory.  Includes JSPs, HTML, Image files, etc --%>
 <c:set var="env_jspStoreDir" value="/${sdb.jspStoreDir}/" />
@@ -596,3 +589,5 @@ jspStoreDir - /<sharedstorefrontassetstoredir>/
 <c:if test="${CommandContext.user.userId eq '-1002'}">
 	<c:set var="anonymousUser" value="true" scope="request"/>
 </c:if>
+
+<c:set var="s3ImageHost" value="http://s3-ap-southeast-2.amazonaws.com/obv9.public" scope="request"/>

@@ -17,6 +17,8 @@
       <props>
         <prop key="/Logon">logon</prop>
         <prop key="/AjaxLogon">ajaxLogon</prop>
+        <prop key="/OauthLogon">oauthLogon</prop>
+        <prop key="/ValidateOauthToken">validateOauthToken</prop>
         <prop key="/PersonChangeServicePasswordReset">personChangeServicePasswordReset</prop>
         <prop key="/PersonChangeServicePasswordForgottenReset">personChangeServicePasswordForgottenReset</prop>
         <prop key="/UnauthenticatedPersonPasswordReset">unauthenticatedPersonPasswordReset</prop>
@@ -171,6 +173,7 @@
         <prop key="/RESTOrderAddConfigurationToCart">orderAddConfigurationToCart</prop>
         <prop key="/RESTOrderAddPreConfigurationToCart">orderAddPreConfigurationToCart</prop>
         <prop key="/RESTOrderUpdateConfigurationInCart">orderUpdateConfigurationInCart</prop>
+        <prop key="/AjaxRESTOrderUpdateConfigurationInCart">ajaxOrderUpdateConfigurationInCart</prop>
         <prop key="/RESTOrderRewardOptionUpdate">orderRewardOptionUpdate</prop>
         <prop key="/AjaxRESTOrderLockOnBehalf">ajaxRESTOrderLockOnBehalf</prop>
         <prop key="/AjaxRESTOrderLockTakeOverOnBehalf">ajaxRESTOrderLockTakeOverOnBehalf</prop>
@@ -268,6 +271,8 @@
         <prop key="/RESTTakeOverlock">restTakeOverlock</prop>
         <prop key="/RESTAddOrderComment">restAddOrderComment</prop>
         <prop key="/AjaxRESTAddOrderComment">ajaxRESTAddOrderComment</prop>
+        <prop key="/AjaxRESTUpdatePrivacyAndMarketingConsent">ajaxRESTUpdatePrivacyAndMarketingConsent</prop>
+        <prop key="/AjaxRESTUpdateMarketingTrackingConsent">ajaxRESTUpdateMarketingTrackingConsent</prop>
       </props>
     </property>
   </bean>
@@ -282,4 +287,10 @@
     </property>
   </bean>
   <import resource="classpath:/WEB-INF/spring/AuroraStorefrontAssetStore/controllers-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/ONB2BDirectStorefrontAssetStore/controllers-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/NationalAccountStorefrontAssetStore/controllers-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/ONetB2BStoreAssetStore/controllers-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/OPDB2BStorefrontAssetStore/controllers-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/ONNationalAccountStorefrontAssetStore/controllers-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/OPDNZB2BStorefrontAssetStore/controllers-ext.xml"/>
 </beans>

@@ -250,6 +250,8 @@ var declareOrderLockStatusRefreshArea = function(){
 	// div: orderLockStatusRefreshArea refresh area
 	// Declares a new refresh controller for the fetching order Lock status.
 	var myWidgetObj = $("#orderLockStatusRefreshArea");
+	// initialize widget
+	myWidgetObj.refreshWidget({postRefreshHandler: postRefreshHandler});
 	myWidgetObj.refreshWidget("updateUrl", getAbsoluteURL() + "OrderLockStatusView?" + getCommonParametersQueryString());
 	var myRCProperties = wcRenderContext.getRenderContextProperties("orderLockStatusContext");
 
@@ -264,8 +266,7 @@ var declareOrderLockStatusRefreshArea = function(){
 		cursor_clear();
 	};
 
-	// initialize widget
-	myWidgetObj.refreshWidget({postRefreshHandler: postRefreshHandler});
+	
 };
 
 wcService.declare({

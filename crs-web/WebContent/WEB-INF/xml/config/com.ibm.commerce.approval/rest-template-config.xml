@@ -27,6 +27,7 @@
                  "approvalStatusId" : "$approvalStatusId",
                  "aprv_act" : "$aprv_act",
                  "aprv_ids" : "$aprv_ids",
+                 "authToken" : "$authToken",
                  "comments" : "$comments",
                  "viewtask" : "$viewtask",
                  "status" : "$status",

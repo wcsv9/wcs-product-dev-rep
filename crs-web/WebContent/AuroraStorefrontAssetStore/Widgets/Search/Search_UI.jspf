@@ -39,6 +39,7 @@ var staticContentHeaders = [];
         <input name="showResultsPage" value="true" type="hidden"/>
         <input name="searchSource" value="Q" type="hidden"/>
         <input name="pageView" value="${env.defaultPageView}" type="hidden"/>
+		<input name="pageGroup" value="Search" type="hidden"/>
         <input name="beginIndex" value="0" type="hidden"/>
         <input name="pageSize" value="${empty pageSize ? 12 : pageSize}" type="hidden"/>
 

@@ -11,7 +11,29 @@
   IBM Corp.
  =================================================================
 --%>
-
+<script>
+function ShowHideOrganization(){
+	//'readOnlyAdd', 'orgAddressDetailsEdit'
+	if($('.orgAddressDetailsEdit').css('display') == "block"){
+		$(".orgAddressDetailsEdit").hide(200);
+		$(".readOnlyAdd").show(200);
+	}
+	else{
+		$(".orgAddressDetailsEdit").show(200);
+		$(".readOnlyAdd").hide(200);
+	}
+}
+function ShowHideContact(){
+	if($('.orgContactInfoEdit').css('display') == 'none'){
+		$('.orgContactDetails').hide(200);
+		$('.orgContactInfoEdit').show(200);
+	}
+	else{
+		$('.orgContactDetails').show(200);
+		$('.orgContactInfoEdit').hide(200);
+	}
+}
+</script>
 <c:set var="editSectionId" value="orgAddressDetailsEdit"/>
 
 <c:if test="${param.requesttype ne 'ajax'}">
@@ -24,37 +46,41 @@
 
 	<%-- Organization Address Details --%>
 	<div class="pageSectionTitle">
-		<h2 id="organizationAddressDetails"><wcst:message bundle="${widgetText}" key="ORG_ADDRESS"/></h2>
+		<span id="organizationAddressDetails"><wcst:message bundle="${widgetText}" key="ORG_ADDRESS"/></span>
 		<span class="spanacce" aria-hidden="true" id="WC_orgAddress_pageSection_edit"><wcst:message bundle="${widgetText}" key="ACCE_ORG_SUMMARY_EDIT"/></span>
 		<div id="${editSectionId}Icon" class="editIcon" >
-			<a href="#" aria-describedBy='WC_orgAddress_pageSection_edit' onclick="javascript:widgetCommonJS.toggleReadEditSection('${editSectionId}', 'edit');return false;">
+			<a  aria-describedBy='WC_orgAddress_pageSection_edit' onclick="javascript:ShowHideOrganization();">
 				<img src="${staticIBMAssetAliasRoot}/images/edit_icon.png" alt=''>
 			</a>
 		</div>
 	</div>
 
 	<%-- Organization Address Details - Summary Section --%>
-	<div style="display: block;" class="readField" id="${editSectionId}Read" role="document" aria-labelledBy="organizationAddressDetails" tabindex="0">
+	<div style="display: block;" class="readField readOnlyAdd" id="${editSectionId}Read" role="document" aria-labelledBy="organizationAddressDetails" tabindex="0">
 		<c:forEach var="addressField" items="${addressFieldDisplayList}">
-			<div class="field"><span class="readLabel" style="margin-bottom:0px;">&nbsp;</span><span class="readLabel-readValue" style="margin-bottom:0px;">${addressField}</span></div>
+			<div class="row addFields">
+			<div class="col5">&nbsp;</div>
+			<div class="col7"><span class="">&nbsp;</span><span class="readLabel-readValue">${addressField}</span></div>
+			</div>
 		</c:forEach>
 	</div>
 
-	<div style="display: none;" class="editField" id="${editSectionId}">
-		<form id="orgAddressDetails"  name="orgAddressDetails" role="form">
+	<div class="row col12 orgAddressDetailsEdit" style="display: none; " class="editField" id="${editSectionId}">
+		<div class="col12 row">
+		<form id="orgAddressDetails"  name="orgAddressDetails" role="form" >
 		<%-- Organization Address Details - Edit Section --%>
 	
 		<c:forEach items = "${addressFieldOrderForOrgEdit}" var = "fieldName" varStatus="counter">
 			<c:if test="${counter.count % 2 ne 0}">
 				<div class="row">
 			</c:if>
-					<div class="col4 formField">
-						<div class="field">
+					<div class="col12 formField row">
+						<div class="field col12 row">
 							<c:set var="ariaRequiredAttribute" value=""/>
 							<c:if test="${fn:contains(mandatoryFields, fieldName)}">
 								<c:set var="ariaRequiredAttribute">aria-required="true"</c:set>
 							</c:if>
-							<p><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/><c:if test="${fn:contains(mandatoryFields, fieldName)}"><span class="required" ${ariaRequiredAttribute} >&nbsp;*</span></c:if></p>
+							<div class="col5"><span class="starikText"><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/><c:if test="${fn:contains(mandatoryFields, fieldName)}"></span><span class="required" ${ariaRequiredAttribute} >&nbsp;*</span></c:if></div>
 							<c:choose>
 								<c:when test="${fieldName eq 'address1'}">
 									<span class="spanacce">
@@ -62,7 +88,7 @@
 											<wcst:message bundle="${widgetText}" key="STREET_ADDRESS_LINE_1"/>
 										</label>
 									</span>
-									<input type="text" value = "<c:out value="${orgEntityDetails.orgProperties[fieldName]}"/>" name="${fieldName}" id="${fieldName}" style="margin-bottom:4px;" ${ariaRequiredAttribute}/>
+									<div class="col7"><input type="text" value = "<c:out value="${orgEntityDetails.orgProperties[fieldName]}"/>" name="${fieldName}" id="${fieldName}" style="margin-bottom:4px;" ${ariaRequiredAttribute}/></div>
 								</c:when>
 								<c:when test="${fieldName eq 'country'}">
 									<span class="spanacce">
@@ -71,13 +97,13 @@
 										</label>
 									</span>
 									<c:set var="selectOptions" value='{"wcMenuClass": "wcSelectMenu"}' />							
-									<select data-widget-type="wc.Select" class="wcSelect" data-widget-options="${fn:escapeXml(selectOptions)}" forceWidth="true" maxHeight="400" ${ariaRequiredAttribute} id="WC_UserAddress_Form_Input_country" name="country"		onChange="javascript:AddressHelper.loadAddressFormStatesUI(this.form.name, '','stateDiv','WC_UserAddress_Form_Input_state', 'true', '', true)">
+									<div class="col7"><select data-widget-type="wc.Select" class="wcSelect" data-widget-options="${fn:escapeXml(selectOptions)}" forceWidth="true" maxHeight="400" ${ariaRequiredAttribute} id="WC_UserAddress_Form_Input_country" name="country"		onChange="javascript:AddressHelper.loadAddressFormStatesUI(this.form.name, '','stateDiv','WC_UserAddress_Form_Input_state', 'true', '', true)">
 										<c:forEach var="country" items="${countryBean.countries}">
 											<option value='<c:out value="${country.code}"/>' <c:if test="${country.code eq selectedCountryCode }">selected="selected"</c:if> >
 												<c:out value="${country.displayName}"/>
 											</option>
 										</c:forEach>
-									</select>
+									</select></div> 
 								</c:when>
 								<c:when test="${fieldName eq 'state'}">
 									<span class="spanacce">
@@ -87,7 +113,7 @@
 									</span>
 									<c:choose>
 										<c:when test="${!empty countryBean.countryCodeStates}">
-											<div id="stateDiv">
+											<div id="stateDiv" class="col7">
 												<c:set var="selectOptions" value='{"wcMenuClass": "wcSelectMenu"}' />
 												<select data-widget-type="wc.Select" class="wcSelect" data-widget-options="${fn:escapeXml(selectOptions)}" forceWidth="true" maxHeight="400" id="WC_UserAddress_Form_Input_state" name="state" ${ariaRequiredAttribute}>
 													<c:forEach var="state" items="${countryBean.countryCodeStates}">
@@ -99,7 +125,7 @@
 											</div>
 										</c:when>
 										<c:otherwise>
-											<div id="stateDiv">
+											<div id="stateDiv" class="col7">
 												<input type="text" value = "<c:out value="${orgEntityDetails.orgProperties[fieldName]}"/>" id="WC_UserAddress_Form_Input_state" name="state" ${ariaRequiredAttribute}/>
 											</div>
 										</c:otherwise>
@@ -111,7 +137,7 @@
 											<wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/>
 										</label>
 									</span>
-									<div>
+									<div class="col7">
 										<input type="text" value = "<c:out value="${orgEntityDetails.orgProperties[fieldName]}"/>" name="${fieldName}" id="${fieldName}" ${ariaRequiredAttribute}/>
 									</div>
 								</c:otherwise>
@@ -120,24 +146,27 @@
 					</div>
 			<c:if test="${counter.count % 2 eq 0 || counter.last}">
 				</div>
+				
+				
 			</c:if>
 		</c:forEach>
 		<div class="row">
-			<div class="editActions">
+			<div class="editActions right">
 				<a class="button_primary" role="button"  href="#" onclick="organizationSummaryJS.updateOrganizationAddress('${param.orgEntityId}','${editSectionId}');return false;">
 						<div class="left_border"></div>
 						<div class="button_text"><span><wcst:message bundle="${widgetText}" key="ORG_SAVE"/></span></div>								
 						<div class="right_border"></div>
 				</a>
 
-				<a class="button_secondary" role="button"  href="#" onclick="widgetCommonJS.toggleReadEditSection('${editSectionId}', 'read');organizationSummaryJS.resetFormValue('${editSectionId}');return false;">
+				<%-- <a class="button_secondary" role="button"  href="#" onclick="widgetCommonJS.toggleReadEditSection('${editSectionId}', 'read');organizationSummaryJS.resetFormValue('${editSectionId}');return false;">
 						<div class="left_border"></div>
 						<div class="button_text"><span><wcst:message bundle="${widgetText}" key="ORG_CANCEL"/></span></div>								
 						<div class="right_border"></div>
-				</a>
+				</a> --%>
 			</div>
 		</div>
 		</form>
+		</div>
 	</div>
 <c:if test="${param.requesttype ne 'ajax'}">
 	</div>

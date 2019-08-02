@@ -93,18 +93,33 @@
 		</c:catch>
 		<%-- Check if the parent is a product and not package or bundle --%>
 		<c:if test="${parentCatalogNavigationView.catalogEntryView[0].catalogEntryTypeCode eq 'ProductBean'}">
-			<%-- Keep all the defining attributes and its value in WCParam so that it will be selected by default --%>
-			<c:forEach var="attribute" items="${catalogNavigationView.catalogEntryView[0].attributes}">
-				<c:if test="${attribute.usage eq 'Defining'}">
-					<c:set target="${WCParam}" property="${attribute.name}" value="${attribute.values[0].value}"/>
-				</c:if>
-			</c:forEach>
-
-			<%-- So that the parent page can be displayed instead of item page and pre select the values correspoding to the item --%>
-			<c:set var="catalogNavigationView" value="${parentCatalogNavigationView}" />
-			<c:set var="itemId" value="${productId}" scope="request"/>
-			<c:set var="productId" value="${parentCatEntryId}" scope="request"/>
-			<c:set var="catalogEntryDetails" value="${catalogNavigationView.catalogEntryView[0]}"/>
+			
+			<c:choose>
+				<c:when test="${catalogNavigationView.catalogEntryView[0].catalogEntryTypeCode eq 'VariantBean'}">
+					<c:forEach var="attribute" items="${catalogNavigationView.catalogEntryView[0].attributes}">
+						<c:if test="${attribute.usage eq 'Defining'  && attribute.bindToVariant eq 'true'}">
+							<c:set target="${WCParam}" property="${attribute.name}" value="${attribute.values[0].value}"/>
+						</c:if>				
+						
+					</c:forEach>
+					<%-- when is variant, set the catalogEntryDetails coming from Product --%>
+					<c:set var="catalogEntryDetails" value="${parentCatalogNavigationView.catalogEntryView[0]}"/>
+				
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="attribute" items="${catalogNavigationView.catalogEntryView[0].attributes}">
+						<c:if test="${attribute.usage eq 'Defining'}">
+							<c:set target="${WCParam}" property="${attribute.name}" value="${attribute.values[0].value}"/>
+						</c:if>
+					</c:forEach>
+					
+					<%-- So that the parent page can be displayed instead of item page and pre select the values correspoding to the item --%>
+					<c:set var="catalogNavigationView" value="${parentCatalogNavigationView}" />
+					<c:set var="itemId" value="${productId}" scope="request"/>
+					<c:set var="productId" value="${parentCatEntryId}" scope="request"/>
+					<c:set var="catalogEntryDetails" value="${catalogNavigationView.catalogEntryView[0]}"/>
+				</c:otherwise>
+			</c:choose>
 
 			<%-- Cache parent catalog entry in our internal hash map --%>
 			<c:set var="key1" value="${productId}+getCatalogEntryViewAllByID"/>
@@ -135,6 +150,9 @@
 <c:choose>
 	<c:when test="${type == 'item'}">
 		<c:set var="pageGroup" value="Item" scope="request"/>
+	</c:when>
+	<c:when test="${type == 'variant'}">
+		<c:set var="pageGroup" value="Variant" scope="request"/>
 	</c:when>
 	<c:otherwise>
 		<c:set var="pageGroup" value="Product" scope="request"/>
@@ -196,6 +214,24 @@
 	<wcf:param name="parent_category_rn" value="${parent_category_rn}" />
 	<wcf:param name="top_category" value="${top_category}" />
 </wcf:url>
+
+<!-- build a canonical URL -->
+<wcf:url var="CanonicalProductDisplayURL" patternName="ProductURL" value="Product1" scope="request">
+	<wcf:param name="catalogId" value="${catalogId}"/>
+	<wcf:param name="storeId" value="${storeId}"/>
+	<wcf:param name="productId" value="${parentCatEntryId}"/>
+	<wcf:param name="langId" value="${langId}"/>
+</wcf:url>
+
+<c:if test="${catalogNavigationView.catalogEntryView[0].catalogEntryTypeCode eq 'VariantBean'}">
+<!-- build a canonical URL For variant -->
+<wcf:url var="CanonicalProductDisplayURL" patternName="ProductURL" value="Product1" scope="request">
+	<wcf:param name="catalogId" value="${catalogId}"/>
+	<wcf:param name="storeId" value="${storeId}"/>
+	<wcf:param name="productId" value="${productId}"/>
+	<wcf:param name="langId" value="${langId}"/>
+</wcf:url>
+</c:if>
 
 <c:set var="productWithoutDefiningAttribute" value="true"/>
 
@@ -269,14 +305,16 @@ xmlns:waistate="http://www.w3.org/2005/07/aaa" lang="${shortLocale}" xml:lang="$
 		<meta name="pageIdentifier" content="<c:out value="${partNumber}"/>"/>
 		<meta name="pageId" content="<c:out value="${productId}"/>"/>
 		<meta name="pageGroup" content="<c:out value="${pageGroup}"/>"/>
-		<link rel="canonical" href="<c:out value="${ProductDisplayURL}"/>" />
+		<link rel="canonical" href="<c:out value="${CanonicalProductDisplayURL}"/>" />
 
 		<!-- Include script files -->
 		<%@include file="../../../Common/CommonJSToInclude.jspf" %>
 		<script type="text/javascript">
 			$(document).ready(function () {
 					shoppingActionsServicesDeclarationJS.setCommonParameters('<c:out value="${langId}" />','<c:out value="${storeId}" />','<c:out value="${catalogId}" />');
-					shoppingActionsServicesDeclarationJS.registerMarketingEvent({productId:'<c:out value="${productId}"/>',DM_ReqCmd:'ProductDisplay',storeId:'<c:out value="${storeId}"/>'});
+					<c:if test="${CommandContext.user.userId ne '-1002' && unregisterMktEvent ne '1'}">
+						shoppingActionsServicesDeclarationJS.registerMarketingEvent({productId:'<c:out value="${productId}"/>',DM_ReqCmd:'ProductDisplay',storeId:'<c:out value="${storeId}"/>'});
+					</c:if>
 					<c:if test="${!empty redirectSKUUrl}">
 						document.location.replace("${redirectSKUUrl}");
 					</c:if>
@@ -346,9 +384,10 @@ xmlns:waistate="http://www.w3.org/2005/07/aaa" lang="${shortLocale}" xml:lang="$
 <c:set var="numberOfSKUs" value="${catalogEntryDetails.numberOfSKUs}"/>
 <c:set var="attributes" value="${catalogEntryDetails.attributes}"/>
 <div id="ProductDisplayURL" style="display:none;"><c:out value="${ProductDisplayURL}" /></div>
+
 <div id="entitledItem_<c:out value='${catalogEntryID}'/>" style="display:none;">
 		[
-		<c:if test="${type == 'product'}">
+		<c:if test="${type == 'product' || type == 'variant'}">
 
 				<%-- SwatchCode start --%>
 				<c:if test="${!empty entitledItems}">

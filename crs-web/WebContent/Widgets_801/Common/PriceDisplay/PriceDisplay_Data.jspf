@@ -11,38 +11,70 @@
   IBM Corp.
  =================================================================
 --%>
+<!-- START PriceDisplay_Data.jspf -->
+
 <%-- LinkedHashMap to retain order --%>
 <wcf:useBean var="localizedQuantityPriceMap" classname="java.util.LinkedHashMap"/>
 
 <c:set var="productId" value="${WCParam.productId}" />
 
-<c:if test="${empty catalogEntryDetails}" >
-	<c:if test="${!empty productId}">
-		<c:catch var="searchServerException">
-			<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/byId/${productId}"  >
-				<wcf:param name="langId" value="${langId}" />
-				<wcf:param name="currency" value="${env_currencyCode}" />
-				<wcf:param name="responseFormat" value="json" />
-				<wcf:param name="catalogId" value="${WCParam.catalogId}" />
-			</wcf:rest>
-		</c:catch>
-	</c:if>
-	<c:if test="${empty productId && !empty WCParam.partNumber}">
-		<c:catch var="searchServerException">
-			<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/${WCParam.partNumber}" >
-				<wcf:param name="langId" value="${langId}" />
-				<wcf:param name="currency" value="${env_currencyCode}" />
-				<wcf:param name="responseFormat" value="json" />
-				<wcf:param name="catalogId" value="${WCParam.catalogId}" />
-			</wcf:rest>
-		</c:catch>
-	</c:if>
-	<c:if test="${!empty catalogNavigationView && !empty catalogNavigationView.catalogEntryView[0]}">
-		<c:set var="catalogEntryDetails" value="${catalogNavigationView.catalogEntryView[0]}"/>
-		<c:set property="productId" value="${catalogEntryDetails.uniqueID}" target="${WCParam}"/>
-		<c:set var="productId" value="${WCParam.productId}" />
-	</c:if>
-</c:if>
+<c:choose>
+	<c:when test="${empty catalogEntryDetails}">
+	
+		<c:if test="${!empty productId}">
+			<c:catch var="searchServerException">
+				<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/byId/${productId}"  >
+					<wcf:param name="langId" value="${langId}" />
+					<wcf:param name="currency" value="${env_currencyCode}" />
+					<wcf:param name="responseFormat" value="json" />
+					<wcf:param name="catalogId" value="${WCParam.catalogId}" />
+				</wcf:rest>
+			</c:catch>
+		</c:if>
+		<c:if test="${empty productId && !empty WCParam.partNumber}">
+			<c:catch var="searchServerException">
+				<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/${WCParam.partNumber}" >
+					<wcf:param name="langId" value="${langId}" />
+					<wcf:param name="currency" value="${env_currencyCode}" />
+					<wcf:param name="responseFormat" value="json" />
+					<wcf:param name="catalogId" value="${WCParam.catalogId}" />
+				</wcf:rest>
+			</c:catch>
+		</c:if>
+		<c:if test="${!empty catalogNavigationView && !empty catalogNavigationView.catalogEntryView[0]}">
+			<c:set var="catalogEntryDetails" value="${catalogNavigationView.catalogEntryView[0]}"/>
+			<c:set property="productId" value="${catalogEntryDetails.uniqueID}" target="${WCParam}"/>
+			<c:set var="productId" value="${WCParam.productId}" />
+		</c:if>
+	</c:when>
+	<c:otherwise>
+		<c:if test="${!empty productId  && catalogEntryDetails.uniqueID != productId}">
+			<c:catch var="searchServerException">
+				<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/byId/${productId}"  >
+					<wcf:param name="langId" value="${langId}" />
+					<wcf:param name="currency" value="${env_currencyCode}" />
+					<wcf:param name="responseFormat" value="json" />
+					<wcf:param name="catalogId" value="${WCParam.catalogId}" />
+				</wcf:rest>
+			</c:catch>
+		</c:if>
+		<c:if test="${empty productId && !empty WCParam.partNumber && catalogEntryDetails.partNumber != WCParam.partNumber}">
+			<c:catch var="searchServerException">
+				<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/${WCParam.partNumber}" >
+					<wcf:param name="langId" value="${langId}" />
+					<wcf:param name="currency" value="${env_currencyCode}" />
+					<wcf:param name="responseFormat" value="json" />
+					<wcf:param name="catalogId" value="${WCParam.catalogId}" />
+				</wcf:rest>
+			</c:catch>
+		</c:if>
+		<c:if test="${!empty catalogNavigationView && !empty catalogNavigationView.catalogEntryView[0]}">
+			<c:set var="catalogEntryDetails" value="${catalogNavigationView.catalogEntryView[0]}"/>
+			<c:set property="productId" value="${catalogEntryDetails.uniqueID}" target="${WCParam}"/>
+			<c:set var="productId" value="${WCParam.productId}" />
+		</c:if>
+	</c:otherwise>
+</c:choose>
 
 <c:set var="minimumPrice" value=""/>
 <c:set var="maximumPrice" value=""/>
@@ -56,7 +88,7 @@
 <c:remove var="maximumPriceString"/>
 <c:set var="dataBean" value="true"/>
 <c:remove var="rangePrice" />
-
+<c:set var="loyaltyPartNumber" value="${catalogEntryDetails.partNumber}"/>
 <c:set var="catalogEntryID" value="${catalogEntryDetails.uniqueID}"/>
 <c:set var="listPriced" value="false"/>
 <c:forEach var="price" items="${catalogEntryDetails.price}" >
@@ -90,7 +122,6 @@
 		</c:when>
 	</c:choose>
 </c:if>
-
 <!--  If leverage price rule to get the price, get the contract unit price. -->
 <c:choose>
  <c:when test="${calculatedPriceFlag == 'true'}">
@@ -108,7 +139,7 @@
 		<wcf:param name="q" value="byCatalogEntryIdsAndPriceRuleName"/>
 		<wcf:param name="catalogEntryId" value="${catalogEntryDetails.uniqueID}"/>
 		<wcf:param name="priceRuleName" value="${defaultDisplayPriceRuleName}"/>
-	</wcf:rest>
+	</wcf:rest>	
 	<c:set var="displayPriceType" value="${displayPriceResult.resultList[0]}"  />
 	
 	<c:if test="${null!=displayPriceType}">
@@ -118,7 +149,7 @@
 		</c:forEach>
 	</c:if>
 	<c:choose>
-		<c:when test="${type eq 'product' && !empty numberOfSKUs}">
+		<c:when test="${(type eq 'product' or type eq 'variant' ) && !empty numberOfSKUs}">
 		<!--  Get all the price of the SKU and get the maximum and minimum price. -->
 		<c:catch>
 			<wcf:rest var="entitledPricesResult" url="/store/{storeId}/price">
@@ -129,9 +160,11 @@
 				</c:forEach>
 				<wcf:param name="currency" value="${env_currencyCode}"/>
 				<wcf:param name="checkEntitlement" value="false"/>
+				<wcf:param name="profileName" value="IBM_Store_EntitledPrice_RangePrice_All"/>
 			</wcf:rest>
 			<c:set var="entitledPrices" value="${entitledPricesResult.EntitledPrice}"/>
-			<c:if test="${displayPriceRange eq 'true'}">
+			<c:set var="rangePrices" value="${entitledPricesResult.EntitledPrice}"  />
+			<%--<c:if test="${displayPriceRange eq 'true'}">
 				<wcf:rest var="rangePricesResult" url="/store/{storeId}/price">
 					<wcf:var name="storeId" value="${WCParam.storeId}" />
 					<wcf:param name="q" value="byCatalogEntryIds"/>
@@ -142,7 +175,7 @@
 				</wcf:rest>
 				<c:set var="rangePrices" value="${rangePricesResult.EntitledPrice}"  />
 				
-			</c:if>
+			</c:if>--%>
 		</c:catch>
 	 	<c:if test="${null!=entitledPrices}">
 			<c:forEach var="entitledPrice" items="${entitledPrices}" varStatus="idx">
@@ -230,7 +263,7 @@
 			</c:if>
 		</c:when>
 		<%-- In grid mode, no child SKU will be retrieved, only display the offer price of the product. --%>
-		<c:when test="${type eq 'package' || type eq 'item' || (type eq 'product' && empty catalogEntryDetails.numberOfSKUs)}">
+		<c:when test="${type eq 'package' || type eq 'item' || ((type eq 'product' or type eq 'variant') && empty catalogEntryDetails.numberOfSKUs)}">
 		<c:catch>
 			<c:choose>
 				<c:when test="${displayPriceRange eq 'true' }">
@@ -319,7 +352,7 @@
 </c:when>
 <c:otherwise>
 
-	<c:if test="${!empty listPrice && listPrice.value gt offerPrice}" >
+	<c:if test="${!empty listPrice && listPrice.value - offerPrice gt 0}" >
 		<c:set var="strikedPriceString">
 			<fmt:formatNumber value="${listPrice.value}" type="currency" currencySymbol="${env_CurrencySymbolToFormat}" maxFractionDigits="${env_currencyDecimal}"/>
 		</c:set>
@@ -332,6 +365,7 @@
 
  </c:when>
  <c:otherwise>
+ 
  	<c:set var="minimumPrice" value="${calculatedPrice.minimumValue}"  />
 	<c:set var="maximumPrice" value="${calculatedPrice.maximumValue}"  />
 	<c:set var="minimumPriceString" value="${calculatedPrice.minimumValue.value}"  />
@@ -530,7 +564,7 @@
 	</c:when>
 	
 	<c:otherwise>
-		<c:if test="${!empty listPrice && listPrice.value gt offerPrice}" >
+		<c:if test="${!empty listPrice && listPrice.value - offerPrice gt 0}" >
 			<c:set var="strikedPriceString">
 				<fmt:formatNumber value="${listPrice.value}" type="currency" currencySymbol="${env_CurrencySymbolToFormat}" maxFractionDigits="${env_currencyDecimal}"/>
 			</c:set>
@@ -584,3 +618,4 @@
 	<wcf:set target = "${cachedRangePriceMap}" key="${catalogEntryDetails.uniqueID}" value="${rangePrice}"/>
 </c:if>
 
+<!-- END PriceDisplay_Data.jspf -->

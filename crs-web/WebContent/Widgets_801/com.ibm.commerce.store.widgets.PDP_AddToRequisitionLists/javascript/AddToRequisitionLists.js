@@ -10,7 +10,7 @@
 // IBM Corp.
 //-----------------------------------------------------------------
 
-function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, selectListMenuId, createListMenuId, listTypeMenuId, listNameFieldId, listTypeFieldId, addResultMenuId, buttonStyle, jsObjectName) {
+function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, selectListMenuId, createListMenuId, listTypeMenuId, listNameFieldId, listTypeFieldId, addResultMenuId, favoritesOrderCheck, quickOrderCheck, recurringOrderCheck, addAginInput, parentPageValue, buttonStyle, jsObjectName) {
 
     this.storeId = storeId;
     this.catalogId = catalogId;
@@ -22,6 +22,11 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
     this.listNameFieldId = listNameFieldId;
     this.listTypeFieldId = listTypeFieldId;
     this.addResultMenuId = addResultMenuId;
+	this.favoritesOrderCheck = favoritesOrderCheck;
+    this.quickOrderCheck = quickOrderCheck;
+    this.recurringOrderCheck = recurringOrderCheck;
+	this.addAginInput = addAginInput;
+	this.parentPageValue = parentPageValue;
     this.buttonStyle = buttonStyle;
 
     this.jsObjectName = jsObjectName;
@@ -236,7 +241,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
             }
         }
     };
-
+	
     /**
      * Toggle showing the requisition list drop down
      * @param showSelectList - optionally choose whether the list of requisition lists should be affected by the toggle
@@ -302,6 +307,90 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
 
             this.setQuantity(quantity);
             this.addSingleSKU = true;
+        }
+
+        if (this.dropDownOpen == false) {
+            this._showDropDownMenu(dropDownMenuId, resolveCatentry);
+        } else {
+            this._hideDropDownMenu(dropDownMenuId);
+        }
+        if (showSelectList == false) {
+            this._hideSelectList();
+        } else {
+            this._showSelectList();
+        }
+    };
+	
+	this.customToggleDropDownMenu = function (showSelectList, resolveCatentry, pdpSKUs, plpSKUs, cartSKUs) {
+        if (resolveCatentry == null) {
+            resolveCatentry = true;
+        }
+		
+        // Check to make sure quantity fields are populated if adding multiple SKUs
+        if (pdpSKUs) {
+			var entitledItemId = 'entitledItem_'+product_id;
+			if ($("#" + entitledItemId).length) {
+            //the json object for entitled items are already in the HTML. 
+            entitledItemJSON = eval('(' + $("#" + entitledItemId).html() + ')');
+			} else {
+				//if $("#" + entitledItemId).length is 0, that means there's no <div> in the HTML that contains the JSON object. 
+				//in this case, it must have been set in catalogentryThumbnailDisplay.js when the quick info
+				entitledItemJSON = this.getEntitledItemJsonObject();
+			}
+
+			productDisplayJS.setEntitledItems(entitledItemJSON);
+			var catalogEntryId = productDisplayJS.getCatalogEntryId(entitledItemId);
+
+			if (catalogEntryId != null) {
+				catEntryId = catalogEntryId;
+			} else {
+				MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('ERR_RESOLVING_SKU'));
+				return;
+			}
+        }
+
+        if (plpSKUs) {
+			// Check to make sure quantity field is populated when adding single SKU from SKU List widget
+            var entitledItemId = 'entitledItem_'+product_id;
+			if ($("#" + entitledItemId).length) {
+            //the json object for entitled items are already in the HTML. 
+            entitledItemJSON = eval('(' + $("#" + entitledItemId).html() + ')');
+			} else {
+				//if $("#" + entitledItemId).length is 0, that means there's no <div> in the HTML that contains the JSON object. 
+				//in this case, it must have been set in catalogentryThumbnailDisplay.js when the quick info
+				entitledItemJSON = this.getEntitledItemJsonObject();
+			}
+
+			shoppingActionsJS.setEntitledItems(entitledItemJSON);
+			var catalogEntryId = shoppingActionsJS.getCatalogEntryId(entitledItemId);
+
+			if (catalogEntryId != null) {
+				catEntryId = catalogEntryId;
+			} else {
+				MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('ERR_RESOLVING_SKU'));
+				return;
+			}
+        }
+		
+		if (cartSKUs) {
+            if (product_id in SKUListJS.quantityList) {
+                var length = 0;
+                for (var skuId in SKUListJS.quantityList[product_id]) {
+                    var quantity = SKUListJS.quantityList[product_id][skuId];
+                    if (!isPositiveInteger(quantity)) {
+                        MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('QUANTITY_INPUTS_ERROR'));
+                        return;
+                    }
+                    length++;
+                }
+                if (length == 0) {
+                    MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('QUANTITY_INPUTS_ERROR'));
+                    return;
+                }
+            } else {
+                MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('QUANTITY_INPUTS_ERROR'));
+                return;
+            }
         }
 
         if (this.dropDownOpen == false) {
@@ -403,7 +492,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
 
 
     /**
-     * addSkus2RequisitionListAjax This function is used to add one or more SKUs to a requisition list using an AJAX call.
+     * addSkus2RequisitionListAjax This function is used to add one or more SKUs to a requisition list using an AJAX call (Arsalan - Add Some Custom Fields of PLP/PDP).
      **/
     this.addSkus2RequisitionListAjax = function () {
         if (this.someRadioButtonChecked == true) {
@@ -461,7 +550,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                             MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('QUANTITY_INPUTS_ERROR'));
                             return;
                         }
-                        params["catEntryId_" + i] = skuId;
+                        params["catEntryId_" + i] = catEntryId;
                         params["quantity_" + i++] = quantity;
                     }
                 }
@@ -472,21 +561,49 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('QUANTITY_INPUTS_ERROR'));
                 return;
             }
+			
+			if(document.getElementById("addAgainInput").value == 'Y'){
+				params["addItemAgain"] = 'Y';
+			}
 
             //For Handling multiple clicks
-            if (!submitRequest()) {
+            /*if (!submitRequest()) {
                 return;
-            }
+            }*/
             cursor_wait();
 
             if (this.createListDetailsMenuOpen) {
                 params.name = $("#" + this.listNameFieldId).val().replace(/^\s+|\s+$/g, '');
-                if (params.name == "") {
+				
+				if (params.name == "") {
                     MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('ERROR_SL_EMPTY_SL_NAME'));
                     return;
                 }
+				
+				var favCheckFlag = false;
+				
+				if($("#" + this.favoritesOrderCheck).is(':checked')) {
+					params["favoritesOrder"] = $("#" + this.favoritesOrderCheck).val();
+					favCheckFlag = true;
+				}
+				
+				if($("#" + this.quickOrderCheck).is(':checked')) {
+					params["quickOrder"] = $("#" + this.quickOrderCheck).val();
+					favCheckFlag = true;
+				}
+				
+				if($("#" + this.recurringOrderCheck).is(':checked')) {
+					params["recurOrder"] = $("#" + this.recurringOrderCheck).val();
+					favCheckFlag = true;
+				}
+				
+				if(!favCheckFlag){
+					MessageHelper.displayErrorMessage('No checkboxes are selected.');
+                    return;
+				}
             }
-            wcService.invoke('addCatalogEntriesToCreateRequisitionList', params);
+            //wcService.invoke('addCatalogEntriesToCreateRequisitionList', params);
+			wcService.invoke('addCatalogEntriesToCreateRequisitionListCustom', params);
         } else {
             MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('ERROR_SL_LIST_NOT_CHOSEN'));
             return;
@@ -565,29 +682,64 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 pageName: this.pageName,
                 buttonStyle: this.buttonStyle,
                 name: this.params.name,
-                status: this.params.status,
-                requisitionListId: this.params.requisitionListId,
-                quantity: quantity
+                status: this.params.status
             };
-            if (quantity < 1) {
-                MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('QUANTITY_INPUT_ERROR'));
+			
+			var quantity = document.getElementById('quantity_'+product_id);
+			if(quantity){
+				params["quantity"] = quantity.value;
+			} else {
+				params["quantity"] = '1';
+			}
+			
+			if(this.params.requisitionListId != ""){
+				params["requisitionListId"] = this.params.requisitionListId;
+			}
+			
+			if(document.getElementById("addAgainInput").value == 'Y'){
+				params["addItemAgain"] = 'Y';
+			}
+			
+            /*if (!submitRequest()) {
                 return;
-            }
-            if (!submitRequest()) {
-                return;
-            }
+            }*/
             cursor_wait();
             if (this.createListDetailsMenuOpen) {
                 params.name = $("#" + this.listNameFieldId).val().replace(/^\s+|\s+$/g, '');
+				
                 if (params.name == "") {
                     MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('ERROR_SL_EMPTY_SL_NAME'));
                     return;
                 }
+				
+				var favCheckFlag = false;
+				
+				if($("#" + this.favoritesOrderCheck).is(':checked')) {
+					params["favoritesOrder"] = $("#" + this.favoritesOrderCheck).val();
+					favCheckFlag = true;
+				}
+				
+				if($("#" + this.quickOrderCheck).is(':checked')) {
+					params["quickOrder"] = $("#" + this.quickOrderCheck).val();
+					favCheckFlag = true;
+				}
+				
+				if($("#" + this.recurringOrderCheck).is(':checked')) {
+					params["recurOrder"] = $("#" + this.recurringOrderCheck).val();
+					favCheckFlag = true;
+				}
+				
+				if(!favCheckFlag){
+					MessageHelper.displayErrorMessage('No checkboxes are selected.');
+                    return;
+				}
             }
             if (this.addPDK) {
-                wcService.getServiceById("addToCreateRequisitionList").setUrl(getAbsoluteURL() + "AjaxRESTRequisitionListConfigurationAdd");
+				wcService.getServiceById("addToCreateRequisitionListCustom").setUrl(getAbsoluteURL() + "AjaxRESTRequisitionListConfigurationAdd");				
+                //wcService.getServiceById("addToCreateRequisitionList").setUrl(getAbsoluteURL() + "AjaxRESTRequisitionListConfigurationAdd");
             }
-            wcService.invoke('addToCreateRequisitionList', params);
+			wcService.invoke('addToCreateRequisitionListCustom', params);
+            //wcService.invoke('addToCreateRequisitionList', params);
         } else {
             MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('ERROR_SL_LIST_NOT_CHOSEN'));
             return;
@@ -609,7 +761,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 buttonStyle: this.buttonStyle,
                 name: this.params.name,
                 status: this.params.status,
-                requisitionListId: this.params.requisitionListId,
+                requisitionListId: this.params.requisitionListId ? this.params.requisitionListId : "",
                 requisitionOrderItemId: requisitionOrderItemId,
                 quantity: quantity
             };
@@ -658,13 +810,108 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
         }, this);
     };
 
+	/**
+     * Service declaration to add a catalog entry to a requisition list.  List is created if it does not exist. (Arsalan - Check Duplicate Item in Requisition List).
+     */
+    wcService.declare({
+        id: "addToCreateRequisitionListCustom",
+        actionId: "addToCreateRequisitionListCustom",
+		url: getAbsoluteURL() + "ONRESTRequisitionListUpdateItem",
+        formId: "",
+
+        successHandler: function (serviceResponse) {
+			if(serviceResponse.productIdMatchFlag){
+				$.confirm({
+					title:"Confirmation Box",
+					text:"This part number "+serviceResponse.partNumber+" is already is in the selected favorites list. Please click on ADD to add the product again or or CANCEL to cancel the request.",
+					confirm: function(button) {
+						document.getElementById("addAgainInput").value = 'Y';
+						document.getElementById(serviceResponse.pageName+"requisitionListsSaveButton").click();
+					},
+					cancel: function(button) {
+						return false;
+					},
+					confirmButton: "ADD",
+					cancelButton: "CANCEL"
+				});
+			} else {
+				MessageHelper.hideAndClearMessage();
+				cursor_clear();
+
+				var productName = "";
+				// Get the product or SKU name
+				if ($("#ProductInfoName_" + serviceResponse.productId).length) {
+					productName = $("#" + "ProductInfoName_" + serviceResponse.productId).val();
+				} else if ($("#ProductInfoName_" + catEntryId).length) {
+					productName = $("#" + "ProductInfoName_" + catEntryId).val();
+				}
+
+				var productThumbnail = "";
+				// Get the product's image or SKU image
+				if ($("#ProductInfoImage_" + serviceResponse.productId).length) {
+					productThumbnail = $("#" + "ProductInfoImage_" + serviceResponse.productId).val();
+				} else if ($("#ProductInfoImage_" + catEntryId).length) {
+					productThumbnail = $("#" + "ProductInfoImage_" + catEntryId).val();
+				}
+				var curRefershAreas = wcRenderContext.getRefreshAreaIds("requisitionLists_content_context");
+				$.each(curRefershAreas, function(i, refreshDivId) {
+					var pageName = refreshDivId.replace("requisitionlists_content_widget", "");
+					declareRequsitionListsContentController(pageName);
+				});
+				// Refresh the widget's refresh area and show item was added to a list
+				wcRenderContext.updateRenderContext("requisitionLists_content_context", {
+					"showSuccess": "true",
+					"listName": serviceResponse.name,
+					"productName": productName,
+					"productThumbnail": productThumbnail,
+					"storeId": serviceResponse.storeId,
+					"buttonStyle": serviceResponse.buttonStyle,
+					"parentPage": serviceResponse.pageName,
+					"productId": serviceResponse.productId
+				});
+				
+				if ($("#ProductInfo_PageName").val() == 'OrderItemDetailsPage'){					
+					$("#grayOut").css("display", "none");
+					$("#grayOutPopup").css("display", "none");
+					$("#"+serviceResponse.pageName+"requisitionListContent").css("display", "none");
+					
+					MessageHelper.displayStatusMessage("Product added to '"+ serviceResponse.name +"' requisition list. Product Name: " + productName);
+				}
+				
+				// Keep polling until the continue shopping button is visible after AJAX update, then focus on it
+				var poll = window.setInterval(function () {
+					Utils.ifSelectorExists("#" + serviceResponse.pageName + "requisitionListsContShopButton", function ($contShopButton) {
+						if ($contShopButton.get(0).offsetHeight !== 0) {
+							window.clearInterval(poll);
+							$contShopButton.focus();
+							if (document.addEventListener) {
+								document.addEventListener("keydown", this.trapTabKey, true);
+							}
+						}
+					}, this);
+				}, 100);
+			}
+        },
+
+        failureHandler: function (serviceResponse) {
+            if (serviceResponse.errorMessage) {
+                MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+            } else {
+                if (serviceResponse.errorMessageKey) {
+                    MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+                }
+            }
+            cursor_clear();
+        }
+    });
+	
     /**
      * Service declaration to add a catalog entry to a requisition list.  List is created if it does not exist.
      */
     wcService.declare({
         id: "addToCreateRequisitionList",
         actionId: "addToCreateRequisitionList",
-        url: getAbsoluteURL() + "AjaxRequisitionListUpdateItem",
+		url: getAbsoluteURL() + "AjaxRequisitionListUpdateItem",
         formId: "",
 
         successHandler: function (serviceResponse) {
@@ -686,7 +933,11 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
             } else if ($("#ProductInfoImage_" + catEntryId).length) {
                 productThumbnail = $("#" + "ProductInfoImage_" + catEntryId).val();
             }
-
+            var curRefershAreas = wcRenderContext.getRefreshAreaIds("requisitionLists_content_context");
+            $.each(curRefershAreas, function(i, refreshDivId) {
+                var pageName = refreshDivId.replace("requisitionlists_content_widget", "");
+                declareRequsitionListsContentController(pageName);
+            });
             // Refresh the widget's refresh area and show item was added to a list
             wcRenderContext.updateRenderContext("requisitionLists_content_context", {
                 "showSuccess": "true",
@@ -750,6 +1001,12 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 productThumbnail = document.getElementById("catalogEntry_img_" + serviceResponse.requisitionOrderItemId).childNodes[1].src;
             }
 
+            var curRefershAreas = wcRenderContext.getRefreshAreaIds("requisitionLists_content_context");
+            $.each(curRefershAreas, function(i, refreshDivId) {
+                var pageName = refreshDivId.replace("requisitionlists_content_widget", "");
+                declareRequsitionListsContentController(pageName);
+            });
+            
             // Refresh the widget's refresh area and show item was added to a list
             wcRenderContext.updateRenderContext("requisitionLists_content_context", {
                 "showSuccess": "true",
@@ -876,6 +1133,122 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
             }, 100);
 
             wcTopic.publish('SKUsAddedToReqList');
+        },
+
+        failureHandler: function (serviceResponse) {
+            if (serviceResponse.errorMessage) {
+                MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+            } else {
+                if (serviceResponse.errorMessageKey) {
+                    MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+                }
+            }
+            cursor_clear();
+        }
+    });
+	
+	/**
+     * Service declaration to add multiple catalog entries to a requisition list.  List is created if it does not exist (Arsalan - Check Duplicate Item in Requisition List).
+     */
+    wcService.declare({
+        id: "addCatalogEntriesToCreateRequisitionListCustom",
+        actionId: "addCatalogEntriesToCreateRequisitionListCustom",
+        url: getAbsoluteURL() + "ONRESTRequisitionListUpdateItem",
+        formId: "",
+
+        successHandler: function (serviceResponse) {
+			if(serviceResponse.productIdMatchFlag){
+				$.confirm({
+					title:"Confirmation Box",
+					text:"This part number "+serviceResponse.partNumber+" is already is in the selected favorites list. Please click on ADD to add the product again or or CANCEL to cancel the request.",
+					confirm: function(button) {
+						document.getElementById("addAgainInput").value = 'Y';
+						document.getElementById(serviceResponse.pageName+"requisitionListsSaveButton").click();
+					},
+					cancel: function(button) {
+						return false;
+					},
+					confirmButton: "ADD",
+					cancelButton: "CANCEL"
+				});
+			} else {			
+				MessageHelper.hideAndClearMessage();
+				cursor_clear();
+
+				var productName = [];
+				var productThumbnail = [];
+				var productSKU = [];
+
+				// Get the SKU name and thumbnail urls
+				for (var i = 1;
+					("catEntryId_" + i) in serviceResponse; i++) {
+					var catEntryId = serviceResponse["catEntryId_" + i];
+					var productId = serviceResponse["productId"]; //Used when adding bundle
+					//var productId = serviceResponse["productId_" + i]; //Used when adding bundle
+
+					var catEntryName = Utils.selectExistingElement(["#item_name_" + catEntryId, "#ProductInfoName_" + productId]);
+					if (catEntryName) {
+						productName.push(catEntryName.val());
+						Utils.ifSelectorExists("#item_sku_" + catEntryId, function (catEntrySKU) {
+							productSKU.push("(" + catEntrySKU.val() + ")");
+						});
+					}
+
+					var catEntryThumbnail = Utils.selectExistingElement(["#item_thumbnail_" + catEntryId, "#ProductInfoImage_" + catEntryId]);
+					if (catEntryThumbnail) {
+						productThumbnail.push(catEntryThumbnail.val());
+					} else { //Get the thumbnail image from the JSON in the HTML in the bundle case
+						Utils.ifSelectorExists("#entitledItem_" + productId, function (element) {
+							var entitledItemJSON = JSON.parse(element.html());
+							for (var j in entitledItemJSON) {
+								var entitledItem = entitledItemJSON[j];
+								if (entitledItem.catentry_id == catEntryId) {
+									if (entitledItem.ItemThumbnailImage != null) {
+										productThumbnail.push(entitledItem.ItemThumbnailImage);
+										break;
+									}
+								}
+							}
+						});
+					}
+				}
+
+				var type = "";
+				if (serviceResponse.addBundle) {
+					type = 'bundle';
+				}
+
+				// Refresh the widget's refresh area and show item was added to a list
+				wcRenderContext.updateRenderContext("requisitionLists_content_context", {
+					"showSuccess": "true",
+					"listName": serviceResponse.name,
+					"productName": productName,
+					"productThumbnail": productThumbnail,
+					"productSKU": productSKU,
+					"storeId": serviceResponse.storeId,
+					"buttonStyle": serviceResponse.buttonStyle,
+					"parentPage": serviceResponse.pageName,
+					"productId": serviceResponse.productId,
+					"addMultipleSKUs": serviceResponse.addMultipleSKUs,
+					"numberOfSKUs": i - 1,
+					"type": type
+				});
+
+				// Keep polling until the continue shopping button is visible after AJAX update, then focus on it
+				var poll = window.setInterval(function () {
+					Utils.ifSelectorExists("#" + serviceResponse.pageName + "requisitionListsContShopButton", function ($contShopButton) {
+						if ($contShopButton.get(0).offsetHeight !== 0) {
+							window.clearInterval(poll);
+							$contShopButton.focus();
+							if (document.addEventListener) {
+								document.addEventListener("keydown", this.trapTabKey, true);
+							}
+						}
+					}, this);
+				}, 100);
+
+				wcTopic.publish('SKUsAddedToReqList');
+			}	
         },
 
         failureHandler: function (serviceResponse) {

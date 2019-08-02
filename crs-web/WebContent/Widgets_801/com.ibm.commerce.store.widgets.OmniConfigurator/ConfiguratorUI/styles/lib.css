@@ -1,0 +1,7764 @@
+/*!
+ * Bootstrap v3.3.1 (http://getbootstrap.com)
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+.ibm-omni-configurator html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+.ibm-omni-configurator body {
+  margin: 0;
+}
+
+.ibm-omni-configurator article,
+.ibm-omni-configurator aside,
+.ibm-omni-configurator details,
+.ibm-omni-configurator figcaption,
+.ibm-omni-configurator figure,
+.ibm-omni-configurator footer,
+.ibm-omni-configurator header,
+.ibm-omni-configurator hgroup,
+.ibm-omni-configurator main,
+.ibm-omni-configurator menu,
+.ibm-omni-configurator nav,
+.ibm-omni-configurator section,
+.ibm-omni-configurator summary {
+  display: block;
+}
+
+.ibm-omni-configurator audio,
+.ibm-omni-configurator canvas,
+.ibm-omni-configurator progress,
+.ibm-omni-configurator video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.ibm-omni-configurator audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+.ibm-omni-configurator [hidden],
+.ibm-omni-configurator template {
+  display: none;
+}
+
+.ibm-omni-configurator a {
+  background-color: transparent;
+}
+
+.ibm-omni-configurator a:active,
+.ibm-omni-configurator a:hover {
+  outline: 0;
+}
+
+.ibm-omni-configurator abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+.ibm-omni-configurator b,
+.ibm-omni-configurator strong {
+  font-weight: bold;
+}
+
+.ibm-omni-configurator dfn {
+  font-style: italic;
+}
+
+.ibm-omni-configurator h1 {
+  margin: .67em 0;
+  font-size: 2em;
+}
+
+.ibm-omni-configurator mark {
+  color: #000;
+  background: #ff0;
+}
+
+.ibm-omni-configurator small {
+  font-size: 80%;
+}
+
+.ibm-omni-configurator sub,
+.ibm-omni-configurator sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.ibm-omni-configurator sup {
+  top: -.5em;
+}
+
+.ibm-omni-configurator sub {
+  bottom: -.25em;
+}
+
+.ibm-omni-configurator img {
+  border: 0;
+}
+
+.ibm-omni-configurator svg:not(:root) {
+  overflow: hidden;
+}
+
+.ibm-omni-configurator figure {
+  margin: 1em 40px;
+}
+
+.ibm-omni-configurator hr {
+  height: 0;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.ibm-omni-configurator pre {
+  overflow: auto;
+}
+
+.ibm-omni-configurator code,
+.ibm-omni-configurator kbd,
+.ibm-omni-configurator pre,
+.ibm-omni-configurator samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.ibm-omni-configurator button,
+.ibm-omni-configurator input,
+.ibm-omni-configurator optgroup,
+.ibm-omni-configurator select,
+.ibm-omni-configurator textarea {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+.ibm-omni-configurator button {
+  overflow: visible;
+}
+
+.ibm-omni-configurator button,
+.ibm-omni-configurator select {
+  text-transform: none;
+}
+
+.ibm-omni-configurator button,
+.ibm-omni-configurator html input[type="button"],
+.ibm-omni-configurator input[type="reset"],
+.ibm-omni-configurator input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+.ibm-omni-configurator button[disabled],
+.ibm-omni-configurator html input[disabled] {
+  cursor: default;
+}
+
+.ibm-omni-configurator button::-moz-focus-inner,
+.ibm-omni-configurator input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+.ibm-omni-configurator input {
+  line-height: normal;
+}
+
+.ibm-omni-configurator input[type="checkbox"],
+.ibm-omni-configurator input[type="radio"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.ibm-omni-configurator input[type="number"]::-webkit-inner-spin-button,
+.ibm-omni-configurator input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+.ibm-omni-configurator input[type="search"] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+}
+
+.ibm-omni-configurator input[type="search"]::-webkit-search-cancel-button,
+.ibm-omni-configurator input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.ibm-omni-configurator fieldset {
+  padding: .35em .625em .75em;
+  margin: 0 2px;
+  border: 1px solid #c0c0c0;
+}
+
+.ibm-omni-configurator legend {
+  padding: 0;
+  border: 0;
+}
+
+.ibm-omni-configurator textarea {
+  overflow: auto;
+}
+
+.ibm-omni-configurator optgroup {
+  font-weight: bold;
+}
+
+.ibm-omni-configurator table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.ibm-omni-configurator td,
+.ibm-omni-configurator th {
+  padding: 0;
+}
+
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+
+@media print {
+  .ibm-omni-configurator *,
+  .ibm-omni-configurator *:before,
+  .ibm-omni-configurator *:after {
+    color: #000 !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  .ibm-omni-configurator a,
+  .ibm-omni-configurator a:visited {
+    text-decoration: underline;
+  }
+
+  .ibm-omni-configurator a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .ibm-omni-configurator abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .ibm-omni-configurator a[href^="#"]:after,
+  .ibm-omni-configurator a[href^="javascript:"]:after {
+    content: "";
+  }
+
+  .ibm-omni-configurator pre,
+  .ibm-omni-configurator blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  .ibm-omni-configurator thead {
+    display: table-header-group;
+  }
+
+  .ibm-omni-configurator tr,
+  .ibm-omni-configurator img {
+    page-break-inside: avoid;
+  }
+
+  .ibm-omni-configurator img {
+    max-width: 100% !important;
+  }
+
+  .ibm-omni-configurator p,
+  .ibm-omni-configurator h2,
+  .ibm-omni-configurator h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .ibm-omni-configurator h2,
+  .ibm-omni-configurator h3 {
+    page-break-after: avoid;
+  }
+
+  .ibm-omni-configurator select {
+    background: #fff !important;
+  }
+
+  .ibm-omni-configurator .navbar {
+    display: none;
+  }
+
+  .ibm-omni-configurator .btn > .caret,
+  .ibm-omni-configurator .dropup > .btn > .caret {
+    border-top-color: #000 !important;
+  }
+
+  .ibm-omni-configurator .label {
+    border: 1px solid #000;
+  }
+
+  .ibm-omni-configurator .table {
+    border-collapse: collapse !important;
+  }
+
+  .ibm-omni-configurator .table td,
+  .ibm-omni-configurator .table th {
+    background-color: #fff !important;
+  }
+
+  .ibm-omni-configurator .table-bordered th,
+  .ibm-omni-configurator .table-bordered td {
+    border: 1px solid #ddd !important;
+  }
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.ibm-omni-configurator .glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ibm-omni-configurator .glyphicon-asterisk:before {
+  content: "\2a";
+}
+
+.ibm-omni-configurator .glyphicon-plus:before {
+  content: "\2b";
+}
+
+.ibm-omni-configurator .glyphicon-euro:before,
+.ibm-omni-configurator .glyphicon-eur:before {
+  content: "\20ac";
+}
+
+.ibm-omni-configurator .glyphicon-minus:before {
+  content: "\2212";
+}
+
+.ibm-omni-configurator .glyphicon-cloud:before {
+  content: "\2601";
+}
+
+.ibm-omni-configurator .glyphicon-envelope:before {
+  content: "\2709";
+}
+
+.ibm-omni-configurator .glyphicon-pencil:before {
+  content: "\270f";
+}
+
+.ibm-omni-configurator .glyphicon-glass:before {
+  content: "\e001";
+}
+
+.ibm-omni-configurator .glyphicon-music:before {
+  content: "\e002";
+}
+
+.ibm-omni-configurator .glyphicon-search:before {
+  content: "\e003";
+}
+
+.ibm-omni-configurator .glyphicon-heart:before {
+  content: "\e005";
+}
+
+.ibm-omni-configurator .glyphicon-star:before {
+  content: "\e006";
+}
+
+.ibm-omni-configurator .glyphicon-star-empty:before {
+  content: "\e007";
+}
+
+.ibm-omni-configurator .glyphicon-user:before {
+  content: "\e008";
+}
+
+.ibm-omni-configurator .glyphicon-film:before {
+  content: "\e009";
+}
+
+.ibm-omni-configurator .glyphicon-th-large:before {
+  content: "\e010";
+}
+
+.ibm-omni-configurator .glyphicon-th:before {
+  content: "\e011";
+}
+
+.ibm-omni-configurator .glyphicon-th-list:before {
+  content: "\e012";
+}
+
+.ibm-omni-configurator .glyphicon-ok:before {
+  content: "\e013";
+}
+
+.ibm-omni-configurator .glyphicon-remove:before {
+  content: "\e014";
+}
+
+.ibm-omni-configurator .glyphicon-zoom-in:before {
+  content: "\e015";
+}
+
+.ibm-omni-configurator .glyphicon-zoom-out:before {
+  content: "\e016";
+}
+
+.ibm-omni-configurator .glyphicon-off:before {
+  content: "\e017";
+}
+
+.ibm-omni-configurator .glyphicon-signal:before {
+  content: "\e018";
+}
+
+.ibm-omni-configurator .glyphicon-cog:before {
+  content: "\e019";
+}
+
+.ibm-omni-configurator .glyphicon-trash:before {
+  content: "\e020";
+}
+
+.ibm-omni-configurator .glyphicon-home:before {
+  content: "\e021";
+}
+
+.ibm-omni-configurator .glyphicon-file:before {
+  content: "\e022";
+}
+
+.ibm-omni-configurator .glyphicon-time:before {
+  content: "\e023";
+}
+
+.ibm-omni-configurator .glyphicon-road:before {
+  content: "\e024";
+}
+
+.ibm-omni-configurator .glyphicon-download-alt:before {
+  content: "\e025";
+}
+
+.ibm-omni-configurator .glyphicon-download:before {
+  content: "\e026";
+}
+
+.ibm-omni-configurator .glyphicon-upload:before {
+  content: "\e027";
+}
+
+.ibm-omni-configurator .glyphicon-inbox:before {
+  content: "\e028";
+}
+
+.ibm-omni-configurator .glyphicon-play-circle:before {
+  content: "\e029";
+}
+
+.ibm-omni-configurator .glyphicon-repeat:before {
+  content: "\e030";
+}
+
+.ibm-omni-configurator .glyphicon-refresh:before {
+  content: "\e031";
+}
+
+.ibm-omni-configurator .glyphicon-list-alt:before {
+  content: "\e032";
+}
+
+.ibm-omni-configurator .glyphicon-lock:before {
+  content: "\e033";
+}
+
+.ibm-omni-configurator .glyphicon-flag:before {
+  content: "\e034";
+}
+
+.ibm-omni-configurator .glyphicon-headphones:before {
+  content: "\e035";
+}
+
+.ibm-omni-configurator .glyphicon-volume-off:before {
+  content: "\e036";
+}
+
+.ibm-omni-configurator .glyphicon-volume-down:before {
+  content: "\e037";
+}
+
+.ibm-omni-configurator .glyphicon-volume-up:before {
+  content: "\e038";
+}
+
+.ibm-omni-configurator .glyphicon-qrcode:before {
+  content: "\e039";
+}
+
+.ibm-omni-configurator .glyphicon-barcode:before {
+  content: "\e040";
+}
+
+.ibm-omni-configurator .glyphicon-tag:before {
+  content: "\e041";
+}
+
+.ibm-omni-configurator .glyphicon-tags:before {
+  content: "\e042";
+}
+
+.ibm-omni-configurator .glyphicon-book:before {
+  content: "\e043";
+}
+
+.ibm-omni-configurator .glyphicon-bookmark:before {
+  content: "\e044";
+}
+
+.ibm-omni-configurator .glyphicon-print:before {
+  content: "\e045";
+}
+
+.ibm-omni-configurator .glyphicon-camera:before {
+  content: "\e046";
+}
+
+.ibm-omni-configurator .glyphicon-font:before {
+  content: "\e047";
+}
+
+.ibm-omni-configurator .glyphicon-bold:before {
+  content: "\e048";
+}
+
+.ibm-omni-configurator .glyphicon-italic:before {
+  content: "\e049";
+}
+
+.ibm-omni-configurator .glyphicon-text-height:before {
+  content: "\e050";
+}
+
+.ibm-omni-configurator .glyphicon-text-width:before {
+  content: "\e051";
+}
+
+.ibm-omni-configurator .glyphicon-align-left:before {
+  content: "\e052";
+}
+
+.ibm-omni-configurator .glyphicon-align-center:before {
+  content: "\e053";
+}
+
+.ibm-omni-configurator .glyphicon-align-right:before {
+  content: "\e054";
+}
+
+.ibm-omni-configurator .glyphicon-align-justify:before {
+  content: "\e055";
+}
+
+.ibm-omni-configurator .glyphicon-list:before {
+  content: "\e056";
+}
+
+.ibm-omni-configurator .glyphicon-indent-left:before {
+  content: "\e057";
+}
+
+.ibm-omni-configurator .glyphicon-indent-right:before {
+  content: "\e058";
+}
+
+.ibm-omni-configurator .glyphicon-facetime-video:before {
+  content: "\e059";
+}
+
+.ibm-omni-configurator .glyphicon-picture:before {
+  content: "\e060";
+}
+
+.ibm-omni-configurator .glyphicon-map-marker:before {
+  content: "\e062";
+}
+
+.ibm-omni-configurator .glyphicon-adjust:before {
+  content: "\e063";
+}
+
+.ibm-omni-configurator .glyphicon-tint:before {
+  content: "\e064";
+}
+
+.ibm-omni-configurator .glyphicon-edit:before {
+  content: "\e065";
+}
+
+.ibm-omni-configurator .glyphicon-share:before {
+  content: "\e066";
+}
+
+.ibm-omni-configurator .glyphicon-check:before {
+  content: "\e067";
+}
+
+.ibm-omni-configurator .glyphicon-move:before {
+  content: "\e068";
+}
+
+.ibm-omni-configurator .glyphicon-step-backward:before {
+  content: "\e069";
+}
+
+.ibm-omni-configurator .glyphicon-fast-backward:before {
+  content: "\e070";
+}
+
+.ibm-omni-configurator .glyphicon-backward:before {
+  content: "\e071";
+}
+
+.ibm-omni-configurator .glyphicon-play:before {
+  content: "\e072";
+}
+
+.ibm-omni-configurator .glyphicon-pause:before {
+  content: "\e073";
+}
+
+.ibm-omni-configurator .glyphicon-stop:before {
+  content: "\e074";
+}
+
+.ibm-omni-configurator .glyphicon-forward:before {
+  content: "\e075";
+}
+
+.ibm-omni-configurator .glyphicon-fast-forward:before {
+  content: "\e076";
+}
+
+.ibm-omni-configurator .glyphicon-step-forward:before {
+  content: "\e077";
+}
+
+.ibm-omni-configurator .glyphicon-eject:before {
+  content: "\e078";
+}
+
+.ibm-omni-configurator .glyphicon-chevron-left:before {
+  content: "\e079";
+}
+
+.ibm-omni-configurator .glyphicon-chevron-right:before {
+  content: "\e080";
+}
+
+.ibm-omni-configurator .glyphicon-plus-sign:before {
+  content: "\e081";
+}
+
+.ibm-omni-configurator .glyphicon-minus-sign:before {
+  content: "\e082";
+}
+
+.ibm-omni-configurator .glyphicon-remove-sign:before {
+  content: "\e083";
+}
+
+.ibm-omni-configurator .glyphicon-ok-sign:before {
+  content: "\e084";
+}
+
+.ibm-omni-configurator .glyphicon-question-sign:before {
+  content: "\e085";
+}
+
+.ibm-omni-configurator .glyphicon-info-sign:before {
+  content: "\e086";
+}
+
+.ibm-omni-configurator .glyphicon-screenshot:before {
+  content: "\e087";
+}
+
+.ibm-omni-configurator .glyphicon-remove-circle:before {
+  content: "\e088";
+}
+
+.ibm-omni-configurator .glyphicon-ok-circle:before {
+  content: "\e089";
+}
+
+.ibm-omni-configurator .glyphicon-ban-circle:before {
+  content: "\e090";
+}
+
+.ibm-omni-configurator .glyphicon-arrow-left:before {
+  content: "\e091";
+}
+
+.ibm-omni-configurator .glyphicon-arrow-right:before {
+  content: "\e092";
+}
+
+.ibm-omni-configurator .glyphicon-arrow-up:before {
+  content: "\e093";
+}
+
+.ibm-omni-configurator .glyphicon-arrow-down:before {
+  content: "\e094";
+}
+
+.ibm-omni-configurator .glyphicon-share-alt:before {
+  content: "\e095";
+}
+
+.ibm-omni-configurator .glyphicon-resize-full:before {
+  content: "\e096";
+}
+
+.ibm-omni-configurator .glyphicon-resize-small:before {
+  content: "\e097";
+}
+
+.ibm-omni-configurator .glyphicon-exclamation-sign:before {
+  content: "\e101";
+}
+
+.ibm-omni-configurator .glyphicon-gift:before {
+  content: "\e102";
+}
+
+.ibm-omni-configurator .glyphicon-leaf:before {
+  content: "\e103";
+}
+
+.ibm-omni-configurator .glyphicon-fire:before {
+  content: "\e104";
+}
+
+.ibm-omni-configurator .glyphicon-eye-open:before {
+  content: "\e105";
+}
+
+.ibm-omni-configurator .glyphicon-eye-close:before {
+  content: "\e106";
+}
+
+.ibm-omni-configurator .glyphicon-warning-sign:before {
+  content: "\e107";
+}
+
+.ibm-omni-configurator .glyphicon-plane:before {
+  content: "\e108";
+}
+
+.ibm-omni-configurator .glyphicon-calendar:before {
+  content: "\e109";
+}
+
+.ibm-omni-configurator .glyphicon-random:before {
+  content: "\e110";
+}
+
+.ibm-omni-configurator .glyphicon-comment:before {
+  content: "\e111";
+}
+
+.ibm-omni-configurator .glyphicon-magnet:before {
+  content: "\e112";
+}
+
+.ibm-omni-configurator .glyphicon-chevron-up:before {
+  content: "\e113";
+}
+
+.ibm-omni-configurator .glyphicon-chevron-down:before {
+  content: "\e114";
+}
+
+.ibm-omni-configurator .glyphicon-retweet:before {
+  content: "\e115";
+}
+
+.ibm-omni-configurator .glyphicon-shopping-cart:before {
+  content: "\e116";
+}
+
+.ibm-omni-configurator .glyphicon-folder-close:before {
+  content: "\e117";
+}
+
+.ibm-omni-configurator .glyphicon-folder-open:before {
+  content: "\e118";
+}
+
+.ibm-omni-configurator .glyphicon-resize-vertical:before {
+  content: "\e119";
+}
+
+.ibm-omni-configurator .glyphicon-resize-horizontal:before {
+  content: "\e120";
+}
+
+.ibm-omni-configurator .glyphicon-hdd:before {
+  content: "\e121";
+}
+
+.ibm-omni-configurator .glyphicon-bullhorn:before {
+  content: "\e122";
+}
+
+.ibm-omni-configurator .glyphicon-bell:before {
+  content: "\e123";
+}
+
+.ibm-omni-configurator .glyphicon-certificate:before {
+  content: "\e124";
+}
+
+.ibm-omni-configurator .glyphicon-thumbs-up:before {
+  content: "\e125";
+}
+
+.ibm-omni-configurator .glyphicon-thumbs-down:before {
+  content: "\e126";
+}
+
+.ibm-omni-configurator .glyphicon-hand-right:before {
+  content: "\e127";
+}
+
+.ibm-omni-configurator .glyphicon-hand-left:before {
+  content: "\e128";
+}
+
+.ibm-omni-configurator .glyphicon-hand-up:before {
+  content: "\e129";
+}
+
+.ibm-omni-configurator .glyphicon-hand-down:before {
+  content: "\e130";
+}
+
+.ibm-omni-configurator .glyphicon-circle-arrow-right:before {
+  content: "\e131";
+}
+
+.ibm-omni-configurator .glyphicon-circle-arrow-left:before {
+  content: "\e132";
+}
+
+.ibm-omni-configurator .glyphicon-circle-arrow-up:before {
+  content: "\e133";
+}
+
+.ibm-omni-configurator .glyphicon-circle-arrow-down:before {
+  content: "\e134";
+}
+
+.ibm-omni-configurator .glyphicon-globe:before {
+  content: "\e135";
+}
+
+.ibm-omni-configurator .glyphicon-wrench:before {
+  content: "\e136";
+}
+
+.ibm-omni-configurator .glyphicon-tasks:before {
+  content: "\e137";
+}
+
+.ibm-omni-configurator .glyphicon-filter:before {
+  content: "\e138";
+}
+
+.ibm-omni-configurator .glyphicon-briefcase:before {
+  content: "\e139";
+}
+
+.ibm-omni-configurator .glyphicon-fullscreen:before {
+  content: "\e140";
+}
+
+.ibm-omni-configurator .glyphicon-dashboard:before {
+  content: "\e141";
+}
+
+.ibm-omni-configurator .glyphicon-paperclip:before {
+  content: "\e142";
+}
+
+.ibm-omni-configurator .glyphicon-heart-empty:before {
+  content: "\e143";
+}
+
+.ibm-omni-configurator .glyphicon-link:before {
+  content: "\e144";
+}
+
+.ibm-omni-configurator .glyphicon-phone:before {
+  content: "\e145";
+}
+
+.ibm-omni-configurator .glyphicon-pushpin:before {
+  content: "\e146";
+}
+
+.ibm-omni-configurator .glyphicon-usd:before {
+  content: "\e148";
+}
+
+.ibm-omni-configurator .glyphicon-gbp:before {
+  content: "\e149";
+}
+
+.ibm-omni-configurator .glyphicon-sort:before {
+  content: "\e150";
+}
+
+.ibm-omni-configurator .glyphicon-sort-by-alphabet:before {
+  content: "\e151";
+}
+
+.ibm-omni-configurator .glyphicon-sort-by-alphabet-alt:before {
+  content: "\e152";
+}
+
+.ibm-omni-configurator .glyphicon-sort-by-order:before {
+  content: "\e153";
+}
+
+.ibm-omni-configurator .glyphicon-sort-by-order-alt:before {
+  content: "\e154";
+}
+
+.ibm-omni-configurator .glyphicon-sort-by-attributes:before {
+  content: "\e155";
+}
+
+.ibm-omni-configurator .glyphicon-sort-by-attributes-alt:before {
+  content: "\e156";
+}
+
+.ibm-omni-configurator .glyphicon-unchecked:before {
+  content: "\e157";
+}
+
+.ibm-omni-configurator .glyphicon-expand:before {
+  content: "\e158";
+}
+
+.ibm-omni-configurator .glyphicon-collapse-down:before {
+  content: "\e159";
+}
+
+.ibm-omni-configurator .glyphicon-collapse-up:before {
+  content: "\e160";
+}
+
+.ibm-omni-configurator .glyphicon-log-in:before {
+  content: "\e161";
+}
+
+.ibm-omni-configurator .glyphicon-flash:before {
+  content: "\e162";
+}
+
+.ibm-omni-configurator .glyphicon-log-out:before {
+  content: "\e163";
+}
+
+.ibm-omni-configurator .glyphicon-new-window:before {
+  content: "\e164";
+}
+
+.ibm-omni-configurator .glyphicon-record:before {
+  content: "\e165";
+}
+
+.ibm-omni-configurator .glyphicon-save:before {
+  content: "\e166";
+}
+
+.ibm-omni-configurator .glyphicon-open:before {
+  content: "\e167";
+}
+
+.ibm-omni-configurator .glyphicon-saved:before {
+  content: "\e168";
+}
+
+.ibm-omni-configurator .glyphicon-import:before {
+  content: "\e169";
+}
+
+.ibm-omni-configurator .glyphicon-export:before {
+  content: "\e170";
+}
+
+.ibm-omni-configurator .glyphicon-send:before {
+  content: "\e171";
+}
+
+.ibm-omni-configurator .glyphicon-floppy-disk:before {
+  content: "\e172";
+}
+
+.ibm-omni-configurator .glyphicon-floppy-saved:before {
+  content: "\e173";
+}
+
+.ibm-omni-configurator .glyphicon-floppy-remove:before {
+  content: "\e174";
+}
+
+.ibm-omni-configurator .glyphicon-floppy-save:before {
+  content: "\e175";
+}
+
+.ibm-omni-configurator .glyphicon-floppy-open:before {
+  content: "\e176";
+}
+
+.ibm-omni-configurator .glyphicon-credit-card:before {
+  content: "\e177";
+}
+
+.ibm-omni-configurator .glyphicon-transfer:before {
+  content: "\e178";
+}
+
+.ibm-omni-configurator .glyphicon-cutlery:before {
+  content: "\e179";
+}
+
+.ibm-omni-configurator .glyphicon-header:before {
+  content: "\e180";
+}
+
+.ibm-omni-configurator .glyphicon-compressed:before {
+  content: "\e181";
+}
+
+.ibm-omni-configurator .glyphicon-earphone:before {
+  content: "\e182";
+}
+
+.ibm-omni-configurator .glyphicon-phone-alt:before {
+  content: "\e183";
+}
+
+.ibm-omni-configurator .glyphicon-tower:before {
+  content: "\e184";
+}
+
+.ibm-omni-configurator .glyphicon-stats:before {
+  content: "\e185";
+}
+
+.ibm-omni-configurator .glyphicon-sd-video:before {
+  content: "\e186";
+}
+
+.ibm-omni-configurator .glyphicon-hd-video:before {
+  content: "\e187";
+}
+
+.ibm-omni-configurator .glyphicon-subtitles:before {
+  content: "\e188";
+}
+
+.ibm-omni-configurator .glyphicon-sound-stereo:before {
+  content: "\e189";
+}
+
+.ibm-omni-configurator .glyphicon-sound-dolby:before {
+  content: "\e190";
+}
+
+.ibm-omni-configurator .glyphicon-sound-5-1:before {
+  content: "\e191";
+}
+
+.ibm-omni-configurator .glyphicon-sound-6-1:before {
+  content: "\e192";
+}
+
+.ibm-omni-configurator .glyphicon-sound-7-1:before {
+  content: "\e193";
+}
+
+.ibm-omni-configurator .glyphicon-copyright-mark:before {
+  content: "\e194";
+}
+
+.ibm-omni-configurator .glyphicon-registration-mark:before {
+  content: "\e195";
+}
+
+.ibm-omni-configurator .glyphicon-cloud-download:before {
+  content: "\e197";
+}
+
+.ibm-omni-configurator .glyphicon-cloud-upload:before {
+  content: "\e198";
+}
+
+.ibm-omni-configurator .glyphicon-tree-conifer:before {
+  content: "\e199";
+}
+
+.ibm-omni-configurator .glyphicon-tree-deciduous:before {
+  content: "\e200";
+}
+
+.ibm-omni-configurator * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ibm-omni-configurator *:before,
+.ibm-omni-configurator *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ibm-omni-configurator html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.ibm-omni-configurator body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator input,
+.ibm-omni-configurator button,
+.ibm-omni-configurator select,
+.ibm-omni-configurator textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.ibm-omni-configurator a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.ibm-omni-configurator a:hover,
+.ibm-omni-configurator a:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+.ibm-omni-configurator a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.ibm-omni-configurator figure {
+  margin: 0;
+}
+
+.ibm-omni-configurator img {
+  vertical-align: middle;
+}
+
+.ibm-omni-configurator .img-responsive,
+.ibm-omni-configurator .thumbnail > img,
+.ibm-omni-configurator .thumbnail a > img,
+.ibm-omni-configurator .carousel-inner > .item > img,
+.ibm-omni-configurator .carousel-inner > .item > a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.ibm-omni-configurator .img-rounded {
+  border-radius: 6px;
+}
+
+.ibm-omni-configurator .img-thumbnail {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.ibm-omni-configurator .img-circle {
+  border-radius: 50%;
+}
+
+.ibm-omni-configurator hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+.ibm-omni-configurator .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.ibm-omni-configurator .sr-only-focusable:active,
+.ibm-omni-configurator .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+
+.ibm-omni-configurator h1,
+.ibm-omni-configurator h2,
+.ibm-omni-configurator h3,
+.ibm-omni-configurator h4,
+.ibm-omni-configurator h5,
+.ibm-omni-configurator h6,
+.ibm-omni-configurator .h1,
+.ibm-omni-configurator .h2,
+.ibm-omni-configurator .h3,
+.ibm-omni-configurator .h4,
+.ibm-omni-configurator .h5,
+.ibm-omni-configurator .h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+
+.ibm-omni-configurator h1 small,
+.ibm-omni-configurator h2 small,
+.ibm-omni-configurator h3 small,
+.ibm-omni-configurator h4 small,
+.ibm-omni-configurator h5 small,
+.ibm-omni-configurator h6 small,
+.ibm-omni-configurator .h1 small,
+.ibm-omni-configurator .h2 small,
+.ibm-omni-configurator .h3 small,
+.ibm-omni-configurator .h4 small,
+.ibm-omni-configurator .h5 small,
+.ibm-omni-configurator .h6 small,
+.ibm-omni-configurator h1 .small,
+.ibm-omni-configurator h2 .small,
+.ibm-omni-configurator h3 .small,
+.ibm-omni-configurator h4 .small,
+.ibm-omni-configurator h5 .small,
+.ibm-omni-configurator h6 .small,
+.ibm-omni-configurator .h1 .small,
+.ibm-omni-configurator .h2 .small,
+.ibm-omni-configurator .h3 .small,
+.ibm-omni-configurator .h4 .small,
+.ibm-omni-configurator .h5 .small,
+.ibm-omni-configurator .h6 .small {
+  font-weight: normal;
+  line-height: 1;
+  color: #777;
+}
+
+.ibm-omni-configurator h1,
+.ibm-omni-configurator .h1,
+.ibm-omni-configurator h2,
+.ibm-omni-configurator .h2,
+.ibm-omni-configurator h3,
+.ibm-omni-configurator .h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.ibm-omni-configurator h1 small,
+.ibm-omni-configurator .h1 small,
+.ibm-omni-configurator h2 small,
+.ibm-omni-configurator .h2 small,
+.ibm-omni-configurator h3 small,
+.ibm-omni-configurator .h3 small,
+.ibm-omni-configurator h1 .small,
+.ibm-omni-configurator .h1 .small,
+.ibm-omni-configurator h2 .small,
+.ibm-omni-configurator .h2 .small,
+.ibm-omni-configurator h3 .small,
+.ibm-omni-configurator .h3 .small {
+  font-size: 65%;
+}
+
+.ibm-omni-configurator h4,
+.ibm-omni-configurator .h4,
+.ibm-omni-configurator h5,
+.ibm-omni-configurator .h5,
+.ibm-omni-configurator h6,
+.ibm-omni-configurator .h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ibm-omni-configurator h4 small,
+.ibm-omni-configurator .h4 small,
+.ibm-omni-configurator h5 small,
+.ibm-omni-configurator .h5 small,
+.ibm-omni-configurator h6 small,
+.ibm-omni-configurator .h6 small,
+.ibm-omni-configurator h4 .small,
+.ibm-omni-configurator .h4 .small,
+.ibm-omni-configurator h5 .small,
+.ibm-omni-configurator .h5 .small,
+.ibm-omni-configurator h6 .small,
+.ibm-omni-configurator .h6 .small {
+  font-size: 75%;
+}
+
+.ibm-omni-configurator h1,
+.ibm-omni-configurator .h1 {
+  font-size: 36px;
+}
+
+.ibm-omni-configurator h2,
+.ibm-omni-configurator .h2 {
+  font-size: 30px;
+}
+
+.ibm-omni-configurator h3,
+.ibm-omni-configurator .h3 {
+  font-size: 24px;
+}
+
+.ibm-omni-configurator h4,
+.ibm-omni-configurator .h4 {
+  font-size: 18px;
+}
+
+.ibm-omni-configurator h5,
+.ibm-omni-configurator .h5 {
+  font-size: 14px;
+}
+
+.ibm-omni-configurator h6,
+.ibm-omni-configurator .h6 {
+  font-size: 12px;
+}
+
+.ibm-omni-configurator p {
+  margin: 0 0 10px;
+}
+
+.ibm-omni-configurator .lead {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .lead {
+    font-size: 21px;
+  }
+}
+
+.ibm-omni-configurator small,
+.ibm-omni-configurator .small {
+  font-size: 85%;
+}
+
+.ibm-omni-configurator mark,
+.ibm-omni-configurator .mark {
+  padding: .2em;
+  background-color: #fcf8e3;
+}
+
+.ibm-omni-configurator .text-left {
+  text-align: left;
+}
+
+.ibm-omni-configurator .text-right {
+  text-align: right;
+}
+
+.ibm-omni-configurator .text-center {
+  text-align: center;
+}
+
+.ibm-omni-configurator .text-justify {
+  text-align: justify;
+}
+
+.ibm-omni-configurator .text-nowrap {
+  white-space: nowrap;
+}
+
+.ibm-omni-configurator .text-lowercase {
+  text-transform: lowercase;
+}
+
+.ibm-omni-configurator .text-uppercase {
+  text-transform: uppercase;
+}
+
+.ibm-omni-configurator .text-capitalize {
+  text-transform: capitalize;
+}
+
+.ibm-omni-configurator .text-muted {
+  color: #777;
+}
+
+.ibm-omni-configurator .text-primary {
+  color: #337ab7;
+}
+
+.ibm-omni-configurator a.text-primary:hover {
+  color: #286090;
+}
+
+.ibm-omni-configurator .text-success {
+  color: #3c763d;
+}
+
+.ibm-omni-configurator a.text-success:hover {
+  color: #2b542c;
+}
+
+.ibm-omni-configurator .text-info {
+  color: #31708f;
+}
+
+.ibm-omni-configurator a.text-info:hover {
+  color: #245269;
+}
+
+.ibm-omni-configurator .text-warning {
+  color: #8a6d3b;
+}
+
+.ibm-omni-configurator a.text-warning:hover {
+  color: #66512c;
+}
+
+.ibm-omni-configurator .text-danger {
+  color: #a94442;
+}
+
+.ibm-omni-configurator a.text-danger:hover {
+  color: #843534;
+}
+
+.ibm-omni-configurator .bg-primary {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.ibm-omni-configurator a.bg-primary:hover {
+  background-color: #286090;
+}
+
+.ibm-omni-configurator .bg-success {
+  background-color: #dff0d8;
+}
+
+.ibm-omni-configurator a.bg-success:hover {
+  background-color: #c1e2b3;
+}
+
+.ibm-omni-configurator .bg-info {
+  background-color: #d9edf7;
+}
+
+.ibm-omni-configurator a.bg-info:hover {
+  background-color: #afd9ee;
+}
+
+.ibm-omni-configurator .bg-warning {
+  background-color: #fcf8e3;
+}
+
+.ibm-omni-configurator a.bg-warning:hover {
+  background-color: #f7ecb5;
+}
+
+.ibm-omni-configurator .bg-danger {
+  background-color: #f2dede;
+}
+
+.ibm-omni-configurator a.bg-danger:hover {
+  background-color: #e4b9b9;
+}
+
+.ibm-omni-configurator .page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.ibm-omni-configurator ul,
+.ibm-omni-configurator ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.ibm-omni-configurator ul ul,
+.ibm-omni-configurator ol ul,
+.ibm-omni-configurator ul ol,
+.ibm-omni-configurator ol ol {
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.ibm-omni-configurator .list-inline {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+}
+
+.ibm-omni-configurator .list-inline > li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.ibm-omni-configurator dl {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.ibm-omni-configurator dt,
+.ibm-omni-configurator dd {
+  line-height: 1.42857143;
+}
+
+.ibm-omni-configurator dt {
+  font-weight: bold;
+}
+
+.ibm-omni-configurator dd {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .dl-horizontal dt {
+    float: left;
+    width: 160px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ibm-omni-configurator .dl-horizontal dd {
+    margin-left: 180px;
+  }
+}
+
+.ibm-omni-configurator abbr[title],
+.ibm-omni-configurator abbr[data-original-title] {
+  cursor: help;
+  border-bottom: 1px dotted #777;
+}
+
+.ibm-omni-configurator .initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+.ibm-omni-configurator blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 5px solid #eee;
+}
+
+.ibm-omni-configurator blockquote p:last-child,
+.ibm-omni-configurator blockquote ul:last-child,
+.ibm-omni-configurator blockquote ol:last-child {
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator blockquote footer,
+.ibm-omni-configurator blockquote small,
+.ibm-omni-configurator blockquote .small {
+  display: block;
+  font-size: 80%;
+  line-height: 1.42857143;
+  color: #777;
+}
+
+.ibm-omni-configurator blockquote footer:before,
+.ibm-omni-configurator blockquote small:before,
+.ibm-omni-configurator blockquote .small:before {
+  content: '\2014 \00A0';
+}
+
+.ibm-omni-configurator .blockquote-reverse,
+.ibm-omni-configurator blockquote.pull-right {
+  padding-right: 15px;
+  padding-left: 0;
+  text-align: right;
+  border-right: 5px solid #eee;
+  border-left: 0;
+}
+
+.ibm-omni-configurator .blockquote-reverse footer:before,
+.ibm-omni-configurator blockquote.pull-right footer:before,
+.ibm-omni-configurator .blockquote-reverse small:before,
+.ibm-omni-configurator blockquote.pull-right small:before,
+.ibm-omni-configurator .blockquote-reverse .small:before,
+.ibm-omni-configurator blockquote.pull-right .small:before {
+  content: '';
+}
+
+.ibm-omni-configurator .blockquote-reverse footer:after,
+.ibm-omni-configurator blockquote.pull-right footer:after,
+.ibm-omni-configurator .blockquote-reverse small:after,
+.ibm-omni-configurator blockquote.pull-right small:after,
+.ibm-omni-configurator .blockquote-reverse .small:after,
+.ibm-omni-configurator blockquote.pull-right .small:after {
+  content: '\00A0 \2014';
+}
+
+.ibm-omni-configurator address {
+  margin-bottom: 20px;
+  font-style: normal;
+  line-height: 1.42857143;
+}
+
+.ibm-omni-configurator code,
+.ibm-omni-configurator kbd,
+.ibm-omni-configurator pre,
+.ibm-omni-configurator samp {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.ibm-omni-configurator code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator kbd {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #fff;
+  background-color: #333;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .25);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .25);
+}
+
+.ibm-omni-configurator kbd kbd {
+  padding: 0;
+  font-size: 100%;
+  font-weight: bold;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ibm-omni-configurator pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre-wrap;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .pre-scrollable {
+  max-height: 340px;
+  overflow-y: scroll;
+}
+
+.ibm-omni-configurator .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .ibm-omni-configurator .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ibm-omni-configurator .container {
+    width: 1170px;
+  }
+}
+
+.ibm-omni-configurator .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ibm-omni-configurator .row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.ibm-omni-configurator .col-xs-1,
+.ibm-omni-configurator .col-sm-1,
+.ibm-omni-configurator .col-md-1,
+.ibm-omni-configurator .col-lg-1,
+.ibm-omni-configurator .col-xs-2,
+.ibm-omni-configurator .col-sm-2,
+.ibm-omni-configurator .col-md-2,
+.ibm-omni-configurator .col-lg-2,
+.ibm-omni-configurator .col-xs-3,
+.ibm-omni-configurator .col-sm-3,
+.ibm-omni-configurator .col-md-3,
+.ibm-omni-configurator .col-lg-3,
+.ibm-omni-configurator .col-xs-4,
+.ibm-omni-configurator .col-sm-4,
+.ibm-omni-configurator .col-md-4,
+.ibm-omni-configurator .col-lg-4,
+.ibm-omni-configurator .col-xs-5,
+.ibm-omni-configurator .col-sm-5,
+.ibm-omni-configurator .col-md-5,
+.ibm-omni-configurator .col-lg-5,
+.ibm-omni-configurator .col-xs-6,
+.ibm-omni-configurator .col-sm-6,
+.ibm-omni-configurator .col-md-6,
+.ibm-omni-configurator .col-lg-6,
+.ibm-omni-configurator .col-xs-7,
+.ibm-omni-configurator .col-sm-7,
+.ibm-omni-configurator .col-md-7,
+.ibm-omni-configurator .col-lg-7,
+.ibm-omni-configurator .col-xs-8,
+.ibm-omni-configurator .col-sm-8,
+.ibm-omni-configurator .col-md-8,
+.ibm-omni-configurator .col-lg-8,
+.ibm-omni-configurator .col-xs-9,
+.ibm-omni-configurator .col-sm-9,
+.ibm-omni-configurator .col-md-9,
+.ibm-omni-configurator .col-lg-9,
+.ibm-omni-configurator .col-xs-10,
+.ibm-omni-configurator .col-sm-10,
+.ibm-omni-configurator .col-md-10,
+.ibm-omni-configurator .col-lg-10,
+.ibm-omni-configurator .col-xs-11,
+.ibm-omni-configurator .col-sm-11,
+.ibm-omni-configurator .col-md-11,
+.ibm-omni-configurator .col-lg-11,
+.ibm-omni-configurator .col-xs-12,
+.ibm-omni-configurator .col-sm-12,
+.ibm-omni-configurator .col-md-12,
+.ibm-omni-configurator .col-lg-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.ibm-omni-configurator .col-xs-1,
+.ibm-omni-configurator .col-xs-2,
+.ibm-omni-configurator .col-xs-3,
+.ibm-omni-configurator .col-xs-4,
+.ibm-omni-configurator .col-xs-5,
+.ibm-omni-configurator .col-xs-6,
+.ibm-omni-configurator .col-xs-7,
+.ibm-omni-configurator .col-xs-8,
+.ibm-omni-configurator .col-xs-9,
+.ibm-omni-configurator .col-xs-10,
+.ibm-omni-configurator .col-xs-11,
+.ibm-omni-configurator .col-xs-12 {
+  float: left;
+}
+
+.ibm-omni-configurator .col-xs-12 {
+  width: 100%;
+}
+
+.ibm-omni-configurator .col-xs-11 {
+  width: 91.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-10 {
+  width: 83.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-9 {
+  width: 75%;
+}
+
+.ibm-omni-configurator .col-xs-8 {
+  width: 66.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-7 {
+  width: 58.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-6 {
+  width: 50%;
+}
+
+.ibm-omni-configurator .col-xs-5 {
+  width: 41.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-4 {
+  width: 33.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-3 {
+  width: 25%;
+}
+
+.ibm-omni-configurator .col-xs-2 {
+  width: 16.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-1 {
+  width: 8.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-pull-12 {
+  right: 100%;
+}
+
+.ibm-omni-configurator .col-xs-pull-11 {
+  right: 91.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-pull-10 {
+  right: 83.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-pull-9 {
+  right: 75%;
+}
+
+.ibm-omni-configurator .col-xs-pull-8 {
+  right: 66.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-pull-7 {
+  right: 58.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-pull-6 {
+  right: 50%;
+}
+
+.ibm-omni-configurator .col-xs-pull-5 {
+  right: 41.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-pull-4 {
+  right: 33.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-pull-3 {
+  right: 25%;
+}
+
+.ibm-omni-configurator .col-xs-pull-2 {
+  right: 16.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-pull-1 {
+  right: 8.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-pull-0 {
+  right: auto;
+}
+
+.ibm-omni-configurator .col-xs-push-12 {
+  left: 100%;
+}
+
+.ibm-omni-configurator .col-xs-push-11 {
+  left: 91.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-push-10 {
+  left: 83.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-push-9 {
+  left: 75%;
+}
+
+.ibm-omni-configurator .col-xs-push-8 {
+  left: 66.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-push-7 {
+  left: 58.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-push-6 {
+  left: 50%;
+}
+
+.ibm-omni-configurator .col-xs-push-5 {
+  left: 41.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-push-4 {
+  left: 33.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-push-3 {
+  left: 25%;
+}
+
+.ibm-omni-configurator .col-xs-push-2 {
+  left: 16.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-push-1 {
+  left: 8.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-push-0 {
+  left: auto;
+}
+
+.ibm-omni-configurator .col-xs-offset-12 {
+  margin-left: 100%;
+}
+
+.ibm-omni-configurator .col-xs-offset-11 {
+  margin-left: 91.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-offset-10 {
+  margin-left: 83.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-offset-9 {
+  margin-left: 75%;
+}
+
+.ibm-omni-configurator .col-xs-offset-8 {
+  margin-left: 66.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-offset-7 {
+  margin-left: 58.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-offset-6 {
+  margin-left: 50%;
+}
+
+.ibm-omni-configurator .col-xs-offset-5 {
+  margin-left: 41.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-offset-4 {
+  margin-left: 33.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-offset-3 {
+  margin-left: 25%;
+}
+
+.ibm-omni-configurator .col-xs-offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.ibm-omni-configurator .col-xs-offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.ibm-omni-configurator .col-xs-offset-0 {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .col-sm-1,
+  .ibm-omni-configurator .col-sm-2,
+  .ibm-omni-configurator .col-sm-3,
+  .ibm-omni-configurator .col-sm-4,
+  .ibm-omni-configurator .col-sm-5,
+  .ibm-omni-configurator .col-sm-6,
+  .ibm-omni-configurator .col-sm-7,
+  .ibm-omni-configurator .col-sm-8,
+  .ibm-omni-configurator .col-sm-9,
+  .ibm-omni-configurator .col-sm-10,
+  .ibm-omni-configurator .col-sm-11,
+  .ibm-omni-configurator .col-sm-12 {
+    float: left;
+  }
+
+  .ibm-omni-configurator .col-sm-12 {
+    width: 100%;
+  }
+
+  .ibm-omni-configurator .col-sm-11 {
+    width: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-10 {
+    width: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-9 {
+    width: 75%;
+  }
+
+  .ibm-omni-configurator .col-sm-8 {
+    width: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-7 {
+    width: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-6 {
+    width: 50%;
+  }
+
+  .ibm-omni-configurator .col-sm-5 {
+    width: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-4 {
+    width: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-3 {
+    width: 25%;
+  }
+
+  .ibm-omni-configurator .col-sm-2 {
+    width: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-1 {
+    width: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-12 {
+    right: 100%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-11 {
+    right: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-10 {
+    right: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-9 {
+    right: 75%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-8 {
+    right: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-7 {
+    right: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-6 {
+    right: 50%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-5 {
+    right: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-4 {
+    right: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-3 {
+    right: 25%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-2 {
+    right: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-1 {
+    right: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-pull-0 {
+    right: auto;
+  }
+
+  .ibm-omni-configurator .col-sm-push-12 {
+    left: 100%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-11 {
+    left: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-10 {
+    left: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-9 {
+    left: 75%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-8 {
+    left: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-7 {
+    left: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-6 {
+    left: 50%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-5 {
+    left: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-4 {
+    left: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-3 {
+    left: 25%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-2 {
+    left: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-1 {
+    left: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-push-0 {
+    left: auto;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-12 {
+    margin-left: 100%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-11 {
+    margin-left: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-10 {
+    margin-left: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-9 {
+    margin-left: 75%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-8 {
+    margin-left: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-7 {
+    margin-left: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-6 {
+    margin-left: 50%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-5 {
+    margin-left: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-4 {
+    margin-left: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-3 {
+    margin-left: 25%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-2 {
+    margin-left: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-1 {
+    margin-left: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-sm-offset-0 {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .ibm-omni-configurator .col-md-1,
+  .ibm-omni-configurator .col-md-2,
+  .ibm-omni-configurator .col-md-3,
+  .ibm-omni-configurator .col-md-4,
+  .ibm-omni-configurator .col-md-5,
+  .ibm-omni-configurator .col-md-6,
+  .ibm-omni-configurator .col-md-7,
+  .ibm-omni-configurator .col-md-8,
+  .ibm-omni-configurator .col-md-9,
+  .ibm-omni-configurator .col-md-10,
+  .ibm-omni-configurator .col-md-11,
+  .ibm-omni-configurator .col-md-12 {
+    float: left;
+  }
+
+  .ibm-omni-configurator .col-md-12 {
+    width: 100%;
+  }
+
+  .ibm-omni-configurator .col-md-11 {
+    width: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-10 {
+    width: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-9 {
+    width: 75%;
+  }
+
+  .ibm-omni-configurator .col-md-8 {
+    width: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-7 {
+    width: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-6 {
+    width: 50%;
+  }
+
+  .ibm-omni-configurator .col-md-5 {
+    width: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-4 {
+    width: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-3 {
+    width: 25%;
+  }
+
+  .ibm-omni-configurator .col-md-2 {
+    width: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-1 {
+    width: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-12 {
+    right: 100%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-11 {
+    right: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-10 {
+    right: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-9 {
+    right: 75%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-8 {
+    right: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-7 {
+    right: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-6 {
+    right: 50%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-5 {
+    right: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-4 {
+    right: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-3 {
+    right: 25%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-2 {
+    right: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-1 {
+    right: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-pull-0 {
+    right: auto;
+  }
+
+  .ibm-omni-configurator .col-md-push-12 {
+    left: 100%;
+  }
+
+  .ibm-omni-configurator .col-md-push-11 {
+    left: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-push-10 {
+    left: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-push-9 {
+    left: 75%;
+  }
+
+  .ibm-omni-configurator .col-md-push-8 {
+    left: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-push-7 {
+    left: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-push-6 {
+    left: 50%;
+  }
+
+  .ibm-omni-configurator .col-md-push-5 {
+    left: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-push-4 {
+    left: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-push-3 {
+    left: 25%;
+  }
+
+  .ibm-omni-configurator .col-md-push-2 {
+    left: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-push-1 {
+    left: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-push-0 {
+    left: auto;
+  }
+
+  .ibm-omni-configurator .col-md-offset-12 {
+    margin-left: 100%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-11 {
+    margin-left: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-10 {
+    margin-left: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-9 {
+    margin-left: 75%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-8 {
+    margin-left: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-7 {
+    margin-left: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-6 {
+    margin-left: 50%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-5 {
+    margin-left: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-4 {
+    margin-left: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-3 {
+    margin-left: 25%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-2 {
+    margin-left: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-1 {
+    margin-left: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-md-offset-0 {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ibm-omni-configurator .col-lg-1,
+  .ibm-omni-configurator .col-lg-2,
+  .ibm-omni-configurator .col-lg-3,
+  .ibm-omni-configurator .col-lg-4,
+  .ibm-omni-configurator .col-lg-5,
+  .ibm-omni-configurator .col-lg-6,
+  .ibm-omni-configurator .col-lg-7,
+  .ibm-omni-configurator .col-lg-8,
+  .ibm-omni-configurator .col-lg-9,
+  .ibm-omni-configurator .col-lg-10,
+  .ibm-omni-configurator .col-lg-11,
+  .ibm-omni-configurator .col-lg-12 {
+    float: left;
+  }
+
+  .ibm-omni-configurator .col-lg-12 {
+    width: 100%;
+  }
+
+  .ibm-omni-configurator .col-lg-11 {
+    width: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-10 {
+    width: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-9 {
+    width: 75%;
+  }
+
+  .ibm-omni-configurator .col-lg-8 {
+    width: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-7 {
+    width: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-6 {
+    width: 50%;
+  }
+
+  .ibm-omni-configurator .col-lg-5 {
+    width: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-4 {
+    width: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-3 {
+    width: 25%;
+  }
+
+  .ibm-omni-configurator .col-lg-2 {
+    width: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-1 {
+    width: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-12 {
+    right: 100%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-11 {
+    right: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-10 {
+    right: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-9 {
+    right: 75%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-8 {
+    right: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-7 {
+    right: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-6 {
+    right: 50%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-5 {
+    right: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-4 {
+    right: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-3 {
+    right: 25%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-2 {
+    right: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-1 {
+    right: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-pull-0 {
+    right: auto;
+  }
+
+  .ibm-omni-configurator .col-lg-push-12 {
+    left: 100%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-11 {
+    left: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-10 {
+    left: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-9 {
+    left: 75%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-8 {
+    left: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-7 {
+    left: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-6 {
+    left: 50%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-5 {
+    left: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-4 {
+    left: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-3 {
+    left: 25%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-2 {
+    left: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-1 {
+    left: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-push-0 {
+    left: auto;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-12 {
+    margin-left: 100%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-11 {
+    margin-left: 91.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-10 {
+    margin-left: 83.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-9 {
+    margin-left: 75%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-8 {
+    margin-left: 66.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-7 {
+    margin-left: 58.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-6 {
+    margin-left: 50%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-5 {
+    margin-left: 41.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-4 {
+    margin-left: 33.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-3 {
+    margin-left: 25%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-2 {
+    margin-left: 16.66666667%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-1 {
+    margin-left: 8.33333333%;
+  }
+
+  .ibm-omni-configurator .col-lg-offset-0 {
+    margin-left: 0;
+  }
+}
+
+.ibm-omni-configurator table {
+  background-color: transparent;
+}
+
+.ibm-omni-configurator caption {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #777;
+  text-align: left;
+}
+
+.ibm-omni-configurator th {
+  text-align: left;
+}
+
+.ibm-omni-configurator .table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.ibm-omni-configurator .table > thead > tr > th,
+.ibm-omni-configurator .table > tbody > tr > th,
+.ibm-omni-configurator .table > tfoot > tr > th,
+.ibm-omni-configurator .table > thead > tr > td,
+.ibm-omni-configurator .table > tbody > tr > td,
+.ibm-omni-configurator .table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+
+.ibm-omni-configurator .table > caption + thead > tr:first-child > th,
+.ibm-omni-configurator .table > colgroup + thead > tr:first-child > th,
+.ibm-omni-configurator .table > thead:first-child > tr:first-child > th,
+.ibm-omni-configurator .table > caption + thead > tr:first-child > td,
+.ibm-omni-configurator .table > colgroup + thead > tr:first-child > td,
+.ibm-omni-configurator .table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+
+.ibm-omni-configurator .table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+
+.ibm-omni-configurator .table .table {
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .table-condensed > thead > tr > th,
+.ibm-omni-configurator .table-condensed > tbody > tr > th,
+.ibm-omni-configurator .table-condensed > tfoot > tr > th,
+.ibm-omni-configurator .table-condensed > thead > tr > td,
+.ibm-omni-configurator .table-condensed > tbody > tr > td,
+.ibm-omni-configurator .table-condensed > tfoot > tr > td {
+  padding: 5px;
+}
+
+.ibm-omni-configurator .table-bordered {
+  border: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .table-bordered > thead > tr > th,
+.ibm-omni-configurator .table-bordered > tbody > tr > th,
+.ibm-omni-configurator .table-bordered > tfoot > tr > th,
+.ibm-omni-configurator .table-bordered > thead > tr > td,
+.ibm-omni-configurator .table-bordered > tbody > tr > td,
+.ibm-omni-configurator .table-bordered > tfoot > tr > td {
+  border: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .table-bordered > thead > tr > th,
+.ibm-omni-configurator .table-bordered > thead > tr > td {
+  border-bottom-width: 2px;
+}
+
+.ibm-omni-configurator .table-striped > tbody > tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.ibm-omni-configurator .table-hover > tbody > tr:hover {
+  background-color: #f5f5f5;
+}
+
+.ibm-omni-configurator table col[class*="col-"] {
+  position: static;
+  display: table-column;
+  float: none;
+}
+
+.ibm-omni-configurator table td[class*="col-"],
+.ibm-omni-configurator table th[class*="col-"] {
+  position: static;
+  display: table-cell;
+  float: none;
+}
+
+.ibm-omni-configurator .table > thead > tr > td.active,
+.ibm-omni-configurator .table > tbody > tr > td.active,
+.ibm-omni-configurator .table > tfoot > tr > td.active,
+.ibm-omni-configurator .table > thead > tr > th.active,
+.ibm-omni-configurator .table > tbody > tr > th.active,
+.ibm-omni-configurator .table > tfoot > tr > th.active,
+.ibm-omni-configurator .table > thead > tr.active > td,
+.ibm-omni-configurator .table > tbody > tr.active > td,
+.ibm-omni-configurator .table > tfoot > tr.active > td,
+.ibm-omni-configurator .table > thead > tr.active > th,
+.ibm-omni-configurator .table > tbody > tr.active > th,
+.ibm-omni-configurator .table > tfoot > tr.active > th {
+  background-color: #f5f5f5;
+}
+
+.ibm-omni-configurator .table-hover > tbody > tr > td.active:hover,
+.ibm-omni-configurator .table-hover > tbody > tr > th.active:hover,
+.ibm-omni-configurator .table-hover > tbody > tr.active:hover > td,
+.ibm-omni-configurator .table-hover > tbody > tr:hover > .active,
+.ibm-omni-configurator .table-hover > tbody > tr.active:hover > th {
+  background-color: #e8e8e8;
+}
+
+.ibm-omni-configurator .table > thead > tr > td.success,
+.ibm-omni-configurator .table > tbody > tr > td.success,
+.ibm-omni-configurator .table > tfoot > tr > td.success,
+.ibm-omni-configurator .table > thead > tr > th.success,
+.ibm-omni-configurator .table > tbody > tr > th.success,
+.ibm-omni-configurator .table > tfoot > tr > th.success,
+.ibm-omni-configurator .table > thead > tr.success > td,
+.ibm-omni-configurator .table > tbody > tr.success > td,
+.ibm-omni-configurator .table > tfoot > tr.success > td,
+.ibm-omni-configurator .table > thead > tr.success > th,
+.ibm-omni-configurator .table > tbody > tr.success > th,
+.ibm-omni-configurator .table > tfoot > tr.success > th {
+  background-color: #dff0d8;
+}
+
+.ibm-omni-configurator .table-hover > tbody > tr > td.success:hover,
+.ibm-omni-configurator .table-hover > tbody > tr > th.success:hover,
+.ibm-omni-configurator .table-hover > tbody > tr.success:hover > td,
+.ibm-omni-configurator .table-hover > tbody > tr:hover > .success,
+.ibm-omni-configurator .table-hover > tbody > tr.success:hover > th {
+  background-color: #d0e9c6;
+}
+
+.ibm-omni-configurator .table > thead > tr > td.info,
+.ibm-omni-configurator .table > tbody > tr > td.info,
+.ibm-omni-configurator .table > tfoot > tr > td.info,
+.ibm-omni-configurator .table > thead > tr > th.info,
+.ibm-omni-configurator .table > tbody > tr > th.info,
+.ibm-omni-configurator .table > tfoot > tr > th.info,
+.ibm-omni-configurator .table > thead > tr.info > td,
+.ibm-omni-configurator .table > tbody > tr.info > td,
+.ibm-omni-configurator .table > tfoot > tr.info > td,
+.ibm-omni-configurator .table > thead > tr.info > th,
+.ibm-omni-configurator .table > tbody > tr.info > th,
+.ibm-omni-configurator .table > tfoot > tr.info > th {
+  background-color: #d9edf7;
+}
+
+.ibm-omni-configurator .table-hover > tbody > tr > td.info:hover,
+.ibm-omni-configurator .table-hover > tbody > tr > th.info:hover,
+.ibm-omni-configurator .table-hover > tbody > tr.info:hover > td,
+.ibm-omni-configurator .table-hover > tbody > tr:hover > .info,
+.ibm-omni-configurator .table-hover > tbody > tr.info:hover > th {
+  background-color: #c4e3f3;
+}
+
+.ibm-omni-configurator .table > thead > tr > td.warning,
+.ibm-omni-configurator .table > tbody > tr > td.warning,
+.ibm-omni-configurator .table > tfoot > tr > td.warning,
+.ibm-omni-configurator .table > thead > tr > th.warning,
+.ibm-omni-configurator .table > tbody > tr > th.warning,
+.ibm-omni-configurator .table > tfoot > tr > th.warning,
+.ibm-omni-configurator .table > thead > tr.warning > td,
+.ibm-omni-configurator .table > tbody > tr.warning > td,
+.ibm-omni-configurator .table > tfoot > tr.warning > td,
+.ibm-omni-configurator .table > thead > tr.warning > th,
+.ibm-omni-configurator .table > tbody > tr.warning > th,
+.ibm-omni-configurator .table > tfoot > tr.warning > th {
+  background-color: #fcf8e3;
+}
+
+.ibm-omni-configurator .table-hover > tbody > tr > td.warning:hover,
+.ibm-omni-configurator .table-hover > tbody > tr > th.warning:hover,
+.ibm-omni-configurator .table-hover > tbody > tr.warning:hover > td,
+.ibm-omni-configurator .table-hover > tbody > tr:hover > .warning,
+.ibm-omni-configurator .table-hover > tbody > tr.warning:hover > th {
+  background-color: #faf2cc;
+}
+
+.ibm-omni-configurator .table > thead > tr > td.danger,
+.ibm-omni-configurator .table > tbody > tr > td.danger,
+.ibm-omni-configurator .table > tfoot > tr > td.danger,
+.ibm-omni-configurator .table > thead > tr > th.danger,
+.ibm-omni-configurator .table > tbody > tr > th.danger,
+.ibm-omni-configurator .table > tfoot > tr > th.danger,
+.ibm-omni-configurator .table > thead > tr.danger > td,
+.ibm-omni-configurator .table > tbody > tr.danger > td,
+.ibm-omni-configurator .table > tfoot > tr.danger > td,
+.ibm-omni-configurator .table > thead > tr.danger > th,
+.ibm-omni-configurator .table > tbody > tr.danger > th,
+.ibm-omni-configurator .table > tfoot > tr.danger > th {
+  background-color: #f2dede;
+}
+
+.ibm-omni-configurator .table-hover > tbody > tr > td.danger:hover,
+.ibm-omni-configurator .table-hover > tbody > tr > th.danger:hover,
+.ibm-omni-configurator .table-hover > tbody > tr.danger:hover > td,
+.ibm-omni-configurator .table-hover > tbody > tr:hover > .danger,
+.ibm-omni-configurator .table-hover > tbody > tr.danger:hover > th {
+  background-color: #ebcccc;
+}
+
+.ibm-omni-configurator .table-responsive {
+  min-height: .01%;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .ibm-omni-configurator .table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+
+  .ibm-omni-configurator .table-responsive > .table {
+    margin-bottom: 0;
+  }
+
+  .ibm-omni-configurator .table-responsive > .table > thead > tr > th,
+  .ibm-omni-configurator .table-responsive > .table > tbody > tr > th,
+  .ibm-omni-configurator .table-responsive > .table > tfoot > tr > th,
+  .ibm-omni-configurator .table-responsive > .table > thead > tr > td,
+  .ibm-omni-configurator .table-responsive > .table > tbody > tr > td,
+  .ibm-omni-configurator .table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap;
+  }
+
+  .ibm-omni-configurator .table-responsive > .table-bordered {
+    border: 0;
+  }
+
+  .ibm-omni-configurator .table-responsive > .table-bordered > thead > tr > th:first-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tbody > tr > th:first-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > thead > tr > td:first-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tbody > tr > td:first-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0;
+  }
+
+  .ibm-omni-configurator .table-responsive > .table-bordered > thead > tr > th:last-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tbody > tr > th:last-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > thead > tr > td:last-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tbody > tr > td:last-child,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0;
+  }
+
+  .ibm-omni-configurator .table-responsive > .table-bordered > tbody > tr:last-child > th,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tbody > tr:last-child > td,
+  .ibm-omni-configurator .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+    border-bottom: 0;
+  }
+}
+
+.ibm-omni-configurator fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.ibm-omni-configurator legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  color: #333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.ibm-omni-configurator label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.ibm-omni-configurator input[type="search"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ibm-omni-configurator input[type="radio"],
+.ibm-omni-configurator input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9;
+  line-height: normal;
+}
+
+.ibm-omni-configurator input[type="file"] {
+  display: block;
+}
+
+.ibm-omni-configurator input[type="range"] {
+  display: block;
+  width: 100%;
+}
+
+.ibm-omni-configurator select[multiple],
+.ibm-omni-configurator select[size] {
+  height: auto;
+}
+
+.ibm-omni-configurator input[type="file"]:focus,
+.ibm-omni-configurator input[type="radio"]:focus,
+.ibm-omni-configurator input[type="checkbox"]:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.ibm-omni-configurator output {
+  display: block;
+  padding-top: 7px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+}
+
+.ibm-omni-configurator .form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.ibm-omni-configurator .form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+.ibm-omni-configurator .form-control::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.ibm-omni-configurator .form-control:-ms-input-placeholder {
+  color: #999;
+}
+
+.ibm-omni-configurator .form-control::-webkit-input-placeholder {
+  color: #999;
+}
+
+.ibm-omni-configurator .form-control[disabled],
+.ibm-omni-configurator .form-control[readonly],
+.ibm-omni-configurator fieldset[disabled] .form-control {
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
+}
+
+.ibm-omni-configurator textarea.form-control {
+  height: auto;
+}
+
+.ibm-omni-configurator input[type="search"] {
+  -webkit-appearance: none;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .ibm-omni-configurator input[type="date"],
+  .ibm-omni-configurator input[type="time"],
+  .ibm-omni-configurator input[type="datetime-local"],
+  .ibm-omni-configurator input[type="month"] {
+    line-height: 34px;
+  }
+
+  .ibm-omni-configurator input[type="date"].input-sm,
+  .ibm-omni-configurator input[type="time"].input-sm,
+  .ibm-omni-configurator input[type="datetime-local"].input-sm,
+  .ibm-omni-configurator input[type="month"].input-sm {
+    line-height: 30px;
+  }
+
+  .ibm-omni-configurator input[type="date"].input-lg,
+  .ibm-omni-configurator input[type="time"].input-lg,
+  .ibm-omni-configurator input[type="datetime-local"].input-lg,
+  .ibm-omni-configurator input[type="month"].input-lg {
+    line-height: 46px;
+  }
+}
+
+.ibm-omni-configurator .form-group {
+  margin-bottom: 15px;
+}
+
+.ibm-omni-configurator .radio,
+.ibm-omni-configurator .checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ibm-omni-configurator .radio label,
+.ibm-omni-configurator .checkbox label {
+  min-height: 20px;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.ibm-omni-configurator .radio input[type="radio"],
+.ibm-omni-configurator .radio-inline input[type="radio"],
+.ibm-omni-configurator .checkbox input[type="checkbox"],
+.ibm-omni-configurator .checkbox-inline input[type="checkbox"] {
+  position: absolute;
+  margin-top: 4px \9;
+  margin-left: -20px;
+}
+
+.ibm-omni-configurator .radio + .radio,
+.ibm-omni-configurator .checkbox + .checkbox {
+  margin-top: -5px;
+}
+
+.ibm-omni-configurator .radio-inline,
+.ibm-omni-configurator .checkbox-inline {
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: normal;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.ibm-omni-configurator .radio-inline + .radio-inline,
+.ibm-omni-configurator .checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: 10px;
+}
+
+.ibm-omni-configurator input[type="radio"][disabled],
+.ibm-omni-configurator input[type="checkbox"][disabled],
+.ibm-omni-configurator input[type="radio"].disabled,
+.ibm-omni-configurator input[type="checkbox"].disabled,
+.ibm-omni-configurator fieldset[disabled] input[type="radio"],
+.ibm-omni-configurator fieldset[disabled] input[type="checkbox"] {
+  cursor: not-allowed;
+}
+
+.ibm-omni-configurator .radio-inline.disabled,
+.ibm-omni-configurator .checkbox-inline.disabled,
+.ibm-omni-configurator fieldset[disabled] .radio-inline,
+.ibm-omni-configurator fieldset[disabled] .checkbox-inline {
+  cursor: not-allowed;
+}
+
+.ibm-omni-configurator .radio.disabled label,
+.ibm-omni-configurator .checkbox.disabled label,
+.ibm-omni-configurator fieldset[disabled] .radio label,
+.ibm-omni-configurator fieldset[disabled] .checkbox label {
+  cursor: not-allowed;
+}
+
+.ibm-omni-configurator .form-control-static {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .form-control-static.input-lg,
+.ibm-omni-configurator .form-control-static.input-sm {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.ibm-omni-configurator .input-sm,
+.ibm-omni-configurator .form-group-sm .form-control {
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.ibm-omni-configurator select.input-sm,
+.ibm-omni-configurator select.form-group-sm .form-control {
+  height: 30px;
+  line-height: 30px;
+}
+
+.ibm-omni-configurator textarea.input-sm,
+.ibm-omni-configurator textarea.form-group-sm .form-control,
+.ibm-omni-configurator select[multiple].input-sm,
+.ibm-omni-configurator select[multiple].form-group-sm .form-control {
+  height: auto;
+}
+
+.ibm-omni-configurator .input-lg,
+.ibm-omni-configurator .form-group-lg .form-control {
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.ibm-omni-configurator select.input-lg,
+.ibm-omni-configurator select.form-group-lg .form-control {
+  height: 46px;
+  line-height: 46px;
+}
+
+.ibm-omni-configurator textarea.input-lg,
+.ibm-omni-configurator textarea.form-group-lg .form-control,
+.ibm-omni-configurator select[multiple].input-lg,
+.ibm-omni-configurator select[multiple].form-group-lg .form-control {
+  height: auto;
+}
+
+.ibm-omni-configurator .has-feedback {
+  position: relative;
+}
+
+.ibm-omni-configurator .has-feedback .form-control {
+  padding-right: 42.5px;
+}
+
+.ibm-omni-configurator .form-control-feedback {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ibm-omni-configurator .input-lg + .form-control-feedback {
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+}
+
+.ibm-omni-configurator .input-sm + .form-control-feedback {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.ibm-omni-configurator .has-success .help-block,
+.ibm-omni-configurator .has-success .control-label,
+.ibm-omni-configurator .has-success .radio,
+.ibm-omni-configurator .has-success .checkbox,
+.ibm-omni-configurator .has-success .radio-inline,
+.ibm-omni-configurator .has-success .checkbox-inline,
+.ibm-omni-configurator .has-success.radio label,
+.ibm-omni-configurator .has-success.checkbox label,
+.ibm-omni-configurator .has-success.radio-inline label,
+.ibm-omni-configurator .has-success.checkbox-inline label {
+  color: #3c763d;
+}
+
+.ibm-omni-configurator .has-success .form-control {
+  border-color: #3c763d;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.ibm-omni-configurator .has-success .form-control:focus {
+  border-color: #2b542c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #67b168;
+}
+
+.ibm-omni-configurator .has-success .input-group-addon {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #3c763d;
+}
+
+.ibm-omni-configurator .has-success .form-control-feedback {
+  color: #3c763d;
+}
+
+.ibm-omni-configurator .has-warning .help-block,
+.ibm-omni-configurator .has-warning .control-label,
+.ibm-omni-configurator .has-warning .radio,
+.ibm-omni-configurator .has-warning .checkbox,
+.ibm-omni-configurator .has-warning .radio-inline,
+.ibm-omni-configurator .has-warning .checkbox-inline,
+.ibm-omni-configurator .has-warning.radio label,
+.ibm-omni-configurator .has-warning.checkbox label,
+.ibm-omni-configurator .has-warning.radio-inline label,
+.ibm-omni-configurator .has-warning.checkbox-inline label {
+  color: #8a6d3b;
+}
+
+.ibm-omni-configurator .has-warning .form-control {
+  border-color: #8a6d3b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.ibm-omni-configurator .has-warning .form-control:focus {
+  border-color: #66512c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #c0a16b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #c0a16b;
+}
+
+.ibm-omni-configurator .has-warning .input-group-addon {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #8a6d3b;
+}
+
+.ibm-omni-configurator .has-warning .form-control-feedback {
+  color: #8a6d3b;
+}
+
+.ibm-omni-configurator .has-error .help-block,
+.ibm-omni-configurator .has-error .control-label,
+.ibm-omni-configurator .has-error .radio,
+.ibm-omni-configurator .has-error .checkbox,
+.ibm-omni-configurator .has-error .radio-inline,
+.ibm-omni-configurator .has-error .checkbox-inline,
+.ibm-omni-configurator .has-error.radio label,
+.ibm-omni-configurator .has-error.checkbox label,
+.ibm-omni-configurator .has-error.radio-inline label,
+.ibm-omni-configurator .has-error.checkbox-inline label {
+  color: #a94442;
+}
+
+.ibm-omni-configurator .has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.ibm-omni-configurator .has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+}
+
+.ibm-omni-configurator .has-error .input-group-addon {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #a94442;
+}
+
+.ibm-omni-configurator .has-error .form-control-feedback {
+  color: #a94442;
+}
+
+.ibm-omni-configurator .has-feedback label ~ .form-control-feedback {
+  top: 25px;
+}
+
+.ibm-omni-configurator .has-feedback label.sr-only ~ .form-control-feedback {
+  top: 0;
+}
+
+.ibm-omni-configurator .help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .form-inline .form-control-static {
+    display: inline-block;
+  }
+
+  .ibm-omni-configurator .form-inline .input-group {
+    display: inline-table;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .form-inline .input-group .input-group-addon,
+  .ibm-omni-configurator .form-inline .input-group .input-group-btn,
+  .ibm-omni-configurator .form-inline .input-group .form-control {
+    width: auto;
+  }
+
+  .ibm-omni-configurator .form-inline .input-group > .form-control {
+    width: 100%;
+  }
+
+  .ibm-omni-configurator .form-inline .control-label {
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .form-inline .radio,
+  .ibm-omni-configurator .form-inline .checkbox {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .form-inline .radio label,
+  .ibm-omni-configurator .form-inline .checkbox label {
+    padding-left: 0;
+  }
+
+  .ibm-omni-configurator .form-inline .radio input[type="radio"],
+  .ibm-omni-configurator .form-inline .checkbox input[type="checkbox"] {
+    position: relative;
+    margin-left: 0;
+  }
+
+  .ibm-omni-configurator .form-inline .has-feedback .form-control-feedback {
+    top: 0;
+  }
+}
+
+.ibm-omni-configurator .form-horizontal .radio,
+.ibm-omni-configurator .form-horizontal .checkbox,
+.ibm-omni-configurator .form-horizontal .radio-inline,
+.ibm-omni-configurator .form-horizontal .checkbox-inline {
+  padding-top: 7px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .form-horizontal .radio,
+.ibm-omni-configurator .form-horizontal .checkbox {
+  min-height: 27px;
+}
+
+.ibm-omni-configurator .form-horizontal .form-group {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+  }
+}
+
+.ibm-omni-configurator .form-horizontal .has-feedback .form-control-feedback {
+  right: 15px;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .form-horizontal .form-group-lg .control-label {
+    padding-top: 14.3px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .form-horizontal .form-group-sm .control-label {
+    padding-top: 6px;
+  }
+}
+
+.ibm-omni-configurator .btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .btn:focus,
+.ibm-omni-configurator .btn:active:focus,
+.ibm-omni-configurator .btn.active:focus,
+.ibm-omni-configurator .btn.focus,
+.ibm-omni-configurator .btn:active.focus,
+.ibm-omni-configurator .btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.ibm-omni-configurator .btn:hover,
+.ibm-omni-configurator .btn:focus,
+.ibm-omni-configurator .btn.focus {
+  color: #333;
+  text-decoration: none;
+}
+
+.ibm-omni-configurator .btn:active,
+.ibm-omni-configurator .btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.ibm-omni-configurator .btn.disabled,
+.ibm-omni-configurator .btn[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .65;
+}
+
+.ibm-omni-configurator .btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.ibm-omni-configurator .btn-default:hover,
+.ibm-omni-configurator .btn-default:focus,
+.ibm-omni-configurator .btn-default.focus,
+.ibm-omni-configurator .btn-default:active,
+.ibm-omni-configurator .btn-default.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+.ibm-omni-configurator .btn-default:active,
+.ibm-omni-configurator .btn-default.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+
+.ibm-omni-configurator .btn-default.disabled,
+.ibm-omni-configurator .btn-default[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn-default,
+.ibm-omni-configurator .btn-default.disabled:hover,
+.ibm-omni-configurator .btn-default[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .btn-default:hover,
+.ibm-omni-configurator .btn-default.disabled:focus,
+.ibm-omni-configurator .btn-default[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .btn-default:focus,
+.ibm-omni-configurator .btn-default.disabled.focus,
+.ibm-omni-configurator .btn-default[disabled].focus,
+.ibm-omni-configurator fieldset[disabled] .btn-default.focus,
+.ibm-omni-configurator .btn-default.disabled:active,
+.ibm-omni-configurator .btn-default[disabled]:active,
+.ibm-omni-configurator fieldset[disabled] .btn-default:active,
+.ibm-omni-configurator .btn-default.disabled.active,
+.ibm-omni-configurator .btn-default[disabled].active,
+.ibm-omni-configurator fieldset[disabled] .btn-default.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.ibm-omni-configurator .btn-default .badge {
+  color: #fff;
+  background-color: #333;
+}
+
+.ibm-omni-configurator .btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.ibm-omni-configurator .btn-primary:hover,
+.ibm-omni-configurator .btn-primary:focus,
+.ibm-omni-configurator .btn-primary.focus,
+.ibm-omni-configurator .btn-primary:active,
+.ibm-omni-configurator .btn-primary.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+
+.ibm-omni-configurator .btn-primary:active,
+.ibm-omni-configurator .btn-primary.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+
+.ibm-omni-configurator .btn-primary.disabled,
+.ibm-omni-configurator .btn-primary[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn-primary,
+.ibm-omni-configurator .btn-primary.disabled:hover,
+.ibm-omni-configurator .btn-primary[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .btn-primary:hover,
+.ibm-omni-configurator .btn-primary.disabled:focus,
+.ibm-omni-configurator .btn-primary[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .btn-primary:focus,
+.ibm-omni-configurator .btn-primary.disabled.focus,
+.ibm-omni-configurator .btn-primary[disabled].focus,
+.ibm-omni-configurator fieldset[disabled] .btn-primary.focus,
+.ibm-omni-configurator .btn-primary.disabled:active,
+.ibm-omni-configurator .btn-primary[disabled]:active,
+.ibm-omni-configurator fieldset[disabled] .btn-primary:active,
+.ibm-omni-configurator .btn-primary.disabled.active,
+.ibm-omni-configurator .btn-primary[disabled].active,
+.ibm-omni-configurator fieldset[disabled] .btn-primary.active {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.ibm-omni-configurator .btn-primary .badge {
+  color: #337ab7;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.ibm-omni-configurator .btn-success:hover,
+.ibm-omni-configurator .btn-success:focus,
+.ibm-omni-configurator .btn-success.focus,
+.ibm-omni-configurator .btn-success:active,
+.ibm-omni-configurator .btn-success.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-success {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+
+.ibm-omni-configurator .btn-success:active,
+.ibm-omni-configurator .btn-success.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-success {
+  background-image: none;
+}
+
+.ibm-omni-configurator .btn-success.disabled,
+.ibm-omni-configurator .btn-success[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn-success,
+.ibm-omni-configurator .btn-success.disabled:hover,
+.ibm-omni-configurator .btn-success[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .btn-success:hover,
+.ibm-omni-configurator .btn-success.disabled:focus,
+.ibm-omni-configurator .btn-success[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .btn-success:focus,
+.ibm-omni-configurator .btn-success.disabled.focus,
+.ibm-omni-configurator .btn-success[disabled].focus,
+.ibm-omni-configurator fieldset[disabled] .btn-success.focus,
+.ibm-omni-configurator .btn-success.disabled:active,
+.ibm-omni-configurator .btn-success[disabled]:active,
+.ibm-omni-configurator fieldset[disabled] .btn-success:active,
+.ibm-omni-configurator .btn-success.disabled.active,
+.ibm-omni-configurator .btn-success[disabled].active,
+.ibm-omni-configurator fieldset[disabled] .btn-success.active {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.ibm-omni-configurator .btn-success .badge {
+  color: #5cb85c;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+.ibm-omni-configurator .btn-info:hover,
+.ibm-omni-configurator .btn-info:focus,
+.ibm-omni-configurator .btn-info.focus,
+.ibm-omni-configurator .btn-info:active,
+.ibm-omni-configurator .btn-info.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-info {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+
+.ibm-omni-configurator .btn-info:active,
+.ibm-omni-configurator .btn-info.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-info {
+  background-image: none;
+}
+
+.ibm-omni-configurator .btn-info.disabled,
+.ibm-omni-configurator .btn-info[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn-info,
+.ibm-omni-configurator .btn-info.disabled:hover,
+.ibm-omni-configurator .btn-info[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .btn-info:hover,
+.ibm-omni-configurator .btn-info.disabled:focus,
+.ibm-omni-configurator .btn-info[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .btn-info:focus,
+.ibm-omni-configurator .btn-info.disabled.focus,
+.ibm-omni-configurator .btn-info[disabled].focus,
+.ibm-omni-configurator fieldset[disabled] .btn-info.focus,
+.ibm-omni-configurator .btn-info.disabled:active,
+.ibm-omni-configurator .btn-info[disabled]:active,
+.ibm-omni-configurator fieldset[disabled] .btn-info:active,
+.ibm-omni-configurator .btn-info.disabled.active,
+.ibm-omni-configurator .btn-info[disabled].active,
+.ibm-omni-configurator fieldset[disabled] .btn-info.active {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+.ibm-omni-configurator .btn-info .badge {
+  color: #5bc0de;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.ibm-omni-configurator .btn-warning:hover,
+.ibm-omni-configurator .btn-warning:focus,
+.ibm-omni-configurator .btn-warning.focus,
+.ibm-omni-configurator .btn-warning:active,
+.ibm-omni-configurator .btn-warning.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-warning {
+  color: #fff;
+  background-color: #ec971f;
+  border-color: #d58512;
+}
+
+.ibm-omni-configurator .btn-warning:active,
+.ibm-omni-configurator .btn-warning.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-warning {
+  background-image: none;
+}
+
+.ibm-omni-configurator .btn-warning.disabled,
+.ibm-omni-configurator .btn-warning[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn-warning,
+.ibm-omni-configurator .btn-warning.disabled:hover,
+.ibm-omni-configurator .btn-warning[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .btn-warning:hover,
+.ibm-omni-configurator .btn-warning.disabled:focus,
+.ibm-omni-configurator .btn-warning[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .btn-warning:focus,
+.ibm-omni-configurator .btn-warning.disabled.focus,
+.ibm-omni-configurator .btn-warning[disabled].focus,
+.ibm-omni-configurator fieldset[disabled] .btn-warning.focus,
+.ibm-omni-configurator .btn-warning.disabled:active,
+.ibm-omni-configurator .btn-warning[disabled]:active,
+.ibm-omni-configurator fieldset[disabled] .btn-warning:active,
+.ibm-omni-configurator .btn-warning.disabled.active,
+.ibm-omni-configurator .btn-warning[disabled].active,
+.ibm-omni-configurator fieldset[disabled] .btn-warning.active {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.ibm-omni-configurator .btn-warning .badge {
+  color: #f0ad4e;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.ibm-omni-configurator .btn-danger:hover,
+.ibm-omni-configurator .btn-danger:focus,
+.ibm-omni-configurator .btn-danger.focus,
+.ibm-omni-configurator .btn-danger:active,
+.ibm-omni-configurator .btn-danger.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-danger {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+
+.ibm-omni-configurator .btn-danger:active,
+.ibm-omni-configurator .btn-danger.active,
+.ibm-omni-configurator .open > .dropdown-toggle.btn-danger {
+  background-image: none;
+}
+
+.ibm-omni-configurator .btn-danger.disabled,
+.ibm-omni-configurator .btn-danger[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn-danger,
+.ibm-omni-configurator .btn-danger.disabled:hover,
+.ibm-omni-configurator .btn-danger[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .btn-danger:hover,
+.ibm-omni-configurator .btn-danger.disabled:focus,
+.ibm-omni-configurator .btn-danger[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .btn-danger:focus,
+.ibm-omni-configurator .btn-danger.disabled.focus,
+.ibm-omni-configurator .btn-danger[disabled].focus,
+.ibm-omni-configurator fieldset[disabled] .btn-danger.focus,
+.ibm-omni-configurator .btn-danger.disabled:active,
+.ibm-omni-configurator .btn-danger[disabled]:active,
+.ibm-omni-configurator fieldset[disabled] .btn-danger:active,
+.ibm-omni-configurator .btn-danger.disabled.active,
+.ibm-omni-configurator .btn-danger[disabled].active,
+.ibm-omni-configurator fieldset[disabled] .btn-danger.active {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.ibm-omni-configurator .btn-danger .badge {
+  color: #d9534f;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .btn-link {
+  font-weight: normal;
+  color: #337ab7;
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .btn-link,
+.ibm-omni-configurator .btn-link:active,
+.ibm-omni-configurator .btn-link.active,
+.ibm-omni-configurator .btn-link[disabled],
+.ibm-omni-configurator fieldset[disabled] .btn-link {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ibm-omni-configurator .btn-link,
+.ibm-omni-configurator .btn-link:hover,
+.ibm-omni-configurator .btn-link:focus,
+.ibm-omni-configurator .btn-link:active {
+  border-color: transparent;
+}
+
+.ibm-omni-configurator .btn-link:hover,
+.ibm-omni-configurator .btn-link:focus {
+  color: #23527c;
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .btn-link[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .btn-link:hover,
+.ibm-omni-configurator .btn-link[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .btn-link:focus {
+  color: #777;
+  text-decoration: none;
+}
+
+.ibm-omni-configurator .btn-lg,
+.ibm-omni-configurator .btn-group-lg > .btn {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.ibm-omni-configurator .btn-sm,
+.ibm-omni-configurator .btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.ibm-omni-configurator .btn-xs,
+.ibm-omni-configurator .btn-group-xs > .btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.ibm-omni-configurator .btn-block {
+  display: block;
+  width: 100%;
+}
+
+.ibm-omni-configurator .btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+.ibm-omni-configurator input[type="submit"].btn-block,
+.ibm-omni-configurator input[type="reset"].btn-block,
+.ibm-omni-configurator input[type="button"].btn-block {
+  width: 100%;
+}
+
+.ibm-omni-configurator .fade {
+  opacity: 0;
+  -webkit-transition: opacity .15s linear;
+  -o-transition: opacity .15s linear;
+  transition: opacity .15s linear;
+}
+
+.ibm-omni-configurator .fade.in {
+  opacity: 1;
+}
+
+.ibm-omni-configurator .collapse {
+  display: none;
+  visibility: hidden;
+}
+
+.ibm-omni-configurator .collapse.in {
+  display: block;
+  visibility: visible;
+}
+
+.ibm-omni-configurator tr.collapse.in {
+  display: table-row;
+}
+
+.ibm-omni-configurator tbody.collapse.in {
+  display: table-row-group;
+}
+
+.ibm-omni-configurator .collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: .35s;
+  -o-transition-duration: .35s;
+  transition-duration: .35s;
+  -webkit-transition-property: height, visibility;
+  -o-transition-property: height, visibility;
+  transition-property: height, visibility;
+}
+
+.ibm-omni-configurator .caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.ibm-omni-configurator .dropdown {
+  position: relative;
+}
+
+.ibm-omni-configurator .dropdown-toggle:focus {
+  outline: 0;
+}
+
+.ibm-omni-configurator .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.ibm-omni-configurator .dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+
+.ibm-omni-configurator .dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+.ibm-omni-configurator .dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+
+.ibm-omni-configurator .dropdown-menu > li > a:hover,
+.ibm-omni-configurator .dropdown-menu > li > a:focus {
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+
+.ibm-omni-configurator .dropdown-menu > .active > a,
+.ibm-omni-configurator .dropdown-menu > .active > a:hover,
+.ibm-omni-configurator .dropdown-menu > .active > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #337ab7;
+  outline: 0;
+}
+
+.ibm-omni-configurator .dropdown-menu > .disabled > a,
+.ibm-omni-configurator .dropdown-menu > .disabled > a:hover,
+.ibm-omni-configurator .dropdown-menu > .disabled > a:focus {
+  color: #777;
+}
+
+.ibm-omni-configurator .dropdown-menu > .disabled > a:hover,
+.ibm-omni-configurator .dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.ibm-omni-configurator .open > .dropdown-menu {
+  display: block;
+}
+
+.ibm-omni-configurator .open > a {
+  outline: 0;
+}
+
+.ibm-omni-configurator .dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
+.ibm-omni-configurator .dropdown-menu-left {
+  right: auto;
+  left: 0;
+}
+
+.ibm-omni-configurator .dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #777;
+  white-space: nowrap;
+}
+
+.ibm-omni-configurator .dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+}
+
+.ibm-omni-configurator .pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+.ibm-omni-configurator .dropup .caret,
+.ibm-omni-configurator .navbar-fixed-bottom .dropdown .caret {
+  content: "";
+  border-top: 0;
+  border-bottom: 4px solid;
+}
+
+.ibm-omni-configurator .dropup .dropdown-menu,
+.ibm-omni-configurator .navbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 1px;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+
+  .ibm-omni-configurator .navbar-right .dropdown-menu-left {
+    right: auto;
+    left: 0;
+  }
+}
+
+.ibm-omni-configurator .btn-group,
+.ibm-omni-configurator .btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ibm-omni-configurator .btn-group > .btn,
+.ibm-omni-configurator .btn-group-vertical > .btn {
+  position: relative;
+  float: left;
+}
+
+.ibm-omni-configurator .btn-group > .btn:hover,
+.ibm-omni-configurator .btn-group-vertical > .btn:hover,
+.ibm-omni-configurator .btn-group > .btn:focus,
+.ibm-omni-configurator .btn-group-vertical > .btn:focus,
+.ibm-omni-configurator .btn-group > .btn:active,
+.ibm-omni-configurator .btn-group-vertical > .btn:active,
+.ibm-omni-configurator .btn-group > .btn.active,
+.ibm-omni-configurator .btn-group-vertical > .btn.active {
+  z-index: 2;
+}
+
+.ibm-omni-configurator .btn-group .btn + .btn,
+.ibm-omni-configurator .btn-group .btn + .btn-group,
+.ibm-omni-configurator .btn-group .btn-group + .btn,
+.ibm-omni-configurator .btn-group .btn-group + .btn-group {
+  margin-left: -1px;
+}
+
+.ibm-omni-configurator .btn-toolbar {
+  margin-left: -5px;
+}
+
+.ibm-omni-configurator .btn-toolbar .btn-group,
+.ibm-omni-configurator .btn-toolbar .input-group {
+  float: left;
+}
+
+.ibm-omni-configurator .btn-toolbar > .btn,
+.ibm-omni-configurator .btn-toolbar > .btn-group,
+.ibm-omni-configurator .btn-toolbar > .input-group {
+  margin-left: 5px;
+}
+
+.ibm-omni-configurator .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group > .btn:first-child {
+  margin-left: 0;
+}
+
+.ibm-omni-configurator .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group > .btn:last-child:not(:first-child),
+.ibm-omni-configurator .btn-group > .dropdown-toggle:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group > .btn-group {
+  float: left;
+}
+
+.ibm-omni-configurator .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group > .btn-group:first-child > .btn:last-child,
+.ibm-omni-configurator .btn-group > .btn-group:first-child > .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group > .btn-group:last-child > .btn:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group .dropdown-toggle:active,
+.ibm-omni-configurator .btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+
+.ibm-omni-configurator .btn-group > .btn + .dropdown-toggle {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.ibm-omni-configurator .btn-group > .btn-lg + .dropdown-toggle {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.ibm-omni-configurator .btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.ibm-omni-configurator .btn-group.open .dropdown-toggle.btn-link {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ibm-omni-configurator .btn .caret {
+  margin-left: 0;
+}
+
+.ibm-omni-configurator .btn-lg .caret {
+  border-width: 5px 5px 0;
+  border-bottom-width: 0;
+}
+
+.ibm-omni-configurator .dropup .btn-lg .caret {
+  border-width: 0 5px 5px;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn,
+.ibm-omni-configurator .btn-group-vertical > .btn-group,
+.ibm-omni-configurator .btn-group-vertical > .btn-group > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn-group > .btn {
+  float: none;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn + .btn,
+.ibm-omni-configurator .btn-group-vertical > .btn + .btn-group,
+.ibm-omni-configurator .btn-group-vertical > .btn-group + .btn,
+.ibm-omni-configurator .btn-group-vertical > .btn-group + .btn-group {
+  margin-top: -1px;
+  margin-left: 0;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn:first-child:not(:last-child) {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn:last-child:not(:first-child) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 4px;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child,
+.ibm-omni-configurator .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ibm-omni-configurator .btn-group-justified {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+}
+
+.ibm-omni-configurator .btn-group-justified > .btn,
+.ibm-omni-configurator .btn-group-justified > .btn-group {
+  display: table-cell;
+  float: none;
+  width: 1%;
+}
+
+.ibm-omni-configurator .btn-group-justified > .btn-group .btn {
+  width: 100%;
+}
+
+.ibm-omni-configurator .btn-group-justified > .btn-group .dropdown-menu {
+  left: auto;
+}
+
+.ibm-omni-configurator [data-toggle="buttons"] > .btn input[type="radio"],
+.ibm-omni-configurator [data-toggle="buttons"] > .btn-group > .btn input[type="radio"],
+.ibm-omni-configurator [data-toggle="buttons"] > .btn input[type="checkbox"],
+.ibm-omni-configurator [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+.ibm-omni-configurator .input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+}
+
+.ibm-omni-configurator .input-group[class*="col-"] {
+  float: none;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.ibm-omni-configurator .input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .input-group-lg > .form-control,
+.ibm-omni-configurator .input-group-lg > .input-group-addon,
+.ibm-omni-configurator .input-group-lg > .input-group-btn > .btn {
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.ibm-omni-configurator select.input-group-lg > .form-control,
+.ibm-omni-configurator select.input-group-lg > .input-group-addon,
+.ibm-omni-configurator select.input-group-lg > .input-group-btn > .btn {
+  height: 46px;
+  line-height: 46px;
+}
+
+.ibm-omni-configurator textarea.input-group-lg > .form-control,
+.ibm-omni-configurator textarea.input-group-lg > .input-group-addon,
+.ibm-omni-configurator textarea.input-group-lg > .input-group-btn > .btn,
+.ibm-omni-configurator select[multiple].input-group-lg > .form-control,
+.ibm-omni-configurator select[multiple].input-group-lg > .input-group-addon,
+.ibm-omni-configurator select[multiple].input-group-lg > .input-group-btn > .btn {
+  height: auto;
+}
+
+.ibm-omni-configurator .input-group-sm > .form-control,
+.ibm-omni-configurator .input-group-sm > .input-group-addon,
+.ibm-omni-configurator .input-group-sm > .input-group-btn > .btn {
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.ibm-omni-configurator select.input-group-sm > .form-control,
+.ibm-omni-configurator select.input-group-sm > .input-group-addon,
+.ibm-omni-configurator select.input-group-sm > .input-group-btn > .btn {
+  height: 30px;
+  line-height: 30px;
+}
+
+.ibm-omni-configurator textarea.input-group-sm > .form-control,
+.ibm-omni-configurator textarea.input-group-sm > .input-group-addon,
+.ibm-omni-configurator textarea.input-group-sm > .input-group-btn > .btn,
+.ibm-omni-configurator select[multiple].input-group-sm > .form-control,
+.ibm-omni-configurator select[multiple].input-group-sm > .input-group-addon,
+.ibm-omni-configurator select[multiple].input-group-sm > .input-group-btn > .btn {
+  height: auto;
+}
+
+.ibm-omni-configurator .input-group-addon,
+.ibm-omni-configurator .input-group-btn,
+.ibm-omni-configurator .input-group .form-control {
+  display: table-cell;
+}
+
+.ibm-omni-configurator .input-group-addon:not(:first-child):not(:last-child),
+.ibm-omni-configurator .input-group-btn:not(:first-child):not(:last-child),
+.ibm-omni-configurator .input-group .form-control:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .input-group-addon,
+.ibm-omni-configurator .input-group-btn {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ibm-omni-configurator .input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .input-group-addon.input-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.ibm-omni-configurator .input-group-addon.input-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  border-radius: 6px;
+}
+
+.ibm-omni-configurator .input-group-addon input[type="radio"],
+.ibm-omni-configurator .input-group-addon input[type="checkbox"] {
+  margin-top: 0;
+}
+
+.ibm-omni-configurator .input-group .form-control:first-child,
+.ibm-omni-configurator .input-group-addon:first-child,
+.ibm-omni-configurator .input-group-btn:first-child > .btn,
+.ibm-omni-configurator .input-group-btn:first-child > .btn-group > .btn,
+.ibm-omni-configurator .input-group-btn:first-child > .dropdown-toggle,
+.ibm-omni-configurator .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.ibm-omni-configurator .input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ibm-omni-configurator .input-group-addon:first-child {
+  border-right: 0;
+}
+
+.ibm-omni-configurator .input-group .form-control:last-child,
+.ibm-omni-configurator .input-group-addon:last-child,
+.ibm-omni-configurator .input-group-btn:last-child > .btn,
+.ibm-omni-configurator .input-group-btn:last-child > .btn-group > .btn,
+.ibm-omni-configurator .input-group-btn:last-child > .dropdown-toggle,
+.ibm-omni-configurator .input-group-btn:first-child > .btn:not(:first-child),
+.ibm-omni-configurator .input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ibm-omni-configurator .input-group-addon:last-child {
+  border-left: 0;
+}
+
+.ibm-omni-configurator .input-group-btn {
+  position: relative;
+  font-size: 0;
+  white-space: nowrap;
+}
+
+.ibm-omni-configurator .input-group-btn > .btn {
+  position: relative;
+}
+
+.ibm-omni-configurator .input-group-btn > .btn + .btn {
+  margin-left: -1px;
+}
+
+.ibm-omni-configurator .input-group-btn > .btn:hover,
+.ibm-omni-configurator .input-group-btn > .btn:focus,
+.ibm-omni-configurator .input-group-btn > .btn:active {
+  z-index: 2;
+}
+
+.ibm-omni-configurator .input-group-btn:first-child > .btn,
+.ibm-omni-configurator .input-group-btn:first-child > .btn-group {
+  margin-right: -1px;
+}
+
+.ibm-omni-configurator .input-group-btn:last-child > .btn,
+.ibm-omni-configurator .input-group-btn:last-child > .btn-group {
+  margin-left: -1px;
+}
+
+.ibm-omni-configurator .nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.ibm-omni-configurator .nav > li {
+  position: relative;
+  display: block;
+}
+
+.ibm-omni-configurator .nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.ibm-omni-configurator .nav > li > a:hover,
+.ibm-omni-configurator .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eee;
+}
+
+.ibm-omni-configurator .nav > li.disabled > a {
+  color: #777;
+}
+
+.ibm-omni-configurator .nav > li.disabled > a:hover,
+.ibm-omni-configurator .nav > li.disabled > a:focus {
+  color: #777;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .nav .open > a,
+.ibm-omni-configurator .nav .open > a:hover,
+.ibm-omni-configurator .nav .open > a:focus {
+  background-color: #eee;
+  border-color: #337ab7;
+}
+
+.ibm-omni-configurator .nav .nav-divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+.ibm-omni-configurator .nav > li > a > img {
+  max-width: none;
+}
+
+.ibm-omni-configurator .nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+
+.ibm-omni-configurator .nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.ibm-omni-configurator .nav-tabs > li > a:hover {
+  border-color: #eee #eee #ddd;
+}
+
+.ibm-omni-configurator .nav-tabs > li.active > a,
+.ibm-omni-configurator .nav-tabs > li.active > a:hover,
+.ibm-omni-configurator .nav-tabs > li.active > a:focus {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+
+.ibm-omni-configurator .nav-tabs.nav-justified {
+  width: 100%;
+  border-bottom: 0;
+}
+
+.ibm-omni-configurator .nav-tabs.nav-justified > li {
+  float: none;
+}
+
+.ibm-omni-configurator .nav-tabs.nav-justified > li > a {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.ibm-omni-configurator .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .nav-tabs.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+
+  .ibm-omni-configurator .nav-tabs.nav-justified > li > a {
+    margin-bottom: 0;
+  }
+}
+
+.ibm-omni-configurator .nav-tabs.nav-justified > li > a {
+  margin-right: 0;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .nav-tabs.nav-justified > .active > a,
+.ibm-omni-configurator .nav-tabs.nav-justified > .active > a:hover,
+.ibm-omni-configurator .nav-tabs.nav-justified > .active > a:focus {
+  border: 1px solid #ddd;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .nav-tabs.nav-justified > li > a {
+    border-bottom: 1px solid #ddd;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .ibm-omni-configurator .nav-tabs.nav-justified > .active > a,
+  .ibm-omni-configurator .nav-tabs.nav-justified > .active > a:hover,
+  .ibm-omni-configurator .nav-tabs.nav-justified > .active > a:focus {
+    border-bottom-color: #fff;
+  }
+}
+
+.ibm-omni-configurator .nav-pills > li {
+  float: left;
+}
+
+.ibm-omni-configurator .nav-pills > li > a {
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .nav-pills > li + li {
+  margin-left: 2px;
+}
+
+.ibm-omni-configurator .nav-pills > li.active > a,
+.ibm-omni-configurator .nav-pills > li.active > a:hover,
+.ibm-omni-configurator .nav-pills > li.active > a:focus {
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.ibm-omni-configurator .nav-stacked > li {
+  float: none;
+}
+
+.ibm-omni-configurator .nav-stacked > li + li {
+  margin-top: 2px;
+  margin-left: 0;
+}
+
+.ibm-omni-configurator .nav-justified {
+  width: 100%;
+}
+
+.ibm-omni-configurator .nav-justified > li {
+  float: none;
+}
+
+.ibm-omni-configurator .nav-justified > li > a {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.ibm-omni-configurator .nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+
+  .ibm-omni-configurator .nav-justified > li > a {
+    margin-bottom: 0;
+  }
+}
+
+.ibm-omni-configurator .nav-tabs-justified {
+  border-bottom: 0;
+}
+
+.ibm-omni-configurator .nav-tabs-justified > li > a {
+  margin-right: 0;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .nav-tabs-justified > .active > a,
+.ibm-omni-configurator .nav-tabs-justified > .active > a:hover,
+.ibm-omni-configurator .nav-tabs-justified > .active > a:focus {
+  border: 1px solid #ddd;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .nav-tabs-justified > li > a {
+    border-bottom: 1px solid #ddd;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .ibm-omni-configurator .nav-tabs-justified > .active > a,
+  .ibm-omni-configurator .nav-tabs-justified > .active > a:hover,
+  .ibm-omni-configurator .nav-tabs-justified > .active > a:focus {
+    border-bottom-color: #fff;
+  }
+}
+
+.ibm-omni-configurator .tab-content > .tab-pane {
+  display: none;
+  visibility: hidden;
+}
+
+.ibm-omni-configurator .tab-content > .active {
+  display: block;
+  visibility: visible;
+}
+
+.ibm-omni-configurator .nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ibm-omni-configurator .navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar {
+    border-radius: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-header {
+    float: left;
+  }
+}
+
+.ibm-omni-configurator .navbar-collapse {
+  padding-right: 15px;
+  padding-left: 15px;
+  overflow-x: visible;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+.ibm-omni-configurator .navbar-collapse.in {
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .ibm-omni-configurator .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+    visibility: visible !important;
+  }
+
+  .ibm-omni-configurator .navbar-collapse.in {
+    overflow-y: visible;
+  }
+
+  .ibm-omni-configurator .navbar-fixed-top .navbar-collapse,
+  .ibm-omni-configurator .navbar-static-top .navbar-collapse,
+  .ibm-omni-configurator .navbar-fixed-bottom .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.ibm-omni-configurator .navbar-fixed-top .navbar-collapse,
+.ibm-omni-configurator .navbar-fixed-bottom .navbar-collapse {
+  max-height: 340px;
+}
+
+@media (max-device-width: 480px) and (orientation: landscape) {
+  .ibm-omni-configurator .navbar-fixed-top .navbar-collapse,
+  .ibm-omni-configurator .navbar-fixed-bottom .navbar-collapse {
+    max-height: 200px;
+  }
+}
+
+.ibm-omni-configurator .container > .navbar-header,
+.ibm-omni-configurator .container-fluid > .navbar-header,
+.ibm-omni-configurator .container > .navbar-collapse,
+.ibm-omni-configurator .container-fluid > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .container > .navbar-header,
+  .ibm-omni-configurator .container-fluid > .navbar-header,
+  .ibm-omni-configurator .container > .navbar-collapse,
+  .ibm-omni-configurator .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.ibm-omni-configurator .navbar-static-top {
+  z-index: 1000;
+  border-width: 0 0 1px;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-static-top {
+    border-radius: 0;
+  }
+}
+
+.ibm-omni-configurator .navbar-fixed-top,
+.ibm-omni-configurator .navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-fixed-top,
+  .ibm-omni-configurator .navbar-fixed-bottom {
+    border-radius: 0;
+  }
+}
+
+.ibm-omni-configurator .navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
+}
+
+.ibm-omni-configurator .navbar-fixed-bottom {
+  bottom: 0;
+  margin-bottom: 0;
+  border-width: 1px 0 0;
+}
+
+.ibm-omni-configurator .navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.ibm-omni-configurator .navbar-brand:hover,
+.ibm-omni-configurator .navbar-brand:focus {
+  text-decoration: none;
+}
+
+.ibm-omni-configurator .navbar-brand > img {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar > .container .navbar-brand,
+  .ibm-omni-configurator .navbar > .container-fluid .navbar-brand {
+    margin-left: -15px;
+  }
+}
+
+.ibm-omni-configurator .navbar-toggle {
+  position: relative;
+  float: right;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .navbar-toggle:focus {
+  outline: 0;
+}
+
+.ibm-omni-configurator .navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.ibm-omni-configurator .navbar-toggle .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-toggle {
+    display: none;
+  }
+}
+
+.ibm-omni-configurator .navbar-nav {
+  margin: 7.5px -15px;
+}
+
+.ibm-omni-configurator .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .ibm-omni-configurator .navbar-nav .open .dropdown-menu > li > a,
+  .ibm-omni-configurator .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px;
+  }
+
+  .ibm-omni-configurator .navbar-nav .open .dropdown-menu > li > a {
+    line-height: 20px;
+  }
+
+  .ibm-omni-configurator .navbar-nav .open .dropdown-menu > li > a:hover,
+  .ibm-omni-configurator .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-image: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+
+  .ibm-omni-configurator .navbar-nav > li {
+    float: left;
+  }
+
+  .ibm-omni-configurator .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+.ibm-omni-configurator .navbar-form {
+  padding: 10px 15px;
+  margin-top: 8px;
+  margin-right: -15px;
+  margin-bottom: 8px;
+  margin-left: -15px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-form .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .navbar-form .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .navbar-form .form-control-static {
+    display: inline-block;
+  }
+
+  .ibm-omni-configurator .navbar-form .input-group {
+    display: inline-table;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .navbar-form .input-group .input-group-addon,
+  .ibm-omni-configurator .navbar-form .input-group .input-group-btn,
+  .ibm-omni-configurator .navbar-form .input-group .form-control {
+    width: auto;
+  }
+
+  .ibm-omni-configurator .navbar-form .input-group > .form-control {
+    width: 100%;
+  }
+
+  .ibm-omni-configurator .navbar-form .control-label {
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .navbar-form .radio,
+  .ibm-omni-configurator .navbar-form .checkbox {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .ibm-omni-configurator .navbar-form .radio label,
+  .ibm-omni-configurator .navbar-form .checkbox label {
+    padding-left: 0;
+  }
+
+  .ibm-omni-configurator .navbar-form .radio input[type="radio"],
+  .ibm-omni-configurator .navbar-form .checkbox input[type="checkbox"] {
+    position: relative;
+    margin-left: 0;
+  }
+
+  .ibm-omni-configurator .navbar-form .has-feedback .form-control-feedback {
+    top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .navbar-form .form-group {
+    margin-bottom: 5px;
+  }
+
+  .ibm-omni-configurator .navbar-form .form-group:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-form {
+    width: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.ibm-omni-configurator .navbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ibm-omni-configurator .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ibm-omni-configurator .navbar-btn {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.ibm-omni-configurator .navbar-btn.btn-sm {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ibm-omni-configurator .navbar-btn.btn-xs {
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.ibm-omni-configurator .navbar-text {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-text {
+    float: left;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .navbar-left {
+    float: left !important;
+  }
+
+  .ibm-omni-configurator .navbar-right {
+    float: right !important;
+    margin-right: -15px;
+  }
+
+  .ibm-omni-configurator .navbar-right ~ .navbar-right {
+    margin-right: 0;
+  }
+}
+
+.ibm-omni-configurator .navbar-default {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-brand {
+  color: #777;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-brand:hover,
+.ibm-omni-configurator .navbar-default .navbar-brand:focus {
+  color: #5e5e5e;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-text {
+  color: #777;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-nav > li > a {
+  color: #777;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-nav > li > a:hover,
+.ibm-omni-configurator .navbar-default .navbar-nav > li > a:focus {
+  color: #333;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-nav > .active > a,
+.ibm-omni-configurator .navbar-default .navbar-nav > .active > a:hover,
+.ibm-omni-configurator .navbar-default .navbar-nav > .active > a:focus {
+  color: #555;
+  background-color: #e7e7e7;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-nav > .disabled > a,
+.ibm-omni-configurator .navbar-default .navbar-nav > .disabled > a:hover,
+.ibm-omni-configurator .navbar-default .navbar-nav > .disabled > a:focus {
+  color: #ccc;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-toggle {
+  border-color: #ddd;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-toggle:hover,
+.ibm-omni-configurator .navbar-default .navbar-toggle:focus {
+  background-color: #ddd;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-toggle .icon-bar {
+  background-color: #888;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-collapse,
+.ibm-omni-configurator .navbar-default .navbar-form {
+  border-color: #e7e7e7;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-nav > .open > a,
+.ibm-omni-configurator .navbar-default .navbar-nav > .open > a:hover,
+.ibm-omni-configurator .navbar-default .navbar-nav > .open > a:focus {
+  color: #555;
+  background-color: #e7e7e7;
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #777;
+  }
+
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333;
+    background-color: transparent;
+  }
+
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+  }
+
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .ibm-omni-configurator .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent;
+  }
+}
+
+.ibm-omni-configurator .navbar-default .navbar-link {
+  color: #777;
+}
+
+.ibm-omni-configurator .navbar-default .navbar-link:hover {
+  color: #333;
+}
+
+.ibm-omni-configurator .navbar-default .btn-link {
+  color: #777;
+}
+
+.ibm-omni-configurator .navbar-default .btn-link:hover,
+.ibm-omni-configurator .navbar-default .btn-link:focus {
+  color: #333;
+}
+
+.ibm-omni-configurator .navbar-default .btn-link[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .navbar-default .btn-link:hover,
+.ibm-omni-configurator .navbar-default .btn-link[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .navbar-default .btn-link:focus {
+  color: #ccc;
+}
+
+.ibm-omni-configurator .navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-brand {
+  color: #9d9d9d;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-brand:hover,
+.ibm-omni-configurator .navbar-inverse .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-text {
+  color: #9d9d9d;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-nav > li > a {
+  color: #9d9d9d;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-nav > li > a:hover,
+.ibm-omni-configurator .navbar-inverse .navbar-nav > li > a:focus {
+  color: #fff;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .active > a,
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .active > a:hover,
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .disabled > a,
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .disabled > a:hover,
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .disabled > a:focus {
+  color: #444;
+  background-color: transparent;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-toggle {
+  border-color: #333;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-toggle:hover,
+.ibm-omni-configurator .navbar-inverse .navbar-toggle:focus {
+  background-color: #333;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-collapse,
+.ibm-omni-configurator .navbar-inverse .navbar-form {
+  border-color: #101010;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .open > a,
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .open > a:hover,
+.ibm-omni-configurator .navbar-inverse .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #080808;
+  }
+
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: #080808;
+  }
+
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #9d9d9d;
+  }
+
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+  }
+
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #080808;
+  }
+
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .ibm-omni-configurator .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+  }
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-link {
+  color: #9d9d9d;
+}
+
+.ibm-omni-configurator .navbar-inverse .navbar-link:hover {
+  color: #fff;
+}
+
+.ibm-omni-configurator .navbar-inverse .btn-link {
+  color: #9d9d9d;
+}
+
+.ibm-omni-configurator .navbar-inverse .btn-link:hover,
+.ibm-omni-configurator .navbar-inverse .btn-link:focus {
+  color: #fff;
+}
+
+.ibm-omni-configurator .navbar-inverse .btn-link[disabled]:hover,
+.ibm-omni-configurator fieldset[disabled] .navbar-inverse .btn-link:hover,
+.ibm-omni-configurator .navbar-inverse .btn-link[disabled]:focus,
+.ibm-omni-configurator fieldset[disabled] .navbar-inverse .btn-link:focus {
+  color: #444;
+}
+
+.ibm-omni-configurator .breadcrumb {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .breadcrumb > li {
+  display: inline-block;
+}
+
+.ibm-omni-configurator .breadcrumb > li + li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+
+.ibm-omni-configurator .breadcrumb > .active {
+  color: #777;
+}
+
+.ibm-omni-configurator .pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .pagination > li {
+  display: inline;
+}
+
+.ibm-omni-configurator .pagination > li > a,
+.ibm-omni-configurator .pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .pagination > li:first-child > a,
+.ibm-omni-configurator .pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.ibm-omni-configurator .pagination > li:last-child > a,
+.ibm-omni-configurator .pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.ibm-omni-configurator .pagination > li > a:hover,
+.ibm-omni-configurator .pagination > li > span:hover,
+.ibm-omni-configurator .pagination > li > a:focus,
+.ibm-omni-configurator .pagination > li > span:focus {
+  color: #23527c;
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+.ibm-omni-configurator .pagination > .active > a,
+.ibm-omni-configurator .pagination > .active > span,
+.ibm-omni-configurator .pagination > .active > a:hover,
+.ibm-omni-configurator .pagination > .active > span:hover,
+.ibm-omni-configurator .pagination > .active > a:focus,
+.ibm-omni-configurator .pagination > .active > span:focus {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.ibm-omni-configurator .pagination > .disabled > span,
+.ibm-omni-configurator .pagination > .disabled > span:hover,
+.ibm-omni-configurator .pagination > .disabled > span:focus,
+.ibm-omni-configurator .pagination > .disabled > a,
+.ibm-omni-configurator .pagination > .disabled > a:hover,
+.ibm-omni-configurator .pagination > .disabled > a:focus {
+  color: #777;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
+}
+
+.ibm-omni-configurator .pagination-lg > li > a,
+.ibm-omni-configurator .pagination-lg > li > span {
+  padding: 10px 16px;
+  font-size: 18px;
+}
+
+.ibm-omni-configurator .pagination-lg > li:first-child > a,
+.ibm-omni-configurator .pagination-lg > li:first-child > span {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.ibm-omni-configurator .pagination-lg > li:last-child > a,
+.ibm-omni-configurator .pagination-lg > li:last-child > span {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.ibm-omni-configurator .pagination-sm > li > a,
+.ibm-omni-configurator .pagination-sm > li > span {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.ibm-omni-configurator .pagination-sm > li:first-child > a,
+.ibm-omni-configurator .pagination-sm > li:first-child > span {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.ibm-omni-configurator .pagination-sm > li:last-child > a,
+.ibm-omni-configurator .pagination-sm > li:last-child > span {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.ibm-omni-configurator .pager {
+  padding-left: 0;
+  margin: 20px 0;
+  text-align: center;
+  list-style: none;
+}
+
+.ibm-omni-configurator .pager li {
+  display: inline;
+}
+
+.ibm-omni-configurator .pager li > a,
+.ibm-omni-configurator .pager li > span {
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+}
+
+.ibm-omni-configurator .pager li > a:hover,
+.ibm-omni-configurator .pager li > a:focus {
+  text-decoration: none;
+  background-color: #eee;
+}
+
+.ibm-omni-configurator .pager .next > a,
+.ibm-omni-configurator .pager .next > span {
+  float: right;
+}
+
+.ibm-omni-configurator .pager .previous > a,
+.ibm-omni-configurator .pager .previous > span {
+  float: left;
+}
+
+.ibm-omni-configurator .pager .disabled > a,
+.ibm-omni-configurator .pager .disabled > a:hover,
+.ibm-omni-configurator .pager .disabled > a:focus,
+.ibm-omni-configurator .pager .disabled > span {
+  color: #777;
+  cursor: not-allowed;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.ibm-omni-configurator a.label:hover,
+.ibm-omni-configurator a.label:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ibm-omni-configurator .label:empty {
+  display: none;
+}
+
+.ibm-omni-configurator .btn .label {
+  position: relative;
+  top: -1px;
+}
+
+.ibm-omni-configurator .label-default {
+  background-color: #777;
+}
+
+.ibm-omni-configurator .label-default[href]:hover,
+.ibm-omni-configurator .label-default[href]:focus {
+  background-color: #5e5e5e;
+}
+
+.ibm-omni-configurator .label-primary {
+  background-color: #337ab7;
+}
+
+.ibm-omni-configurator .label-primary[href]:hover,
+.ibm-omni-configurator .label-primary[href]:focus {
+  background-color: #286090;
+}
+
+.ibm-omni-configurator .label-success {
+  background-color: #5cb85c;
+}
+
+.ibm-omni-configurator .label-success[href]:hover,
+.ibm-omni-configurator .label-success[href]:focus {
+  background-color: #449d44;
+}
+
+.ibm-omni-configurator .label-info {
+  background-color: #5bc0de;
+}
+
+.ibm-omni-configurator .label-info[href]:hover,
+.ibm-omni-configurator .label-info[href]:focus {
+  background-color: #31b0d5;
+}
+
+.ibm-omni-configurator .label-warning {
+  background-color: #f0ad4e;
+}
+
+.ibm-omni-configurator .label-warning[href]:hover,
+.ibm-omni-configurator .label-warning[href]:focus {
+  background-color: #ec971f;
+}
+
+.ibm-omni-configurator .label-danger {
+  background-color: #d9534f;
+}
+
+.ibm-omni-configurator .label-danger[href]:hover,
+.ibm-omni-configurator .label-danger[href]:focus {
+  background-color: #c9302c;
+}
+
+.ibm-omni-configurator .badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #777;
+  border-radius: 10px;
+}
+
+.ibm-omni-configurator .badge:empty {
+  display: none;
+}
+
+.ibm-omni-configurator .btn .badge {
+  position: relative;
+  top: -1px;
+}
+
+.ibm-omni-configurator .btn-xs .badge {
+  top: 0;
+  padding: 1px 5px;
+}
+
+.ibm-omni-configurator a.badge:hover,
+.ibm-omni-configurator a.badge:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ibm-omni-configurator .list-group-item.active > .badge,
+.ibm-omni-configurator .nav-pills > .active > a > .badge {
+  color: #337ab7;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .list-group-item > .badge {
+  float: right;
+}
+
+.ibm-omni-configurator .list-group-item > .badge + .badge {
+  margin-right: 5px;
+}
+
+.ibm-omni-configurator .nav-pills > li > a > .badge {
+  margin-left: 3px;
+}
+
+.ibm-omni-configurator .jumbotron {
+  padding: 30px 15px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
+}
+
+.ibm-omni-configurator .jumbotron h1,
+.ibm-omni-configurator .jumbotron .h1 {
+  color: inherit;
+}
+
+.ibm-omni-configurator .jumbotron p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+
+.ibm-omni-configurator .jumbotron > hr {
+  border-top-color: #d5d5d5;
+}
+
+.ibm-omni-configurator .container .jumbotron,
+.ibm-omni-configurator .container-fluid .jumbotron {
+  border-radius: 6px;
+}
+
+.ibm-omni-configurator .jumbotron .container {
+  max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .ibm-omni-configurator .jumbotron {
+    padding: 48px 0;
+  }
+
+  .ibm-omni-configurator .container .jumbotron,
+  .ibm-omni-configurator .container-fluid .jumbotron {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+
+  .ibm-omni-configurator .jumbotron h1,
+  .ibm-omni-configurator .jumbotron .h1 {
+    font-size: 63px;
+  }
+}
+
+.ibm-omni-configurator .thumbnail {
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: border .2s ease-in-out;
+  -o-transition: border .2s ease-in-out;
+  transition: border .2s ease-in-out;
+}
+
+.ibm-omni-configurator .thumbnail > img,
+.ibm-omni-configurator .thumbnail a > img {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ibm-omni-configurator a.thumbnail:hover,
+.ibm-omni-configurator a.thumbnail:focus,
+.ibm-omni-configurator a.thumbnail.active {
+  border-color: #337ab7;
+}
+
+.ibm-omni-configurator .thumbnail .caption {
+  padding: 9px;
+  color: #333;
+}
+
+.ibm-omni-configurator .alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .alert h4 {
+  margin-top: 0;
+  color: inherit;
+}
+
+.ibm-omni-configurator .alert .alert-link {
+  font-weight: bold;
+}
+
+.ibm-omni-configurator .alert > p,
+.ibm-omni-configurator .alert > ul {
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .alert > p + p {
+  margin-top: 5px;
+}
+
+.ibm-omni-configurator .alert-dismissable,
+.ibm-omni-configurator .alert-dismissible {
+  padding-right: 35px;
+}
+
+.ibm-omni-configurator .alert-dismissable .close,
+.ibm-omni-configurator .alert-dismissible .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  color: inherit;
+}
+
+.ibm-omni-configurator .alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.ibm-omni-configurator .alert-success hr {
+  border-top-color: #c9e2b3;
+}
+
+.ibm-omni-configurator .alert-success .alert-link {
+  color: #2b542c;
+}
+
+.ibm-omni-configurator .alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.ibm-omni-configurator .alert-info hr {
+  border-top-color: #a6e1ec;
+}
+
+.ibm-omni-configurator .alert-info .alert-link {
+  color: #245269;
+}
+
+.ibm-omni-configurator .alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+
+.ibm-omni-configurator .alert-warning hr {
+  border-top-color: #f7e1b5;
+}
+
+.ibm-omni-configurator .alert-warning .alert-link {
+  color: #66512c;
+}
+
+.ibm-omni-configurator .alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.ibm-omni-configurator .alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+
+.ibm-omni-configurator .alert-danger .alert-link {
+  color: #843534;
+}
+
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+.ibm-omni-configurator .progress {
+  height: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+.ibm-omni-configurator .progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #337ab7;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  -webkit-transition: width .6s ease;
+  -o-transition: width .6s ease;
+  transition: width .6s ease;
+}
+
+.ibm-omni-configurator .progress-striped .progress-bar,
+.ibm-omni-configurator .progress-bar-striped {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  -webkit-background-size: 40px 40px;
+  background-size: 40px 40px;
+}
+
+.ibm-omni-configurator .progress.active .progress-bar,
+.ibm-omni-configurator .progress-bar.active {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+.ibm-omni-configurator .progress-bar-success {
+  background-color: #5cb85c;
+}
+
+.ibm-omni-configurator .progress-striped .progress-bar-success {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+
+.ibm-omni-configurator .progress-bar-info {
+  background-color: #5bc0de;
+}
+
+.ibm-omni-configurator .progress-striped .progress-bar-info {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+
+.ibm-omni-configurator .progress-bar-warning {
+  background-color: #f0ad4e;
+}
+
+.ibm-omni-configurator .progress-striped .progress-bar-warning {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+
+.ibm-omni-configurator .progress-bar-danger {
+  background-color: #d9534f;
+}
+
+.ibm-omni-configurator .progress-striped .progress-bar-danger {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+
+.ibm-omni-configurator .media {
+  margin-top: 15px;
+}
+
+.ibm-omni-configurator .media:first-child {
+  margin-top: 0;
+}
+
+.ibm-omni-configurator .media-right,
+.ibm-omni-configurator .media > .pull-right {
+  padding-left: 10px;
+}
+
+.ibm-omni-configurator .media-left,
+.ibm-omni-configurator .media > .pull-left {
+  padding-right: 10px;
+}
+
+.ibm-omni-configurator .media-left,
+.ibm-omni-configurator .media-right,
+.ibm-omni-configurator .media-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.ibm-omni-configurator .media-middle {
+  vertical-align: middle;
+}
+
+.ibm-omni-configurator .media-bottom {
+  vertical-align: bottom;
+}
+
+.ibm-omni-configurator .media-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.ibm-omni-configurator .media-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.ibm-omni-configurator .list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.ibm-omni-configurator .list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .list-group-item:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.ibm-omni-configurator .list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.ibm-omni-configurator a.list-group-item {
+  color: #555;
+}
+
+.ibm-omni-configurator a.list-group-item .list-group-item-heading {
+  color: #333;
+}
+
+.ibm-omni-configurator a.list-group-item:hover,
+.ibm-omni-configurator a.list-group-item:focus {
+  color: #555;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+
+.ibm-omni-configurator .list-group-item.disabled,
+.ibm-omni-configurator .list-group-item.disabled:hover,
+.ibm-omni-configurator .list-group-item.disabled:focus {
+  color: #777;
+  cursor: not-allowed;
+  background-color: #eee;
+}
+
+.ibm-omni-configurator .list-group-item.disabled .list-group-item-heading,
+.ibm-omni-configurator .list-group-item.disabled:hover .list-group-item-heading,
+.ibm-omni-configurator .list-group-item.disabled:focus .list-group-item-heading {
+  color: inherit;
+}
+
+.ibm-omni-configurator .list-group-item.disabled .list-group-item-text,
+.ibm-omni-configurator .list-group-item.disabled:hover .list-group-item-text,
+.ibm-omni-configurator .list-group-item.disabled:focus .list-group-item-text {
+  color: #777;
+}
+
+.ibm-omni-configurator .list-group-item.active,
+.ibm-omni-configurator .list-group-item.active:hover,
+.ibm-omni-configurator .list-group-item.active:focus {
+  z-index: 2;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.ibm-omni-configurator .list-group-item.active .list-group-item-heading,
+.ibm-omni-configurator .list-group-item.active:hover .list-group-item-heading,
+.ibm-omni-configurator .list-group-item.active:focus .list-group-item-heading,
+.ibm-omni-configurator .list-group-item.active .list-group-item-heading > small,
+.ibm-omni-configurator .list-group-item.active:hover .list-group-item-heading > small,
+.ibm-omni-configurator .list-group-item.active:focus .list-group-item-heading > small,
+.ibm-omni-configurator .list-group-item.active .list-group-item-heading > .small,
+.ibm-omni-configurator .list-group-item.active:hover .list-group-item-heading > .small,
+.ibm-omni-configurator .list-group-item.active:focus .list-group-item-heading > .small {
+  color: inherit;
+}
+
+.ibm-omni-configurator .list-group-item.active .list-group-item-text,
+.ibm-omni-configurator .list-group-item.active:hover .list-group-item-text,
+.ibm-omni-configurator .list-group-item.active:focus .list-group-item-text {
+  color: #c7ddef;
+}
+
+.ibm-omni-configurator .list-group-item-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+
+.ibm-omni-configurator a.list-group-item-success {
+  color: #3c763d;
+}
+
+.ibm-omni-configurator a.list-group-item-success .list-group-item-heading {
+  color: inherit;
+}
+
+.ibm-omni-configurator a.list-group-item-success:hover,
+.ibm-omni-configurator a.list-group-item-success:focus {
+  color: #3c763d;
+  background-color: #d0e9c6;
+}
+
+.ibm-omni-configurator a.list-group-item-success.active,
+.ibm-omni-configurator a.list-group-item-success.active:hover,
+.ibm-omni-configurator a.list-group-item-success.active:focus {
+  color: #fff;
+  background-color: #3c763d;
+  border-color: #3c763d;
+}
+
+.ibm-omni-configurator .list-group-item-info {
+  color: #31708f;
+  background-color: #d9edf7;
+}
+
+.ibm-omni-configurator a.list-group-item-info {
+  color: #31708f;
+}
+
+.ibm-omni-configurator a.list-group-item-info .list-group-item-heading {
+  color: inherit;
+}
+
+.ibm-omni-configurator a.list-group-item-info:hover,
+.ibm-omni-configurator a.list-group-item-info:focus {
+  color: #31708f;
+  background-color: #c4e3f3;
+}
+
+.ibm-omni-configurator a.list-group-item-info.active,
+.ibm-omni-configurator a.list-group-item-info.active:hover,
+.ibm-omni-configurator a.list-group-item-info.active:focus {
+  color: #fff;
+  background-color: #31708f;
+  border-color: #31708f;
+}
+
+.ibm-omni-configurator .list-group-item-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+}
+
+.ibm-omni-configurator a.list-group-item-warning {
+  color: #8a6d3b;
+}
+
+.ibm-omni-configurator a.list-group-item-warning .list-group-item-heading {
+  color: inherit;
+}
+
+.ibm-omni-configurator a.list-group-item-warning:hover,
+.ibm-omni-configurator a.list-group-item-warning:focus {
+  color: #8a6d3b;
+  background-color: #faf2cc;
+}
+
+.ibm-omni-configurator a.list-group-item-warning.active,
+.ibm-omni-configurator a.list-group-item-warning.active:hover,
+.ibm-omni-configurator a.list-group-item-warning.active:focus {
+  color: #fff;
+  background-color: #8a6d3b;
+  border-color: #8a6d3b;
+}
+
+.ibm-omni-configurator .list-group-item-danger {
+  color: #a94442;
+  background-color: #f2dede;
+}
+
+.ibm-omni-configurator a.list-group-item-danger {
+  color: #a94442;
+}
+
+.ibm-omni-configurator a.list-group-item-danger .list-group-item-heading {
+  color: inherit;
+}
+
+.ibm-omni-configurator a.list-group-item-danger:hover,
+.ibm-omni-configurator a.list-group-item-danger:focus {
+  color: #a94442;
+  background-color: #ebcccc;
+}
+
+.ibm-omni-configurator a.list-group-item-danger.active,
+.ibm-omni-configurator a.list-group-item-danger.active:hover,
+.ibm-omni-configurator a.list-group-item-danger.active:focus {
+  color: #fff;
+  background-color: #a94442;
+  border-color: #a94442;
+}
+
+.ibm-omni-configurator .list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.ibm-omni-configurator .list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.ibm-omni-configurator .panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.ibm-omni-configurator .panel-body {
+  padding: 15px;
+}
+
+.ibm-omni-configurator .panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.ibm-omni-configurator .panel-heading > .dropdown .dropdown-toggle {
+  color: inherit;
+}
+
+.ibm-omni-configurator .panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+}
+
+.ibm-omni-configurator .panel-title > a {
+  color: inherit;
+}
+
+.ibm-omni-configurator .panel-footer {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .list-group,
+.ibm-omni-configurator .panel > .panel-collapse > .list-group {
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .panel > .list-group .list-group-item,
+.ibm-omni-configurator .panel > .panel-collapse > .list-group .list-group-item {
+  border-width: 1px 0;
+  border-radius: 0;
+}
+
+.ibm-omni-configurator .panel > .list-group:first-child .list-group-item:first-child,
+.ibm-omni-configurator .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
+  border-top: 0;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .list-group:last-child .list-group-item:last-child,
+.ibm-omni-configurator .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {
+  border-bottom: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.ibm-omni-configurator .panel-heading + .list-group .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.ibm-omni-configurator .list-group + .panel-footer {
+  border-top-width: 0;
+}
+
+.ibm-omni-configurator .panel > .table,
+.ibm-omni-configurator .panel > .table-responsive > .table,
+.ibm-omni-configurator .panel > .panel-collapse > .table {
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .panel > .table caption,
+.ibm-omni-configurator .panel > .table-responsive > .table caption,
+.ibm-omni-configurator .panel > .panel-collapse > .table caption {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.ibm-omni-configurator .panel > .table:first-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .table:first-child > thead:first-child > tr:first-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
+.ibm-omni-configurator .panel > .table:first-child > tbody:first-child > tr:first-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,
+.ibm-omni-configurator .panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+.ibm-omni-configurator .panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
+.ibm-omni-configurator .panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
+  border-top-left-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,
+.ibm-omni-configurator .panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+.ibm-omni-configurator .panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
+.ibm-omni-configurator .panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,
+.ibm-omni-configurator .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
+  border-top-right-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .table:last-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .table:last-child > tbody:last-child > tr:last-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,
+.ibm-omni-configurator .panel > .table:last-child > tfoot:last-child > tr:last-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+.ibm-omni-configurator .panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+.ibm-omni-configurator .panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+.ibm-omni-configurator .panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
+  border-bottom-left-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+.ibm-omni-configurator .panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+.ibm-omni-configurator .panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+.ibm-omni-configurator .panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,
+.ibm-omni-configurator .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
+  border-bottom-right-radius: 3px;
+}
+
+.ibm-omni-configurator .panel > .panel-body + .table,
+.ibm-omni-configurator .panel > .panel-body + .table-responsive,
+.ibm-omni-configurator .panel > .table + .panel-body,
+.ibm-omni-configurator .panel > .table-responsive + .panel-body {
+  border-top: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .panel > .table > tbody:first-child > tr:first-child th,
+.ibm-omni-configurator .panel > .table > tbody:first-child > tr:first-child td {
+  border-top: 0;
+}
+
+.ibm-omni-configurator .panel > .table-bordered,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered {
+  border: 0;
+}
+
+.ibm-omni-configurator .panel > .table-bordered > thead > tr > th:first-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > thead > tr > th:first-child,
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr > th:first-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr > th:first-child,
+.ibm-omni-configurator .panel > .table-bordered > tfoot > tr > th:first-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+.ibm-omni-configurator .panel > .table-bordered > thead > tr > td:first-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > thead > tr > td:first-child,
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr > td:first-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr > td:first-child,
+.ibm-omni-configurator .panel > .table-bordered > tfoot > tr > td:first-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+  border-left: 0;
+}
+
+.ibm-omni-configurator .panel > .table-bordered > thead > tr > th:last-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > thead > tr > th:last-child,
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr > th:last-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr > th:last-child,
+.ibm-omni-configurator .panel > .table-bordered > tfoot > tr > th:last-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+.ibm-omni-configurator .panel > .table-bordered > thead > tr > td:last-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > thead > tr > td:last-child,
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr > td:last-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr > td:last-child,
+.ibm-omni-configurator .panel > .table-bordered > tfoot > tr > td:last-child,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+  border-right: 0;
+}
+
+.ibm-omni-configurator .panel > .table-bordered > thead > tr:first-child > td,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > thead > tr:first-child > td,
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr:first-child > td,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr:first-child > td,
+.ibm-omni-configurator .panel > .table-bordered > thead > tr:first-child > th,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > thead > tr:first-child > th,
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr:first-child > th,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr:first-child > th {
+  border-bottom: 0;
+}
+
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr:last-child > td,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr:last-child > td,
+.ibm-omni-configurator .panel > .table-bordered > tfoot > tr:last-child > td,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > td,
+.ibm-omni-configurator .panel > .table-bordered > tbody > tr:last-child > th,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tbody > tr:last-child > th,
+.ibm-omni-configurator .panel > .table-bordered > tfoot > tr:last-child > th,
+.ibm-omni-configurator .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th {
+  border-bottom: 0;
+}
+
+.ibm-omni-configurator .panel > .table-responsive {
+  margin-bottom: 0;
+  border: 0;
+}
+
+.ibm-omni-configurator .panel-group {
+  margin-bottom: 20px;
+}
+
+.ibm-omni-configurator .panel-group .panel {
+  margin-bottom: 0;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .panel-group .panel + .panel {
+  margin-top: 5px;
+}
+
+.ibm-omni-configurator .panel-group .panel-heading {
+  border-bottom: 0;
+}
+
+.ibm-omni-configurator .panel-group .panel-heading + .panel-collapse > .panel-body,
+.ibm-omni-configurator .panel-group .panel-heading + .panel-collapse > .list-group {
+  border-top: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .panel-group .panel-footer {
+  border-top: 0;
+}
+
+.ibm-omni-configurator .panel-group .panel-footer + .panel-collapse .panel-body {
+  border-bottom: 1px solid #ddd;
+}
+
+.ibm-omni-configurator .panel-default {
+  border-color: #ddd;
+}
+
+.ibm-omni-configurator .panel-default > .panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.ibm-omni-configurator .panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #ddd;
+}
+
+.ibm-omni-configurator .panel-default > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333;
+}
+
+.ibm-omni-configurator .panel-default > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ddd;
+}
+
+.ibm-omni-configurator .panel-primary {
+  border-color: #337ab7;
+}
+
+.ibm-omni-configurator .panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+.ibm-omni-configurator .panel-primary > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #337ab7;
+}
+
+.ibm-omni-configurator .panel-primary > .panel-heading .badge {
+  color: #337ab7;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .panel-primary > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #337ab7;
+}
+
+.ibm-omni-configurator .panel-success {
+  border-color: #d6e9c6;
+}
+
+.ibm-omni-configurator .panel-success > .panel-heading {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.ibm-omni-configurator .panel-success > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #d6e9c6;
+}
+
+.ibm-omni-configurator .panel-success > .panel-heading .badge {
+  color: #dff0d8;
+  background-color: #3c763d;
+}
+
+.ibm-omni-configurator .panel-success > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #d6e9c6;
+}
+
+.ibm-omni-configurator .panel-info {
+  border-color: #bce8f1;
+}
+
+.ibm-omni-configurator .panel-info > .panel-heading {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.ibm-omni-configurator .panel-info > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #bce8f1;
+}
+
+.ibm-omni-configurator .panel-info > .panel-heading .badge {
+  color: #d9edf7;
+  background-color: #31708f;
+}
+
+.ibm-omni-configurator .panel-info > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #bce8f1;
+}
+
+.ibm-omni-configurator .panel-warning {
+  border-color: #faebcc;
+}
+
+.ibm-omni-configurator .panel-warning > .panel-heading {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+
+.ibm-omni-configurator .panel-warning > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #faebcc;
+}
+
+.ibm-omni-configurator .panel-warning > .panel-heading .badge {
+  color: #fcf8e3;
+  background-color: #8a6d3b;
+}
+
+.ibm-omni-configurator .panel-warning > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #faebcc;
+}
+
+.ibm-omni-configurator .panel-danger {
+  border-color: #ebccd1;
+}
+
+.ibm-omni-configurator .panel-danger > .panel-heading {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.ibm-omni-configurator .panel-danger > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #ebccd1;
+}
+
+.ibm-omni-configurator .panel-danger > .panel-heading .badge {
+  color: #f2dede;
+  background-color: #a94442;
+}
+
+.ibm-omni-configurator .panel-danger > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ebccd1;
+}
+
+.ibm-omni-configurator .embed-responsive {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ibm-omni-configurator .embed-responsive .embed-responsive-item,
+.ibm-omni-configurator .embed-responsive iframe,
+.ibm-omni-configurator .embed-responsive embed,
+.ibm-omni-configurator .embed-responsive object,
+.ibm-omni-configurator .embed-responsive video {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.ibm-omni-configurator .embed-responsive.embed-responsive-16by9 {
+  padding-bottom: 56.25%;
+}
+
+.ibm-omni-configurator .embed-responsive.embed-responsive-4by3 {
+  padding-bottom: 75%;
+}
+
+.ibm-omni-configurator .well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.ibm-omni-configurator .well blockquote {
+  border-color: #ddd;
+  border-color: rgba(0, 0, 0, .15);
+}
+
+.ibm-omni-configurator .well-lg {
+  padding: 24px;
+  border-radius: 6px;
+}
+
+.ibm-omni-configurator .well-sm {
+  padding: 9px;
+  border-radius: 3px;
+}
+
+.ibm-omni-configurator .close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+}
+
+.ibm-omni-configurator .close:hover,
+.ibm-omni-configurator .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.ibm-omni-configurator button.close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.ibm-omni-configurator .modal-open {
+  overflow: hidden;
+}
+
+.ibm-omni-configurator .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+
+.ibm-omni-configurator .modal.fade .modal-dialog {
+  -webkit-transition: -webkit-transform .3s ease-out;
+  -o-transition: -o-transform .3s ease-out;
+  transition: transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+}
+
+.ibm-omni-configurator .modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.ibm-omni-configurator .modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ibm-omni-configurator .modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+}
+
+.ibm-omni-configurator .modal-content {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+}
+
+.ibm-omni-configurator .modal-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #000;
+}
+
+.ibm-omni-configurator .modal-backdrop.fade {
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.ibm-omni-configurator .modal-backdrop.in {
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.ibm-omni-configurator .modal-header {
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.ibm-omni-configurator .modal-header .close {
+  margin-top: -2px;
+}
+
+.ibm-omni-configurator .modal-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
+
+.ibm-omni-configurator .modal-body {
+  position: relative;
+  padding: 15px;
+}
+
+.ibm-omni-configurator .modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+
+.ibm-omni-configurator .modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.ibm-omni-configurator .modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.ibm-omni-configurator .modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+
+.ibm-omni-configurator .modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+@media (min-width: 768px) {
+  .ibm-omni-configurator .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+
+  .ibm-omni-configurator .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  }
+
+  .ibm-omni-configurator .modal-sm {
+    width: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+  .ibm-omni-configurator .modal-lg {
+    width: 900px;
+  }
+}
+
+.ibm-omni-configurator .tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.4;
+  visibility: visible;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.ibm-omni-configurator .tooltip.in {
+  filter: alpha(opacity=90);
+  opacity: .9;
+}
+
+.ibm-omni-configurator .tooltip.top {
+  padding: 5px 0;
+  margin-top: -3px;
+}
+
+.ibm-omni-configurator .tooltip.right {
+  padding: 0 5px;
+  margin-left: 3px;
+}
+
+.ibm-omni-configurator .tooltip.bottom {
+  padding: 5px 0;
+  margin-top: 3px;
+}
+
+.ibm-omni-configurator .tooltip.left {
+  padding: 0 5px;
+  margin-left: -3px;
+}
+
+.ibm-omni-configurator .tooltip-inner {
+  max-width: 200px;
+  padding: 3px 8px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  background-color: #000;
+  border-radius: 4px;
+}
+
+.ibm-omni-configurator .tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.ibm-omni-configurator .tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+
+.ibm-omni-configurator .tooltip.top-left .tooltip-arrow {
+  right: 5px;
+  bottom: 0;
+  margin-bottom: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+
+.ibm-omni-configurator .tooltip.top-right .tooltip-arrow {
+  bottom: 0;
+  left: 5px;
+  margin-bottom: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #000;
+}
+
+.ibm-omni-configurator .tooltip.right .tooltip-arrow {
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-width: 5px 5px 5px 0;
+  border-right-color: #000;
+}
+
+.ibm-omni-configurator .tooltip.left .tooltip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #000;
+}
+
+.ibm-omni-configurator .tooltip.bottom .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+
+.ibm-omni-configurator .tooltip.bottom-left .tooltip-arrow {
+  top: 0;
+  right: 5px;
+  margin-top: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+
+.ibm-omni-configurator .tooltip.bottom-right .tooltip-arrow {
+  top: 0;
+  left: 5px;
+  margin-top: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #000;
+}
+
+.ibm-omni-configurator .popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: none;
+  max-width: 276px;
+  padding: 1px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: left;
+  white-space: normal;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.ibm-omni-configurator .popover.top {
+  margin-top: -10px;
+}
+
+.ibm-omni-configurator .popover.right {
+  margin-left: 10px;
+}
+
+.ibm-omni-configurator .popover.bottom {
+  margin-top: 10px;
+}
+
+.ibm-omni-configurator .popover.left {
+  margin-left: -10px;
+}
+
+.ibm-omni-configurator .popover-title {
+  padding: 8px 14px;
+  margin: 0;
+  font-size: 14px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ebebeb;
+  border-radius: 5px 5px 0 0;
+}
+
+.ibm-omni-configurator .popover-content {
+  padding: 9px 14px;
+}
+
+.ibm-omni-configurator .popover > .arrow,
+.ibm-omni-configurator .popover > .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.ibm-omni-configurator .popover > .arrow {
+  border-width: 11px;
+}
+
+.ibm-omni-configurator .popover > .arrow:after {
+  content: "";
+  border-width: 10px;
+}
+
+.ibm-omni-configurator .popover.top > .arrow {
+  bottom: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-color: #999;
+  border-top-color: rgba(0, 0, 0, .25);
+  border-bottom-width: 0;
+}
+
+.ibm-omni-configurator .popover.top > .arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-color: #fff;
+  border-bottom-width: 0;
+}
+
+.ibm-omni-configurator .popover.right > .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999;
+  border-right-color: rgba(0, 0, 0, .25);
+  border-left-width: 0;
+}
+
+.ibm-omni-configurator .popover.right > .arrow:after {
+  bottom: -10px;
+  left: 1px;
+  content: " ";
+  border-right-color: #fff;
+  border-left-width: 0;
+}
+
+.ibm-omni-configurator .popover.bottom > .arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #999;
+  border-bottom-color: rgba(0, 0, 0, .25);
+}
+
+.ibm-omni-configurator .popover.bottom > .arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-width: 0;
+  border-bottom-color: #fff;
+}
+
+.ibm-omni-configurator .popover.left > .arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-right-width: 0;
+  border-left-color: #999;
+  border-left-color: rgba(0, 0, 0, .25);
+}
+
+.ibm-omni-configurator .popover.left > .arrow:after {
+  right: 1px;
+  bottom: -10px;
+  content: " ";
+  border-right-width: 0;
+  border-left-color: #fff;
+}
+
+.ibm-omni-configurator .carousel {
+  position: relative;
+}
+
+.ibm-omni-configurator .carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ibm-omni-configurator .carousel-inner > .item {
+  position: relative;
+  display: none;
+  -webkit-transition: .6s ease-in-out left;
+  -o-transition: .6s ease-in-out left;
+  transition: .6s ease-in-out left;
+}
+
+.ibm-omni-configurator .carousel-inner > .item > img,
+.ibm-omni-configurator .carousel-inner > .item > a > img {
+  line-height: 1;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+  .ibm-omni-configurator .carousel-inner > .item {
+    -webkit-transition: -webkit-transform .6s ease-in-out;
+    -o-transition: -o-transform .6s ease-in-out;
+    transition: transform .6s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+  }
+
+  .ibm-omni-configurator .carousel-inner > .item.next,
+  .ibm-omni-configurator .carousel-inner > .item.active.right {
+    left: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  .ibm-omni-configurator .carousel-inner > .item.prev,
+  .ibm-omni-configurator .carousel-inner > .item.active.left {
+    left: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  .ibm-omni-configurator .carousel-inner > .item.next.left,
+  .ibm-omni-configurator .carousel-inner > .item.prev.right,
+  .ibm-omni-configurator .carousel-inner > .item.active {
+    left: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.ibm-omni-configurator .carousel-inner > .active,
+.ibm-omni-configurator .carousel-inner > .next,
+.ibm-omni-configurator .carousel-inner > .prev {
+  display: block;
+}
+
+.ibm-omni-configurator .carousel-inner > .active {
+  left: 0;
+}
+
+.ibm-omni-configurator .carousel-inner > .next,
+.ibm-omni-configurator .carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.ibm-omni-configurator .carousel-inner > .next {
+  left: 100%;
+}
+
+.ibm-omni-configurator .carousel-inner > .prev {
+  left: -100%;
+}
+
+.ibm-omni-configurator .carousel-inner > .next.left,
+.ibm-omni-configurator .carousel-inner > .prev.right {
+  left: 0;
+}
+
+.ibm-omni-configurator .carousel-inner > .active.left {
+  left: -100%;
+}
+
+.ibm-omni-configurator .carousel-inner > .active.right {
+  left: 100%;
+}
+
+.ibm-omni-configurator .carousel-control {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.ibm-omni-configurator .carousel-control.left {
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .5)), to(rgba(0, 0, 0, .0001)));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+  background-repeat: repeat-x;
+}
+
+.ibm-omni-configurator .carousel-control.right {
+  right: 0;
+  left: auto;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .0001)), to(rgba(0, 0, 0, .5)));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+  background-repeat: repeat-x;
+}
+
+.ibm-omni-configurator .carousel-control:hover,
+.ibm-omni-configurator .carousel-control:focus {
+  color: #fff;
+  text-decoration: none;
+  filter: alpha(opacity=90);
+  outline: 0;
+  opacity: .9;
+}
+
+.ibm-omni-configurator .carousel-control .icon-prev,
+.ibm-omni-configurator .carousel-control .icon-next,
+.ibm-omni-configurator .carousel-control .glyphicon-chevron-left,
+.ibm-omni-configurator .carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+}
+
+.ibm-omni-configurator .carousel-control .icon-prev,
+.ibm-omni-configurator .carousel-control .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+
+.ibm-omni-configurator .carousel-control .icon-next,
+.ibm-omni-configurator .carousel-control .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+
+.ibm-omni-configurator .carousel-control .icon-prev,
+.ibm-omni-configurator .carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  font-family: serif;
+}
+
+.ibm-omni-configurator .carousel-control .icon-prev:before {
+  content: '\2039';
+}
+
+.ibm-omni-configurator .carousel-control .icon-next:before {
+  content: '\203a';
+}
+
+.ibm-omni-configurator .carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  padding-left: 0;
+  margin-left: -30%;
+  text-align: center;
+  list-style: none;
+}
+
+.ibm-omni-configurator .carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+
+.ibm-omni-configurator .carousel-indicators .active {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  background-color: #fff;
+}
+
+.ibm-omni-configurator .carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+
+.ibm-omni-configurator .carousel-caption .btn {
+  text-shadow: none;
+}
+
+@media screen and (min-width: 768px) {
+  .ibm-omni-configurator .carousel-control .glyphicon-chevron-left,
+  .ibm-omni-configurator .carousel-control .glyphicon-chevron-right,
+  .ibm-omni-configurator .carousel-control .icon-prev,
+  .ibm-omni-configurator .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    font-size: 30px;
+  }
+
+  .ibm-omni-configurator .carousel-control .glyphicon-chevron-left,
+  .ibm-omni-configurator .carousel-control .icon-prev {
+    margin-left: -15px;
+  }
+
+  .ibm-omni-configurator .carousel-control .glyphicon-chevron-right,
+  .ibm-omni-configurator .carousel-control .icon-next {
+    margin-right: -15px;
+  }
+
+  .ibm-omni-configurator .carousel-caption {
+    right: 20%;
+    left: 20%;
+    padding-bottom: 30px;
+  }
+
+  .ibm-omni-configurator .carousel-indicators {
+    bottom: 20px;
+  }
+}
+
+.ibm-omni-configurator .clearfix:before,
+.ibm-omni-configurator .clearfix:after,
+.ibm-omni-configurator .dl-horizontal dd:before,
+.ibm-omni-configurator .dl-horizontal dd:after,
+.ibm-omni-configurator .container:before,
+.ibm-omni-configurator .container:after,
+.ibm-omni-configurator .container-fluid:before,
+.ibm-omni-configurator .container-fluid:after,
+.ibm-omni-configurator .row:before,
+.ibm-omni-configurator .row:after,
+.ibm-omni-configurator .form-horizontal .form-group:before,
+.ibm-omni-configurator .form-horizontal .form-group:after,
+.ibm-omni-configurator .btn-toolbar:before,
+.ibm-omni-configurator .btn-toolbar:after,
+.ibm-omni-configurator .btn-group-vertical > .btn-group:before,
+.ibm-omni-configurator .btn-group-vertical > .btn-group:after,
+.ibm-omni-configurator .nav:before,
+.ibm-omni-configurator .nav:after,
+.ibm-omni-configurator .navbar:before,
+.ibm-omni-configurator .navbar:after,
+.ibm-omni-configurator .navbar-header:before,
+.ibm-omni-configurator .navbar-header:after,
+.ibm-omni-configurator .navbar-collapse:before,
+.ibm-omni-configurator .navbar-collapse:after,
+.ibm-omni-configurator .pager:before,
+.ibm-omni-configurator .pager:after,
+.ibm-omni-configurator .panel-body:before,
+.ibm-omni-configurator .panel-body:after,
+.ibm-omni-configurator .modal-footer:before,
+.ibm-omni-configurator .modal-footer:after {
+  display: table;
+  content: " ";
+}
+
+.ibm-omni-configurator .clearfix:after,
+.ibm-omni-configurator .dl-horizontal dd:after,
+.ibm-omni-configurator .container:after,
+.ibm-omni-configurator .container-fluid:after,
+.ibm-omni-configurator .row:after,
+.ibm-omni-configurator .form-horizontal .form-group:after,
+.ibm-omni-configurator .btn-toolbar:after,
+.ibm-omni-configurator .btn-group-vertical > .btn-group:after,
+.ibm-omni-configurator .nav:after,
+.ibm-omni-configurator .navbar:after,
+.ibm-omni-configurator .navbar-header:after,
+.ibm-omni-configurator .navbar-collapse:after,
+.ibm-omni-configurator .pager:after,
+.ibm-omni-configurator .panel-body:after,
+.ibm-omni-configurator .modal-footer:after {
+  clear: both;
+}
+
+.ibm-omni-configurator .center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ibm-omni-configurator .pull-right {
+  float: right !important;
+}
+
+.ibm-omni-configurator .pull-left {
+  float: left !important;
+}
+
+.ibm-omni-configurator .hide {
+  display: none !important;
+}
+
+.ibm-omni-configurator .show {
+  display: block !important;
+}
+
+.ibm-omni-configurator .invisible {
+  visibility: hidden;
+}
+
+.ibm-omni-configurator .text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.ibm-omni-configurator .hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.ibm-omni-configurator .affix {
+  position: fixed;
+}
+
+.ibm-omni-configurator @-ms-viewport {
+  width: device-width;
+}
+
+.ibm-omni-configurator .visible-xs,
+.ibm-omni-configurator .visible-sm,
+.ibm-omni-configurator .visible-md,
+.ibm-omni-configurator .visible-lg {
+  display: none !important;
+}
+
+.ibm-omni-configurator .visible-xs-block,
+.ibm-omni-configurator .visible-xs-inline,
+.ibm-omni-configurator .visible-xs-inline-block,
+.ibm-omni-configurator .visible-sm-block,
+.ibm-omni-configurator .visible-sm-inline,
+.ibm-omni-configurator .visible-sm-inline-block,
+.ibm-omni-configurator .visible-md-block,
+.ibm-omni-configurator .visible-md-inline,
+.ibm-omni-configurator .visible-md-inline-block,
+.ibm-omni-configurator .visible-lg-block,
+.ibm-omni-configurator .visible-lg-inline,
+.ibm-omni-configurator .visible-lg-inline-block {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .visible-xs {
+    display: block !important;
+  }
+
+  .ibm-omni-configurator table.visible-xs {
+    display: table;
+  }
+
+  .ibm-omni-configurator tr.visible-xs {
+    display: table-row !important;
+  }
+
+  .ibm-omni-configurator th.visible-xs,
+  .ibm-omni-configurator td.visible-xs {
+    display: table-cell !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .visible-xs-block {
+    display: block !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .visible-xs-inline {
+    display: inline !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .visible-xs-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ibm-omni-configurator .visible-sm {
+    display: block !important;
+  }
+
+  .ibm-omni-configurator table.visible-sm {
+    display: table;
+  }
+
+  .ibm-omni-configurator tr.visible-sm {
+    display: table-row !important;
+  }
+
+  .ibm-omni-configurator th.visible-sm,
+  .ibm-omni-configurator td.visible-sm {
+    display: table-cell !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ibm-omni-configurator .visible-sm-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ibm-omni-configurator .visible-sm-inline {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ibm-omni-configurator .visible-sm-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ibm-omni-configurator .visible-md {
+    display: block !important;
+  }
+
+  .ibm-omni-configurator table.visible-md {
+    display: table;
+  }
+
+  .ibm-omni-configurator tr.visible-md {
+    display: table-row !important;
+  }
+
+  .ibm-omni-configurator th.visible-md,
+  .ibm-omni-configurator td.visible-md {
+    display: table-cell !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ibm-omni-configurator .visible-md-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ibm-omni-configurator .visible-md-inline {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ibm-omni-configurator .visible-md-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ibm-omni-configurator .visible-lg {
+    display: block !important;
+  }
+
+  .ibm-omni-configurator table.visible-lg {
+    display: table;
+  }
+
+  .ibm-omni-configurator tr.visible-lg {
+    display: table-row !important;
+  }
+
+  .ibm-omni-configurator th.visible-lg,
+  .ibm-omni-configurator td.visible-lg {
+    display: table-cell !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ibm-omni-configurator .visible-lg-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ibm-omni-configurator .visible-lg-inline {
+    display: inline !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ibm-omni-configurator .visible-lg-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .ibm-omni-configurator .hidden-xs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ibm-omni-configurator .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ibm-omni-configurator .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ibm-omni-configurator .hidden-lg {
+    display: none !important;
+  }
+}
+
+.ibm-omni-configurator .visible-print {
+  display: none !important;
+}
+
+@media print {
+  .ibm-omni-configurator .visible-print {
+    display: block !important;
+  }
+
+  .ibm-omni-configurator table.visible-print {
+    display: table;
+  }
+
+  .ibm-omni-configurator tr.visible-print {
+    display: table-row !important;
+  }
+
+  .ibm-omni-configurator th.visible-print,
+  .ibm-omni-configurator td.visible-print {
+    display: table-cell !important;
+  }
+}
+
+.ibm-omni-configurator .visible-print-block {
+  display: none !important;
+}
+
+@media print {
+  .ibm-omni-configurator .visible-print-block {
+    display: block !important;
+  }
+}
+
+.ibm-omni-configurator .visible-print-inline {
+  display: none !important;
+}
+
+@media print {
+  .ibm-omni-configurator .visible-print-inline {
+    display: inline !important;
+  }
+}
+
+.ibm-omni-configurator .visible-print-inline-block {
+  display: none !important;
+}
+
+@media print {
+  .ibm-omni-configurator .visible-print-inline-block {
+    display: inline-block !important;
+  }
+}
+
+@media print {
+  .ibm-omni-configurator .hidden-print {
+    display: none !important;
+  }
+}

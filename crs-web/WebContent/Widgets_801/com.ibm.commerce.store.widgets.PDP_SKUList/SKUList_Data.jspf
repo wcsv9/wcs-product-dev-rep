@@ -14,6 +14,7 @@
 
 <%-- START SKUList_Data.jspf --%>
 
+<c:set var="queryParent" value="true" scope="request"/>
 <%@ include file="/Widgets_801/Common/PDP_CatalogEntryData.jspf" %>
 
 <c:set var="search01" value="'"/>
@@ -22,6 +23,7 @@
 <c:set var="replaceStr01" value="\\\\'"/>
 <c:set var="replaceStr02" value='\\\\"'/>
 <c:set var="replaceStr03" value=''/>
+
 
 <c:set var="disableProductCompare" value="false" scope="request"/>
 <c:if test="${param.showCompareBox == 'false' || param.disableProductCompare == 'true'}">
@@ -85,9 +87,8 @@
 <c:set var="cookieVal" value="${fn:replace(cookieVal, '%2C', ',')}" />
 
 <wcf:useBean var="skuList" classname="java.util.ArrayList"/>
-
 <c:choose>
-	<c:when test="${type eq 'product'}">
+	<c:when test="${type eq 'product' || type eq 'variant'}">
 		<c:forEach var="sku" items="${entitledItems}" varStatus="total">
 			<c:if test="${sku.buyable}">
 				<wcf:useBean var="skuAttributeList" classname="java.util.ArrayList"/>

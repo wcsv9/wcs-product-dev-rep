@@ -11,6 +11,7 @@
   IBM Corp.
  =================================================================
 --%>
+
 <c:set var="orderId" value="${WCParam.orderId}"/>
 <c:if test="${empty orderId}">
 	<c:set var="orderId" value="${param.orderId}"/>
@@ -301,10 +302,12 @@ The HTML of a table cell is:
 
 <%-- Process each cat entry item in the saved order to get the item details --%>
 <c:forEach var="orderItem0" items="${order.orderItem}">
+	
 	<c:set var="aCatEntry" value="${itemDetailsInThisOrder[orderItem0.productId]}"/>
 	<c:if test="${empty aCatEntry}">
 		<c:set property="${orderItem0.productId}" value="${orderItem0.productId}" target="${missingCatentryIdsMap}"/>
 	</c:if>
+	
 </c:forEach>
 <c:if test="${!empty missingCatentryIdsMap}">
 	<c:catch var="searchServerException">
@@ -324,10 +327,8 @@ The HTML of a table cell is:
 	<c:set property="${aCatEntry.uniqueID}" value="${aCatEntry}" target="${itemDetailsInThisOrder}"/>
 </c:forEach>
 <c:remove var="missingCatentryIdsMap"/>
-
 <c:set var="rowCount" value="0"/>
 <wcf:useBean var="rows" classname="java.util.ArrayList"/>
-
 <c:forEach var="orderItem" items="${order.orderItem}" varStatus="istat">
 	<c:set var="catEntry" value="${itemDetailsInThisOrder[orderItem.productId]}"/>
 	<c:set var="itemUniqueId" value="${orderItem.orderItemId}"/>
@@ -398,6 +399,30 @@ The HTML of a table cell is:
 				<c:set var="contractName" value="${contract.name}"/>
 			</c:if>
 		</c:if>
+	</c:if>
+		
+	<c:set var="catentryType" value="${catEntry.catalogEntryTypeCode }"/>
+	<c:set var="ConfigXML" value="\'\'"/>
+	<c:if test="${!empty orderItem.configurationID  &&  catEntry.catalogEntryTypeCode == 'DynamicKitBean'}">
+		<wcf:rest var="itemConfiguration" url="store/{storeId}/order">
+			<wcf:var name="storeId" value="${param.storeId}" encode="true"/>
+			<wcf:param name="q" value="findConfigurationByOrderItemId"/>
+			<wcf:param name="orderItemId" value="${orderItem.orderItemId}"/>
+		</wcf:rest>
+		
+		<c:if test="${!empty itemConfiguration.Order && !empty itemConfiguration.Order[0].orderItem && !empty itemConfiguration.Order[0].orderItem[0].orderItemConfiguration}">
+			
+			<c:set var="doubleQuote" value="\""/>
+			<c:set var="escapeDoubleQuote" value="\\\""/>	
+			<c:set var="ConfigXML" value="${itemConfiguration.Order[0].orderItem[0].orderItemConfiguration}" />
+			<c:set var="ConfigXML">
+			    <wcf:json object="${ConfigXML}" />
+			</c:set>
+			<c:set var="ConfigXML">
+				<c:out value="${ConfigXML} "/>
+			</c:set>
+		</c:if> 
+	
 	</c:if>
 	
 	<wcst:message var="skuLabel" key="SAVEDORDERITEM_SKU_LABEL" bundle="${widgetText}"/>
@@ -509,8 +534,8 @@ The HTML of a table cell is:
                 <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} </a>' />
                 <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} <div id=\"actionDropdown${rowCount}\" class=\"actionDropdown\" table-parent=\"listTable\" >' />
                 <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} <div class=\"actionItem\">' />
-                <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} <div class=\"actionTitle\" onclick=\"SavedOrderItemsJS.addItemToCurrentOrder(\'${catEntry.partNumber}\',\'${rowCount}\',\'${catEntry.uniqueID}\');\"' />
-                <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} onkeypress=\"if(event.keyCode == 0 || event.keyCode == 13){SavedOrderItemsJS.addItemToCurrentOrder(\'${catEntry.partNumber}\',\'${rowCount}\');}\" tabindex=\"-1\" role=\"menuitem\" aria-label=\"${btnAddItem}\">' />
+                <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} <div class=\"actionTitle\" onclick=\"SavedOrderItemsJS.addItemToCurrentOrder(\'${catEntry.partNumber}\',\'${rowCount}\',\'${catEntry.uniqueID}\',${ConfigXML }, \'${catentryType}\');\"' />
+                <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} onkeypress=\"if(event.keyCode == 0 || event.keyCode == 13){SavedOrderItemsJS.addItemToCurrentOrder(\'${catEntry.partNumber}\',\'${rowCount}\',${ConfigXML }, \'${catentryType}\' );}\" tabindex=\"-1\" role=\"menuitem\" aria-label=\"${btnAddItem}\">' />
                 <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} ${btnAddItem}' />
                 <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} </div>' />
                 <c:set var='rCol7_HTML_TO_ADD' value='${rCol7_HTML_TO_ADD} </div>' />

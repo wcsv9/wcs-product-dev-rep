@@ -58,6 +58,93 @@ wcService.declare({
 }),
 
 /**
+ * This service allows customer to create add/update an item to an existing requisition list (Arsalan - Add Some Custom Fields).
+ * @constructor
+ */
+wcService.declare({
+	id:"requisitionListAddItemCustom",
+	actionId:"requisitionListAddItemCustom",
+	url: getAbsoluteURL() + "ONRESTRequisitionListUpdateItem",
+	formId:"RequisitionListItemAddForm"
+
+	 /**
+     * Hides all the messages and the progress bar.
+     * @param (object) serviceResponse The service response object, which is the
+     * JSON object returned by the service invocation.
+     */
+	,successHandler: function(serviceResponse) {
+		MessageHelper.hideAndClearMessage();
+		cursor_clear();
+		
+		if(serviceResponse.operation == "addItem"){
+			if(serviceResponse.productIdMatchFlag == true){
+				$.confirm({
+					title:"Confirmation Box",
+					text:"This part number "+serviceResponse.partNumber+" is already is in the selected favorites list. Please click on ADD to add the product again or or CANCEL to cancel the request.",
+					confirm: function(button) {
+						ReqListItemsJS.addItemToReqListAgain(serviceResponse.formName, serviceResponse.partNumber, serviceResponse.quantity);
+					},
+					cancel: function(button) {
+						return false;
+					},
+					confirmButton: "ADD",
+					cancelButton: "CANCEL"
+				});				
+			} else {
+				MessageHelper.displayStatusMessage(MessageHelper.messages["REQUISITIONLIST_ADD_SUCCESS"]);
+			}
+		} else if (serviceResponse.operation == "deleteItem"){
+			MessageHelper.displayStatusMessage(MessageHelper.messages["REQUISITIONLIST_ITEM_DELETE_SUCCESS"]);
+		} else if (serviceResponse.operation == "updateQty") {
+			ReqListItemsJS.showUpdatedMessage(serviceResponse.row);
+		}
+	}
+		
+	/**
+     * display an error message.
+     * @param (object) serviceResponse The service response object, which is the
+     * JSON object returned by the service invocation.
+     */
+	,failureHandler: function(serviceResponse) {
+
+		if (serviceResponse.errorMessage) {
+			var errorMsg = serviceResponse.errorMessage;
+			//If the errorMessage param is the generic error message
+			//Display the systemMessage instead
+			if (errorMsg.search("CMN1009E") !=-1 ) {
+				MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_REQUISITION_LIST_INVALID_SKU"]);
+			}else if(errorMsg.search("CMN3101E") != -1){
+				//If systemMessage is not empty, display systemMessage
+				if(serviceResponse.systemMessage){
+					if (serviceResponse.errorMessageKey!=null) {
+						var msgKey = serviceResponse.errorMessageKey;
+						if (msgKey == '_ERR_GETTING_SKU' || msgKey =='_ERR_PROD_NOT_EXISTING') {
+							MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_REQUISITION_LIST_INVALID_SKU"]);
+						}else {
+							MessageHelper.displayErrorMessage(serviceResponse.systemMessage);
+						}
+					}else{					
+						MessageHelper.displayErrorMessage(serviceResponse.systemMessage);
+					}
+				} else {
+					//If systemMessage is empty, then just display the generic error message
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+				}
+			} else {
+				//If errorMessage is not generic, display errorMessage
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+			}
+		} 
+		else {
+			 if (serviceResponse.errorMessageKey) {
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+			 }
+		}
+		cursor_clear();
+	}			
+}),
+
+/**
  * This service allows customer to create add/update an item to an existing requisition list
  * @constructor
  */
@@ -152,6 +239,70 @@ wcService.declare({
 		} else if (serviceResponse.operation == "deleteItem"){
 			MessageHelper.displayStatusMessage(MessageHelper.messages["REQUISITIONLIST_ITEM_DELETE_SUCCESS"]);
 		} else if (serviceResponse.operation == "updateQty") {
+			ReqListItemsJS.showUpdatedMessage(serviceResponse.row);
+		}
+	}
+	
+	/**
+     * display an error message.
+     * @param (object) serviceResponse The service response object, which is the
+     * JSON object returned by the service invocation.
+     */
+	,failureHandler: function(serviceResponse) {
+		if (serviceResponse.errorMessage) {
+			var errorMsg = serviceResponse.errorMessage;
+			//If the errorMessage param is the generic error message
+			//Display the systemMessage instead
+			if (errorMsg.search("CMN1009E") !=-1 ) {
+				MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_REQUISITION_LIST_INVALID_SKU"]);
+			}else if(errorMsg.search("CMN3101E") != -1){
+				//If systemMessage is not empty, display systemMessage
+				if(serviceResponse.systemMessage){
+					if (serviceResponse.errorMessageKey!=null) {
+						var msgKey = serviceResponse.errorMessageKey;
+						if (msgKey == '_ERR_GETTING_SKU' || msgKey =='_ERR_PROD_NOT_EXISTING') {
+							MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_REQUISITION_LIST_INVALID_SKU"]);
+						}else {
+							MessageHelper.displayErrorMessage(serviceResponse.systemMessage);
+						}
+					}else{					
+						MessageHelper.displayErrorMessage(serviceResponse.systemMessage);
+					}
+				} else {
+					//If systemMessage is empty, then just display the generic error message
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+				}
+			} else {
+				//If errorMessage is not generic, display errorMessage
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+			}
+		} 
+		else {
+			 if (serviceResponse.errorMessageKey) {
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+			 }
+		}
+		cursor_clear();
+	},			
+}),
+
+wcService.declare({
+	id:"requisitionListUpdateItemCustom",
+	actionId:"requisitionListUpdateItemCustom",
+	url: getAbsoluteURL() + "ONRESTRequisitionListUpdateItemQuantity",
+	formId:""
+
+	 /**
+     * Hides all the messages and the progress bar.
+     * @param (object) serviceResponse The service response object, which is the
+     * JSON object returned by the service invocation.
+     */
+	,successHandler: function(serviceResponse) {
+		MessageHelper.hideAndClearMessage();
+		cursor_clear();
+		if(serviceResponse.moqFlag == "true"){
+			MessageHelper.displayErrorMessage("Product "+serviceResponse.errorPartNumber+" can only be purchased in a multiple of "+serviceResponse.minOrderQty+".");
+		} else {
 			ReqListItemsJS.showUpdatedMessage(serviceResponse.row);
 		}
 	}

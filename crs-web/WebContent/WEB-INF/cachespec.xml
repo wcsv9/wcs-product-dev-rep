@@ -1,8 +1,42 @@
-<?xml version="1.0"	?>
-<!DOCTYPE cache	SYSTEM "cachespec.dtd">
+<?xml version="1.0" ?>
 
-<!-- All Commerce default command caching rules have been relocated under InitializationServlet.war -->
+<!DOCTYPE cache SYSTEM "cachespec.dtd">
+
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2009, 2018 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+
+<!--
+	****************************************************************************
+	This file is provided as a sample, where JSP files in the Aurora
+	starter store use dynacache to cache pages and fragments. The main
+	caching targets are the catalog browsing pages, headers and footers.
+	This file contains the caching rules. For the invalidation rules, copy
+	the files from the invalidation directory based on the feature.
+	****************************************************************************
+-->
+
+<!--
+	Section 1.0 - Caching rules for full page browsing pages + for pages retrieved using Ajax call like MiniCartDetails, GetCatalogEntryDetails, SearchSuggestions, StoreDetails
+	Section 2.0 - Caching rules for Store level JSPs
+	Section 3.0 - Caching rules for Site Level Widgets
+	Section 4.0 - Caching rules for Site level common JSPs
+	Section 5.0 - Do not cache rules
+
+-->
 
 <cache>
-	<!-- Please insert your servlet/jsp cache rules here.-->
+
+	
+
 </cache>

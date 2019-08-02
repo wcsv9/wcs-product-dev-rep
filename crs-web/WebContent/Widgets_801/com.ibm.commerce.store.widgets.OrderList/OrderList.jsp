@@ -33,7 +33,9 @@
 <c:if test="${param.selectedTab == 'WaitingForApproval'}">
     <c:set var="widgetPrefix" value="Waiting_"/>
 </c:if>
-
+<c:if test="${param.selectedTab == 'Invoices'}">
+    <c:set var="widgetPrefix" value="Invoices_"/>
+</c:if>
 <div wcType="RefreshArea" id="${widgetPrefix}OrderListTable_Widget" declareFunction="declareOrderDisplayRefreshArea('${widgetPrefix}')" ariaMessage="<wcst:message bundle="${widgetText}" key="ACCE_Status_Order_List_Updated"/>" ariaLiveId="${ariaMessageNode}" role="region" aria-labelledby="orderList_widget_ACCE_Label">
     <%out.flush();%>
         <c:import url="${env_siteWidgetsDir}com.ibm.commerce.store.widgets.OrderList/OrderListAjax.jsp" >

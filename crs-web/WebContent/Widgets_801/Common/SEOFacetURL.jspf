@@ -265,7 +265,7 @@ parameters.values().removeAll(java.util.Arrays.asList((Object) null)); %> --%>
 
 
 
-<wcf:url var="SEOFacetURL" patternName="${patternName}">
+<wcf:url var="SEOFacetURL" patternName="${patternName}" value="Category3">
     <c:forEach var="paramEntry" items="${parameters}">
         <c:if test="${!empty paramEntry.value}">
             <wcf:param name="${paramEntry.key}" value="${paramEntry.value}" />

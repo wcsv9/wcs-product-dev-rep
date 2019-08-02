@@ -23,6 +23,14 @@
 	</c:forEach>
 </c:if>
 
+<%-- Count number of facets selected --%>
+<c:set var="selectedFacetCount" value="${0}" />
+<c:forEach var="entry" items="${WCParam}">
+	<c:if test="${fn:startsWith(entry, 'facet_')}">
+		<c:set var="selectedFacetCount" value="${selectedFacetCount + 1}" />
+	</c:if>
+</c:forEach>
+
 <wcf:useBean var="categoryFacetList" classname="java.util.ArrayList"/>
 <c:forEach var="item" items="${facetField.entry}" varStatus="aStatus">	
 	<c:if test="${WCParam.categoryId != item.value && fn:contains(item.extendedData['parentIds'], WCParam.categoryId)}">
@@ -61,6 +69,12 @@
 			<wcf:param name="urlLangId" value="${urlLangId}" />
 			<wcf:param name="top_category" value="${topCategoryId}"/>
 			<wcf:param name="advancedSearch" value="${WCParam.advancedSearch}"/>
+			<c:if test="${selectedFacetCount > 0}">
+				<c:forEach var="index" begin="1" end="${selectedFacetCount}">
+					<wcf:param name="${'facet_'.concat(index)}" value="${WCParam.get('facet_'.concat(index))}" />
+					<wcf:param name="${'facetName_'.concat(index)}" value="${WCParam.get('facetName_'.concat(index))}" />
+				</c:forEach>
+			</c:if>
 		</wcf:url>
 		
 		<c:if test="${nonCategoryFacetCount == 0 && empty WCParam.searchTerm && empty WCParam.manufacturer && WCParam.advancedSearch != '1'}">

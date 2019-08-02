@@ -39,11 +39,6 @@
 <div id="<c:out value='${widgetName}'/>_Widget" >
 	<div id="<c:out value='${widgetName}'/>_Widget_Heading">
 	<span class="verticalAlign_middle"><c:out value='${registeredBuyers}'/></span>
-	<span id="WC_${widgetName}_OrganizationUserList_ToolTip" tabindex="0" class="more_info_icon verticalAlign_middle" data-widget-type="wc.tooltip" 	
-		data-tooltip-header="<wcst:message key="${widgetNameCaps}_TTITLE_TOOLTIP" bundle="${widgetText}"/>">	
-		<img class="info_on" src="${staticIBMAssetAliasRoot}/Widgets_801/images/icon_info_ON.png" alt="<wcst:message key="${widgetNameCaps}_TTITLE_TOOLTIP" bundle="${widgetText}"/>"/>
-		<img class="info_off" src="${staticIBMAssetAliasRoot}/Widgets_801/images/icon_info.png" alt="<wcst:message key="${widgetNameCaps}_TTITLE_TOOLTIP" bundle="${widgetText}"/>"/>
-	</span>
 	</div>
 	<span class="spanacce" id="<c:out value='${widgetName}'/>_widget_ACCE_Label" aria-hidden="true"><wcst:message key="ACCE_REGION_${widgetNameCaps}" bundle="${widgetText}" /></span>
 	<div wcType="RefreshArea" widgetId="<c:out value='${widgetName}'/>Table_Widget" id="<c:out value='${widgetName}'/>Table_Widget" declareFunction="declareOrganizationUsersListTable_controller()" role="region" aria-labelledby="<c:out value='${widgetName}'/>_widget_ACCE_Label" ariaLiveId="${ariaMessageNode}" ariaMessage="<wcst:message key="ACCE_STATUS_${widgetNameCaps}_UPDATED" bundle="${widgetText}" />">

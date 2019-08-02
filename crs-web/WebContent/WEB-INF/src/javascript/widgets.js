@@ -3506,6 +3506,14 @@ GlobalLoginJS = {
         var params = {
             widgetId: widgetId
         };
+        var privacyCookie = getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId);
+        var marketingConsentCookie = getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId);
+        if (privacyCookie != null){
+            params['privacyNoticeVersion'] = privacyCookie;
+        }
+        if (marketingConsentCookie != null){
+            params['marketingTrackingConsent'] = marketingConsentCookie;
+        }
 
         /*For Handling multiple clicks. */
         if (!submitRequest()) {
@@ -3513,6 +3521,15 @@ GlobalLoginJS = {
         }
         cursor_wait();
         wcService.invoke('globalLoginAjaxLogon', params);
+    },
+    
+    submitOauthSignIn: function(formId, provider) {
+    	 service = wcService.getServiceById('OauthLoginAjaxLogon');
+         service.setFormId(formId);
+    	var params = { 			
+    			authorizationProvider: provider
+    	};
+    	wcService.invoke('OauthLoginAjaxLogon', params);
     },
 
     /**
@@ -3667,18 +3684,20 @@ $(document).ready(function () {
                 }
             }
             var displayContractPanel = getCookie("WC_DisplayContractPanel_" + WCParamJS.storeId);
-            if ((displayContractPanel != undefined && displayContractPanel != null && displayContractPanel.toString() == "true") || (logonUserCookie == undefined && logonUserCookie == null)) {
-                if (typeof isOnPasswordUpdateForm === 'undefined' || isOnPasswordUpdateForm == false) {
-                    //Right after user logged in, perform Global Login Ajax call and display Global Login Contract panel.				
-                    GlobalLoginJS.updateGlobalLoginContent(widgetId);
-                } else if (isOnPasswordUpdateForm == true) {
-                    GlobalLoginJS.updateGlobalLoginUserDisplay("...");
-                }
+            if (WCParamJS.omitHeader != 1 && (
+                    (displayContractPanel != undefined && displayContractPanel != null && displayContractPanel.toString() == "true") || (logonUserCookie == undefined && logonUserCookie == null))) {
+                    if (typeof isOnPasswordUpdateForm === 'undefined' || isOnPasswordUpdateForm == false) {
+                        //Right after user logged in, perform Global Login Ajax call and display Global Login Contract panel.
+                        GlobalLoginJS.updateGlobalLoginContent(widgetId);
+                    } else if (isOnPasswordUpdateForm == true) {
+                        GlobalLoginJS.updateGlobalLoginUserDisplay("...");
+                    }
 
+                }
             }
-        }
-    }, 100);
-});//-----------------------------------------------------------------
+        }, 100);
+    });
+//-----------------------------------------------------------------
 // Licensed Materials - Property of IBM
 //
 // WebSphere Commerce
@@ -3994,6 +4013,10 @@ wcService.declare({
                     }
                 }
             }
+            if (getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId) != serviceResponse.privacyNoticeVersion
+                    || getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId) != serviceResponse.marketingTrackingConsent){
+                        setCookie("WC_PrivacyNoticeVersion_" + WCParamJS.storeId, null, {path: "/", domain: cookieDomain, expires: -1});
+            }
 
             if (serviceResponse["MERGE_CART_FAILED_SHOPCART_THRESHOLD"] == "1") {
                 setCookie("MERGE_CART_FAILED_SHOPCART_THRESHOLD", "1", {path: "/", domain: cookieDomain});
@@ -4017,7 +4040,47 @@ wcService.declare({
         }
         cursor_clear();
     }
-});//-----------------------------------------------------------------
+}),
+
+
+wcService.declare({
+    id: "OauthLoginAjaxLogon",
+    actionId: "OauthLoginAjaxLogon",
+    url: getAbsoluteURL() + "OauthLogon",
+    formId: ""
+
+        /**
+         *  Copies all the items from the existing order to the shopping cart and redirects to the shopping cart page.
+        *  @param (object) serviceResponse The service response object, which is the
+        *  JSON object returned by the service invocation.
+        */
+    ,successHandler: function(serviceResponse) {
+    	cursor_clear();
+    	//if (serviceResponse.redirectUrl != null) {
+    	var currUri = window.location.href;
+    	var url = serviceResponse.redirectUrl.replace(/&amp;/g, '&');
+    	var postLogonUrl = serviceResponse.URL.replace(/&amp;/g, '&');
+    	var provider = serviceResponse.provider;
+    	var redirectUrl = currUri.substring(0, currUri.lastIndexOf("\/")) + '/OauthLoginView?storeId=' +WCParamJS.storeId+ '&provider='+provider+ '&URL=' +postLogonUrl;
+    	//alert(currUri);
+    	//redirectUrl = redirectUrl.replace('&', /&amp;/g);
+    	url = url + "&redirect_uri=" +encodeURIComponent(redirectUrl);
+    	//alert(url);
+    	window.location = url;
+    	//}
+    	
+    }
+
+    /**
+    * display an error message.
+    * @param (object) serviceResponse The service response object, which is the
+    * JSON object returned by the service invocation.
+    */
+    ,failureHandler: function(serviceResponse) {
+        console.log('failed!');
+        cursor_clear();
+    }
+})//-----------------------------------------------------------------
 // Licensed Materials - Property of IBM
 //
 // WebSphere Commerce
@@ -5595,6 +5658,7 @@ OrderListJS = {
         cursor_wait();
 
         var params = {
+            orderId: "null",
             subscriptionId: subscriptionId,
             URL: "",
             storeId: OrderListServicesDeclarationJS.storeId,
@@ -9319,7 +9383,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 buttonStyle: this.buttonStyle,
                 name: this.params.name,
                 status: this.params.status,
-                requisitionListId: this.params.requisitionListId,
+                requisitionListId: this.params.requisitionListId ? this.params.requisitionListId : "",
                 quantity: quantity
             };
             if (quantity < 1) {
@@ -9362,7 +9426,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 buttonStyle: this.buttonStyle,
                 name: this.params.name,
                 status: this.params.status,
-                requisitionListId: this.params.requisitionListId,
+                requisitionListId: this.params.requisitionListId ? this.params.requisitionListId : "",
                 requisitionOrderItemId: requisitionOrderItemId,
                 quantity: quantity
             };
@@ -9439,7 +9503,11 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
             } else if ($("#ProductInfoImage_" + catEntryId).length) {
                 productThumbnail = $("#" + "ProductInfoImage_" + catEntryId).val();
             }
-
+            var curRefershAreas = wcRenderContext.getRefreshAreaIds("requisitionLists_content_context");
+            $.each(curRefershAreas, function(i, refreshDivId) {
+                var pageName = refreshDivId.replace("requisitionlists_content_widget", "");
+                declareRequsitionListsContentController(pageName);
+            });
             // Refresh the widget's refresh area and show item was added to a list
             wcRenderContext.updateRenderContext("requisitionLists_content_context", {
                 "showSuccess": "true",
@@ -9503,6 +9571,12 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 productThumbnail = document.getElementById("catalogEntry_img_" + serviceResponse.requisitionOrderItemId).childNodes[1].src;
             }
 
+            var curRefershAreas = wcRenderContext.getRefreshAreaIds("requisitionLists_content_context");
+            $.each(curRefershAreas, function(i, refreshDivId) {
+                var pageName = refreshDivId.replace("requisitionlists_content_widget", "");
+                declareRequsitionListsContentController(pageName);
+            });
+            
             // Refresh the widget's refresh area and show item was added to a list
             wcRenderContext.updateRenderContext("requisitionLists_content_context", {
                 "showSuccess": "true",
@@ -11794,7 +11868,29 @@ B2BLogonForm ={
 		* This variable stores the ID of the requisition list. Its default value is empty.
 		*/
 		requisitionListId: "",
+		
+		addPDK: false,
+		
+		addDK: false,
+		
+		configurationXML: "",
 
+	    setAddPDK: function (addpdk) {
+	        this.addPDK = addpdk;
+	    },
+
+		setAddDK: function(adddk) {
+			this.addDK = adddk;
+		},
+		
+		setConfigurationXML: function(configXML) {
+			this.configurationXML = configXML;
+		},
+		
+		unEscapeXml: function(str){
+			return str.replace(/&lt;/gm, "<").replace(/&gt;/gm, ">").replace(/&#034;/gm,"\"");
+		},
+		
 		/**
 		 * Sets the common parameters for the current page. 
 		 * For example, the language ID, store ID, and catalog ID.
@@ -11956,6 +12052,11 @@ B2BLogonForm ={
 						// just add quantity of the specified row to params
 						params["quantity"] = formElements[i].value;
 					}
+				} if (formElements[i].name.indexOf("catEntryId") != -1) {
+					if(formElements[i].name.indexOf("catEntryId_"+row) != -1) {
+						// just add catEntryId of the specified row to params
+						params["catEntryId"] = formElements[i].value;
+					}
 				} else if (formElements[i].name.indexOf("ProductInfo") == -1) {
 					// ingore all hidden "ProductInfo" inputs - do not add to params
 					params[formElements[i].name] = formElements[i].value;
@@ -11964,6 +12065,13 @@ B2BLogonForm ={
 			params["partNumber"] = partNumber;
 			params["inventoryValidation"] = true;
 			params["orderId"] = ".";
+			
+			if (this.addDK){
+				params.configXML = this.unEscapeXml(this.configurationXML);
+				wcService.getServiceById("ReqListAddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart");
+			}else {
+				wcService.getServiceById("ReqListAddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddPreConfigurationToCart");
+			}
 			
 			// used by mini shopcart
 			var selectedAttrList = new Object();
@@ -12684,6 +12792,10 @@ wcService.declare({
 			/** The URL of the shopping cart used to forward the page when an order is converted to the current order. **/
 			shoppingCartURL : "",
 			
+			unEscapeXml: function(str){
+				return str.replace(/&lt;/gm, "<").replace(/&gt;/gm, ">").replace(/&#034;/gm,"\"");
+			},
+
 			/**
 			 * Sets the common parameters for the current page. 
 			 * For example, the language ID, store ID, and catalog ID.
@@ -12778,13 +12890,15 @@ wcService.declare({
 				wcService.invoke('AjaxAddSavedOrderItem',params);
 			},
 
+			
+	
 			/**
 			 * Adds item to the current order
 			 * @param {Integer} partNumber The partNumber of the item to add to the current order.
 			 * @param (string) row The row number of the quantity input in the table.
 			 * @param (string) catEntryId The catentry ID of the item
 			 */
-			addItemToCurrentOrder:function(partNumber, row, catEntryId){
+			addItemToCurrentOrder:function(partNumber, row, catEntryId, configXML, catentryType){
 				var params = {
 					storeId: this.storeId,
 					catalogId: this.catalogId,
@@ -12794,11 +12908,13 @@ wcService.declare({
 					mergeToCurrentPendingOrder: "Y",
 					URL: "",
 					partNumber: partNumber,
+					catEntryId:catEntryId,
 					inventoryValidation: true,
 					orderId: ".",
 					quantity: $("#orderItem_input_" + row).val()
 				};
 				
+								
 				// used by mini shopcart
 				var selectedAttrList = new Object();
 				shoppingActionsJS.saveAddedProductInfo(params["quantity"], catEntryId, catEntryId, selectedAttrList);
@@ -12810,7 +12926,13 @@ wcService.declare({
 					return;
 				}
 				cursor_wait();
-				wcService.invoke('AddOrderItem',params);
+				if (catentryType == 'DynamicKitBean') {
+					params.configXML = this.unEscapeXml(configXML.toString());
+					wcService.getServiceById("AddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart");
+				}else if (catentryType == 'PredDynaKitBean'){
+					wcService.getServiceById("AddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddPreConfigurationToCart");
+				}
+				wcService.invoke('AddOrderItem', params);
 				// close action dropdown
 				hideMenu($('#actionButton' + row)[0]);
 				hideMenu($('#actionDropdown' + row)[0]);
@@ -18119,6 +18241,8 @@ var declareOrderLockStatusRefreshArea = function(){
 	// div: orderLockStatusRefreshArea refresh area
 	// Declares a new refresh controller for the fetching order Lock status.
 	var myWidgetObj = $("#orderLockStatusRefreshArea");
+	// initialize widget
+	myWidgetObj.refreshWidget({postRefreshHandler: postRefreshHandler});
 	myWidgetObj.refreshWidget("updateUrl", getAbsoluteURL() + "OrderLockStatusView?" + getCommonParametersQueryString());
 	var myRCProperties = wcRenderContext.getRenderContextProperties("orderLockStatusContext");
 
@@ -18133,8 +18257,7 @@ var declareOrderLockStatusRefreshArea = function(){
 		cursor_clear();
 	};
 
-	// initialize widget
-	myWidgetObj.refreshWidget({postRefreshHandler: postRefreshHandler});
+	
 };
 
 wcService.declare({

@@ -14,6 +14,9 @@
 <%-- Pick catalogEntryId from the param, if empty look in WCParam --%>
 <c:set var ="catalogEntryId" value="${param.productId}" />
 <c:if test="${empty catalogEntryId}">
+	<c:set var ="catalogEntryId" value="${firstItemID}" />
+</c:if>
+<c:if test="${empty catalogEntryId}">
 	<c:set var ="catalogEntryId" value="${WCParam.productId}" />
 </c:if>
 
@@ -30,6 +33,7 @@
 </wcf:rest>
 
 <c:if test="${!empty discounts.resultList}">
+	<c:set var="specialsFlag" value="true" scope="request"/>
 	<c:forEach var="discountEntry" items="${discounts.resultList}" varStatus="discountCounter">
 		<c:url var="DiscountDetailsDisplayViewURL" value="DiscountDetailsDisplayView">
 			<c:param name="code" value="${discountEntry.code}" />

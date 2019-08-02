@@ -29,6 +29,16 @@
 <c:set var="partNumber" value="${catalogEntryDetails.partNumber}" />
 <c:set var="manufacturerName" value="${catalogEntryDetails.manufacturer}" />
 
+<%-- Begin change--%> 
+
+<c:set var="parentCatEntryId" value="${catalogEntryDetails.parentCatalogEntryID}" scope="request"/>
+	<%-- If parentCateEntryId is not empty, then this is an item and not a product --%>
+	<c:if test="${not empty parentCatEntryId && type == 'variant' }">
+		<c:set var="catalogEntryID" value="${parentCatEntryId }" />
+	</c:if>
+<%-- End change --%>
+
+
 <%--
 <wcf:useBean var="swatchImagesList" classname="java.util.ArrayList"/>
 <c:forEach items="${catalogEntryDetails.attachments}" var="attachment">

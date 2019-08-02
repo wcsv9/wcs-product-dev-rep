@@ -12,6 +12,57 @@ IBM Corp.
 =================================================================
 --%>
 <%-- Order Detail - order info area --%>
+<c:set var="pageName" value=""/>
+<c:choose>
+	<c:when test="${order.orderStatus == 'I'}">
+		<c:set var="pageName" value="Recurring Orders"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="pageName" value="Order History"/>
+	</c:otherwise>
+</c:choose>
+<input type="hidden" id="pageName" value="${pageName }"/>
+<div class="row headInsideMenu">
+	<div class="col1">&nbsp;</div>
+	<div class="col10 userIconLine">
+		<c:if test="${pageName == 'Recurring Orders'}">
+			<div class="recurringOrderUserIcon"></div>
+		</c:if>
+		<c:if test="${pageName == 'Order History'}">
+			<div class="orderHistoryPageUserIcon"></div>
+		</c:if>
+		<hr />
+	</div>
+	<div class="col1">&nbsp;</div>
+	<div class="col12">
+		<p>${pageName}</p>
+	</div>
+	<div class="col12 links">
+		<div class="normalMenu" id="accDetailMenu">
+			<%out.flush();%>
+			<c:import url="${env_jspStoreDir}Common/MyAccountPageURLs.jsp" />
+			<%out.flush();%>
+		</div>
+	</div>
+</div>
+
+
+<%-- <c:forEach var="orderItemInfo" items="${catEntry.catalogEntryView}" varStatus="istat">
+	<input type="hidden" id="orderDetailItemManufacturer_<c:out value="${orderItemInfo.partNumber }"/>" value="${orderItemInfo.manufacturer }"/>
+	<input type="hidden" id="orderDetailItemName_<c:out value="${orderItemInfo.partNumber }"/>" value="${orderItemInfo.name }"/>
+	
+	<!-- Get Category name for GTM -->
+	<c:set var="splt" value="${fn:split(orderItemInfo.parentCatalogGroupID[0],'_')}"/>
+	<wcf:rest var="category"
+		url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/categoryview/byId/${splt[1] }">
+		<wcf:param name="langId" value="${langId}" />
+		<wcf:param name="currency" value="${env_currencyCode}" />
+		<wcf:param name="responseFormat" value="json" />
+		<wcf:param name="catalogId" value="${WCParam.catalogId}" />
+	</wcf:rest>
+	<input type="hidden" value='<c:out value="${category.catalogGroupView[0].longDescription }"/>' id='orderDetailItemCategory_<c:out value="${orderItemInfo.partNumber}"/>'/>       
+</c:forEach> --%>
+
 <div id="orderInfo">
 	<c:choose>
 		<c:when test="${WCParam.isQuote eq true}">
@@ -167,7 +218,7 @@ IBM Corp.
 	<%-- buttons --%>
 	<br />
 	<c:if test="${WCParam.isQuote ne true}">
-		<flow:ifEnabled feature="AllowReOrder">
+		<flow:ifEnabled feature="AllowReOrder">			
 			<c:choose>
 				<c:when test="${!empty order.externalOrderID}">
 					<c:set var="objectId" value="${order.externalOrderID}"/>
@@ -186,12 +237,14 @@ IBM Corp.
 				<wcf:param name="langId" value="${WCParam.langId}"/>
 				<wcf:param name="inventoryValidation" value="true"/>
 			</wcf:url>
-		</flow:ifEnabled>	
-		<a class="button_primary" onclick="javascript:MyAccountDisplay.prepareOrderCopy('<c:out value='${OrderCopyUrl}'/>'); return false;" class="button_primary" href="#" id="ReorderCSR">
-			<div class="left_border"></div>
-			<div class="button_text"><span><wcst:message bundle="${widgetText}" key="MO_REORDER" /></span></div>												
-			<div class="right_border"></div>
-		</a>
+		</flow:ifEnabled>
+		<c:if test = "${WCParam.currentSelection ne 'SchedullerOrderDetailSlct'}">
+			<a class="button_primary" onclick="javascript:MyAccountDisplay.prepareOrderCopy('<c:out value='${OrderCopyUrl}'/>'); return false;" class="button_primary" href="#" id="ReorderCSR">
+				<div class="left_border"></div>
+				<div class="button_text"><span><wcst:message bundle="${widgetText}" key="MO_REORDER" /></span></div>												
+				<div class="right_border"></div>
+			</a>
+		</c:if>		
 	</c:if>
 	<c:if test = "${fn:contains(validOrderStatusForCancel,order.orderStatus) && env_shopOnBehalfSessionEstablished eq 'true'}">
 		<%-- Order status allows cancelation. CSR is accessing store on-behalf of shopper. Display cancel button --%>

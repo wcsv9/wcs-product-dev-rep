@@ -170,6 +170,114 @@ function nullCartTotalCookie(orderId){
 
 	}),
 
+	
+	/**
+	 * Add an item to a shopping cart in Ajax mode. A message is displayed after
+	 * the service call.
+	 * @constructor
+	 */
+	wcService.declare({
+		id: "AjaxRESTOrderAddConfigurationToCart",
+		actionId: "AjaxRESTOrderAddConfigurationToCart",
+		url: getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart",
+		formId: ""
+
+	 /**
+	 * display a success message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,successHandler: function(serviceResponse) {
+			console.log(serviceResponse);
+			if (!CheckoutHelperJS.pendingOrderDetailsPage)
+			{
+				document.location.href = appendWcCommonRequestParameters("AjaxOrderItemDisplayView?storeId=" + ServicesDeclarationJS.storeId + "&catalogId=" + ServicesDeclarationJS.catalogId + "&langId=" + ServicesDeclarationJS.langId);
+			}
+			else
+			{
+				cursor_clear();
+			}
+		}
+
+	 /**
+	 * display an error message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,failureHandler: function(serviceResponse) {
+			console.log(serviceResponse);
+			if (serviceResponse.errorMessage) {
+				if(serviceResponse.errorMessageKey == "_ERR_NO_ELIGIBLE_TRADING"){
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_CONTRACT_EXPIRED_GOTO_ORDER"]);
+				} else if (serviceResponse.errorMessageKey == "_ERR_RETRIEVE_PRICE") {
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_RETRIEVE_PRICE"]);
+				} else {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+				}
+			}
+			else {
+				 if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				 }
+			}
+			cursor_clear();
+		}
+	}),
+	
+	/**
+	 * Add an item to a shopping cart in Ajax mode. A message is displayed after
+	 * the service call.
+	 * @constructor
+	 */
+	wcService.declare({
+		id: "AjaxOrderUpdateConfigurationInCart",
+		actionId: "AjaxOrderUpdateConfigurationInCart",
+		url: getAbsoluteURL() + "AjaxRESTOrderUpdateConfigurationInCart",
+		formId: ""
+
+	 /**
+	 * display a success message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,successHandler: function(serviceResponse) {
+			console.log(serviceResponse);
+			if (!CheckoutHelperJS.pendingOrderDetailsPage)
+			{
+				document.location.href = appendWcCommonRequestParameters("AjaxOrderItemDisplayView?storeId=" + ServicesDeclarationJS.storeId + "&catalogId=" + ServicesDeclarationJS.catalogId + "&langId=" + ServicesDeclarationJS.langId);
+			}
+			else
+			{
+				cursor_clear();
+			}
+		}
+
+	 /**
+	 * display an error message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,failureHandler: function(serviceResponse) {
+			console.log(getAbsoluteURL() + "AjaxRESTOrderUpdateConfigurationInCart");
+			console.log(serviceResponse);
+			if (serviceResponse.errorMessage) {
+				if(serviceResponse.errorMessageKey == "_ERR_NO_ELIGIBLE_TRADING"){
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_CONTRACT_EXPIRED_GOTO_ORDER"]);
+				} else if (serviceResponse.errorMessageKey == "_ERR_RETRIEVE_PRICE") {
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_RETRIEVE_PRICE"]);
+				} else {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+				}
+			}
+			else {
+				 if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				 }
+			}
+			cursor_clear();
+		}
+	}),
+	
    /**
    * Add an item to a shopping cart in non-Ajax mode. Upon a successful request,
    * the shopping cart page is loaded. An error message is displayed otherwise.
@@ -1340,7 +1448,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxOrderCreate",
 		actionId: "AjaxOrderCreate",
-		url: getAbsoluteURL() + "AjaxOrderCreate",
+		url: getAbsoluteURL() + "AjaxRESTOrderCreate",
 		formId: ""
 
 	 /**
@@ -1483,7 +1591,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxOrderSave",
 		actionId: "AjaxOrderSave",
-		url: getAbsoluteURL() + "AjaxOrderCopy",
+		url: getAbsoluteURL() + "AjaxRESTOrderCopy",
 		formId: ""
 
 	 /**
@@ -1636,7 +1744,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxSingleOrderCopy",
 		actionId: "AjaxSingleOrderCopy",
-		url: getAbsoluteURL() + "AjaxOrderCopy",
+		url: getAbsoluteURL() + "AjaxRESTOrderCopy",
 		formId: ""
 
 	 /**
@@ -1697,7 +1805,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxOrderCopy",
 		actionId: "AjaxOrderCopy",
-		url: getAbsoluteURL() + "AjaxOrderCopy",
+		url: getAbsoluteURL() + "AjaxRESTOrderCopy",
 		formId: ""
 
 	/**
@@ -1996,4 +2104,100 @@ wcService.declare({
 		,failureHandler: function(serviceResponse) {
 			console.debug("marketing event logging failed");
 		}
+	}),
+	
+	/**
+	 * Registers a Person update privacy and marketing consent service
+	 */
+	wcService.declare({
+		id: "AjaxPrivacyAndMarketingConsent",
+		actionId: "AjaxPrivacyAndMarketingConsent",
+		url: "AjaxRESTUpdatePrivacyAndMarketingConsent",
+		formId: ""
+
+		/**
+		 * Clear messages on the page.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation
+		 */
+		,successHandler: function(serviceResponse) {
+			console.debug("Privace and marketing consent updated");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			else {
+				MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATED"]);
+			}
+			cursor_clear();
+		}
+
+		/**
+		 * Displays an error message on the page if the request failed.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation.
+		 */
+		,failureHandler: function(serviceResponse) {
+			console.debug("Privace and marketing consent update failed");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			if (serviceResponse.errorMessage) {
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+			}
+			else {
+				if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				}
+				else {
+					MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATE_ERROR"]);
+				}
+			}
+			cursor_clear();
+		}
+	}),
+	/**
+	 * Registers a marketing consent update service
+	 */
+	wcService.declare({
+		id: "AjaxUpdateMarketingTrackingConsent",
+		actionId: "AjaxUpdateMarketingTrackingConsent",
+		url: "AjaxRESTUpdateMarketingTrackingConsent",
+		formId: ""
+
+		/**
+		 * Clear messages on the page.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation
+		 */
+		,successHandler: function(serviceResponse) {
+			console.debug("Marketing consent updated");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			else {
+				MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATED"]);
+			}
+			cursor_clear();
+		}
+
+		/**
+		 * Displays an error message on the page if the request failed.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation.
+		 */
+		,failureHandler: function(serviceResponse) {
+			console.debug("Marketing consent update failed");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			if (serviceResponse.errorMessage) {
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+			}
+			else {
+				if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				}
+				else {
+					MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATE_ERROR"]);
+				}
+			}
+			cursor_clear();
+		}
 	})
+

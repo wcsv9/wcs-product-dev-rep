@@ -29,9 +29,9 @@
 									<div class="section_list bottom_border" id="search_facet_category<c:out value="${widgetSuffix}"/>" style="display: block;">
 										<ul id="categoryFacetList${widgetSuffix}" class="facetSelect">
 											<c:forEach var="categoryFacetValues" items="${categoryFacetList}" varStatus="aStatus" >
-												<c:if test="${aStatus.index == subcategoryLimit}">
+												<c:if test="${aStatus.index == 5}">
 													<li class="more">
-														<a id="modeLink${widgetSuffix}" href="#" data-activate="categoryFacetList${widgetSuffix}"><wcst:message bundle="${widgetText}" key="MORE_CATEGORY"/></a>
+														<a style="color: #002c75;font-weight:bold;" id="modeLink${widgetSuffix}" href="#" data-activate="categoryFacetList${widgetSuffix}"><wcst:message bundle="${widgetText}" key="MORE_CATEGORY"/></a>
 													</li>
 												</c:if>
 												<li class="singleFacet">
@@ -51,7 +51,11 @@
 														</div>
 													</a>
 												</li>
+												<c:set var="countli" value="${aStatus.index}" />
 											</c:forEach>
+											<c:if test="${countli > 4}">
+												<li><a style="color: #002c75;font-weight:bold;" id="modeLink${widgetSuffix}" href="#" data-deactivate="categoryFacetList${widgetSuffix}">Less...</a></li>
+											</c:if>											
 										</ul>
 									</div>
 								</div>

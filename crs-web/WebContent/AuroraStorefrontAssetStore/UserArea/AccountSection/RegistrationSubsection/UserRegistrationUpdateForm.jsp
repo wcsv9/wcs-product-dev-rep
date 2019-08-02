@@ -67,6 +67,7 @@
 			<fmt:message bundle="${storeText}" key="ERROR_SpecifyDate" var="ERROR_SpecifyDate"/>
 			<fmt:message bundle="${storeText}" key="ERROR_InvalidDate1" var="ERROR_InvalidDate1"/>
 			<fmt:message bundle="${storeText}" key="ERROR_InvalidDate2" var="ERROR_InvalidDate2"/>
+			<fmt:message bundle="${storeText}" key="AGE_WARNING_ALERT" var="AGE_WARNING_ALERT"/>
 		
 			MessageHelper.setMessage("ERROR_FirstNameTooLong", <wcf:json object="${ERROR_FirstNameTooLong}"/>);
 			MessageHelper.setMessage("ERROR_LastNameTooLong", <wcf:json object="${ERROR_LastNameTooLong}"/>);
@@ -98,7 +99,8 @@
 			MessageHelper.setMessage("ERROR_SpecifyMonth", <wcf:json object="${ERROR_SpecifyMonth}"/>);
 			MessageHelper.setMessage("ERROR_SpecifyDate", <wcf:json object="${ERROR_SpecifyDate}"/>);
 			MessageHelper.setMessage("ERROR_InvalidDate1", <wcf:json object="${ERROR_InvalidDate1}"/>);
-			MessageHelper.setMessage("ERROR_InvalidDate2", <wcf:json object="${ERROR_InvalidDate2}"/>);			
+			MessageHelper.setMessage("ERROR_InvalidDate2", <wcf:json object="${ERROR_InvalidDate2}"/>);		
+			MessageHelper.setMessage("AGE_WARNING_ALERT", <wcf:json object="${AGE_WARNING_ALERT}"/>);
 		});
 	</script>
 </head>

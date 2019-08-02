@@ -33,7 +33,7 @@ Optional parameters:
 <div class="product_option">
 	<%-- at least one preconfiguration. Only picking the first pre-configuration if there are multiple. --%>
 	<c:if test="${isDKPreConfigured}">
-		<a id="addDK<c:out value='${catEntryIdentifier}'/>PreconfigurationToCartLink" href="javascript: setCurrentId('addDK<c:out value='${catEntryIdentifier}'/>PreconfigurationToCartLink'); shoppingActionsJS.Add2ShopCartAjax('entitledItem_<c:out value='${catalogEntryID}'/>',document.getElementById('quantity_<c:out value='${catalogEntryID}'/>').value, false, {catalogEntryType: 'dynamicKit'});" class="button primary" wairole="button" role="button" title="<wcst:message key='ADD_TO_CART' bundle='${widgetText}'/>">
+		<a id="addDK<c:out value='${catEntryIdentifier}'/>PreconfigurationToCartLink" href="javascript: setCurrentId('addDK<c:out value='${catEntryIdentifier}'/>PreconfigurationToCartLink'); shoppingActionsJS.Add2ShopCartAjax('entitledItem_<c:out value='${catalogEntryID}'/>',(document.getElementById('quantity_<c:out value='${catalogEntryID}'/>') != null ? document.getElementById('quantity_<c:out value='${catalogEntryID}'/>').value : 1), false, {catalogEntryType: 'dynamicKit'});" class="button primary" wairole="button" role="button" title="<wcst:message key='ADD_TO_CART' bundle='${widgetText}'/>">
 			<div class="left_border"></div>
 			<div class="button_text">
 				<wcst:message key="ADD_TO_CART" bundle="${widgetText}"/>
@@ -48,7 +48,8 @@ Optional parameters:
 
 	<%-- show configure button --%>
 	<c:if test="${isDKConfigurable}">
-		<a id="customize_<c:out value='${catEntryIdentifier}'/>" href="javascript:setCurrentId('customize_${catEntryIdentifier}');shoppingActionsJS.customizeDynamicKit('<c:out value='${catalogEntryID}'/>',dojo.byId('quantity_<c:out value='${catalogEntryID}'/>').value);" class="${customizeBtnStyle}" title="<wcst:message key='CUSTOMIZE' bundle='${widgetText}'/>">
+		<a id="customize_<c:out value='${catEntryIdentifier}'/>" 
+		href="javascript:setCurrentId('customizeBtn');categoryDisplayJS.setCommonParameters('<c:out value="${WCParam.langId}"/>','<c:out value="${WCParam.storeId}"/>','<c:out value="${WCParam.catalogId}"/>', '${userType}');categoryDisplayJS.ConfigureDynamicKit(<c:out value='${catalogEntryID}'/>,(document.getElementById('quantity_<c:out value='${catalogEntryID}'/>') != null? document.getElementById('quantity_<c:out value='${catalogEntryID}'/>').value : 1), {catalogEntryType: 'dynamicKit'} );" class="${customizeBtnStyle}" title="<wcst:message key='CUSTOMIZE' bundle='${widgetText}'/>">
 			<div class="left_border"></div>
 			<div class="button_text">
 				<wcst:message key="CUSTOMIZE" bundle="${widgetText}"/>

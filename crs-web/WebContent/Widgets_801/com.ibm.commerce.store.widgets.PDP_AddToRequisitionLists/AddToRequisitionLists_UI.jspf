@@ -29,6 +29,11 @@
 			"<c:out value="${widgetPrefix}"/>newListNameInput",			
 			"<c:out value="${widgetPrefix}"/>listType",
 			"<c:out value="${widgetPrefix}"/>productAdded",
+			"<c:out value="${widgetPrefix}"/>favoritesOrderCheck",
+			"<c:out value="${widgetPrefix}"/>quickOrderCheck",
+			"<c:out value="${widgetPrefix}"/>recurringOrderCheck",
+			"<c:out value="${widgetPrefix}"/>addAginInput",
+			"<c:out value="${widgetPrefix}"/>parentPageValue",
 			"<c:out value="${param.buttonStyle}"/>",
 			"AddToRequisitionListsJS<c:out value="${widgetPrefix}"/>");
 		
@@ -98,6 +103,11 @@
 			"<c:out value="${widgetPrefix}"/>newListNameInput",			
 			"<c:out value="${widgetPrefix}"/>listType",
 			"<c:out value="${widgetPrefix}"/>productAdded",
+			"<c:out value="${widgetPrefix}"/>favoritesOrderCheck",
+			"<c:out value="${widgetPrefix}"/>quickOrderCheck",
+			"<c:out value="${widgetPrefix}"/>recurringOrderCheck",
+			"<c:out value="${widgetPrefix}"/>addAginInput",
+			"<c:out value="${widgetPrefix}"/>parentPageValue",
 			"<c:out value="${param.buttonStyle}"/>",
 			"AddToRequisitionListsJS<c:out value="${widgetPrefix}"/>");
 			

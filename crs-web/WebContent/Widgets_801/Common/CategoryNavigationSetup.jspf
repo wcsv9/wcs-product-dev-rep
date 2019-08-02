@@ -23,6 +23,9 @@
 	</c:if>
 
 	<c:set var="searchType" value="${WCParam.searchType}" scope="request"/>
+	<c:if test="${empty searchType}" >
+		<c:set var="searchType" value="1000" scope="request"/>
+	</c:if>
 	
 	<%-- Do not need to get category facets separately in case of expanded category navigation. --%>
 	<flow:ifDisabled feature="ExpandedCategoryNavigation">

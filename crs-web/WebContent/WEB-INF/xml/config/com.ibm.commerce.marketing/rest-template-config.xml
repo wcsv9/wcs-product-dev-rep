@@ -32,6 +32,7 @@
 	                 "catEntryId" : "$catEntryId",
 	                 "productId" : "$productId",
 	                 "partNumber" : "$partNumber",
+                         "searchTerm" : "$searchTerm",
 	                 "manufacturerName" : "$manufacturerName"
 	                }]]>
 			</template>
@@ -66,6 +67,13 @@
 	                 "referralURL" : "$referralURL",
 	                 "eventOccurence" : "$eventOccurence",
 	                 "forUserId" : "$trigger_forUserId"
+	                }]]>
+			</template>
+		</method>
+		<method name="updateMarketingTrackingConsent" httpMethod="POST" path="update_marketing_tracking_consent">
+			<template>
+				<![CDATA[{
+	                 "marketingTrackingConsent" : "$marketingTrackingConsent"
 	                }]]>
 			</template>
 		</method>				

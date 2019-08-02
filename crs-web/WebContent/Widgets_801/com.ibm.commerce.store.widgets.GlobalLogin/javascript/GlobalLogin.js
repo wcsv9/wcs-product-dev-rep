@@ -319,6 +319,14 @@ GlobalLoginJS = {
         var params = {
             widgetId: widgetId
         };
+        var privacyCookie = getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId);
+        var marketingConsentCookie = getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId);
+        if (privacyCookie != null){
+            params['privacyNoticeVersion'] = privacyCookie;
+        }
+        if (marketingConsentCookie != null){
+            params['marketingTrackingConsent'] = marketingConsentCookie;
+        }
 
         /*For Handling multiple clicks. */
         if (!submitRequest()) {
@@ -326,6 +334,15 @@ GlobalLoginJS = {
         }
         cursor_wait();
         wcService.invoke('globalLoginAjaxLogon', params);
+    },
+    
+    submitOauthSignIn: function(formId, provider) {
+    	 service = wcService.getServiceById('OauthLoginAjaxLogon');
+         service.setFormId(formId);
+    	var params = { 			
+    			authorizationProvider: provider
+    	};
+    	wcService.invoke('OauthLoginAjaxLogon', params);
     },
 
     /**

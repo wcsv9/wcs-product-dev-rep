@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2014 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+<_config:rest-action-config xmlns:_config="http://www.ibm.com/xmlns/prod/commerce/foundation/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ibm.com/xmlns/prod/commerce/foundation/config ../../xsd/rest-action-config.xsd ">
+	<resource path="{serverHost}/{contextPath}/store/{storeId}/orderApproval" name="ONOrderApprovalHandler">
+	 <serverParam name="serverHost">$WCParam.serverHost</serverParam>
+	 <serverParam name="contextPath">$WCParam.contextPath</serverParam>
+	 <serverParam name="storeId">$WCParam.storeId</serverParam>
+	 	<method name="orderReceivedApprovalUpdate" httpMethod="GET" path="orderReceivedApprovalUpdate?approval_detail_orderItemQty_2_1={approval_detail_orderItemQty_2_1}&amp;approval_detail_orderItemId_2_1={approval_detail_orderItemId_2_1}&amp;totalNumberOfItems={totalNumberOfItems}&amp;purchase_order_number={purchase_order_number}&amp;POId={POId}&amp;ship={ship}&amp;shipInstructions={shipInstructions}&amp;approval_order_OrderId={approval_order_OrderId}&amp;approval_order_action={approval_order_action}&amp;approval_approvalStatusId={approval_approvalStatusId}&amp;ONOrderReceivedEmailIncludeXML={ONOrderReceivedEmailIncludeXML}&amp;URL={URL}&amp;ErrorURL={ErrorURL}">
+	 		<var name="approval_detail_orderItemQty_2_1">$WCParam.approval_detail_orderItemQty_2_1</var>
+	 		<var name="approval_detail_orderItemId_2_1">$WCParam.approval_detail_orderItemId_2_1</var>
+	 		<var name="totalNumberOfItems">$WCParam.totalNumberOfItems</var>
+	 		<var name="purchase_order_number">$WCParam.purchase_order_number</var>
+			<var name="POId">$WCParam.POId</var>
+			<var name="ship">$WCParam.ship</var>
+			<var name="shipInstructions">$WCParam.shipInstructions</var>
+			<var name="approval_order_OrderId">$WCParam.approval_order_OrderId</var>
+			<var name="approval_order_action">$WCParam.approval_order_action</var>
+			<var name="approval_approvalStatusId">$WCParam.approval_approvalStatusId</var>
+			<var name="ONOrderReceivedEmailIncludeXML">$WCParam.ONOrderReceivedEmailIncludeXML</var>
+			<var name="URL">$WCParam.URL</var>
+			<var name="ErrorURL">$WCParam.ErrorURL</var>
+    	</method>  
+			
+	</resource>
+</_config:rest-action-config>

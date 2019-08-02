@@ -11,16 +11,24 @@
   IBM Corp.
  =================================================================
 --%>
- 
+ <%--${productFullImage} --%>
 <!-- Widget Product Image Viewer -->
+
+ <link rel="stylesheet" media="screen, projection" href="/wcsstore/ONB2BDirectStorefrontAssetStore/css/drift-basic.min.css">
 <c:if test="${!empty catalogEntryID}">
 	<div id="widget_product_image_viewer<c:out value="${widgetSuffix}"/>" class="widget_product_image_viewer">
 		<div class="content">
 			<div dataci_toolbar="<c:out value='${param.pgl_widgetId}_product'/>" dataci_product="<c:out value='${param.pgl_widgetId}_${partNumber}'/>" class="image_container">
-				<img id="productMainImage" src="${productFullImage}" alt="<c:out value="${fullImageAltDescription}" escapeXml="${env_escapeXmlFlag}"/>" title="<c:out value="${fullImageAltDescription}" escapeXml="${env_escapeXmlFlag}"/>" class="product_main_image"/>
+				<div id="mainImages" class="img-zoom-container--">
+				<c:if test="${getFavFlag.favouritesFlag}">
+					<img src="${s3ImageHost}/wcsstore/ONB2BDirectStorefrontAssetStore/images/favourites-icon.png" class="favourites-icon-ribbon" />
+				</c:if>
+				<img id="productMainImage" class="drift-demo-trigger" src="${s3ImageHost}${productFullImage}?w=400&ch=DPR&dpr=2" data-zoom="${s3ImageHost}${productFullImage}?w=1200&ch=DPR&dpr=2" alt="<c:out value="${fullImageAltDescription}" escapeXml="${env_escapeXmlFlag}"/>" title="<c:out value="${fullImageAltDescription}" escapeXml="${env_escapeXmlFlag}"/>" class="product_main_image"/>
+				<div id="myresult" class="detail"></div>
 				<div class="clear_float"></div>
 				<div class="hover_text">
 					<span style="display:none;"><wcst:message key="FI_HOVER_OVER_IMAGE_TO_ZOOM" bundle="${widgetText}"/></span>
+				</div>
 				</div>
 			</div>
 			<c:set var="angledImageCount" value="${fn:length(angleThumbnailAttachmentMap)}" />
@@ -46,6 +54,9 @@
 		</div>
 		<div class="clear_float"></div>
 		<c:set var="hiddenFieldName" value="ProductInfoImage_${catalogEntryID}"/>
+		<c:if test="${!empty parentCatEntryId}">
+          <c:set var="hiddenFieldName" value="ProductInfoImage_${parentCatEntryId}"/>
+        </c:if>
 		<c:if test="${!fn:contains(env_hiddenFieldsList, hiddenFieldName)}">
 			<input type="hidden" id="${hiddenFieldName}" value="<c:out value='${productFullImage}'/>"/>	
 			<c:set var="env_hiddenFieldsList" value="${env_hiddenFieldsList},${hiddenFieldName}" scope="request"/>
@@ -54,4 +65,36 @@
 	</div>
 
 </c:if>
+<span id="runTimeControl"></span>
+<script src="/wcsstore/ONB2BDirectStorefrontAssetStore/javascript/driftjs/Drift.min.js"></script>
+
+<script type="text/javascript">
+function NoZoomOnSmallImg(){
+	var getImgWidth = $("#productMainImage").width();
+	var getImgHeight = $("#productMainImage").height();
+	console.log(getImgWidth +"-<< No Cache >>-"+ getImgHeight);
+	if(parseInt(getImgWidth)<100 || parseInt(getImgHeight)<100){
+		$("#productMainImage").removeClass('drift-demo-trigger');
+		$("#runTimeControl").addClass('drift-demo-trigger');
+	}
+}
+$( document ).ready(function() {
+	NoZoomOnSmallImg();
+	new Drift(document.querySelector('.drift-demo-trigger'), {
+		paneContainer: document.querySelector('.detail'),
+		inlinePane: 900,
+		inlineOffsetY: -85,
+		containInline: true,
+		hoverBoundingBox: true
+	});
+});
+$(".widget_product_image_viewer").mousemove(function(event){
+	NoZoomOnSmallImg();
+});
+</script>
+<style>
+.drift-open{
+	margin-top: -70px;
+}
+</style>
 <!-- End Widget Product Image Viewer -->

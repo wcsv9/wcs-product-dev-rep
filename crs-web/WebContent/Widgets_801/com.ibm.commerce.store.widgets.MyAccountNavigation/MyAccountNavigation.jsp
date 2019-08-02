@@ -26,9 +26,9 @@ Required parameters:
 	<%@ include file="MyAccountNavigation_Data.jspf" %>
 </c:if>
 
-<%@ include file="ext/MyAccountNavigation_UI.jspf"%>
+<%-- <%@ include file="ext/MyAccountNavigation_UI.jspf"%>
 <c:if test = "${param.custom_view ne 'true'}">
 	<%@ include file="MyAccountNavigation_UI.jspf"%>
-</c:if>
+</c:if> --%>
 
 <!-- END MyAccountNavigation.jsp -->

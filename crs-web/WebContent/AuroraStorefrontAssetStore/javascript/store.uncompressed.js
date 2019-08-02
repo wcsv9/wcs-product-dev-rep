@@ -40633,6 +40633,21 @@ var Utils = Utils || {
             return Globalize.formatNumber(amount, options);
         }
     },
+	
+	/**
+     * Format numbers from en_US locale into a localized locale according to localized information
+     * example: Utils.formatNumber("123.4", {maximumFractionDigits: 2, minimumFractionDigits: 2})
+     * 
+     * @param amount {string}
+     * @param options {object} may include minimumFractionDigits, maximumFractionDigits, etc.
+     */
+    formatEnUSLocaleNumberIntoTargetLocaleNumber: function(amount, options) {
+        amount = amount.replace(/[^0-9\.\,]/g, '');
+        if (GlobalizeLoaded) {
+            amount = Globalize('en').parseNumber(amount);
+            return Globalize.formatNumber(amount, options);
+        }
+    },
 
     /**
      * Returns the locale.
@@ -46486,6 +46501,14 @@ GlobalLoginJS = {
         var params = {
             widgetId: widgetId
         };
+        var privacyCookie = getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId);
+        var marketingConsentCookie = getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId);
+        if (privacyCookie != null){
+            params['privacyNoticeVersion'] = privacyCookie;
+        }
+        if (marketingConsentCookie != null){
+            params['marketingTrackingConsent'] = marketingConsentCookie;
+        }
 
         /*For Handling multiple clicks. */
         if (!submitRequest()) {
@@ -46493,6 +46516,15 @@ GlobalLoginJS = {
         }
         cursor_wait();
         wcService.invoke('globalLoginAjaxLogon', params);
+    },
+    
+    submitOauthSignIn: function(formId, provider) {
+    	 service = wcService.getServiceById('OauthLoginAjaxLogon');
+         service.setFormId(formId);
+    	var params = { 			
+    			authorizationProvider: provider
+    	};
+    	wcService.invoke('OauthLoginAjaxLogon', params);
     },
 
     /**
@@ -46647,18 +46679,20 @@ $(document).ready(function () {
                 }
             }
             var displayContractPanel = getCookie("WC_DisplayContractPanel_" + WCParamJS.storeId);
-            if ((displayContractPanel != undefined && displayContractPanel != null && displayContractPanel.toString() == "true") || (logonUserCookie == undefined && logonUserCookie == null)) {
-                if (typeof isOnPasswordUpdateForm === 'undefined' || isOnPasswordUpdateForm == false) {
-                    //Right after user logged in, perform Global Login Ajax call and display Global Login Contract panel.				
-                    GlobalLoginJS.updateGlobalLoginContent(widgetId);
-                } else if (isOnPasswordUpdateForm == true) {
-                    GlobalLoginJS.updateGlobalLoginUserDisplay("...");
-                }
+            if (WCParamJS.omitHeader != 1 && (
+                    (displayContractPanel != undefined && displayContractPanel != null && displayContractPanel.toString() == "true") || (logonUserCookie == undefined && logonUserCookie == null))) {
+                    if (typeof isOnPasswordUpdateForm === 'undefined' || isOnPasswordUpdateForm == false) {
+                        //Right after user logged in, perform Global Login Ajax call and display Global Login Contract panel.
+                        GlobalLoginJS.updateGlobalLoginContent(widgetId);
+                    } else if (isOnPasswordUpdateForm == true) {
+                        GlobalLoginJS.updateGlobalLoginUserDisplay("...");
+                    }
 
+                }
             }
-        }
-    }, 100);
-});//-----------------------------------------------------------------
+        }, 100);
+    });
+//-----------------------------------------------------------------
 // Licensed Materials - Property of IBM
 //
 // WebSphere Commerce
@@ -46974,6 +47008,10 @@ wcService.declare({
                     }
                 }
             }
+            if (getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId) != serviceResponse.privacyNoticeVersion
+                    || getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId) != serviceResponse.marketingTrackingConsent){
+                        setCookie("WC_PrivacyNoticeVersion_" + WCParamJS.storeId, null, {path: "/", domain: cookieDomain, expires: -1});
+            }
 
             if (serviceResponse["MERGE_CART_FAILED_SHOPCART_THRESHOLD"] == "1") {
                 setCookie("MERGE_CART_FAILED_SHOPCART_THRESHOLD", "1", {path: "/", domain: cookieDomain});
@@ -46997,7 +47035,47 @@ wcService.declare({
         }
         cursor_clear();
     }
-});//-----------------------------------------------------------------
+}),
+
+
+wcService.declare({
+    id: "OauthLoginAjaxLogon",
+    actionId: "OauthLoginAjaxLogon",
+    url: getAbsoluteURL() + "OauthLogon",
+    formId: ""
+
+        /**
+         *  Copies all the items from the existing order to the shopping cart and redirects to the shopping cart page.
+        *  @param (object) serviceResponse The service response object, which is the
+        *  JSON object returned by the service invocation.
+        */
+    ,successHandler: function(serviceResponse) {
+    	cursor_clear();
+    	//if (serviceResponse.redirectUrl != null) {
+    	var currUri = window.location.href;
+    	var url = serviceResponse.redirectUrl.replace(/&amp;/g, '&');
+    	var postLogonUrl = serviceResponse.URL.replace(/&amp;/g, '&');
+    	var provider = serviceResponse.provider;
+    	var redirectUrl = currUri.substring(0, currUri.lastIndexOf("\/")) + '/OauthLoginView?storeId=' +WCParamJS.storeId+ '&provider='+provider+ '&URL=' +postLogonUrl;
+    	//alert(currUri);
+    	//redirectUrl = redirectUrl.replace('&', /&amp;/g);
+    	url = url + "&redirect_uri=" +encodeURIComponent(redirectUrl);
+    	//alert(url);
+    	window.location = url;
+    	//}
+    	
+    }
+
+    /**
+    * display an error message.
+    * @param (object) serviceResponse The service response object, which is the
+    * JSON object returned by the service invocation.
+    */
+    ,failureHandler: function(serviceResponse) {
+        console.log('failed!');
+        cursor_clear();
+    }
+})//-----------------------------------------------------------------
 // Licensed Materials - Property of IBM
 //
 // WebSphere Commerce
@@ -48575,6 +48653,7 @@ OrderListJS = {
         cursor_wait();
 
         var params = {
+            orderId: "null",
             subscriptionId: subscriptionId,
             URL: "",
             storeId: OrderListServicesDeclarationJS.storeId,
@@ -52299,7 +52378,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 buttonStyle: this.buttonStyle,
                 name: this.params.name,
                 status: this.params.status,
-                requisitionListId: this.params.requisitionListId,
+                requisitionListId: this.params.requisitionListId ? this.params.requisitionListId : "",
                 quantity: quantity
             };
             if (quantity < 1) {
@@ -52342,7 +52421,7 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 buttonStyle: this.buttonStyle,
                 name: this.params.name,
                 status: this.params.status,
-                requisitionListId: this.params.requisitionListId,
+                requisitionListId: this.params.requisitionListId ? this.params.requisitionListId : "",
                 requisitionOrderItemId: requisitionOrderItemId,
                 quantity: quantity
             };
@@ -52419,7 +52498,11 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
             } else if ($("#ProductInfoImage_" + catEntryId).length) {
                 productThumbnail = $("#" + "ProductInfoImage_" + catEntryId).val();
             }
-
+            var curRefershAreas = wcRenderContext.getRefreshAreaIds("requisitionLists_content_context");
+            $.each(curRefershAreas, function(i, refreshDivId) {
+                var pageName = refreshDivId.replace("requisitionlists_content_widget", "");
+                declareRequsitionListsContentController(pageName);
+            });
             // Refresh the widget's refresh area and show item was added to a list
             wcRenderContext.updateRenderContext("requisitionLists_content_context", {
                 "showSuccess": "true",
@@ -52483,6 +52566,12 @@ function AddToRequisitionListsJS(storeId, catalogId, langId, dropDownMenuId, sel
                 productThumbnail = document.getElementById("catalogEntry_img_" + serviceResponse.requisitionOrderItemId).childNodes[1].src;
             }
 
+            var curRefershAreas = wcRenderContext.getRefreshAreaIds("requisitionLists_content_context");
+            $.each(curRefershAreas, function(i, refreshDivId) {
+                var pageName = refreshDivId.replace("requisitionlists_content_widget", "");
+                declareRequsitionListsContentController(pageName);
+            });
+            
             // Refresh the widget's refresh area and show item was added to a list
             wcRenderContext.updateRenderContext("requisitionLists_content_context", {
                 "showSuccess": "true",
@@ -54774,7 +54863,29 @@ B2BLogonForm ={
 		* This variable stores the ID of the requisition list. Its default value is empty.
 		*/
 		requisitionListId: "",
+		
+		addPDK: false,
+		
+		addDK: false,
+		
+		configurationXML: "",
 
+	    setAddPDK: function (addpdk) {
+	        this.addPDK = addpdk;
+	    },
+
+		setAddDK: function(adddk) {
+			this.addDK = adddk;
+		},
+		
+		setConfigurationXML: function(configXML) {
+			this.configurationXML = configXML;
+		},
+		
+		unEscapeXml: function(str){
+			return str.replace(/&lt;/gm, "<").replace(/&gt;/gm, ">").replace(/&#034;/gm,"\"");
+		},
+		
 		/**
 		 * Sets the common parameters for the current page. 
 		 * For example, the language ID, store ID, and catalog ID.
@@ -54936,6 +55047,11 @@ B2BLogonForm ={
 						// just add quantity of the specified row to params
 						params["quantity"] = formElements[i].value;
 					}
+				} if (formElements[i].name.indexOf("catEntryId") != -1) {
+					if(formElements[i].name.indexOf("catEntryId_"+row) != -1) {
+						// just add catEntryId of the specified row to params
+						params["catEntryId"] = formElements[i].value;
+					}
 				} else if (formElements[i].name.indexOf("ProductInfo") == -1) {
 					// ingore all hidden "ProductInfo" inputs - do not add to params
 					params[formElements[i].name] = formElements[i].value;
@@ -54944,6 +55060,13 @@ B2BLogonForm ={
 			params["partNumber"] = partNumber;
 			params["inventoryValidation"] = true;
 			params["orderId"] = ".";
+			
+			if (this.addDK){
+				params.configXML = this.unEscapeXml(this.configurationXML);
+				wcService.getServiceById("ReqListAddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart");
+			}else {
+				wcService.getServiceById("ReqListAddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddPreConfigurationToCart");
+			}
 			
 			// used by mini shopcart
 			var selectedAttrList = new Object();
@@ -55664,6 +55787,10 @@ wcService.declare({
 			/** The URL of the shopping cart used to forward the page when an order is converted to the current order. **/
 			shoppingCartURL : "",
 			
+			unEscapeXml: function(str){
+				return str.replace(/&lt;/gm, "<").replace(/&gt;/gm, ">").replace(/&#034;/gm,"\"");
+			},
+
 			/**
 			 * Sets the common parameters for the current page. 
 			 * For example, the language ID, store ID, and catalog ID.
@@ -55758,13 +55885,15 @@ wcService.declare({
 				wcService.invoke('AjaxAddSavedOrderItem',params);
 			},
 
+			
+	
 			/**
 			 * Adds item to the current order
 			 * @param {Integer} partNumber The partNumber of the item to add to the current order.
 			 * @param (string) row The row number of the quantity input in the table.
 			 * @param (string) catEntryId The catentry ID of the item
 			 */
-			addItemToCurrentOrder:function(partNumber, row, catEntryId){
+			addItemToCurrentOrder:function(partNumber, row, catEntryId, configXML, catentryType){
 				var params = {
 					storeId: this.storeId,
 					catalogId: this.catalogId,
@@ -55774,11 +55903,13 @@ wcService.declare({
 					mergeToCurrentPendingOrder: "Y",
 					URL: "",
 					partNumber: partNumber,
+					catEntryId:catEntryId,
 					inventoryValidation: true,
 					orderId: ".",
 					quantity: $("#orderItem_input_" + row).val()
 				};
 				
+								
 				// used by mini shopcart
 				var selectedAttrList = new Object();
 				shoppingActionsJS.saveAddedProductInfo(params["quantity"], catEntryId, catEntryId, selectedAttrList);
@@ -55790,7 +55921,13 @@ wcService.declare({
 					return;
 				}
 				cursor_wait();
-				wcService.invoke('AddOrderItem',params);
+				if (catentryType == 'DynamicKitBean') {
+					params.configXML = this.unEscapeXml(configXML.toString());
+					wcService.getServiceById("AddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart");
+				}else if (catentryType == 'PredDynaKitBean'){
+					wcService.getServiceById("AddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddPreConfigurationToCart");
+				}
+				wcService.invoke('AddOrderItem', params);
 				// close action dropdown
 				hideMenu($('#actionButton' + row)[0]);
 				hideMenu($('#actionDropdown' + row)[0]);
@@ -61099,6 +61236,8 @@ var declareOrderLockStatusRefreshArea = function(){
 	// div: orderLockStatusRefreshArea refresh area
 	// Declares a new refresh controller for the fetching order Lock status.
 	var myWidgetObj = $("#orderLockStatusRefreshArea");
+	// initialize widget
+	myWidgetObj.refreshWidget({postRefreshHandler: postRefreshHandler});
 	myWidgetObj.refreshWidget("updateUrl", getAbsoluteURL() + "OrderLockStatusView?" + getCommonParametersQueryString());
 	var myRCProperties = wcRenderContext.getRenderContextProperties("orderLockStatusContext");
 
@@ -61113,8 +61252,7 @@ var declareOrderLockStatusRefreshArea = function(){
 		cursor_clear();
 	};
 
-	// initialize widget
-	myWidgetObj.refreshWidget({postRefreshHandler: postRefreshHandler});
+	
 };
 
 wcService.declare({
@@ -64865,6 +65003,19 @@ categoryDisplayJS={
 	allSwatchesArray : [],
 	
 	/**
+	 * Add customized parameter for add to order
+	 * "reverse":"$reverse",
+	 * "contractId":"$contractId",
+	 * "physicalStoreId":"$physicalStoreId",
+	 * "catEntryId":"$catEntryId",
+	 **/
+	customParams :{},
+	
+	setCustomParams:function(customParams){
+		this.customParams = customParams;
+	},
+	
+	/**
 	* setCommonParameters This function initializes storeId, catalogId, and langId.
 	*
 	* @param {String} langId The language id to use.
@@ -65943,12 +66094,12 @@ getDefaultItem : function(productId){
 	* @param {Object} customParams - Any additional parameters that needs to be passed to the configurator page.
 	*
 	**/
-	ConfigureDynamicKit : function(catEntryIdentifier, quantity, customParams)
+	ConfigureDynamicKit : function(catEntryId, quantity, customParams)
 	{
 		var params = {storeId: this.storeId,
 catalogId: this.catalogId,
 langId: this.langId,
-catEntryId: catEntryIdentifier,
+catEntryId: catEntryId,
 quantity: quantity};
 		
 		if(!isPositiveInteger(quantity)){
@@ -65987,6 +66138,80 @@ quantity: quantity};
 		document.location.href = getAbsoluteURL() + appendWcCommonRequestParameters(configureURL);
 	},
 	
+	/**
+	* addDynamicKitToCart This function is used to add dynamic kit to cart.
+	*
+	* @param {String} catalogId The catalog entry of the item to replace to the cart.
+	* @param {int} quantity The quantity of the item to add.
+	* @param {String} langId 
+	*
+	**/
+	
+	updateDynamicKitInCart : function (langId, storeId, catalogId,orderItemId){
+		generateBOM( function (bomXML) {
+				ServicesDeclarationJS.setCommonParameters(langId, storeId, catalogId);
+				service = wcService.getServiceById('AjaxOrderUpdateConfigurationInCart');
+	        
+				var params = {
+	         		configXML:bomXML,
+	         		orderItemId:orderItemId,
+				};
+				//Pass any other customParams set by other add on features
+				if(this.customParams != null && this.customParams != 'undefined'){
+					for(i in this.customParams){
+						params[i] = this.customParams[i];
+					}
+				}
+				
+	        /*For Handling multiple clicks. */
+	        if(!submitRequest()){
+	            return;
+	        }
+	        cursor_wait();
+	        wcService.invoke('AjaxOrderUpdateConfigurationInCart',params);
+			}
+		);
+		
+		},
+	
+		/**
+		* addDynamicKitToCart This function is used to add dynamic kit to cart.
+		*
+		* @param {String} catalogId The catalog entry of the item to replace to the cart.
+		* @param {int} quantity The quantity of the item to add.
+		* @param {String} langId 
+		*
+		**/
+		
+		addDynamicKitToCart : function (langId, storeId, catalogId,catEntryId, quantity){
+			generateBOM( function (bomXML) {
+					ServicesDeclarationJS.setCommonParameters(langId, storeId, catalogId);
+					service = wcService.getServiceById('AjaxRESTOrderAddConfigurationToCart');
+		        
+					var params = {
+		         		configXML:bomXML,
+						catEntryId:catEntryId,
+						quantity:quantity
+					};
+					//Pass any other customParams set by other add on features
+					if(this.customParams != null && this.customParams != 'undefined'){
+						for(i in this.customParams){
+							params[i] = this.customParams[i];
+						}
+					}
+					
+		        /*For Handling multiple clicks. */
+		        if(!submitRequest()){
+		            return;
+		        }
+		        cursor_wait();
+		        wcService.invoke('AjaxRESTOrderAddConfigurationToCart',params);
+				}
+			);
+			
+			},
+		
+			
 	/**
 	* ReplaceItemAjaxHelper This function is used to replace an item in the cart. This will be called from the {@link this.ReplaceItemAjax} method.
 	*
@@ -70362,29 +70587,25 @@ CheckoutPayments = {
 
 		if(this.jQlocale == 'ar_EG')
 		{
-			var formattedPaymentAmountValue = Utils.formatNumber(paymentAmount.value, {
+			var formattedPaymentAmountValue = Utils.formatEnUSLocaleNumberIntoTargetLocaleNumber(paymentAmount.value, {
 				maximumFractionDigits: 2,
 				minimumFractionDigits: 2
 			});
+		} else if (this.jQlocale.indexOf('zh') === 0 || this.jQlocale.indexOf('ja') === 0 || this.jQlocale.indexOf('ko') === 0) {
+			// Add trailing 0 only if necessary.  Only useful for double-byte languages
+			var formattedPaymentAmountValue = Utils.formatEnUSLocaleNumberIntoTargetLocaleNumber(paymentAmount.value, {
+				locale: this.jQlocale,
+				maximumFractionDigits: 1
+			});
+		} else {
+			// Always add 2 trailing 0.  Only useful for single-byte languages
+			var formattedPaymentAmountValue = Utils.formatEnUSLocaleNumberIntoTargetLocaleNumber(paymentAmount.value, {
+				locale: this.jQlocale,
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2
+			});
 		}
-		else
-		{
-			if (this.jQlocale.indexOf('zh') === 0 || this.jQlocale.indexOf('ja') === 0 || this.jQlocale.indexOf('ko') === 0) {
-				// Add trailing 0 only if necessary.  Only useful for double-byte languages
-				var formattedPaymentAmountValue = Utils.formatNumber(paymentAmount.value, {
- 					locale: this.jQlocale,
- 					maximumFractionDigits: 1
- 				});
-			}
-			else {
-				// Always add 2 trailing 0.  Only useful for single-byte languages
-				var formattedPaymentAmountValue = Utils.formatNumber(paymentAmount.value, {
- 					locale: this.jQlocale,
- 					minimumFractionDigits: 2,
- 					maximumFractionDigits: 2
- 				});
-			}
-		}
+		
 
 		//If the displayed payment amount is different from the hidden payment amount
 		//Synchronize the display payment amount according to the hidden payment amount
@@ -70831,7 +71052,7 @@ CheckoutPayments = {
 			formName = document.forms["PaymentForm1"];
 			if (formName.piAmount != null && formName.piAmount.value != "" && !isNaN(formName.piAmount.value)){
 				formName.piAmount.value = updatedTotal;
-				formName.piAmount_display.value = updatedTotal;
+				//formName.piAmount_display.value = updatedTotal;
 				this.formatAmountDisplayForLocale("1");
 				if(this.retrievePaymentObject(1) != null){
 					this.updatePaymentObject(1, 'piAmount');
@@ -76497,7 +76718,7 @@ shoppingActionsServicesDeclarationJS = {
 				}
 			}
 			if(typeof(ShipmodeSelectionExtJS)!= null && typeof(ShipmodeSelectionExtJS)!='undefined'){
-				ShipmodeSelectionExtJS.setOrderItemId(serviceResponse.orderItem[0].orderItemId);
+				ShipmodeSelectionExtJS.setOrderItemId((serviceResponse.orderItem != null && serviceResponse.orderItem[0].orderItemId != null) ? serviceResponse.orderItem[0].orderItemId : serviceResponse.orderItemId);
 			}
 		}
      /**
@@ -78798,6 +79019,114 @@ function nullCartTotalCookie(orderId){
 
 	}),
 
+	
+	/**
+	 * Add an item to a shopping cart in Ajax mode. A message is displayed after
+	 * the service call.
+	 * @constructor
+	 */
+	wcService.declare({
+		id: "AjaxRESTOrderAddConfigurationToCart",
+		actionId: "AjaxRESTOrderAddConfigurationToCart",
+		url: getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart",
+		formId: ""
+
+	 /**
+	 * display a success message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,successHandler: function(serviceResponse) {
+			console.log(serviceResponse);
+			if (!CheckoutHelperJS.pendingOrderDetailsPage)
+			{
+				document.location.href = appendWcCommonRequestParameters("AjaxOrderItemDisplayView?storeId=" + ServicesDeclarationJS.storeId + "&catalogId=" + ServicesDeclarationJS.catalogId + "&langId=" + ServicesDeclarationJS.langId);
+			}
+			else
+			{
+				cursor_clear();
+			}
+		}
+
+	 /**
+	 * display an error message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,failureHandler: function(serviceResponse) {
+			console.log(serviceResponse);
+			if (serviceResponse.errorMessage) {
+				if(serviceResponse.errorMessageKey == "_ERR_NO_ELIGIBLE_TRADING"){
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_CONTRACT_EXPIRED_GOTO_ORDER"]);
+				} else if (serviceResponse.errorMessageKey == "_ERR_RETRIEVE_PRICE") {
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_RETRIEVE_PRICE"]);
+				} else {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+				}
+			}
+			else {
+				 if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				 }
+			}
+			cursor_clear();
+		}
+	}),
+	
+	/**
+	 * Add an item to a shopping cart in Ajax mode. A message is displayed after
+	 * the service call.
+	 * @constructor
+	 */
+	wcService.declare({
+		id: "AjaxOrderUpdateConfigurationInCart",
+		actionId: "AjaxOrderUpdateConfigurationInCart",
+		url: getAbsoluteURL() + "AjaxRESTOrderUpdateConfigurationInCart",
+		formId: ""
+
+	 /**
+	 * display a success message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,successHandler: function(serviceResponse) {
+			console.log(serviceResponse);
+			if (!CheckoutHelperJS.pendingOrderDetailsPage)
+			{
+				document.location.href = appendWcCommonRequestParameters("AjaxOrderItemDisplayView?storeId=" + ServicesDeclarationJS.storeId + "&catalogId=" + ServicesDeclarationJS.catalogId + "&langId=" + ServicesDeclarationJS.langId);
+			}
+			else
+			{
+				cursor_clear();
+			}
+		}
+
+	 /**
+	 * display an error message
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation
+	 */
+		,failureHandler: function(serviceResponse) {
+			console.log(getAbsoluteURL() + "AjaxRESTOrderUpdateConfigurationInCart");
+			console.log(serviceResponse);
+			if (serviceResponse.errorMessage) {
+				if(serviceResponse.errorMessageKey == "_ERR_NO_ELIGIBLE_TRADING"){
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_CONTRACT_EXPIRED_GOTO_ORDER"]);
+				} else if (serviceResponse.errorMessageKey == "_ERR_RETRIEVE_PRICE") {
+					MessageHelper.displayErrorMessage(MessageHelper.messages["ERROR_RETRIEVE_PRICE"]);
+				} else {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+				}
+			}
+			else {
+				 if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				 }
+			}
+			cursor_clear();
+		}
+	}),
+	
    /**
    * Add an item to a shopping cart in non-Ajax mode. Upon a successful request,
    * the shopping cart page is loaded. An error message is displayed otherwise.
@@ -79968,7 +80297,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxOrderCreate",
 		actionId: "AjaxOrderCreate",
-		url: getAbsoluteURL() + "AjaxOrderCreate",
+		url: getAbsoluteURL() + "AjaxRESTOrderCreate",
 		formId: ""
 
 	 /**
@@ -80111,7 +80440,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxOrderSave",
 		actionId: "AjaxOrderSave",
-		url: getAbsoluteURL() + "AjaxOrderCopy",
+		url: getAbsoluteURL() + "AjaxRESTOrderCopy",
 		formId: ""
 
 	 /**
@@ -80264,7 +80593,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxSingleOrderCopy",
 		actionId: "AjaxSingleOrderCopy",
-		url: getAbsoluteURL() + "AjaxOrderCopy",
+		url: getAbsoluteURL() + "AjaxRESTOrderCopy",
 		formId: ""
 
 	 /**
@@ -80325,7 +80654,7 @@ wcService.declare({
 	wcService.declare({
 		id: "AjaxOrderCopy",
 		actionId: "AjaxOrderCopy",
-		url: getAbsoluteURL() + "AjaxOrderCopy",
+		url: getAbsoluteURL() + "AjaxRESTOrderCopy",
 		formId: ""
 
 	/**
@@ -80624,7 +80953,103 @@ wcService.declare({
 		,failureHandler: function(serviceResponse) {
 			console.debug("marketing event logging failed");
 		}
+	}),
+	
+	/**
+	 * Registers a Person update privacy and marketing consent service
+	 */
+	wcService.declare({
+		id: "AjaxPrivacyAndMarketingConsent",
+		actionId: "AjaxPrivacyAndMarketingConsent",
+		url: "AjaxRESTUpdatePrivacyAndMarketingConsent",
+		formId: ""
+
+		/**
+		 * Clear messages on the page.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation
+		 */
+		,successHandler: function(serviceResponse) {
+			console.debug("Privace and marketing consent updated");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			else {
+				MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATED"]);
+			}
+			cursor_clear();
+		}
+
+		/**
+		 * Displays an error message on the page if the request failed.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation.
+		 */
+		,failureHandler: function(serviceResponse) {
+			console.debug("Privace and marketing consent update failed");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			if (serviceResponse.errorMessage) {
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+			}
+			else {
+				if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				}
+				else {
+					MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATE_ERROR"]);
+				}
+			}
+			cursor_clear();
+		}
+	}),
+	/**
+	 * Registers a marketing consent update service
+	 */
+	wcService.declare({
+		id: "AjaxUpdateMarketingTrackingConsent",
+		actionId: "AjaxUpdateMarketingTrackingConsent",
+		url: "AjaxRESTUpdateMarketingTrackingConsent",
+		formId: ""
+
+		/**
+		 * Clear messages on the page.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation
+		 */
+		,successHandler: function(serviceResponse) {
+			console.debug("Marketing consent updated");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			else {
+				MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATED"]);
+			}
+			cursor_clear();
+		}
+
+		/**
+		 * Displays an error message on the page if the request failed.
+		 * @param (object) serviceResponse The service response object, which is the JSON object returned by the service invocation.
+		 */
+		,failureHandler: function(serviceResponse) {
+			console.debug("Marketing consent update failed");
+			if ($("#privacyPolicyPopup").WCDialog("isOpen")){
+				$("#privacyPolicyPopup").WCDialog("close");
+			}
+			if (serviceResponse.errorMessage) {
+				MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+			}
+			else {
+				if (serviceResponse.errorMessageKey) {
+					MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+				}
+				else {
+					MessageHelper.displayStatusMessage(MessageHelper.messages["MARKETING_CONSENT_UPDATE_ERROR"]);
+				}
+			}
+			cursor_clear();
+		}
 	})
+
 //-----------------------------------------------------------------
 // Licensed Materials - Property of IBM
 //
@@ -80799,7 +81224,7 @@ detectedLocale = Utils.getLocale();
 function initializeInactivityWarning() {
 
     // only set timer if user is not guest, in a full-auth session, and is able to retrieve inactivityTimeout from server
-    if (storeUserType != "G" && inactivityTimeout != 0 && document.cookie.indexOf("WC_USERACTIVITY_") > 0) {
+    if (storeUserType != "G" && inactivityTimeout != 0 && document.cookie.indexOf("WC_LogonUserId_") > 0) {
         // Reset the inactivity timer dialog
         if (inactivityTimeoutTracker != null) {
             clearTimeout(inactivityTimeoutTracker);
@@ -81457,7 +81882,12 @@ function isPositiveInteger(value){
  */
 function closeAllDialogs(){
     $("[data-widget-type='wc.WCDialog']").each(function (i, e) {
-        $(e).hide();
+    	var dialog = $(e).data("wc-WCDialog");
+    	if(dialog){
+    		dialog.close();
+    	}else {
+    		$(e).hide();
+    	}
     });
 }
 
@@ -82571,7 +83001,103 @@ function getCommonParametersQueryString(){
         }
         console.debug("Return AjaxCustomServiceForURLChaining", service);
         return service;
-    }//-----------------------------------------------------------------
+    }
+    
+    /**
+     * The function for Privacy popup to accept privacy policy
+     * @param {*} privacyContentName The privacy marketing content name in xxxV1.1 format
+     * @param {*} isSession To store cookie in session of not
+     */
+    function acceptPrivacyPolicy(privacyContentName, marketingConsentCheckboxId, privacyCheckboxId, isSession) {
+        var versionPattern = /[\w\d]+[vV]ersion(\d+\.\d+)/g;
+        var matches = versionPattern.exec(privacyContentName);
+        var pVersion = 0;
+        if (matches) {
+            pVersion = matches[1];
+        }
+        var marketingConsent = null;
+        var privacyCheckboxElement = $("#" + privacyCheckboxId)[0];
+        if (privacyCheckboxElement && !privacyCheckboxElement.checked ){
+            $("#" + privacyCheckboxId + "_Error").toggle(true);
+            return;
+        }
+        var marketingConsentElement = $("#" + marketingConsentCheckboxId)[0];
+        if (marketingConsentElement){
+            marketingConsent = marketingConsentElement.checked ? '1' : '0';
+        }
+        if (storeUserType != 'G') {
+            var requestParams = {
+                "privacyNoticeVersion": pVersion
+            };
+            if (marketingConsent != null){
+                requestParams.marketingTrackingConsent = marketingConsent;
+            }
+            cursor_wait();
+            wcService.invoke("AjaxPrivacyAndMarketingConsent", requestParams);
+            setPrivacyCookies(pVersion, marketingConsent, isSession); // set it here, since the response does return the version and consent.
+        }
+        else {
+            if (marketingConsent != null){
+                var requestParams = {
+                    "marketingTrackingConsent": marketingConsent
+                };
+                cursor_wait();
+                wcService.invoke("AjaxUpdateMarketingTrackingConsent", requestParams);
+            }
+            else {
+                $("#privacyPolicyPopup").WCDialog("close");
+            }
+            setPrivacyCookies(pVersion, marketingConsent, isSession);
+        }
+    }
+
+    /**
+     * Check whether the current version of privacy policy accepted or not
+     */
+    function isCurrentPrivacyPolicyAccepted() {
+        var currentPrivacyPolicyContentName = $('#PrivacyPolicyPopupContentName')[0].value;
+        var versionPattern = /[\w\d]+[vV]ersion(\d+\.\d+)/g;
+        var matches = versionPattern.exec(currentPrivacyPolicyContentName);
+        var pVersion = 0;
+        if (matches) {
+            pVersion = matches[1];
+        }
+        var accepted = false;
+        var privacyCookie = getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId);
+        if (privacyCookie = null || privacyCookie != pVersion) {
+            var privacyPolicyPopup = $("#privacyPolicyPopup").data("wc-WCDialog");
+            if (privacyPolicyPopup) {
+                closeAllDialogs();
+                privacyPolicyPopup.open();
+            } else {
+                console.debug("privacyPolicyPopup does not exist");
+            }
+        }
+    }
+
+    function setPrivacyCookies(version, consent, isSession){
+    	if (isSession == null || isSession == undefined){
+    		isSession = storePrivacyVersionCookieInSession;
+    	}
+        if (isSession){
+        	if (version != null){
+        		setCookie("WC_PrivacyNoticeVersion_" + WCParamJS.storeId,version, {path: "/", domain: cookieDomain, secure: true});
+        	}
+            if (consent != null){
+                setCookie("WC_MarketingTrackingConsent_" + WCParamJS.storeId, consent, {path: "/", domain: cookieDomain, secure: true});
+            }
+        }
+        else {
+            var expire = 30;//dafault to days
+            if (version != null){
+            	setCookie("WC_PrivacyNoticeVersion_" + WCParamJS.storeId,version, {path: "/", domain: cookieDomain, expires: expire, secure: true});
+            }
+            if (consent != null){
+                setCookie("WC_MarketingTrackingConsent_" + WCParamJS.storeId, consent, {path: "/", domain: cookieDomain, expires: expire, secure: true});
+            }
+        }
+    }
+//-----------------------------------------------------------------
 // Licensed Materials - Property of IBM
 //
 // WebSphere Commerce
@@ -84834,6 +85360,9 @@ LogonForm ={
                 return false;
             }
         }
+        if(form.marketingTrackingConsent){
+            setPrivacyCookies(null, form.marketingTrackingConsent.value);
+        }
         return true;
     },
 
@@ -85452,7 +85981,7 @@ MyAccountDisplay={
         }
         wcRenderContext.updateRenderContext(contextId,{'beginIndex':currentBeginIndex,'pageSize':pageSize,'isQuote':isQuote,'lastExternalOrderIds':lastRecordInfo,'recordSetTotal':recordSetTotal});
     },
-
+    
     escapeXML: function(value) {
         //don't use jazz.util.html.escape(value). This function doesn't encode character "
         if (!value) {
@@ -85767,7 +86296,9 @@ MyAccountDisplay={
         else {
             form.receiveEmail.value = false;
         }
-
+        if(form.marketingTrackingConsent){
+            setPrivacyCookies(null, form.marketingTrackingConsent.value);
+        }
         if(form.sendMeSMSNotification && form.sendMeSMSNotification.checked){
             form.receiveSMSNotification.value = true;
         }
@@ -86118,6 +86649,30 @@ MyAccountDisplay={
         this.setOff(this.currentOrderTabId);
         this.setOn(tabId);
         this.currentOrderTabId = tabId;
+    },
+    
+    validateOauthToken:function(token, isToken, provider, url, parameters){
+    	var params = {};
+    	if(isToken == '1'){
+    		params = {
+    				accessToken: token,
+        			URL: url,
+        			authorizationProvider: provider
+        	};
+    	}else{
+    		params = {
+        			code: token,
+        			URL: url,
+        			authorizationProvider: provider
+        	};
+    	}
+
+        $.each(parameters,function(name,value) {
+            params[name]=value;
+        });
+    	
+    	cursor_wait();
+        wcService.invoke("AjaxValidateOauthToken", params);
     }
 }
 //-----------------------------------------------------------------
@@ -86837,6 +87392,157 @@ wcService.declare({
 		}
 		cursor_clear();
 	}
+}),
+
+wcService.declare({
+	id: "AjaxValidateOauthToken",
+	actionId: "AjaxValidateOauthToken",
+	url: "ValidateOauthToken",
+	formId: "",
+
+	/**
+	 * Displays a success message.
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation.
+	 */
+		successHandler: function (serviceResponse) {
+	        cursor_clear();
+	        var errorMessage = "";
+	        if (serviceResponse.ErrorCode != null) {
+	            var errorCode = Number(serviceResponse.ErrorCode);
+	            switch (errorCode) {
+	            case 2000:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2000"];
+	                break;
+	            case 2010:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2010"];
+	                break;
+	            case 2020:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2020"];
+	                break;
+	            case 2030:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2030"];
+	                break;
+	            case 2110:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2110"];
+	                break;
+	            case 2300:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2300"];
+	                break;
+	            case 2340:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2340"];
+	                break;
+	            case 2400:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2400"];
+	                break;
+	            case 2410:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2410"];
+	                break;
+	            case 2420:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2420"];
+	                break;
+	            case 2430:
+	                document.location.href = "ResetPasswordForm?storeId=" + WCParamJS.storeId + "&catalogId=" + WCParamJS.catalogId + "&langId=" + WCParamJS.langId + "&errorCode=" + errorCode;
+	                break;
+	            case 2170:
+	                document.location.href = "ChangePassword?storeId=" + WCParamJS.storeId + "&catalogId=" + WCParamJS.catalogId + "&langId=" + WCParamJS.langId + "&errorCode=" + errorCode + "&logonId=" + serviceResponse.logonId;
+	                break;
+	            case 2570:
+	                errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2570"];
+	                    break;
+	                case 2440:
+	                    errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2440"];
+	                    break;
+	                case 2450:
+	                    errorMessage = MessageHelper.messages["GLOBALLOGIN_SIGN_IN_ERROR_2450"];
+	                    break;
+	            }
+	            if (document.getElementById(serviceResponse.widgetId + "_logonErrorMessage_GL") != null) {
+	                document.getElementById(serviceResponse.widgetId + "_logonErrorMessage_GL").innerHTML = errorMessage;
+	                document.getElementById(serviceResponse.widgetId + "_WC_AccountDisplay_FormInput_logonId_In_Logon_1").setAttribute("aria-invalid", "true");
+	                document.getElementById(serviceResponse.widgetId + "_WC_AccountDisplay_FormInput_logonId_In_Logon_1").setAttribute("aria-describedby", "logonErrorMessage_GL_alt");
+	                document.getElementById(serviceResponse.widgetId + "_WC_AccountDisplay_FormInput_logonPassword_In_Logon_1").setAttribute("aria-invalid", "true");
+	                document.getElementById(serviceResponse.widgetId + "_WC_AccountDisplay_FormInput_logonPassword_In_Logon_1").setAttribute("aria-describedby", "logonErrorMessage_GL_alt");
+	            }
+	        } else {
+	        	//alert(serviceResponse.redirecturl);
+	            var url = serviceResponse.redirecturl.replace(/&amp;/g, '&'),
+	                languageId = serviceResponse.langId;
+	            if (languageId != null && document.getElementById('langSEO' + languageId) != null) { // Need to switch language.
+
+	                var browserURL = document.location.href,
+	                    currentLangSEO = '/' + $('#currentLanguageSEO').val() + '/';
+
+	                if (browserURL.indexOf(currentLangSEO) !== -1) {
+	                    // If it's SEO URL.
+	                    var preferLangSEO = '/' + $('#langSEO' + languageId).val() + '/';
+
+	                    var query = url.substring(url.indexOf('?') + 1, url.length),
+	                        parameters = Utils.queryToObject(query);
+	                    if (parameters["URL"] != null) {
+	                        var redirectURL = parameters["URL"],
+	                            query2 = redirectURL.substring(redirectURL.indexOf('?') + 1, redirectURL.length),
+	                            parameters2 = Utils.queryToObject(query2);
+	                        // No redirect URL
+	                        if (parameters2["URL"] != null) {
+	                            var finalRedirectURL = parameters2["URL"];
+	                            if (finalRedirectURL.indexOf(currentLangSEO) != -1) {
+	                                // Get the prefer language, and replace with prefer language.
+	                                finalRedirectURL = finalRedirectURL.replace(currentLangSEO, preferLangSEO);
+	                                parameters2["URL"] = finalRedirectURL;
+	                            }
+	                            query2 = $.param(parameters2);
+	                            redirectURL = redirectURL.substring(0, redirectURL.indexOf('?')) + '?' + query2;
+	                        } else {
+	                            //Current URL is the final redirect URL.
+	                            redirectURL = redirectURL.toString().replace(currentLangSEO, preferLangSEO);
+	                        }
+	                        parameters["URL"] = redirectURL;
+	                    }
+	                    query = $.param(parameters);
+	                    url = url.substring(0, url.indexOf('?')) + '?' + query;
+
+	                } else {
+	                    // Not SEO URL.
+	                    // Parse the parameter and check whether if have langId parameter.
+	                    if (url.contains('?')) {
+	                        var query = url.substring(url.indexOf('?') + 1, url.length),
+	                            parameters = Utils.queryToObject(query);
+	                        if (parameters["langId"] != null) {
+	                            parameters["langId"] = languageId;
+	                            var query2 = $.param(parameters);
+	                            url = url.substring(0, url.indexOf('?')) + '?' + query2;
+	                        } else {
+	                            url = url + "&langId=" + languageId;
+	                        }
+	                    } else {
+	                        url = url + "?langId=" + languageId;
+	                    }
+	                }
+	            }
+
+	            if (serviceResponse["MERGE_CART_FAILED_SHOPCART_THRESHOLD"] == "1") {
+	                setCookie("MERGE_CART_FAILED_SHOPCART_THRESHOLD", "1", {path: "/", domain: cookieDomain});
+	            }
+	            window.location = url;
+	        }
+	    },
+
+	/**
+	 * Displays an error message.
+	 * @param (object) serviceResponse The service response object, which is the
+	 * JSON object returned by the service invocation.
+	 */
+	    failureHandler: function (serviceResponse) {
+	        if (serviceResponse.errorMessage) {
+	            MessageHelper.displayErrorMessage(serviceResponse.errorMessage);
+	        } else {
+	            if (serviceResponse.errorMessageKey) {
+	                MessageHelper.displayErrorMessage(serviceResponse.errorMessageKey);
+	            }
+	        }
+	        cursor_clear();
+	    }
 })
 //-----------------------------------------------------------------
 // Licensed Materials - Property of IBM
@@ -92612,7 +93318,7 @@ $(document).ready(function () {
         if (ajaxRefresh == "true" && startsWith) {
             setAjaxRefresh(""); // No more refresh till shopper leaves this page
             // Update the Context, so that widget gets refreshed..
-            wcRenderContext.updateRenderContext("departmentSubMenuContext", {
+            wcRenderContext.updateRenderContext("departmentSubMenuContext_" + target.id, {
                 "targetId": target.id
             });
             if (typeof cX === 'function') {
@@ -92630,7 +93336,9 @@ $(document).ready(function () {
         }
         if (parent) {
             activate(document.getElementById(parent));
-        }
+        }else {
+			setAjaxRefresh("true");
+		}
         $(target).addClass("active");
         $("a[data-activate='" + target.id + "']").addClass("selected");
         var toggleControl = $("a[data-toggle='" + target.id + "']");
@@ -92890,17 +93598,17 @@ function declareDeptDropdownRefreshArea(divId) {
     // Context and Controller to refresh department drop-down
 
     // common render context
-    wcRenderContext.declare("departmentSubMenuContext", [divId], { targetId: "" });
+    wcRenderContext.declare("departmentSubMenuContext_" + divId, [divId], { targetId: "" });
 
     // render content changed handler
     var renderContextChangedHandler = function() {
-        $("#"+divId).refreshWidget("refresh", wcRenderContext.getRenderContextProperties("departmentSubMenuContext"));
+        $("#"+divId).refreshWidget("refresh", wcRenderContext.getRenderContextProperties("departmentSubMenuContext_" + divId));
     };
 
     // post refresh handler
     var postRefreshHandler = function() {
         updateDepartmentsMenu(); // Browser may be re-sized. From server we return entire department list.. updateHeader to fit to the list within available size
-        activate(document.getElementById(wcRenderContext.getRenderContextProperties("departmentSubMenuContext").targetId)); // We have all the data.. Activate the menu...
+        activate(document.getElementById(wcRenderContext.getRenderContextProperties("departmentSubMenuContext_" + divId).targetId)); // We have all the data.. Activate the menu...
         cursor_clear();
     };
 

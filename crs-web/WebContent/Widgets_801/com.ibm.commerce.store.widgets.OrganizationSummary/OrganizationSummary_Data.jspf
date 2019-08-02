@@ -123,7 +123,7 @@
 
 <%-- State display name --%>
 <c:forEach var="state" items="${countryBean.countryCodeStates}">
-	<c:if test="${state.code eq selectedStateCode}">
+	<c:if test="${state.code eq 'AU'}">
 		<c:set value="${state.displayName}" var="selectedStateName"/>
 	</c:if>
 </c:forEach>

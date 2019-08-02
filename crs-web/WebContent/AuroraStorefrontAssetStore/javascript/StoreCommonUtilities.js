@@ -101,7 +101,7 @@ detectedLocale = Utils.getLocale();
 function initializeInactivityWarning() {
 
     // only set timer if user is not guest, in a full-auth session, and is able to retrieve inactivityTimeout from server
-    if (storeUserType != "G" && inactivityTimeout != 0 && document.cookie.indexOf("WC_USERACTIVITY_") > 0) {
+    if (storeUserType != "G" && inactivityTimeout != 0 && document.cookie.indexOf("WC_LogonUserId_") > 0) {
         // Reset the inactivity timer dialog
         if (inactivityTimeoutTracker != null) {
             clearTimeout(inactivityTimeoutTracker);
@@ -759,7 +759,12 @@ function isPositiveInteger(value){
  */
 function closeAllDialogs(){
     $("[data-widget-type='wc.WCDialog']").each(function (i, e) {
-        $(e).hide();
+    	var dialog = $(e).data("wc-WCDialog");
+    	if(dialog){
+    		dialog.close();
+    	}else {
+    		$(e).hide();
+    	}
     });
 }
 
@@ -1873,4 +1878,99 @@ function getCommonParametersQueryString(){
         }
         console.debug("Return AjaxCustomServiceForURLChaining", service);
         return service;
+    }
+    
+    /**
+     * The function for Privacy popup to accept privacy policy
+     * @param {*} privacyContentName The privacy marketing content name in xxxV1.1 format
+     * @param {*} isSession To store cookie in session of not
+     */
+    function acceptPrivacyPolicy(privacyContentName, marketingConsentCheckboxId, privacyCheckboxId, isSession) {
+        var versionPattern = /[\w\d]+[vV]ersion(\d+\.\d+)/g;
+        var matches = versionPattern.exec(privacyContentName);
+        var pVersion = 0;
+        if (matches) {
+            pVersion = matches[1];
+        }
+        var marketingConsent = null;
+        var privacyCheckboxElement = $("#" + privacyCheckboxId)[0];
+        if (privacyCheckboxElement && !privacyCheckboxElement.checked ){
+            $("#" + privacyCheckboxId + "_Error").toggle(true);
+            return;
+        }
+        var marketingConsentElement = $("#" + marketingConsentCheckboxId)[0];
+        if (marketingConsentElement){
+            marketingConsent = marketingConsentElement.checked ? '1' : '0';
+        }
+        if (storeUserType != 'G') {
+            var requestParams = {
+                "privacyNoticeVersion": pVersion
+            };
+            if (marketingConsent != null){
+                requestParams.marketingTrackingConsent = marketingConsent;
+            }
+            cursor_wait();
+            wcService.invoke("AjaxPrivacyAndMarketingConsent", requestParams);
+            setPrivacyCookies(pVersion, marketingConsent, isSession); // set it here, since the response does return the version and consent.
+        }
+        else {
+            if (marketingConsent != null){
+                var requestParams = {
+                    "marketingTrackingConsent": marketingConsent
+                };
+                cursor_wait();
+                wcService.invoke("AjaxUpdateMarketingTrackingConsent", requestParams);
+            }
+            else {
+                $("#privacyPolicyPopup").WCDialog("close");
+            }
+            setPrivacyCookies(pVersion, marketingConsent, isSession);
+        }
+    }
+
+    /**
+     * Check whether the current version of privacy policy accepted or not
+     */
+    function isCurrentPrivacyPolicyAccepted() {
+        var currentPrivacyPolicyContentName = $('#PrivacyPolicyPopupContentName')[0].value;
+        var versionPattern = /[\w\d]+[vV]ersion(\d+\.\d+)/g;
+        var matches = versionPattern.exec(currentPrivacyPolicyContentName);
+        var pVersion = 0;
+        if (matches) {
+            pVersion = matches[1];
+        }
+        var accepted = false;
+        var privacyCookie = getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId);
+        if (privacyCookie = null || privacyCookie != pVersion) {
+            var privacyPolicyPopup = $("#privacyPolicyPopup").data("wc-WCDialog");
+            if (privacyPolicyPopup) {
+                closeAllDialogs();
+                privacyPolicyPopup.open();
+            } else {
+                console.debug("privacyPolicyPopup does not exist");
+            }
+        }
+    }
+
+    function setPrivacyCookies(version, consent, isSession){
+    	if (isSession == null || isSession == undefined){
+    		isSession = storePrivacyVersionCookieInSession;
+    	}
+        if (isSession){
+        	if (version != null){
+        		setCookie("WC_PrivacyNoticeVersion_" + WCParamJS.storeId,version, {path: "/", domain: cookieDomain, secure: true});
+        	}
+            if (consent != null){
+                setCookie("WC_MarketingTrackingConsent_" + WCParamJS.storeId, consent, {path: "/", domain: cookieDomain, secure: true});
+            }
+        }
+        else {
+            var expire = 30;//dafault to days
+            if (version != null){
+            	setCookie("WC_PrivacyNoticeVersion_" + WCParamJS.storeId,version, {path: "/", domain: cookieDomain, expires: expire, secure: true});
+            }
+            if (consent != null){
+                setCookie("WC_MarketingTrackingConsent_" + WCParamJS.storeId, consent, {path: "/", domain: cookieDomain, expires: expire, secure: true});
+            }
+        }
     }

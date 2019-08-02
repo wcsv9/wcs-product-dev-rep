@@ -32,7 +32,7 @@
 <c:set var="pmt_includedMemberGroupNames" value=""/>
 <c:if test="${!empty param.includedMemberGroupIds}">
 	<c:forTokens items="${param.includedMemberGroupIds}" delims="," var="includedMemberGroupId" varStatus="status">
-		<wcf:rest var="segmentData" url="store/{storeId}/segment/{segmentId}" cached="true" disablePreview="true"  scope="request">
+		<wcf:rest var="segmentData" url="store/{storeId}/segment/{segmentId}" disablePreview="true"  scope="request">
 			<wcf:var name="storeId" value="${CommandContext.storeId}" encode="true"/>
 			<wcf:var name="segmentId" value="${includedMemberGroupId}" encode="true"/>
 		</wcf:rest>

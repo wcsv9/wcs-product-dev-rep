@@ -614,6 +614,21 @@ var Utils = Utils || {
             return Globalize.formatNumber(amount, options);
         }
     },
+	
+	/**
+     * Format numbers from en_US locale into a localized locale according to localized information
+     * example: Utils.formatNumber("123.4", {maximumFractionDigits: 2, minimumFractionDigits: 2})
+     * 
+     * @param amount {string}
+     * @param options {object} may include minimumFractionDigits, maximumFractionDigits, etc.
+     */
+    formatEnUSLocaleNumberIntoTargetLocaleNumber: function(amount, options) {
+        amount = amount.replace(/[^0-9\.\,]/g, '');
+        if (GlobalizeLoaded) {
+            amount = Globalize('en').parseNumber(amount);
+            return Globalize.formatNumber(amount, options);
+        }
+    },
 
     /**
      * Returns the locale.

@@ -15,7 +15,63 @@
 	<c:if test="${empty itemTableEmpty}">
 		<wcst:message var="itemTableEmpty" key="ITEM_TABLE_GENERIC_EMPTY" bundle="${widgetText}"/>
 	</c:if>
-
+	<script type="text/javascript">
+			var products = new Array(10);
+			var count = 0;
+			var currentPagePosition = 0;
+			function addProduct(countValue) {
+				currentPagePosition++;
+				count++;
+				var singleProduct = {};
+				if ('${widgetName }' == 'RequisitionListItems') {
+					var id = document.getElementById('cellContent_2').value;
+					//var cat = document.getElementById('favouriteItemCategory_'+id).value
+					singleProduct = {
+						'name': document.getElementById('cellContent_3').value,
+						'id': id,//SKU
+						'price': document.getElementById('cellContent_6').value.replace("$", ""),
+						'brand': document.getElementById('cellContent_5').value,
+						'variant': '',
+						'list': 'favourites', // + cat,
+						'category': '', //cat,
+						'position': parseInt(countValue) + parseInt(currentPagePosition)
+					};
+				} else if ('${widgetName }' == 'OrderDetail_ItemTable'){
+					var id = document.getElementById('cellContent_2').value;
+					var priceValue = document.getElementById('cellContent_5').value.replace("$", "");
+					if ('${storeId}' == '80355' || '${storeId}' == '14069') {
+						priceValue = document.getElementById('cellContent_6').value.replace("$", "");
+					}
+					singleProduct = {
+						'name': document.getElementById('cellContent_1').value, //document.getElementById('orderDetailItemName_'+id.toString()).value,
+						'id': id,//SKU
+						'price': priceValue,
+						'brand': '', //document.getElementById('orderDetailItemManufacturer_'+id.toString()).value,
+						'variant': '',
+						'list': document.getElementById('pageName').value, // + document.getElementById('orderDetailItemCategory_'+id).value,
+						'category': '',//document.getElementById('orderDetailItemCategory_'+id).value,
+						'position': parseInt(countValue) + parseInt(currentPagePosition)
+					};
+				}
+				products[count-1]= singleProduct;
+				if (count==10) {
+					pushProductsBatch();
+				}
+			}
+			function pushProductsBatch() {
+				if (count > 0) {
+					dataLayer.push({
+						'event': 'impression',
+						'ecommerce': {
+							'impression': products
+						 }
+					});
+					console.log(products);
+					products = new Array(10);
+					count = 0;
+				}
+			}
+		</script>
 	<div id="${widgetName}_table" class="listTable" role="grid">
 		<c:if test="${isTableEditable ne 'false'}">
 			<%-- table toolbar --%>
@@ -32,9 +88,9 @@
 				<%out.flush();%>
 			</c:if>
 		</c:if>
- 
+		
 		<%-- table header --%>
-		<div id="${widgetName}_table_content" tabindex="0">
+		<div id="${widgetName}_table_content" class="itemTableUIPage" tabindex="0">
 			<div class="<c:out value='${headerDivClass}'/>" role="row">
 	
 				<c:set var="hColClassValues" value="${fn:split(hColClasses, colValueSeparator)}" /> 
@@ -74,42 +130,41 @@
 			<c:if test="${empty rows}">
 				<c:out value="${itemTableEmpty}"/>
 			</c:if>
-			
 			<c:forEach var="row" items="${rows}" varStatus="rStatus">
 				<div class="<c:out value='${rowDivClass}'/>" role="row">
-					<c:forEach var="cell" items="${row}">
+					<c:forEach var="cell" items="${row}" varStatus="cStatus">
 						<div class="<c:out value='${cell.div1Class}'/>" role="gridcell">
 							<c:choose>
-								<c:when test="${fn:contains(cell.div1Class, 'actions') and not empty cell.actionsMap}" >
-									<div class="cell" id="WC_<c:out value="${widgetName}"/>_TableContent_Action_<c:out value="${rStatus.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_POPUP_${widgetNameCaps}" bundle="${widgetText}"/>">
-										<a table-toggle="<c:out value="${widgetName}"/>_actionDropdown<c:out value="${rStatus.count}"/>" tabindex="0" table-parent="listTable" role="menuitem" id="<c:out value="${widgetName}"/>_actionButton<c:out value="${rStatus.count}"/>" aria-haspopup="true" class="button_secondary actionButton" href="#">
-											<div class="left_border"></div>
-											<div class="button_text">
-												<span>
-													<img alt="<wcst:message key="${widgetNameCaps}_ACTIONS" bundle="${widgetText}"/>" src="<c:out value='${jspStoreImgDir}'/>images/action_icon.png">								
-												</span>
-											</div>												
-											<div class="right_border"></div>
-										</a>
-										<div class="actionDropdown" table-parent="listTable" id="<c:out value="${widgetName}"/>_actionDropdown<c:out value="${rStatus.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_MENU_${widgetNameCaps}" bundle="${widgetText}"/>">
-											<c:forEach var="action" items="${cell.actionsMap}">
-												<c:set var="onclickAttribute">onclick="<c:out value="${action.value}"/>;return false;"</c:set>
-												<c:set var="onkeypressAttribute">onkeypress="if(event.keyCode == 0 || event.keyCode == 13){<c:out value="${action.value}"/>;return false;}"</c:set>
-												<c:set var="actionItemClass" value="actionItem" />
-												<c:if test="${empty action.value }" >
-													<c:set var="onclickAttribute">aria-disabled='true' onClick="javascript:return false;"</c:set>
-													<c:set var="actionItemClass" value="actionItem inactive" />
-												</c:if>	
-												<div class="${actionItemClass}">
-													<div id="WC_<c:out value="${widgetName}"/>_Action_<c:out value="${action.key}"/>_${rStatus.count}"
-															class="actionTitle" ${onclickAttribute} ${onkeypressAttribute} tabindex="-1" role="menuitem"
-															aria-label="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action.key)}" bundle="${widgetText}"/>">
-														<span><wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action.key)}" bundle="${widgetText}"/></span>
-													</div>
-												</div>					
-											</c:forEach>
-										</div>
-									</div>
+							<c:when test="${fn:contains(cell.div1Class, 'actions') and not empty cell.actionsMap}" >
+									<div class="cell">
+									<c:forEach var="action" items="${cell.actionsMap}">
+										<c:set var="onclickAttribute">onclick="<c:out value="${action.value}"/>;return false;"</c:set>
+										<c:set var="onkeypressAttribute">onkeypress="if(event.keyCode == 0 || event.keyCode == 13){<c:out value="${action.value}"/>;return false;}"</c:set>
+										<c:set var="actionItemClass" value="actionItem" />
+										<c:if test="${empty action.value }" >
+											<c:set var="onclickAttribute">aria-disabled='true' onClick="javascript:return false;"</c:set>
+											<c:set var="actionItemClass" value="actionItem inactive" />
+										</c:if>	
+										<div class="${actionItemClass}">
+											<div id="WC_<c:out value="${widgetName}"/>_Action_<c:out value="${action.key}"/>_${rStatus.count}"
+													class="actionTitle" ${onclickAttribute} ${onkeypressAttribute} tabindex="-1" role="menuitem"
+													aria-label="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action.key)}" bundle="${widgetText}"/>"
+													title="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action.key)}" bundle="${widgetText}"/>">
+												
+												<%-- <c:if test="${action.key eq 'ADD_LIST'}">
+													<img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/shopSmall.png">
+												</c:if> --%>
+												<c:if test="${action.key eq 'ADD_ITEM'}">
+													<img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/addItem.png">
+													
+												</c:if>
+												<c:if test="${action.key eq 'REMOVE_ITEM'}">
+													<img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/recycle.png">
+												</c:if>												
+											</div>
+										</div>					
+									</c:forEach>
+									</div>									
 								</c:when>
 								<c:otherwise>
 									<div class="<c:out value='${cell.div2Class}'/>" 
@@ -119,13 +174,32 @@
 									>
 										<c:out value="${cell.cellContent}" escapeXml="false"/>
 									</div>
+									
+									<input type="hidden" id="cellContent_${cStatus.count}" value=""/>
+									<script>
+										if ('${widgetName }' == 'RequisitionListItems') {
+											document.getElementById('cellContent_${cStatus.count}').value = '${cell.cellContent }'.replace(/<[^>]*?>/gm, '');
+										} else if ('${widgetName }' == 'OrderDetail_ItemTable') {
+											if ('${cStatus.count}' == '2') {
+												document.getElementById('cellContent_${cStatus.count}').value = document.getElementById('OrderDetail_ItemTable_r${rStatus.count}_col2Link').innerHTML;
+												document.getElementById('cellContent_1').value = document.getElementById('OrderDetail_ItemTable_r${rStatus.count}_col2Link').parentElement.nextSibling.innerHTML;
+											} else {
+												document.getElementById('cellContent_${cStatus.count}').value = '${cell.cellContent }';
+											}
+										}
+									</script>
 								</c:otherwise>
 							</c:choose>	
 						</div>
 					</c:forEach>
+					<script>
+						this.addProduct('${(currentPage-1)*pageSize}');
+					</script>
 				</div>
 			</c:forEach>
-					
+			<script>
+	       		this.pushProductsBatch();
+	       	</script>		
 			<c:if test="${!empty tableInputForm and isTableEditable ne 'false'}">
 				</form>
 			</c:if>

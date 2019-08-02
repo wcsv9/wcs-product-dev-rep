@@ -152,7 +152,8 @@
         <%@ include file="SavedOrderList_Data.jspf" %>
     </c:when>
     <c:when test="${param.isRecurringOrder eq true || param.isSubscription eq true}">
-        <%@ include file="RecurringOrderList_Data.jspf" %>
+        <%-- <%@ include file="RecurringOrderList_Data.jspf" %> --%>
+        <%@ include file="SchedulerOrderList_Data.jspf"%>
     </c:when>
     <c:otherwise>
         <%@ include file="OrderHistoryList_Data.jspf" %>

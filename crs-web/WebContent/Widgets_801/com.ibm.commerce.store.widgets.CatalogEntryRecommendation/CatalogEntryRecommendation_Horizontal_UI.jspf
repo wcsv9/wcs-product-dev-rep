@@ -44,7 +44,7 @@
 			</div>
 			<div class="content">
 				<c:forTokens items="${catentryIdList}" delims="," var="catEntryIdentifier">
-				<div>
+				<div class="pro-set">
 					<%@include file="RecommendedCatalogEntryDisplay.jspf"%>
 				</div>
 				</c:forTokens>

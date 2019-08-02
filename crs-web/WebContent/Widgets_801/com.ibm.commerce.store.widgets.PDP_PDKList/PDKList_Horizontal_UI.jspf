@@ -18,7 +18,7 @@
 	<wcst:message key="PC_NEXT_PAGE" bundle="${widgetText}" var="PC_NEXT_PAGE"/>
 	<wcst:message key="PDK_LIST_PREDEFINED_DYNAMIC_KITS" bundle="${widgetText}" var="PDK_LIST_PREDEFINED_DYNAMIC_KITS"/>
 	
-	 <c:set var="carouselOptions" value='{"prevButton": "a.prevPageButton", "nextButton": "a.nextPageButton", "contentContainer": "div.content", "columnCountByWidth": ${columnCountByWidth}, "owlCarouselOptions": {"itemsScaleUp": true}}'/>
+	 <c:set var="carouselOptions" value='{"prevButton": "a.prevPageButton", "nextButton": "a.nextPageButton", "contentContainer": "div.content", "columnCountByWidth": ${columnCountByWidth}, "owlCarouselOptions": {"itemsScaleUp": true, "items":3, "responsive": false}}'/>
 	
 	<div id="pdkListWidget${widgetSuffix}" class="catalogEntryRecommendationWidget carousel clip-true padding-true background-${background} border-${border}" data-widget-type="wc.Carousel" data-widget-options="${fn:escapeXml(carouselOptions)}">
 		<h2 id="title${widgetSuffix}">

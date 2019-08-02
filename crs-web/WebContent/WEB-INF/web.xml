@@ -75,8 +75,17 @@
 	  <url-pattern>/shop/store/0/storeAsset</url-pattern>
 	  <url-pattern>/shop/store/0/storeAsset/*</url-pattern>
 	</servlet-mapping>
-	
-     <filter>
+
+    <filter>
+        <filter-name>ExecutionContextFilter</filter-name>
+        <filter-class>com.ibm.commerce.cf.servlet.ExecutionContextFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExecutionContextFilter</filter-name>
+        <servlet-name>Stores</servlet-name>
+    </filter-mapping>
+
+    <filter>
         <icon/>
         <filter-name>RuntimeServletFilter</filter-name>
      <filter-class>com.ibm.commerce.store.servlet.StoreRuntimeServletFilter</filter-class>
@@ -127,6 +136,18 @@
      <servlet-name>Stores</servlet-name>
    </filter-mapping>   
 
+    <filter>
+    	<display-name>Strict Transport Security Filter</display-name>
+    	<filter-name>HSTSFilter</filter-name>
+    	<filter-class>
+    		com.ibm.commerce.store.servlet.StrictTransportSecurityFilter
+    	</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>HSTSFilter</filter-name>
+		<servlet-name>Stores</servlet-name>
+    </filter-mapping>
+
     <filter-mapping>
         <filter-name>JspExecutionServiceLoggingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -146,7 +167,17 @@
         <url-pattern>/hystrix.stream</url-pattern>
     </servlet-mapping>
     
-     <jsp-config>
+    <context-param>
+        <param-name>messageTopics</param-name>
+        <param-value>ExtendedLoggerConfig</param-value>
+    </context-param>
+
+    <listener>
+        <description>Servlet listener that initializes Commerce REST message configuration </description>
+        <listener-class>com.ibm.commerce.rest.config.CommerceRestMessageConfigListener</listener-class>
+    </listener>
+
+    <jsp-config>
         <taglib>
             <taglib-uri>flow.tld</taglib-uri>
             <taglib-location>/WEB-INF/flow.tld</taglib-location>

@@ -25,6 +25,20 @@
     <property name="parameter" value="loginIdentityHandler.logon"/> 
 	<property name="generic" value="1"/>
   </bean>  
+  <bean id="oauthLogon" class="com.ibm.commerce.store.mvc.controller.spring.AjaxOauthLogonController"> 
+    <property name="https" value="1"/>  
+    <property name="authenticate" value="0"/>  
+    <property name="credentialsAccepted" value="P"/>  
+    <property name="parameter" value="loginIdentityHandler.oauth"/> 
+	<property name="generic" value="1"/>
+  </bean>  
+  <bean id="validateOauthToken" class="com.ibm.commerce.store.mvc.controller.spring.AjaxOauthTokenLogonController"> 
+    <property name="https" value="1"/>  
+    <property name="authenticate" value="0"/>  
+    <property name="credentialsAccepted" value="P"/>  
+    <property name="parameter" value="loginIdentityHandler.oauth_validate"/> 
+	<property name="generic" value="1"/>
+  </bean>  
   <bean id="logonAndChangePassword" class="com.ibm.commerce.store.mvc.controller.spring.LogonController"> 
     <property name="https" value="1"/>  
     <property name="authenticate" value="0"/>  
@@ -128,6 +142,13 @@
     <property name="authenticate" value="0"/>  
     <property name="parameter" value="personHandler.updatePerson"/> 
   </bean>  
+  <bean id="ajaxRESTUpdatePrivacyAndMarketingConsent" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController">
+    <property name="supportedMethods" value="POST"/>
+    <property name="https" value="1"/>
+    <property name="authenticate" value="0"/>
+    <property name="csrfProtected" value="1"/>
+    <property name="parameter" value="personHandler.updatePrivacyAndMarketingConsent"/>
+  </bean>
   <bean id="personChangeServicePersonUpdate" class="com.ibm.commerce.store.mvc.controller.spring.RESTActionController"> 
     <property name="https" value="1"/>  
     <property name="authenticate" value="0"/>  

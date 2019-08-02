@@ -91,6 +91,7 @@
 					<wcst:message key="ORDERDETAIL_SHIP_TAX" bundle="${widgetText}"/>
 				</span>
 				<span class="value">
+				
 					<c:choose>
 						<c:when test="${!empty order.totalShippingTax}">
 							<fmt:formatNumber value="${order.totalShippingTax}" type="currency" maxFractionDigits="${env_currencyDecimal}" currencySymbol="${env_CurrencySymbolToFormat}"/><c:out value="${env_currencySymbol}"/>
@@ -101,7 +102,25 @@
 					</c:choose>
 				</span>
 			</p>
-			
+			<c:if test="${!empty order.x_field2}">
+				<%-- Minimum Order Charges tax --%>
+				<p>
+					<span class="label">
+						Minimum Order Charges
+					</span>
+					<span class="value">
+					
+						<c:choose>
+							<c:when test="${!empty order.x_field2}">
+								<fmt:formatNumber value="${order.x_field2}" type="currency" maxFractionDigits="${env_currencyDecimal}" currencySymbol="${env_CurrencySymbolToFormat}"/><c:out value="${env_currencySymbol}"/>
+							</c:when>
+							<c:otherwise>
+								<wcst:message key="MO_NOT_AVAILABLE" bundle="${widgetText}"/>
+							</c:otherwise>
+						</c:choose>
+					</span>
+				</p>
+			</c:if>
 			<%-- order total --%>
 			<p>
 				<div id="totalLabel">
@@ -113,7 +132,12 @@
 							<c:when test="${order.grandTotal != null}">
 									<c:choose>
 									<c:when test="${!empty order.grandTotal}">
-										<fmt:formatNumber value="${order.grandTotal}" type="currency" maxFractionDigits="${env_currencyDecimal}" currencySymbol="${env_CurrencySymbolToFormat}"/><c:out value="${env_currencySymbol}"/>
+										<c:if test="${!empty order.x_field2}">
+											<fmt:formatNumber value="${order.grandTotal+order.x_field2}" type="currency" maxFractionDigits="${env_currencyDecimal}" currencySymbol="${env_CurrencySymbolToFormat}"/><c:out value="${env_currencySymbol}"/>
+										</c:if>
+										<c:if test="${empty order.x_field2}">
+											<fmt:formatNumber value="${order.grandTotal}" type="currency" maxFractionDigits="${env_currencyDecimal}" currencySymbol="${env_CurrencySymbolToFormat}"/><c:out value="${env_currencySymbol}"/>
+										</c:if>
 									</c:when>
 									<c:otherwise>
 										<wcst:message key="MO_NOT_AVAILABLE" bundle="${widgetText}"/>

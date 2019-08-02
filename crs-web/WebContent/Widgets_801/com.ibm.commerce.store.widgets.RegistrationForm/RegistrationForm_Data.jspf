@@ -28,13 +28,17 @@
 <c:set var="middleName" value="${paramSource.middleName}"/>
 <c:set var="street" value="${paramSource.address1}"/>
 <c:set var="street2" value="${paramSource.address2}"/>
+<c:set var="street3" value="${paramSource.address3}"/>
+<c:set var="role" value="${paramSource.userField3}"/>
+<c:set var="title" value="${paramSource.userField2}"/>
 <c:set var="city" value="${paramSource.city}"/>
 <c:set var="state" value="${paramSource.state}"/>
 <c:set var="phone1" value="${paramSource.phone1}"/>
+<c:set var="phone2" value="${paramSource.phone2}"/>
 <c:set var="email1" value="${paramSource.email1}"/>
 <c:set var="country1" value="${paramSource.country}"/>
 <c:set var="zipCode" value="${paramSource.zipCode}"/>
-<c:set var="flexFlowsFieldOrder" value="EmailOption,preferredLanguage,preferredCurrency,Age,Gender,DateOfBirth,MobilePhone" />
+<c:set var="flexFlowsFieldOrder" value="EmailOption,preferredLanguage,preferredCurrency,Age,Gender,DateOfBirth,MobilePhone,MarketingConsent" />
 <c:set var="preferredLanguage" value="${paramSource.preferredLanguage}"/>
 <c:set var="preferredCurrency" value="${paramSource.preferredCurrency}"/>
 <c:set var="receiveSMSNotification" value="${paramSource.receiveSMSNotification}"/>
@@ -67,11 +71,15 @@
 <c:set var="usr_middleName" value="${paramSource.usr_middleName}"/>
 <c:set var="usr_street" value="${paramSource.usr_address1}"/>
 <c:set var="usr_street2" value="${paramSource.usr_address2}"/>
+<c:set var="usr_street3" value="${paramSource.usr_address3}"/>
 <c:set var="usr_city" value="${paramSource.usr_city}"/>
 <c:set var="usr_state" value="${paramSource.usr_state}"/>
 <c:set var="usr_country1" value="${paramSource.usr_country}"/>
 <c:set var="usr_zipCode" value="${paramSource.usr_zipCode}"/>
 <c:set var="usr_phone1" value="${paramSource.usr_phone1}"/>
+<c:set var="usr_phone2" value="${paramSource.usr_phone2}"/>
+<c:set var="role" value="${paramSource.userField3}"/>
+<c:set var="title" value="${paramSource.userField2}"/>
 <c:set var="usr_email1" value="${paramSource.usr_email1}"/>
 <c:set var="usr_flexFlowsFieldOrder" value="preferredLanguage,preferredCurrency"/>
 <c:set var="usr_preferredCurrency" value="${paramSource.usr_preferredCurrency}"/>

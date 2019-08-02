@@ -45,12 +45,12 @@
 											<li>
 												<a href="<c:out value='${RegisterURL}'/>" id="addCustomer"><wcst:message key="MA_ADD_CUSTOMER" bundle="${widgetText}"/></a>
 											</li>
-											<c:if test="${env_b2bStore != 'true'}">
-												<%-- CSR cannot shop as guest user in B2B Store --%>
+											<%--<c:if test="${env_b2bStore != 'true'}">
+												 CSR cannot shop as guest user in B2B Store 
 												<li>
 													<a href="#" onClick = "javascript:registeredCustomersJS.createGuestUser()" class="link" id="createGuestUser"><wcst:message key="MA_SHOP_AS_GUEST" bundle="${widgetText}"/></a>
 												</li>
-											</c:if>
+											</c:if>--%>
 										</ul>
 									</div>
 								</div>

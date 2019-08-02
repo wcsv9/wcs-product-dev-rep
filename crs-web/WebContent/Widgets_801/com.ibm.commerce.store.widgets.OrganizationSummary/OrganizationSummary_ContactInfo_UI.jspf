@@ -11,7 +11,169 @@
   IBM Corp.
  =================================================================
 --%>
+<script>
+function addCostCentre(field, fieldId) {
+	var newCostCentre = field.value;
+	addToCostCentreList(newCostCentre, field, fieldId);
+	drawCostCentreBox(field, fieldId);
+}
+function addToCostCentreList(newCostCentre, field, fieldId) {
+	//newCostCentre = trimString(newCostCentre);
+	//alert("In Add " + newCostCentre);
+	if (newCostCentre != "") {
+		var costCentreOptionNew = document.createElement('option');
+		costCentreOptionNew.text = newCostCentre;
+		costCentreOptionNew.value = newCostCentre;
+		var costCentreList = getCostCenterList(fieldId);
+		var optArray = new Array(costCentreList.options.length); 
+		var optArray1 = new Array(); 
+		var costLength = costCentreList.options.length;
+		
+		try {
+			costCentreList.add(costCentreOptionNew, null); // standards compliant; doesn't work in IE
+		}
+		catch(ex) {
+			costCentreList.add(costCentreOptionNew); // IE only
+		}
+	}
+	else{
+		alert("Invalid value.");
+	}
+	drawCostCentreBox(field, fieldId);
+	if(costLength > 0 ){
+		optArray1[0] = costCentreList.options[costLength].value;
+		for(var i=0; i<costLength; i++){
+			optArray [i] = costCentreList.options[i].value;				
+		}
+		for(var i2=0; i2<costLength+1; i2++){
+			costCentreList.options[0].remove();			
+		}
+		var b = true;
+		
+		for (var i3 = 0; i3<optArray.length+1; i3++) {
+			if(b){
+				b = false;
+				var temp = document.createElement('option');
+				temp.text = optArray1[0];
+				temp.value = optArray1[0];
+				try {
+					costCentreList.add(temp, null); // standards compliant; doesn't work in IE
+				} 
+				catch(ex) {
+					costCentreList.add(temp); // IE only
+				}
+				drawCostCentreBox(field, fieldId);
+				i3 = 0;
+			}
+			else{
+				var temp = document.createElement('option');
+				temp.text = optArray[i3-1];
+				temp.value = optArray[i3-1];
+				try {
+					costCentreList.add(temp, null); // standards compliant; doesn't work in IE
+				} 
+				catch(ex) {
+					costCentreList.add(temp); // IE only
+				}
+				drawCostCentreBox(field, fieldId);
+			}
+		}
+	}
+}
 
+function drawCostCentreBox(field, fieldId) {
+	field.value = "";
+	var costCentreList = getCostCenterList(fieldId);
+	if (costCentreList.length > 4) {
+		costCentreList.size = 4;
+	} 
+	else {
+		costCentreList.size = costCentreList.length;
+	}
+	var costCentreBox = getCostCentreBox(fieldId);
+	if (costCentreList.length > 0) {
+		costCentreBox.style.display = 'block';
+	} else {
+		costCentreBox.style.display = 'none';
+	}
+	combineCostCentre(costCentreList, fieldId);
+}
+
+
+function getCostCenterList(fieldId){
+	var costCentreList = '';
+	if(fieldId == 'usr_'){		
+		costCentreList = document.getElementById('costCentreList_usr');
+	}
+	else if(fieldId == 'org_'){
+		costCentreList = document.getElementById('costCentreList_org');
+	}
+	else{
+		costCentreList = document.getElementById('costCentreList');
+	}
+	
+	return costCentreList;
+}
+
+function getCostCentreBox(fieldId){
+	var costCentreBox = '';
+	if(fieldId == 'usr_'){		
+		costCentreBox = document.getElementById('costCentreBox_usr');
+	}
+	else if(fieldId == 'org_'){
+		costCentreBox = document.getElementById('costCentreBox_org');
+	}
+	else{
+		costCentreBox = document.getElementById('costCentreBox');
+	}
+	
+	return costCentreBox;
+}
+ 
+function removeCostCentre(field, fieldId) {
+	var costCentreList = getCostCenterList(fieldId);
+	
+	var i;
+	for (i = costCentreList.length - 1; i>=0; i--) {
+		if (costCentreList.options[i].selected) {
+			costCentreList.remove(i);
+		}
+	}
+	drawCostCentreBox(field, fieldId);
+}
+ 
+function combineCostCentre(costCentreList1, fieldId) {
+	var costCentreList = getCostCenterList(fieldId);
+	var i;
+	var combinedString = "";
+	for (i = 0; i<costCentreList.length; i++) {
+		if (i != 0) {
+			combinedString = combinedString + ";";
+		}
+		combinedString = combinedString + costCentreList.options[i].value;
+	}
+	
+	if(fieldId == 'usr_'){		
+		document.getElementById('costCentreCombined_usr').value = combinedString;
+	}
+	else if(fieldId == 'org_'){
+		document.getElementById('costCentreCombined_org').value = combinedString;
+	}
+	else{
+		document.getElementById('costCentreCombined').value = combinedString;
+	}
+	
+}
+function loadCostCentreList() {
+	var string1 = "";
+	var tarray = new Array();
+	tarray = string1.split(";");
+	for (i = 0; i < tarray.length; i++) {
+		addToCostCentreList(tarray[i]);
+	}
+	drawCostCentreBox();
+}
+</script>
 <c:set var="editSectionId" value="orgContactInfoEdit"/>
 
 <c:if test="${param.requesttype ne 'ajax'}">
@@ -23,7 +185,31 @@
 </c:if>
 
 <%-- Organization Contact Info Details --%>
-<div class="pageSectionTitle">
+
+
+<%-- Organization Contact Info Details - Summary Section --%>
+<div class="row col12">
+	<div class="row col12">
+		<div class="col5">
+		<span>Name:</span>
+		<span class="starick">*</span>
+		</div>
+		<div class="col7">
+			<input class="inputField" type="text" value="${orgEntityDetails.displayName}"/>
+		</div>
+	</div>
+	<div class="clear_float"></div>
+	<div class="row col12">
+	<div class="col5">
+		<span>ABN:</span>
+		<span class="starick">*</span>
+	</div>
+	<div class="col7">
+		<input class="inputField" type="text" value=""/>
+	</div>
+	</div>
+</div>
+<%-- <div class="pageSectionTitle">
 	<h2 id="organizationContactInfoDetails"><wcst:message bundle="${widgetText}" key="ORG_CONTACT_INFO"/></h2>
 	<span class="spanacce" aria-hidden="true" id="WC_orgContactInfo_pageSection_edit"><wcst:message bundle="${widgetText}" key="ACCE_ORG_SUMMARY_EDIT"/></span>
 	<div id="${editSectionId}Icon" class="editIcon">
@@ -31,19 +217,45 @@
 			<img src="${staticIBMAssetAliasRoot}/images/edit_icon.png" alt=''>
 		</a>
 	</div>
-</div>
-
-<%-- Organization Contact Info Details - Summary Section --%>
+</div> --%>
 <div style="display: block;" class="readField" id="${editSectionId}Read" role="document" aria-labelledBy="organizationContactInfoDetails" tabindex="0">
+	<%-- <div class="row col12">
+		<div class="col5">
+			<h2 id="organizationContactInfoDetails"><wcst:message bundle="${widgetText}" key="ORG_CONTACT_INFO"/></h2>
+		</div>
+		<div class="col7">
+			<div id="${editSectionId}Icon" class="editIcon">
+				<a aria-describedBy='WC_orgContactInfo_pageSection_edit' href="#" onclick="javaScript:widgetCommonJS.toggleReadEditSection('${editSectionId}', 'edit');return false;" >
+					<img src="${staticIBMAssetAliasRoot}/images/edit_icon.png" alt=''>
+				</a>
+			</div>
+		</div>
+	</div> --%>
+	<div class="row col12">
+	<div class="pageSectionTitle">
+		<span><wcst:message bundle="${widgetText}" key="ORG_CONTACT_INFO"/></span>
+		<div id="${editSectionId}Icon" class="editIcon">
+			<a aria-describedby="WC_orgAddress_pageSection_edit" onclick="javaScript:ShowHideContact();">
+				<img src="${staticIBMAssetAliasRoot}/images/edit_icon.png" alt=''>
+			</a>
+		</div>
+	</div> 
+	</div>
+	<div class="row col12 orgContactDetails">
 	<c:forEach var="fieldName" items="${contactInfoFieldsForOrg}">
-		<div class="field">
-			<span class="readLabel"><wcst:message bundle="${widgetText}" key="ORG_CONTACT_INFO_${fieldName}"/></span> <span class="readValue"><c:out value='${orgEntityDetails.orgProperties[fieldName]}'/></span>
+		<div class="col5">
+			&nbsp; <%-- <span class="readLabel"><wcst:message bundle="${widgetText}" key="ORG_CONTACT_INFO_${fieldName}"/></span>  --%>
+		</div>
+		<div class="col7">
+			<span class=""><c:out value='${orgEntityDetails.orgProperties[fieldName]}'/></span>
 		</div>
 	</c:forEach>
+	</div>
 </div>
 
 <%-- Organization Contact Info - Edit Section --%>
-<div style="display: none;" class="editField" id="${editSectionId}">
+<div style="display: none;" class="editField col12 row orgContactInfoEdit" id="${editSectionId}">
+	<div class="col12 row"> 
 	<form id="orgContactInfo"  name="orgContactInfo" role="form">
 
 	<c:forEach items = "${contactInfoFieldsForOrg}" var = "fieldName" varStatus="counter">
@@ -54,15 +266,15 @@
 		<c:if test="${(counter.count - 1) % 3 eq 0}"> 
 			<div class="row">
 		</c:if>
-			<div class="col4 formField">
-				<div class="field">
-					<p><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/><c:if test="${fn:contains(mandatoryFields, fieldName)}"><span class="required" ${ariaRequiredAttribute} >&nbsp;*</span></c:if></p>
+			<div class="col12 row formField">
+				<div class="field col12 row">
+					<div class="col5"><p><span class="starikText"><wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/><c:if test="${fn:contains(mandatoryFields, fieldName)}"></span><span class="required" ${ariaRequiredAttribute} >&nbsp;*</span></c:if></p></div>
 					<span class="spanacce">
 						<label for="${fieldName}">
 							<wcst:message bundle="${widgetText}" key="ORG_${fieldName}_inputText"/>
 						</label>
 					</span>
-					<div>
+					<div class="col7">
 						<input type="text" value = "<c:out value='${orgEntityDetails.orgProperties[fieldName]}'/>" name="${fieldName}" id="${fieldName}"/>
 					</div>
 				</div>
@@ -73,21 +285,22 @@
 	</c:forEach>
 
 	<div class="row">
-		<div class="editActions">
+		<div class="editActions right">
 			<a class="button_primary" role="button" onclick="organizationSummaryJS.updateOrganizationContactInfo('${param.orgEntityId}','${editSectionId}');return false;" href="#">
 					<div class="left_border"></div>
 					<div class="button_text"><span><wcst:message bundle="${widgetText}" key="ORG_SAVE"/></span></div>								
 					<div class="right_border"></div>
 			</a>
-
+<%-- 
 			<a class="button_secondary" role="button" onclick="javascript:widgetCommonJS.toggleReadEditSection('${editSectionId}', 'read');organizationSummaryJS.resetFormValue('${editSectionId}');return false;" href="#">
 					<div class="left_border"></div>
 					<div class="button_text"><span><wcst:message bundle="${widgetText}" key="ORG_CANCEL"/></span></div>								
 					<div class="right_border"></div>
-			</a>
+			</a> --%>
 		</div>
 	</div>
 	</form>
+	</div>
 </div>
 
 

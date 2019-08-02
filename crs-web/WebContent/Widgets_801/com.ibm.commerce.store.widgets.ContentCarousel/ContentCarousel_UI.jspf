@@ -17,9 +17,10 @@
 <c:if test="${!empty contentFormatMap}">
 	<wcst:message key="PC_PREVIOUS_PAGE" bundle="${widgetText}" var="PC_PREVIOUS_PAGE"/>
 	<wcst:message key="PC_NEXT_PAGE" bundle="${widgetText}" var="PC_NEXT_PAGE"/>
-	<wcst:message key="PC_MOVE_TO_PAGE_{0}" bundle="${widgetText}" var="PC_MOVE_TO_PAGE"/>
+	
+	
 	<div dataci_espot ="<c:out value='${param.pgl_widgetId}_${emsName}'/>" id="ci_espot_<c:out value='${param.pgl_widgetId}_${emsName}'/>" style="position:relative">
-        <c:set var="carouselOptions" value='{"prevButton": "a.prevPageButton", "nextButton": "a.nextPageButton", "contentContainer": "div.content", "paginationButtons": "div.pageControl>a", "overflowVisible": true, "owlCarouselOptions": {"singleItem": true}}'/>
+        <c:set var="carouselOptions" value='{"prevButton": "a.prevPageButton", "nextButton": "a.nextPageButton", "contentContainer": "div.content", "paginationButtons": "div.pageControl>a", "overflowVisible": true, "owlCarouselOptions": {"singleItem": true, "autoPlay": true}}'/>
         <div id="contentCarouselWidget${widgetSuffix}" class="contentCarouselWidget carousel" data-widget-id="${param.pgl_widgetId}" data-widget-type="wc.Carousel" data-widget-options="${fn:escapeXml(carouselOptions)}" >            
             <div class="content" >
                 <c:forEach items="${contentFormatMap}" var="contentFormat">
@@ -29,6 +30,7 @@
                     </div>
                 </c:forEach>
             </div>
+            
 			<c:if test="${param.ribbonArrows}">
 				<a id="prevPageButton${widgetSuffix}" href="#" class="prevPageButton" role="button" aria-label="${PC_PREVIOUS_PAGE}"></a>
 				<a id="nextPageButton${widgetSuffix}" href="#" class="nextPageButton" role="button" aria-label="${PC_NEXT_PAGE}"></a>
@@ -36,9 +38,12 @@
 			<c:if test="${param.ribbonImageType != 'none'}">
 				<div class="pageControl ${param.ribbonImageType}">
                     <c:forEach items="${contentFormatMap}" var="contentFormat" varStatus="loop">
+                        <wcst:message key="PC_MOVE_TO_PAGE_{0}" bundle="${widgetText}" var="PC_MOVE_TO_PAGE">
+                        	<wcst:param value="${loop.index+1}" />
+                        </wcst:message>
                         <c:choose>
                             <c:when test="${param.ribbonImageType == 'dot'}"><a role="button" href="#" title="${PC_MOVE_TO_PAGE}" aria-label="${fn:replace(PC_MOVE_TO_PAGE, '0', 'z')}"></a></c:when>
-                            <c:when test="${param.ribbonImageType == 'number'}"><a role="button" href="#" title="${PC_MOVE_TO_PAGE}" aria-label="${PC_MOVE_TO_PAGE}">${loop.index}</a></c:when>
+                            <c:when test="${param.ribbonImageType == 'number'}"><a role="button" href="#" title="${PC_MOVE_TO_PAGE}" aria-label="${PC_MOVE_TO_PAGE}">${loop.index+1}</a></c:when>
                         </c:choose>
                     </c:forEach>
 				</div>

@@ -133,6 +133,9 @@
 		<c:set var="type" value="product" />
 		<c:set var="singleSKU" value="${catalogEntryDetails.hasSingleSKU}"/>
 	</c:when>
+	<c:when test="${catalogEntryDetails.catalogEntryTypeCode == 'VariantBean'}">
+		<c:set var="type" value="variant" />
+	</c:when>
 	<c:when test="${catalogEntryDetails.catalogEntryTypeCode == 'DynamicKitBean' || catalogEntryDetails.catalogEntryTypeCode == 'PredDynaKitBean'}">
 		<c:choose>
             <c:when test="${catalogEntryDetails.catalogEntryTypeCode == 'PredDynaKitBean'}">
@@ -490,3 +493,15 @@
 		</wcf:url>
 	</c:when>
 </c:choose>
+
+<c:if test="${!empty userType && userType ne 'G'}">
+	<c:if test="${empty userId}">
+		<c:set var="userId"><c:out value="${CommandContext.userId}"/></c:set>
+	</c:if>
+	
+	<wcf:rest var="getFavFlag" url="store/{storeId}/moq/getFavouritesFlag/{catentryId}/{userId}" scope="request">
+		<wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
+		<wcf:var name="catentryId" value="${catalogEntryID}" encode="true"/>
+		<wcf:var name="userId" value="${userId}" encode="true"/>
+	</wcf:rest>
+</c:if>

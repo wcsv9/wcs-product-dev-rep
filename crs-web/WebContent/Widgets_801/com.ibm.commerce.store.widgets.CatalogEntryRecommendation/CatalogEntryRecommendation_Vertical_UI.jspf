@@ -39,7 +39,7 @@
 			<c:if test="${eSpotTitleIncluded == null || empty eSpotTitleIncluded[emsName]}" >
 				<h2 id="title${widgetSuffix}"><%@include file="../Common/ESpot/ESpotTitle_UI.jspf"%></h2>
 			</c:if>
-			<div class="controlBar">
+			<div class="controlBar left">
 				<a id="prevPageButton${widgetSuffix}" href="#" class="prevPageButton" role="button" aria-label="${PC_PREVIOUS_PAGE}" alt="${PC_PREVIOUS_PAGE}"></a>
 				<div class="pageControlWrapper">
                     <div id="pageControlMenu${widgetSuffix}" class="pageControlMenu" data-parent="header">

@@ -45,7 +45,7 @@ pageViewButtonURLs - an ArrayList containing URLs for the view buttons (e.g. gri
 </c:if>
 
 <%-- Data for items per page drop down menu --%>
-<c:set var="itemsPerPage" value="6,12,18" />
+<c:set var="itemsPerPage" value="12,24,36" />
 <wcf:useBean var="itemsPerPageList" classname="java.util.ArrayList"/>
 <c:forTokens items="${itemsPerPage}" delims="," var="itemCount">
 	<wcf:useBean var="itemPerPageObj" classname="java.util.HashMap"/>
@@ -125,6 +125,42 @@ it will become an empty String. If you do not include the space, the forEach wil
 <c:if test="${empty initSortOrder }" >
 	<c:set var="initSortOrder" value="${param.sortBy }" />
 </c:if>
+
+
+<wcf:url var="ProductListingViewURL" value="ProductListingView" type="Ajax">
+    <wcf:param name="langId" value="${langId}"/>
+	<wcf:param name="storeId" value="${storeId}"/>
+	<wcf:param name="catalogId" value="${catalogId}"/>
+	<wcf:param name="advancedSearch" value="${WCParam.advancedSearch}"/>
+	<wcf:param name="sType" value="SimpleSearch"/>
+	<wcf:param name="categoryId" value="${WCParam.categoryId}"/>
+	<wcf:param name="searchType" value="${searchType}"/>
+	<wcf:param name="facet" value="${WCParam.facet}"/>
+	<wcf:param name="searchTermScope" value="${WCParam.searchTermScope}" />
+	<wcf:param name="searchTerm" value="${intentSearchTerm}" />
+	<wcf:param name="metaData" value="${metaData}"/>
+	<wcf:param name="resultCatEntryType" value="${WCParam.resultCatEntryType}"/>
+	<wcf:param name="filterFacet" value="${WCParam.filterFacet}"/>
+	<wcf:param name="manufacturer" value="${WCParam.manufacturer}"/>
+	<wcf:param name="emsName" value="${param.emsName}" />
+	<wcf:param name="gridPosition" value="${param.gridPosition}" />
+	<wcf:param name="resultsPerPage" value="${pageSize}" />
+	<wcf:param name="disableProductCompare" value="${disableProductCompare}" />
+	<wcf:param name="ajaxStoreImageDir" value="${jspStoreImgDir}" />
+	<wcf:param name="filterTerm" value="${WCParam.filterTerm}" />
+	<wcf:param name="enableSKUListView" value="${param.enableSKUListView}" />
+	<c:if test="${env_inPreview && !env_storePreviewLink}">
+		<wcf:param name="initSortOrder" value="${initSortOrder}" />
+		<wcf:param name="initPageView" value="${initPageView}" />
+		<wcf:param name="pgl_widgetName" value="${param.pgl_widgetName}" />
+		<wcf:param name="pgl_widgetId" value="${param.pgl_widgetId}" />
+		<wcf:param name="pgl_widgetSlotId" value="${param.pgl_widgetSlotId}"/>
+		<wcf:param name="pgl_widgetSeqeunce" value="${param.pgl_widgetSeqeunce}"/>
+		<wcf:param name="pgl_widgetDefName" value="${param.pgl_widgetDefName}"/>
+	</c:if>
+	<wcf:param name="ddkey" value="ProductListingView${widgetSuffix}"/>
+</wcf:url>
+
 
 <c:set var="categoryId" value="${WCParam.categoryId}" />
 <c:if test="${!empty categoryId}">

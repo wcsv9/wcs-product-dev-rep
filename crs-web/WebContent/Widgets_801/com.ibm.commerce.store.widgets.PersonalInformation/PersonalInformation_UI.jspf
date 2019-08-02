@@ -14,6 +14,184 @@
 
 <!-- BEGIN PersonalInformation_UI.jsp -->
 
+
+<script type="text/javascript" language="javascript">  
+function ResponsiveMenu(){
+	 var x = document.getElementById("accDetailMenu");
+	  if (x.className === "normalMenu") {
+	    x.className = " responsive";
+	  } else {
+	    x.className = "normalMenu";
+	  }
+}	 
+function addCostCentre(field, fieldId) {
+	var newCostCentre = field.value;
+	//alert(newCostCentre);	
+	//alert(fieldId);
+	addToCostCentreList(newCostCentre, field, fieldId);
+	drawCostCentreBox(field, fieldId);
+}
+ 
+function addToCostCentreList(newCostCentre, field, fieldId) {
+	//newCostCentre = trimString(newCostCentre);
+	//alert("In Add " + newCostCentre);
+	if (newCostCentre != "") {
+		var costCentreOptionNew = document.createElement('option');
+		costCentreOptionNew.text = newCostCentre;
+		costCentreOptionNew.value = newCostCentre;
+		var costCentreList = getCostCenterList(fieldId);
+		var optArray = new Array(costCentreList.options.length); 
+		var optArray1 = new Array(); 
+		var costLength = costCentreList.options.length;
+		
+		try {
+			costCentreList.add(costCentreOptionNew, null); // standards compliant; doesn't work in IE
+		}
+		catch(ex) {
+			costCentreList.add(costCentreOptionNew); // IE only
+		}
+	}
+	else{
+		alert("Invalid value.");
+	}
+	drawCostCentreBox(field, fieldId);
+	if(costLength > 0 ){
+		optArray1[0] = costCentreList.options[costLength].value;
+		for(var i=0; i<costLength; i++){
+			optArray [i] = costCentreList.options[i].value;				
+		}
+		for(var i2=0; i2<costLength+1; i2++){
+			costCentreList.options[0].remove();			
+		}
+		var b = true;
+		
+		for (var i3 = 0; i3<optArray.length+1; i3++) {
+			if(b){
+				b = false;
+				var temp = document.createElement('option');
+				temp.text = optArray1[0];
+				temp.value = optArray1[0];
+				try {
+					costCentreList.add(temp, null); // standards compliant; doesn't work in IE
+				} 
+				catch(ex) {
+					costCentreList.add(temp); // IE only
+				}
+				drawCostCentreBox(field, fieldId);
+				i3 = 0;
+			}
+			else{
+				var temp = document.createElement('option');
+				temp.text = optArray[i3-1];
+				temp.value = optArray[i3-1];
+				try {
+					costCentreList.add(temp, null); // standards compliant; doesn't work in IE
+				} 
+				catch(ex) {
+					costCentreList.add(temp); // IE only
+				}
+				drawCostCentreBox(field, fieldId);
+			}
+		}
+	}
+}
+
+function drawCostCentreBox(field, fieldId) {
+	field.value = "";
+	var costCentreList = getCostCenterList(fieldId);
+	if (costCentreList.length > 4) {
+		costCentreList.size = 4;
+	} 
+	else {
+		costCentreList.size = costCentreList.length;
+	}
+	var costCentreBox = getCostCentreBox(fieldId);
+	if (costCentreList.length > 0) {
+		costCentreBox.style.display = 'block';
+	} else {
+		costCentreBox.style.display = 'none';
+	}
+	combineCostCentre(costCentreList, fieldId);
+}
+
+
+function getCostCenterList(fieldId){
+	var costCentreList = '';
+	if(fieldId == 'usr_'){		
+		costCentreList = document.getElementById('costCentreList_usr');
+	}
+	else if(fieldId == 'org_'){
+		costCentreList = document.getElementById('costCentreList_org');
+	}
+	else{
+		costCentreList = document.getElementById('costCentreList');
+	}
+	
+	return costCentreList;
+}
+
+function getCostCentreBox(fieldId){
+	var costCentreBox = '';
+	if(fieldId == 'usr_'){		
+		costCentreBox = document.getElementById('costCentreBox_usr');
+	}
+	else if(fieldId == 'org_'){
+		costCentreBox = document.getElementById('costCentreBox_org');
+	}
+	else{
+		costCentreBox = document.getElementById('costCentreBox');
+	}
+	
+	return costCentreBox;
+}
+ 
+function removeCostCentre(field, fieldId) {
+	var costCentreList = getCostCenterList(fieldId);
+	
+	var i;
+	for (i = costCentreList.length - 1; i>=0; i--) {
+		if (costCentreList.options[i].selected) {
+			costCentreList.remove(i);
+		}
+	}
+	drawCostCentreBox(field, fieldId);
+}
+ 
+function combineCostCentre(costCentreList1, fieldId) {
+	var costCentreList = getCostCenterList(fieldId);
+	var i;
+	var combinedString = "";
+	for (i = 0; i<costCentreList.length; i++) {
+		if (i != 0) {
+			combinedString = combinedString + ";";
+		}
+		combinedString = combinedString + costCentreList.options[i].value;
+	}
+	
+	if(fieldId == 'usr_'){		
+		document.getElementById('costCentreCombined_usr').value = combinedString;
+	}
+	else if(fieldId == 'org_'){
+		document.getElementById('costCentreCombined_org').value = combinedString;
+	}
+	else{
+		document.getElementById('costCentreCombined').value = combinedString;
+	}
+	
+}
+ 
+ 
+function loadCostCentreList() {
+	var string1 = "";
+	var tarray = new Array();
+	tarray = string1.split(";");
+	for (i = 0; i < tarray.length; i++) {
+		addToCostCentreList(tarray[i]);
+	}
+	drawCostCentreBox();
+}
+ 
+</script>
 <c:if test="${env_shopOnBehalfSessionEstablished eq 'true'}">
 	<div class="listTable listTable_CSR_resetPassword" id="csr_reset_password">
 		<form name="ResetPasswordAction_AuthTokenInfo"  id="ResetPasswordAction_AuthTokenInfo">
@@ -64,8 +242,26 @@
 </c:if>
 
 <div id="box" class="myAccountMarginRight">
-	<div class="my_account" id="WC_RegistrationUpdateCommonPage_div_1">
-		<h2 class="myaccount_header"><wcst:message bundle="${widgetText}" key="MA_PERSONAL_INFO" /></h2>
+	<div class="my_account row myAccDetailsPage" id="WC_RegistrationUpdateCommonPage_div_1">
+		<div class="row headInsideMenu">
+			<div class="col1">&nbsp;</div>
+			<div class="col10 userIconLine">
+				<div class="userIcon"> </div>
+				<hr/>
+			</div>
+			<div class="col1">&nbsp;</div>
+		<div class="col12"><p>Account Details</p></div>
+		<div class="col12 links">
+			<div class="normalMenu" id="accDetailMenu">
+				<%out.flush();%>
+		        <c:import url="${env_jspStoreDir}/Common/MyAccountPageURLs.jsp"/>
+		   		 <%out.flush();%> 
+			</div>
+		</div>
+		</div>
+		<br/>
+	<div style="clear:both"></div>
+		<%-- <h2 class="myaccount_header"><wcst:message bundle="${widgetText}" key="MA_PERSONAL_INFO" /></h2>
 		<div class="content_header" id="WC_UserRegistrationUpdateForm_div_6">
 			<div class="left_corner" id="WC_UserRegistrationUpdateForm_div_7"></div>
 			<div  id="WC_UserRegistrationUpdateForm_div_8" class="headingtext">
@@ -79,10 +275,21 @@
 				</span>
 			</div>
 			<div class="right_corner" id="WC_UserRegistrationUpdateForm_div_9"></div>
-		</div>
-		<div class="body" id="WC_UserRegistrationUpdateForm_div_10">
-			<div class="form_2column" id="WC_UserRegistrationUpdateForm_div_11">
-				<form name="Register" method="post" action="RESTUserRegistrationUpdate" id="Register">
+		</div> --%>
+		
+		
+		
+		<div class="body row" id="WC_UserRegistrationUpdateForm_div_10">
+		<br/><br/><br/>
+		
+		
+		 
+					
+					
+			<div class="form_2column col6 acol12" id="WC_UserRegistrationUpdateForm_div_11">
+				<fieldset class="personalField">
+					<legend>Personal Details</legend>
+					<form name="Register" method="post" action="RESTUserRegistrationUpdate" id="Register">
 					<input type="hidden" name="storeId" value="<c:out value="${WCParam.storeId}"/>" id="WC_UserRegistrationUpdateForm_FormInput_storeId_In_Register_1"/>
 					<input type="hidden" name="catalogId" value="<c:out value="${WCParam.catalogId}"/>" id="WC_UserRegistrationUpdateForm_FormInput_catalogId_In_Register_1"/>
 					<input type="hidden" name="URL" value="<c:out value='${LogonForm}'/>" id="WC_UserRegistrationUpdateForm_FormInput_URL_In_Register_1"/>
@@ -94,8 +301,13 @@
 					<input type="hidden" name="receiveSMS" value="" id="WC_UserRegistrationUpdateForm_FormInput_receiveSMS_In_Register_1"/>
 					<input type="hidden" name="logonId" value="<c:out value="${person.logonId}"/>" id="WC_UserRegistrationUpdateForm_FormInput_logonId_In_Register_1_1"/>
 					<input type="hidden" name="authToken" value="${authToken}" id="WC_UserRegistrationUpdateForm_FormInput_authToken_In_Register_1"/>
-					<span class="required-field" id="WC_UserRegistrationUpdateForm_div_12"> *</span>
-					<wcst:message bundle="${widgetText}" key="REQUIRED_FIELDS" />
+					<div class="row">
+					<div class="col4 denotesTxtAndField">
+						<span class="required-field left" id="WC_UserRegistrationUpdateForm_div_12"> *</span>
+						<span><wcst:message bundle="${widgetText}" key="REQUIRED_FIELDS" /></span>
+						
+					</div>
+					</div>
 					<%-- The challenge answer and question are necessary for the forget password feature. Therefore, they are set to "-" here.       --%>
 					<input type="hidden" name="challengeQuestion" value="-" id="WC_UserRegistrationUpdateForm_FormInput_challengeQuestion_In_Register_1"/>
 					<input type="hidden" name="challengeAnswer" value="-" id="WC_UserRegistrationUpdateForm_FormInput_challengeAnswer_In_Register_1"/>
@@ -107,6 +319,11 @@
 					<c:set var="formName" value="document.Register.name" />
 					<c:set var="pageName" value="UserRegistrationUpdateForm" />
 					
+					 
+					
+					
+					
+					 
 					<wcpgl:widgetImport useIBMContextInSeparatedEnv="${isStoreServer}" url="${env_siteWidgetsDir}com.ibm.commerce.store.widgets.AddressForm/AddressForm.jsp">
 						<wcpgl:param name="addressId" value="${addressId}" />
 						<wcpgl:param name="nickName" value="${nickName}" />
@@ -115,11 +332,15 @@
 						<wcpgl:param name="middleName" value="${middleName}"/>
 						<wcpgl:param name="address1" value="${street}"/>
 						<wcpgl:param name="address2" value="${street2}"/>
+						<wcpgl:param name="address3" value="${street3}"/>
 						<wcpgl:param name="city" value="${city}"/>
 						<wcpgl:param name="state" value="${state}"/>
 						<wcpgl:param name="countryReg" value="${country1}"/>
 						<wcpgl:param name="zipCode" value="${zipCode}"/>
 						<wcpgl:param name="phone" value="${phone1}"/>
+						<wcpgl:param name="phone2" value="${phone2}"/>
+						<wcpgl:param name="role" value="${role}"/>
+						<wcpgl:param name="title" value="${title}"/>
 						<wcpgl:param name="email1" value="${email1}"/>
 						<wcpgl:param name="emailOption" value="${emailOption}"/>
 						<wcpgl:param name="gender" value="${gender}"/>
@@ -133,23 +354,183 @@
 						<wcpgl:param name="preferredCurrency" value="${preferredCurrency}"/>
 						<wcpgl:param name="formName" value="${formName}"/>
 						<wcpgl:param name="pageName" value="${pageName}"/>
-						<wcpgl:param name="flexFlowsFieldOrder" value="EmailOption,preferredLanguage,preferredCurrency,Age,Gender,DateOfBirth,MobilePhone,RememberMe"/>
+						<wcpgl:param name="flexFlowsFieldOrder" value="EmailOption,preferredLanguage,preferredCurrency,Age,Gender,DateOfBirth,MobilePhone,RememberMe,MarketingConsent"/>
 					</wcpgl:widgetImport>
 				
 					<br clear="all" />
 					<br />
-				</form>
-			</div>
-		</div>
-	</div>
-	<div id="WC_UserRegistrationUpdateForm_div_40">
+	
+<!-- New Field added 'Cost centre '-->
+
+
+<wcf:rest var="getCostCenter" url="store/{storeId}/userRegister/getCostCenter/{userId}" scope="request">
+	<wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
+	<wcf:var name="userId" value="${userId}" encode="true"/>
+</wcf:rest>
+				<div id="WC_UserRegistrationUpdateForm_div_40">
 		<div class="button_footer_line" id="WC_UserRegistrationUpdateForm_div_42">
 			<a href="#" role="button" class="button_primary" id="WC_UserRegistrationUpdateForm_links_1" onclick="javascript:MyAccountDisplay.prepareSubmit(document.Register,'<c:out value='${logonPassword}'/>','<c:out value='${logonPasswordVerify}'/>');return false;">
 				<div class="left_border"></div>
-				<div class="button_text"><wcst:message bundle="${widgetText}" key="UPDATE" /></div>												
+				<div class="button_text"><wcst:message bundle="${widgetText}" key="SAVE" /> Details</div>												
 				<div class="right_border"></div>
 			</a>	
 		</div>
 	</div>
+
+				</fieldset>	
+				</form>
+			</div>
+			
+			
+			
+			
+			
+		<div class="col6 acol12 row changePassParent">
+		<div class="col12 changePass">
+			<fieldset>
+			<legend>Password</legend>
+			<form name="Logon" method="post" action="PersonChangeServicePasswordReset" id="Logon">
+						<input type="hidden" name="storeId" value='<c:out value="${storeId}" />' id="WC_UserPasswordUpdateForm_FormInput_storeId_In_Logon_1"/>
+						<input type="hidden" name="catalogId" value='<c:out value="${catalogId}" />' id="WC_UserPasswordUpdateForm_FormInput_catalogId_In_Logon_1"/>
+						<input type="hidden" name="langId" value='<c:out value="${langId}" />' id="WC_UserPasswordUpdateForm_FormInput_langId_In_Logon_1"/>
+						<input type="hidden" name="reLogonURL" value="UserPasswordUpdate" id="WC_UserPasswordUpdateForm_FormInput_reLogonURL_In_Logon_1"/>
+						<input type="hidden" name="errorViewName" value="UserPasswordUpdate" id="WC_UserPasswordUpdateForm_FormInput_Error_In_Logon_1"/>
+						<%-- the parameter 'calculationUsageId' and 'updatePrices' are used by the OrderCalculate command --%>
+						<input type="hidden" name="URL" value="<c:out value='${LogonForm}'/>" id="WC_PasswordResetForm_FormInput_URL_In_ResetPasswordForm_1"/>
+						<input type="hidden" name="authToken" value="${authToken}"  id="WC_UserPasswordUpdateForm_FormInput_authToken_In_Logon_1"/>
+						
+						<div class="column row" id="WC_UserPasswordUpdateForm_div_6" style="float: none;">
+							<div class="col4" id="WC_UserPasswordUpdateForm_div_7">
+								<label for="WC_UserPasswordUpdateForm_FormInput_logonPasswordOld_In_Logon_1">
+									<wcst:message bundle="${widgetText}" key="MA_CURRENT_PWORD"/>
+								</label>
+							</div>
+							<div class="col8">
+								<input <c:out value="${aria_invalid}"/> class="inputField" aria-required="true" aria-describedby="error_msg" size="35" maxlength="50" name="logonPasswordOld" type="password" autocomplete="off" value="" id="WC_UserPasswordUpdateForm_FormInput_logonPasswordOld_In_Logon_1"/>
+							</div>
+						</div>
+						<br clear="all" />
+						
+						<div class="column row" id="WC_UserPasswordUpdateForm_div_8" style="float: none;">
+							<div class="col4" id="WC_UserPasswordUpdateForm_div_9">
+								<label for="WC_UserPasswordUpdateForm_FormInput_logonPassword_In_Logon_1">
+									<wcst:message bundle="${widgetText}" key="MA_PASSWORD"/>
+								</label>
+							</div>
+							<div class="col8"><input <c:out value="${aria_invalid}"/> class="inputField" aria-required="true" aria-describedby="error_msg" size="35" maxlength="50" name="logonPassword" type="password" autocomplete="off" value="" id="WC_UserPasswordUpdateForm_FormInput_logonPassword_In_Logon_1"/></div>
+						</div>
+						
+						<br clear="all" />
+						
+						<div class="column row" id="WC_UserPasswordUpdateForm_div_10" style="float: none;">
+							<div class="col4" id="WC_UserPasswordUpdateForm_div_11">
+								<label for="WC_UserPasswordUpdateForm_FormInput_logonPasswordVerify_In_Logon_1">
+									<wcst:message bundle="${widgetText}" key="MA_VERIFY_PASSWORD"/>
+								</label>
+							</div>
+						    <div class="col8"><input <c:out value="${aria_invalid}"/> class="inputField" aria-required="true" aria-describedby="error_msg" size="35" maxlength="50" name="logonPasswordVerify" type="password" autocomplete="off" value="" id="WC_UserPasswordUpdateForm_FormInput_logonPasswordVerify_In_Logon_1"/></div>
+						</div>
+					</form>
+					<div class="button_footer_line">
+						<a href="#" role="button" class="button_primary" id="WC_UserPasswordUpdateForm_Link_1" onclick="javascript:submitSpecifiedForm(document.Logon);return false;">
+							<div class="left_border"></div>
+							<div class="button_text">Change Password</div>
+							<div class="right_border"></div>
+						</a>
+					</div>
+					</fieldset>
+		</div>
+		<div class="col12">
+			<fieldset class="financialsField">
+			<legend>Financials</legend>
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>_div_13">
+			 <div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>_div_14" class="column_label col3">
+			 	<c:choose>
+				 
+				  <c:when test="${paramPrefix eq 'org_'}">
+				    <%--<label for="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}costCentre_1'/>" class="nodisplay">
+				     Cost centre:
+				    </label>
+					<fmt:message key="COST_CENTRE" bundle="${storeText}"/>--%>
+				  </c:when>
+				  <c:otherwise><!-- Madisons zipcode -->
+				  Cost centre:
+				  </c:otherwise>
+			 	</c:choose>
+			 </div>
+			 <c:choose>
+			 	<c:when test="${paramPrefix eq 'org_'}">
+					 	
+			 	</c:when>
+				<c:when test="${paramPrefix eq 'usr_'}">
+					<div class="col7"><input class="inputField" type="text" maxlength="30" size="35" id="new_cost_centre_usr" name="new_cost_centre" />
+			 		<input type="hidden" name="userField1" value='<c:out value="${getCostCenter.costCenterValue[0] }"/>' id="costCentreCombined_usr" /> </div>
+			 		<div class="col2">
+			 		<a class="button_primary" style=" ;margin-top:0px; text-align:center;" onclick="addCostCentre(document.getElementById('new_cost_centre_usr'), 'usr_');">Add</a></div><br/>
+			 		
+			 	</c:when>
+				
+			 	<c:otherwise>
+			 		
+					<div class="col7"><input  class="inputField" type="text" maxlength="30" size="35" id="new_cost_centre" name="new_cost_centre" />
+			 		<input type="hidden" name="userField1" value='<c:out value="${getCostCenter.costCenterValue[0] }"/>' id="costCentreCombined" /></div>
+			 		<div class="col2"><a class="button_primary"   onclick="addCostCentre(document.getElementById('new_cost_centre'), '');">Add</a></div><br/>
+			 	</c:otherwise>
+			 	
+			 </c:choose>
+		
+					
+			<c:choose>
+			 	<c:when test="${getCostCenter.costCenterValue ne 'NULL'}"> 	
+					<span name="costCentreBox" id="costCentreBox" style="display: block;">
+					 		<c:set var="cstcntr" value="${fn:split(getCostCenter.costCenterValue[0], ';')}" /> 
+					 		<select id="costCentreList" multiple="multiple" style="float:left;padding:10px;">
+						 		<c:forEach var="cst" items="${cstcntr}"  varStatus='outerStatus'>
+							         
+							         <c:if test="${cst ne 'NULL' }">
+								 			<option value='<c:out value="${cst }"/>'><c:out value="${cst }"/></option>
+								 	</c:if>
+							    </c:forEach>
+					 			
+					 		</select>
+					 		<br/>
+							&nbsp;
+						<br/><br/><br/>
+						
+				</span>
+				<a class="button_secondary" style="margin-top:0px;text-align:center;" onclick="removeCostCentre('');">Remove selected</a>
+			</c:when>
+			<c:otherwise>
+				<c:choose>
+				 	<c:when test="${paramPrefix eq 'usr_'}">
+				 		<span name="costCentreBox" id="costCentreBox_usr" style="display: none;">
+						<select id="costCentreList_usr" multiple="multiple" style="float:left;padding:10px;"></select>
+						<a class="button_secondary" style="margin-top:0px;text-align:center;" onclick="removeCostCentre(document.getElementById('new_cost_centre_usr'), 'usr_');">Remove selected</a>
+						<br/><br/><br/>
+					</span>	 	
+				 	</c:when>
+			 	
+				 	<c:otherwise>
+				 		<span name="costCentreBox" id="costCentreBox" style="display: none;">
+						<select id="costCentreList" multiple="multiple" style="float:left;padding:10px;"></select>
+						
+						<br/><br/><br/>
+					</span>	 	
+					<a onclick="removeCostCentre(document.getElementById('new_cost_centre'), ' ');">Remove selected</a>
+				 	</c:otherwise>
+			 	
+			 	</c:choose>
+			</c:otherwise>
+			</c:choose>	
+			 
+		</div>
+		</fieldset>	
+		</div>
+	</div>	
+			
+		</div>
+	</div>
+	
+	
 </div>
 <!-- END PersonalInformation_UI.jsp -->

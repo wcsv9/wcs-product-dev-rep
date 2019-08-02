@@ -57,7 +57,7 @@
 
 <%-- if PiAmount is not set, then calculate the piamount --%>
 <c:if test="${!requestedPIAmount && (empty piAmount || piAmount/1==0)}">
-	<fmt:parseNumber var="piAmount" value='${orderSummary.grandTotal}'/>
+	<fmt:parseNumber var="piAmount" value='${orderSummary.grandTotal}' parseLocale="en" />
 	<c:if test="${paymentAreaNumber > 1}">
 		<c:set var="piAmount" value="${piAmount - currentTotal}"/>
 	</c:if>

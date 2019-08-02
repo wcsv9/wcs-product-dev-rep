@@ -25,7 +25,12 @@
         <wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
     </wcf:rest>
 </c:if>
-
+<%--
+<wcf:rest var="getPerson" url="store/{storeId}/userRegister/getPersonContact/{userId}">
+        <wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
+        <wcf:var name="userId" value="${person.userId}" encode="true"/>
+</wcf:rest>
+ --%>
 <c:set var="addressBookBean" value="${person}"/>
 
 <wcf:url var="AddressFormCreateURL" value="AjaxAccountAddressForm" type="Ajax">

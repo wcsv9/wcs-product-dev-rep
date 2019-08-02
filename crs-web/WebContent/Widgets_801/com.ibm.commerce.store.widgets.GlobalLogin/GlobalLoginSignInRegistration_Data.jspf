@@ -31,6 +31,19 @@
 </wcf:url>
 </c:if>
 
+
+<!--Comment YEHAN STORE LOCATOR ADD KIYA HAI -->
+<wcf:url var="StoreLocatorsB2CDisplayMapView"  value="StoreLocatorsB2CDisplayMapView">
+	<wcf:param name="storeId"   value="${storeId}"  />
+	<wcf:param name="catalogId" value="${catalogId}"/>
+	<wcf:param name="langId" value="${langId}" />
+	<wcf:param name="orderId" value="NA" />
+	<wcf:param name="orderItemId" value="NA" />
+	<wcf:param name="lat" value="" />
+	<wcf:param name="lng" value="" />
+</wcf:url>
+<!--Comment  -->
+
 <c:if test="${empty WCParam.ResendActivationURL}">
 <wcf:url var="ResendActivationURL" value="ResendActivationGuestView">
 	<wcf:param name="langId" value="${WCParam.langId}" />
@@ -39,13 +52,13 @@
 </wcf:url>
 </c:if>
 
-<wcbase:isRemembered>
+<!-- <wcbase:isRemembered>
 	<c:set var="rememberMeFlag" value="true" />
 </wcbase:isRemembered>
 
 <wcbase:isNotRemembered>
 	<c:set var="rememberMeFlag" value="false" />
-</wcbase:isNotRemembered>
+</wcbase:isNotRemembered> -->
 
 <c:set var="accountActivationFlag" value="false" />
 <flow:ifEnabled feature="AccountActivation"> 
@@ -143,8 +156,15 @@
 			<c:if test="${empty WCParam.URL}">
 				<%-- Assume MultipleActiveOrders feature is enabled. May have many inactive orders. In this case, dont want to merge the orders, just calculate the total. Since mergeCart is set to false, orderCalculate needs to be done explicitly. If mergeCart = true, then logonCmd takes care of OrderMove + OrderCalculate --%>
 				<c:set var="mergeCart" value="false"/>
-				<c:set var="orderMove" value="RESTOrderCalculate?URL=${newURL}calculationUsageId=-1&calculationUsageId=-2&deleteCartCookie=true&page=${WCParam.page}&catalogId=${WCParam.catalogId}&storeId=${WCParam.storeId}&globalLogIn=true"/>
-
+				
+				
+				<!--Comment Line replace ki hai  nechay waali -->
+				<%-- <c:set var="orderMove" value="RESTOrderCalculate?URL=${newURL}calculationUsageId=-1&calculationUsageId=-2&deleteCartCookie=true&page=${WCParam.page}&catalogId=${WCParam.catalogId}&storeId=${WCParam.storeId}&globalLogIn=true"/>
+ --%>
+ 				<c:set var="orderMove" value="RESTOrderCalculate?URL=${newURL}calculationUsageId=-1&calculationUsageId=-2&deleteCartCookie=true&catalogId=${WCParam.catalogId}&storeId=${WCParam.storeId}"/>
+ 				<!--Comment -->
+ 				
+ 				
 				<%-- If MultipleActiveOrders is disabled and current order is NOT NULL, then call orderMove --%>
 				<flow:ifDisabled feature="MultipleActiveOrders">
 					

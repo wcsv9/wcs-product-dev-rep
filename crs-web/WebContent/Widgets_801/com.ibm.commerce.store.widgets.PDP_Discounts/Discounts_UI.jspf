@@ -20,6 +20,7 @@
 					<div class="item_spacer_2px"></div>
 				</c:if>
 				<c:if test="${discount.key != ''}">
+					<c:set var="specialsFlag" value="true" scope="request"/>
 					<a class="promotion" href="${discount.value}"><c:out value="${discount.key}" escapeXml="false" /></a>
 				</c:if>
 			</c:forEach>

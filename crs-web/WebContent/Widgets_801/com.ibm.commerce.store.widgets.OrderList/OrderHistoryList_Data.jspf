@@ -28,6 +28,7 @@
 
 <c:set var="isProcessedOrdersTab" value="${param.selectedTab == 'PreviouslyProcessed' || WCParam.selectedTab == 'PreviouslyProcessed'}"/>
 <c:set var="isWaitingForApprovalOrdersTab" value="${param.selectedTab == 'WaitingForApproval' || WCParam.selectedTab == 'WaitingForApproval'}"/>
+<c:set var="isInvoicesTab" value="${param.selectedTab == 'Invoices'}"/>
 
 <%-- Retrieve a list of orders. --%>
 <c:choose>
@@ -62,7 +63,7 @@
                 <flow:ifDisabled feature="SideBySideIntegration">
                     <wcf:rest var="orders" url="store/{storeId}/order/byStatus/{status}">
                         <wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
-                        <wcf:var name="status" value="N,M,A,B,C,R,S,D,F,G,L,X"/>
+                        <wcf:var name="status" value="N,M,P,W,S"/>
                         <wcf:param name="pageSize" value="${pageSize}"/>
                         <wcf:param name="pageNumber" value="${currentPage}"/>
                     </wcf:rest>
@@ -84,18 +85,30 @@
             <c:otherwise>
                 <wcf:rest var="orders" url="store/{storeId}/order/byStatus/{status}">
                     <wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
-                    <wcf:var name="status" value="W"/>
+                    <wcf:var name="status" value="C,X"/>
                     <wcf:param name="pageSize" value="${pageSize}"/>
                     <wcf:param name="pageNumber" value="${currentPage}"/>
                 </wcf:rest>
             </c:otherwise>
         </c:choose>
     </c:when>
+	<c:when test="${isInvoicesTab}">
+		<wcf:rest var="invoices" url="store/{storeId}/invoices/all/{userId}">
+			<wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
+			<wcf:var name="userId" value="${CommandContext.user.userId}" encode="true"/>
+			<wcf:param name="pageSize" value="${pageSize}"/>
+			<wcf:param name="startAt" value="${beginIndex }"/>
+		</wcf:rest>
+	</c:when>
 </c:choose>
 <c:set var="allOrdersInThisCategory" value="${orders.Order}"/>
-
+<c:set var="totalOrders" value="${orders.recordSetTotal}"/>
 <%-- Pagination --%>
 <fmt:parseNumber var="totalCount" value="${orders.recordSetTotal}" integerOnly="true"/>
+<c:if test="${isInvoicesTab}">
+	<c:set var="totalOrders" value="${invoices.count}"/>
+	<fmt:parseNumber var="totalCount" value="${invoices.count}" integerOnly="true"/>
+</c:if>
 <c:if test="${empty totalCount}">
     <fmt:parseNumber var="totalCount" value="0" integerOnly="true"/>
 </c:if>
@@ -239,7 +252,7 @@
                 </c:choose>
                 <wcf:set target="${orderListMap}" key="order" value="${orderListNumberandDetailList}"/>
 
-                <c:if test="${isProcessedOrdersTab}">
+                <c:if test="${isProcessedOrdersTab || isWaitingForApprovalOrdersTab}">
                     <%-- Prepare order date for processed orders --%>
                     <c:remove var="orderDate"/>
                     <c:catch>
@@ -345,8 +358,9 @@
                     </flow:ifEnabled>
                 </c:if>
 
-                <c:if test="${isWaitingForApprovalOrdersTab}">
-                    <%-- Prepare last updated date for waiting orders --%>
+               <%--  <c:if test="${isWaitingForApprovalOrdersTab}">
+                    Prepare last updated date for waiting orders
+                    helllllllll
                     <c:catch>
                         <fmt:parseDate parseLocale="${dateLocale}" var="lastUpdateDate" value="${order.lastUpdateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" timeZone="GMT"/>
                     </c:catch>
@@ -357,7 +371,7 @@
                     </c:if>
                     <fmt:formatDate var="lastUpdateDate" value="${lastUpdateDate}" dateStyle="long" timeZone="${formattedTimeZone}"/>
                     <wcf:set target="${orderListMap}" key="last_updated" value="${lastUpdateDate}"/>
-                </c:if>
+                </c:if> --%>
 
                 <%-- Prepare purchase order number --%>
                 <c:if test="${param.showPONumber}">

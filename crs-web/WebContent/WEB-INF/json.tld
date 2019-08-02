@@ -78,23 +78,7 @@
 			<rtexprvalue>false</rtexprvalue>
 		</attribute>
 	</tag>
-	<tag>
-		<description>
-		Converts the specified Java object to JavaScript Object Notation (JSON).
-		</description>
-		<name>json</name>
-		<tag-class>com.ibm.commerce.store.foundation.internal.client.taglib.JsonTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<description>
-			The Java object that is to be converted to JSON.
-			</description>
-			<name>object</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	
+
 	<function>
 		<name>findJSONObject</name>
 		<function-class>com.ibm.commerce.store.foundation.internal.client.taglib.json.Functions</function-class>

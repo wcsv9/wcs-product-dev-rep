@@ -14,7 +14,7 @@
 
 <%-- START SKUList_UI.jspf --%>
 
-
+<c:if test="${!empty skuList}">
 	<c:choose>
 		<c:when test="${enableSKUListView == 'true'}"> 
 			<div class="skuListExpandArea" id="WC_Sku_List_Table_Expand_Area_${productId}" aria-label="<wcst:message key="WidgetTypeDisplayText_SKUList" bundle="${widgetText}" />">
@@ -34,12 +34,12 @@
 			<div wcType="RefreshArea" class="productDetailTable nodisplay" id="WC_Sku_List_Table_${productId}" declareFunction="declareSKUListTable_WidgetRefreshArea(${productId})" refreshurl="SKUListViewV2" aria-labelledby="WC_Sku_List_Table_Summary_${productId}" role="grid"></div>
 		</c:when>
 		<c:otherwise>
-			<c:if test="${!empty skuList}">
+			<
 					<div wcType="RefreshArea"  class="productDetailTable" id="WC_Sku_List_Table_${productId}" declareFunction="declareSKUListTable_WidgetRefreshArea(${productId})" refreshurl="SKUListViewV2" aria-labelledby="WC_Sku_List_Table_Summary_${productId}" role="grid">
 						<%@ include file="SKUList_Table.jspf" %>
 						<%@ include file="SKUList_Table_Mobile.jspf" %>
 					</div>
-			</c:if>
+			
 		</c:otherwise>
 	</c:choose>
 	
@@ -53,6 +53,6 @@
 	    <label><wcst:message key="ADD_MORE_TO_COMPARE" bundle="${widgetText}"/></label>
 	    <label><wcst:message key="ADDED" bundle="${widgetText}"/></label>
 	</div>
-
+</c:if>
 
 <%-- END SKUList_UI.jspf --%>

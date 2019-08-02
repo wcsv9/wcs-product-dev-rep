@@ -94,6 +94,7 @@
 
 	<div class="divider"></div>
 	<c:set var="hasAttributes" value="false"/>
+	<c:set var="attributesSelected" value="false"/>
 	<c:choose>
 		<c:when test="${numberOfSKUs == 1}">
 			<c:forEach var="attribute" items="${definingAttributeList}">
@@ -124,6 +125,15 @@
 					<c:if test="${!empty swatchNames}">
 						<c:set var="swatchNames" value="${swatchNames}_"/>
 					</c:if>
+					<c:if test="${not empty WCParam[swatchName]}">
+						<script type="text/javascript">
+							$(document).ready(function() {
+							QuickInfoJS.selectSwatch("${swatchName}",'<wcf:out value="${WCParam[swatchName]}" escapeFormat="js"/>',"quickInfoSwatch_${swatchName}_${'<wcf:out value="${WCParam[swatchName]}" escapeFormat="js"/>'}","quickInfoSwatch_${swatchName}_");
+						});
+						</script>
+						<c:set var="attributesSelected" value="true"/>
+					</c:if>
+					
 					<c:set var="swatchNames" value="${swatchNames}${swatchName}"/>
 					<div class="heading">
 						<wcst:message key="ATTRNAMEKEY" bundle="${widgetText}">
@@ -139,7 +149,7 @@
 								<li>
 									<a class="tlignore" role="radio" aria-setsize="${fn:length(swatchValues)}" aria-posinset="${vStatus.count}" aria-checked="false" id="WC_QuickInfo_Swatch_${swatchName}_${swatchValue}" href='javascript:QuickInfoJS.selectSwatch("${swatchName}","${fn:escapeXml(swatchValue)}","quickInfoSwatch_${swatchName}_${swatchValue}","quickInfoSwatch_${swatchName}_");
 														QuickInfoJS.notifyAttributeChange();
-														QuickInfoJS.selectItem(${displayPriceRange},${updateItemImageOnly});' title="<c:out value='${swatchValue}'/>">
+' title="<c:out value='${swatchValue}'/>">
 										<img id="quickInfoSwatch_${swatchName}_${swatchValue}" alt="<c:out value='${swatchValue}'/>" src="<c:out value='${swatchImages[index]}'/>" class="color_swatch"/>
 									</a>
 								</li>
@@ -155,6 +165,14 @@
 					<c:set var="attributeName" value="${attribute[0]}" />
 					<c:set var="attributeValues" value="${attribute[1]}" />
 					<c:set var="attributeDisplayValues" value="${attribute[2]}" />
+					<c:if test="${not empty WCParam[attributeName]}">
+						<script type="text/javascript">
+							$(document).ready(function() { 
+							QuickInfoJS.setSelectedAttribute("<c:out value='${attributeName}'/>",'<wcf:out value="${WCParam[attributeName]}" escapeFormat="js"/>');
+						});
+						</script>
+						<c:set var="attributesSelected" value="true"/>
+					</c:if>
 					<span class="heading"><c:out value="${attributeName}"/></span>
 					<p>
 						<label for="quickInfoAttrValue_<c:out value='${aStatus.count}'/>" style="display:none;"><c:out value='${attributeName}'/> <wcst:message key='QI_ACCE_required' bundle='${widgetText}'/></label>
@@ -181,11 +199,18 @@
 						</select>
 					</p>
 				</c:forEach>
-				
 				<c:forEach var="attribute" items="${definingAttributeList}" varStatus="aStatus" >
 					<c:set var="hasAttributes" value="true"/>
 					<c:set var="attributeName" value="${attribute[0]}" />
 					<c:set var="attributeValues" value="${attribute[1]}" />
+					<c:if test="${not empty WCParam[attributeName]}">
+						<script type="text/javascript">
+							$(document).ready(function() { 
+							QuickInfoJS.setSelectedAttribute("<c:out value='${attributeName}'/>",'<wcf:out value="${WCParam[attributeName]}" escapeFormat="js"/>');
+						});
+						</script>
+						<c:set var="attributesSelected" value="true"/>
+					</c:if>
 					<div class="heading">
 						<c:out value="${fn:replace(fn:replace(attributeName, escapeSingleQuote , singleQuote), escapeDoubleQuote, doubleQuote)}"/>
 					</div>										
@@ -215,6 +240,8 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
+	
+	
 	
 	<c:if test="${hasAttributes}">
 		<div class="clear_float"></div>

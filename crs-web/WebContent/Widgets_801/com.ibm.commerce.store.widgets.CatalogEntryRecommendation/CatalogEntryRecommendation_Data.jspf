@@ -349,7 +349,7 @@
 	</c:otherwise>
 </c:choose>
 
-<c:set var="columnCountByWidth" value="${!empty param.columnCountByWidth ? param.columnCountByWidth : '{\"0\":1,\"201\":2,\"451\":3,\"651\":4,\"801\":5,\"1001\":6}'}"/>
+<c:set var="columnCountByWidth" value="${!empty param.columnCountByWidth ? param.columnCountByWidth : '{\"0\":1,\"201\":2,\"451\":3,\"651\":3,\"801\":4,\"1001\":4}'}"/>
 
 <%--
   *

@@ -70,6 +70,8 @@
   <bean id="ConfigureView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
     <property name="url" value="/ShoppingArea/Configurator/Configure.jsp"/>  
     <property name="https" value="1"/>
+	<property name="authenticate" value="0"/>
+    <property name="generic" value="1"/>
   </bean>  
   <bean id="LaunchConfiguratorView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
     <property name="url" value="/ShoppingArea/Configurator/LaunchConfigurator.jsp"/> 

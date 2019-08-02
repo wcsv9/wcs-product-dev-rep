@@ -12,7 +12,7 @@
  =================================================================
 --%>
 <%-- Display only if there is some association --%>
-
+<!-- start MerchandisingAssociations_UI.jsp -->
 <c:set var="specialStr01" value="\\\'"/>
 <c:set var="replaceStr01" value="'"/>
 
@@ -29,7 +29,7 @@
 	
 	<div id="widget_coordinate">
 		<div class="content widget_bundle_package_list">
-			<div class="coordinate_title container_full_width_bundle"><wcst:message key="MA_COORDINATE" bundle="${widgetText}"/></div>
+			<div class="coordinate_title container_full_width_bundle">You May Also Like</div>
 			<div class="coordinate_body">
 				<div class="left_column list_mode package_mode">
 					
@@ -37,7 +37,7 @@
 					<wcst:message key="PC_NEXT_PAGE" bundle="${widgetText}" var="PC_NEXT_PAGE"/>
 					<wcst:message key="PC_MOVE_TO_PAGE_{0}" bundle="${widgetText}" var="PC_MOVE_TO_PAGE"/>
 
-					<c:set var="carouselOptions" value='{"prevButton": "a.prevPageButton", "nextButton": "a.nextPageButton", "contentContainer": "div.content", "columnCountByWidth": ${columnCountByWidth}, "paginationButtons": "div.pageControl>a", "owlCarouselOptions": {"itemsScaleUp": true}}'/>
+					<c:set var="carouselOptions" value='{"prevButton": "a.prevPageButton", "nextButton": "a.nextPageButton", "contentContainer": "div.content", "columnCountByWidth": ${columnCountByWidth}, "paginationButtons": "div.pageControl>a", "owlCarouselOptions": {"itemsScaleUp": true, "items":6, "responsive": true}}'/>
 					<div id="merchandisingAssociationWidget_${widgetSuffix}" class="merchandisingAssociationWidget catalogEntryRecommendationWidget carousel clip-true padding-true background-${background} border-${border}"  data-widget-type="wc.Carousel" data-widget-options="${fn:escapeXml(carouselOptions)}">
 						<c:choose>
 							<c:when test="${hasMultipleAssociations}">
@@ -123,3 +123,4 @@
 	</script>
 	
 </c:if>
+<!-- End MerchandisingAssociations_UI.jsp -->

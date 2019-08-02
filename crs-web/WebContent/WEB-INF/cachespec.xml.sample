@@ -8,7 +8,7 @@
 
   WebSphere Commerce
 
-  (C) Copyright IBM Corp. 2009, 2017 All Rights Reserved.
+  (C) Copyright IBM Corp. 2009, 2018 All Rights Reserved.
 
   US Government Users Restricted Rights - Use, duplication or
   disclosure restricted by GSA ADP Schedule Contract with
@@ -135,15 +135,6 @@
 			</component>
 			<component id="categoryId" type="parameter">
 				<required>true</required>
-			</component>
-			<component id="pageView" type="parameter">
-				<required>false</required>
-			</component>
-			<component id="beginIndex" type="parameter">
-				<required>false</required>
-			</component>
-			<component id="orderBy" type="parameter">
-				<required>false</required>
 			</component>
 			<component id="facetName_1" type="parameter">
 				<required>false</required>
@@ -325,6 +316,9 @@
 			<component id="catalogId" type="parameter">
 				<required>true</required>
 			</component>
+			<component id="uniqueID" type="parameter">
+				<required>false</required>
+			</component>
 		</cache-id>
 
 		<cache-id>
@@ -422,7 +416,112 @@
 			
 			Invalidate all our catalog related pages when any of these dependencyId's are published
 		-->
+		<!-- Start with clearall -->
+		<dependency-id>clearall</dependency-id>
+		
+		<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 
+		<!--This dependency Id is published by DataCache as well as DB trigger when CEDISPCONF is updated.-->
+		<!-- For additional ProductDisplay invalidation IDs, refer to comments at the end of this file -->
+		<dependency-id>productId
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/ProductDisplay</value>
+			</component>
+			<component id="productId" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+
+		<dependency-id>productId
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/GetCatalogEntryDetailsByIDView</value>
+			</component>
+			<component id="catalogEntryId" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>		
+
+		<!-- 
+			Dont we need langId here ? 
+				No need to consider langId here since the changes to category may not always be lang specific (name, description).
+				Changes can be like category code or parent category update etc.,
+		-->
+		<!-- For additional CategoryDisplay invalidation IDs, refer to comments at the end of this file -->
+		<dependency-id>categoryId
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/CategoryDisplay</value>
+			</component>
+			<component id="categoryId" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		
+		<dependency-id>WCT+CATGPENREL+CATALOG_ID
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/DepartmentDropdownViewRWD</value>
+			</component>
+			<component id="DC_PercentageSymbol" type="attribute">
+				<required>true</required>
+			</component>
+			<component id="catalogId" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>	
+
+		<dependency-id>WCT+STORE
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/GetStoreDetailsByIDView</value>
+			</component>
+		</dependency-id>
+
+		<dependency-id>WCT+STOREENT+STOREENT_ID
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/GetStoreDetailsByIDView</value>
+			</component>
+			<component id="DC_PercentageSymbol" type="attribute">
+				<required>true</required>
+			</component>
+			<component id="storeId" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+
+		<dependency-id>WCT+STORE+STORE_ID
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/GetStoreDetailsByIDView</value>
+			</component>
+			<component id="DC_PercentageSymbol" type="attribute">
+				<required>true</required>
+			</component>
+			<component id="storeId" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+
+		<dependency-id>WCT+STOREENTDS+STOREENT_ID+LANGUAGE_ID
+			<component id="" ignore-value="true" type="pathinfo">
+				<required>true</required>
+				<value>/GetStoreDetailsByIDView</value>
+			</component>
+			<component id="DC_PercentageSymbol" type="attribute">
+				<required>true</required>
+			</component>
+			<component id="storeId" type="parameter">
+				<required>true</required>
+			</component>
+			<component id="DC_lang" type="attribute">
+				<required>true</required>
+			</component>			
+		</dependency-id>
+
+		<!--  End dependency ids -->
 		<dependency-id>catalogId
 			<component id="" ignore-value="true" type="pathinfo">
 				<required>true</required>
@@ -433,6 +532,8 @@
 				<!-- TODO needed later -->
 				<value>/QuickInfoDetailsView</value>
 				<value>/GetCatalogEntryDetailsByIDView</value>
+				<value>/SearchComponentCachedSuggestionsView</value>
+				<value>/GenericStaticContentPageLayoutView</value>	
 			</component>
 			<component id="catalogId" type="parameter">
 				<required>true</required>
@@ -450,20 +551,9 @@
 				<value>/QuickInfoDetailsView</value>
 				<value>/GetCatalogEntryDetailsByIDView</value>
 				<value>/SearchComponentCachedSuggestionsView</value>
+				<value>/GenericStaticContentPageLayoutView</value>				
 			</component>
 			<component  id="storeId" type="parameter">
-				<required>true</required>
-			</component>
-		</dependency-id>
-
-
-		<dependency-id>categoryId
-			<component id="" ignore-value="true" type="pathinfo">
-				<required>true</required>
-				<value>/TopCategoriesDisplay</value>
-				<value>/CategoryDisplay</value>
-			</component>
-			<component id="categoryId" type="parameter">
 				<required>true</required>
 			</component>
 		</dependency-id>
@@ -525,22 +615,6 @@
 				<required>true</required>
             </component>
         </dependency-id>
-		<dependency-id>storeId
-			<component id="" ignore-value="true" type="pathinfo">
-				<required>true</required>
-				<value>/StoreCatalogDisplay</value>
-				<value>/TopCategoriesDisplay</value>
-				<value>/CategoryDisplay</value>
-				<value>/SearchDisplay</value>
-				<value>/ProductDisplay</value>
-				<value>/GetCatalogEntryDetailsByIDView</value>
-				<value>/QuickInfoDetailsView</value>
-				<value>/GenericStaticContentPageLayoutView</value>
-			</component>
-			<component id="storeId" type="parameter">
-				<required>true</required>
-			</component>
-		</dependency-id>
 
 		<dependency-id>storeId:catalogId
 			<component id="" ignore-value="true" type="pathinfo">
@@ -548,7 +622,6 @@
 				<value>/StoreCatalogDisplay</value>
 				<value>/TopCategoriesDisplay</value>
 				<value>/CategoryDisplay</value>
-				<value>/SearchDisplay</value>
 				<value>/GenericStaticContentPageLayoutView</value>
 			</component>
 			<component id="storeId" type="parameter">
@@ -562,7 +635,6 @@
 		<dependency-id>StoreCatalogDisplay:storeId
 			<component id="" ignore-value="true" type="pathinfo">
 				<required>true</required>
-				<value>/StoreCatalogDisplay</value>
 				<value>/DepartmentDropdownViewRWD</value>
 			</component>
 			<component id="storeId" type="parameter">
@@ -1273,6 +1345,7 @@
 					<required>true</required>
 				</component>
 			</dependency-id>
+			<dependency-id>clearall</dependency-id>
 			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			<dependency-id>StoreCatalogDisplay:storeId
 				<component id="storeId" type="parameter">
@@ -1301,6 +1374,7 @@
 					<required>true</required>
 				</component>
 			</dependency-id>			
+
 		</cache-entry>
 
 		<!-- Footer Widget -->
@@ -1339,6 +1413,7 @@
 	
 			<!--  Footer shows links based on Flexflow options like StoreLocator -->
 			<dependency-id>FlexFlowFeatureUpdate</dependency-id> 
+			<dependency-id>clearall</dependency-id>
 			
 			<dependency-id>storeId
 				<component id="storeId" type="parameter">
@@ -1431,7 +1506,97 @@
 			</dependency-id>
 	
 			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
+			<dependency-id>clearall</dependency-id>
 		</cache-entry>
+
+<!-- 
+	Product Display cache depends on following additional invalidation IDs. These dependency IDs are defined in
+	individual widget cache definitions found in cachespec.xml of crs-ibm-web.war module
+	Widgets consumed are:
+		FullImage.jsp
+		ShortDescription.jsp
+		LongDescription.jsp
+		DescriptiveAttributes.jsp
+		DefiningAttributes.jsp
+		NamePartNumberAndPrice.jsp
+		AssociatedAssets.jsp
+	************************************************************************************************************
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATA LOAD OPERATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	************************************************************************************************************
+	Note: Though DB Triggers update cacheivl table with IDs of pattern WCN+xxxxxx, DynaCacheInvalidation framework
+	publishes WCT+xxxxxx. So while defining dependencyIds, replace WCN with WCT.
+	(1) WCN+CATENTDESC+CATENTRY_ID+LANGUAGE_ID:%<productId>:%<langId> 
+		a)Product Name 
+		b)Short description
+		c)Long description
+		d)Thumbnail image
+		e)Full image
+		f)Esite Override for following fields:
+			Product Name, Short Description, Long description, Thumbnail image and Full Image.
+		
+	(2) WCN+CATENTRYATTR+CATENTRY_ID:%:<productId>
+		a)Descriptive attributes.
+		b)Defining attributes.
+		
+	(3) WCN+CATENTRY+CATENTRY_ID:%:<productId>
+		a)Part Number
+		
+	(4) WCN+LISTPRICE+CATENTRY_ID+CURRENCY:%:<productId>:%:<currencyCode>
+		(a)List Price of product
+		
+	(5) WCN+OFFER+CATENTRY_ID:%:<productId> : Changes to offer table
+		WCN+OFFERPRICE+CURRENCY+CATENTRY_ID:%:<currency>:%:<productId> : Changes to offerPrice table
+		a)OfferPrice
+
+	(6) WCN+MASSOCCECE+CATENTRY_ID_TO:%:<productId> and WCN+MASSOCCECE+CATENTRY_ID_FROM:<productId>
+		(a) MerchandisingAssociations		
+	
+	
+	************************************************************************************************************
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Management Center OPERATIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	************************************************************************************************************
+	(1) WCT+CATENTDESC+CATENTRY_ID+LANGUAGE_ID:%:<productId>:%:<langId>
+		a)Product Name 
+		b)Short description
+		c)Long description
+		d)Thumbnail image
+		e)Full image
+		f)Esite Override for following fields: (No dataCache ID published. Depend on DB Trigger)
+			Product Name, Short Description, Long description, Thumbnail image and Full Image.
+		
+	(2) WCT+CATENTRYATTR+CATENTRY_ID:%:<productId>
+		a)Descriptive attributes
+		b)Defining attributes
+		
+	(3) WCT+CATENTRY+PARTNUMBER:%:<partNumber> OR WCT+CATENTRY+CATENTRY_ID:%:<productId>
+		a)PartNumber
+	
+	(4) WCT+OFFERPRICE+CURRENCY+OFFER_ID:%:USD:%:<offerId> - 
+		This cannot be used, since offerId is not available in cachespec.xml. Depend on DB Triggers.
+		a)List Price
+		
+	(5) WCT+OFFER+CATENTRY_ID:%:<productId>
+		a)OfferPrice
+		
+	(6) WCT+MASSOCCECE+CATENTRY_ID_TO:%:<productId> and WCT+MASSOCCECE+CATENTRY_ID_FROM:<productId>
+		(a) MerchandisingAssociations
+-->
+
+<!-- 
+	Category Display cache depends on following additional invalidation IDs. These dependency IDs are defined in
+	individual widget cache definitions found in cachespec.xml of crs-ibm-web.war module
+	Widgets consumed are:
+	Heading.jsp	
+	FacetNavigation.jsp
+	CategoryNavigation.jsp
+
+	1. Updating category data like name, code, short description, long description, image
+		WCN+CATGRPDESC+CATGROUP_ID+LANGUAGE_ID:%:<categoryId>:%:<langId>  For Data Load
+		WCT+CATGRPDESC+CATGROUP_ID+LANGUAGE_ID:%:<categoryId>:%:<langId>  For CMC Changes
+		
+	2. Updating any of the sub-categories or products data under the category. (Which needs invalidation to Facets, Category Facets, Catalog Entry List)	
+		CategoryDisplay:storeId:categoryId:<storeId>:<categoryId>
+-->
 
 	<!--
 		**********************************************************************
@@ -1467,6 +1632,7 @@
 			</cache-id>
 			
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			
 			<dependency-id>WCT+CATGRPDESC+CATGROUP_ID+LANGUAGE_ID
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -1523,6 +1689,7 @@
 			</cache-id>
 			
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			
 			<dependency-id>WCT+MASSOCCECE+CATENTRY_ID_TO
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -1579,6 +1746,7 @@
 			</cache-id>
 			
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			
 			<dependency-id>productId
 				<component id="catEntryIdentifier" type="parameter">
@@ -1611,6 +1779,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>			
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			<dependency-id>CategoryDisplay:storeId:categoryId
 				<component id="storeId" type="parameter">
 					<required>true</required>
@@ -1642,6 +1811,7 @@
 			</cache-id>
 			
 			<dependency-id>clearall</dependency-id>			
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			<dependency-id>CategoryDisplay:storeId:categoryId
 				<component id="storeId" type="parameter">
 					<required>true</required>
@@ -1670,6 +1840,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			
 			<dependency-id>WCT+CATENTDESC+CATENTRY_ID+LANGUAGE_ID
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -1706,6 +1877,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 		
 			<dependency-id>WCT+CATENTDESC+CATENTRY_ID+LANGUAGE_ID
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -1741,6 +1913,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 
 			<dependency-id>WCT+CATENTDESC+CATENTRY_ID+LANGUAGE_ID
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -1776,6 +1949,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			
 			<dependency-id>WCT+CATENTDESC+CATENTRY_ID+LANGUAGE_ID
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -1935,12 +2109,13 @@
 					<required>false</required>
 				</component>
 				<component id="pageGroup" type="parameter">
-					<required>true</required>
+					<required>false</required>
 					<not-value>Search</not-value>
 				</component>
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 
 			<dependency-id>CategoryDisplay:storeId:categoryId
 				<component id="storeId" type="parameter">
@@ -1971,6 +2146,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			<dependency-id>storeId:productId
 				<component id="storeId" type="parameter">
 					<required>true</required>
@@ -2004,6 +2180,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			
 			<dependency-id>WCT+CATENTRYATTR+CATENTRY_ID
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -2034,6 +2211,7 @@
 			</cache-id>
 
 			<dependency-id>clearall</dependency-id>
+			<dependency-id>FlexFlowFeatureUpdate</dependency-id>
 			
 			<dependency-id>WCT+CATENTRYATTR+CATENTRY_ID
 				<component id="DC_PercentageSymbol" type="attribute">
@@ -2293,27 +2471,6 @@
 				<component id="fromWidget" type="parameter">
 					<required>false</required>
 					<not-value>WishListDetail</not-value>
-				</component>
-				<component id="top_category5" type="parameter">
-					<required>false</required>
-				</component>
-				<component id="top_category4" type="parameter">
-					<required>false</required>
-				</component>
-				<component id="top_category3" type="parameter">
-					<required>false</required>
-				</component>
-				<component id="top_category2" type="parameter">
-					<required>false</required>
-				</component>
-				<component id="top_category" type="parameter">
-					<required>false</required>
-				</component>
-				<component id="parent_category_rn" type="parameter">
-					<required>false</required>
-				</component>
-				<component id="categoryId" type="parameter">
-					<required>false</required>
 				</component>
 			</cache-id>
 	

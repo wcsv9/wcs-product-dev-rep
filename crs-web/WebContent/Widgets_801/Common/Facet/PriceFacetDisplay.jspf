@@ -22,9 +22,10 @@ IBM Corp.
 
 		<c:set var="rangeLabel" value="${fn:replace(item.label,'({','')}" />
 		<c:set var="rangeLabel" value="${fn:replace(rangeLabel,'})','')}" />
+		<c:set var="rangeLabel" value="${fn:replace(rangeLabel,'])','')}" />
 		<c:set var="rangeLabel" value="${fn:replace(rangeLabel,'}','')}" />
-		<c:set var="rangeLow" value="${fn:substringBefore(rangeLabel,' ')}" />
-		<c:set var="rangeHigh" value="${fn:substringAfter(rangeLabel,' ')}" />
+		<c:set var="rangeLow" value="${fn:substringBefore(rangeLabel,' TO ')}" />
+		<c:set var="rangeHigh" value="${fn:substringAfter(rangeLabel,' TO ')}" />
 		<c:if test="${fn:contains(rangeHigh,' ')}">
 			<c:set var="rangeHigh" value="${fn:substringBefore(rangeHigh,' ')}" />
 		</c:if>					

@@ -53,8 +53,10 @@
 
 <script type="text/javascript">
 	$( document ).ready(function() { 
-		<wcst:message var="ERROR_REQUISITION_LIST_NAME_EMPTY" key="ERROR_REQUISITION_LIST_NAME_EMPTY" bundle="${widgetText}"/>		
-		MessageHelper.setMessage("ERROR_REQUISITION_LIST_NAME_EMPTY", <wcf:json object="${ERROR_REQUISITION_LIST_NAME_EMPTY}"/>);		
+		<wcst:message var="ERROR_REQUISITION_LIST_NAME_EMPTY" key="ERROR_REQUISITION_LIST_NAME_EMPTY" bundle="${widgetText}"/>
+		<wcst:message key="ERROR_REQUISITION_LIST_CHECKBOX" bundle="${widgetText}" var="ERROR_LIST_CHECKBOX"/>
+		MessageHelper.setMessage("ERROR_REQUISITION_LIST_NAME_EMPTY", <wcf:json object="${ERROR_REQUISITION_LIST_NAME_EMPTY}"/>);
+		MessageHelper.setMessage("ERROR_LIST_CHECKBOX", <wcf:json object="${ERROR_LIST_CHECKBOX}"/>);
 	});
 </script>
 

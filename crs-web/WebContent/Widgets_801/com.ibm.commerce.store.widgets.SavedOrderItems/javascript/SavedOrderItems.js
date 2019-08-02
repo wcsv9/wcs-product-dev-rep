@@ -50,6 +50,10 @@
 			/** The URL of the shopping cart used to forward the page when an order is converted to the current order. **/
 			shoppingCartURL : "",
 			
+			unEscapeXml: function(str){
+				return str.replace(/&lt;/gm, "<").replace(/&gt;/gm, ">").replace(/&#034;/gm,"\"");
+			},
+
 			/**
 			 * Sets the common parameters for the current page. 
 			 * For example, the language ID, store ID, and catalog ID.
@@ -144,13 +148,15 @@
 				wcService.invoke('AjaxAddSavedOrderItem',params);
 			},
 
+			
+	
 			/**
 			 * Adds item to the current order
 			 * @param {Integer} partNumber The partNumber of the item to add to the current order.
 			 * @param (string) row The row number of the quantity input in the table.
 			 * @param (string) catEntryId The catentry ID of the item
 			 */
-			addItemToCurrentOrder:function(partNumber, row, catEntryId){
+			addItemToCurrentOrder:function(partNumber, row, catEntryId, configXML, catentryType){
 				var params = {
 					storeId: this.storeId,
 					catalogId: this.catalogId,
@@ -160,11 +166,13 @@
 					mergeToCurrentPendingOrder: "Y",
 					URL: "",
 					partNumber: partNumber,
+					catEntryId:catEntryId,
 					inventoryValidation: true,
 					orderId: ".",
 					quantity: $("#orderItem_input_" + row).val()
 				};
 				
+								
 				// used by mini shopcart
 				var selectedAttrList = new Object();
 				shoppingActionsJS.saveAddedProductInfo(params["quantity"], catEntryId, catEntryId, selectedAttrList);
@@ -176,7 +184,13 @@
 					return;
 				}
 				cursor_wait();
-				wcService.invoke('AddOrderItem',params);
+				if (catentryType == 'DynamicKitBean') {
+					params.configXML = this.unEscapeXml(configXML.toString());
+					wcService.getServiceById("AddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart");
+				}else if (catentryType == 'PredDynaKitBean'){
+					wcService.getServiceById("AddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddPreConfigurationToCart");
+				}
+				wcService.invoke('AddOrderItem', params);
 				// close action dropdown
 				hideMenu($('#actionButton' + row)[0]);
 				hideMenu($('#actionDropdown' + row)[0]);

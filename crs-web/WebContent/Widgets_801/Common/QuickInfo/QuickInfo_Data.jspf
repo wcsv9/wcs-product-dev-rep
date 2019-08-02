@@ -29,6 +29,14 @@
 	<c:set var="catalogEntryDetails" value="${catalogNavigationView.catalogEntryView[0]}"/>
 </c:if>
 
+<c:if test="${catalogEntryDetails.catalogEntryTypeCode eq 'VariantBean'}">
+	<c:forEach var="attribute" items="${catalogEntryDetails.attributes}">
+		<c:if test="${attribute.usage eq 'Defining'  && attribute.bindToVariant eq 'true'}">
+			<c:set target="${WCParam}" property="${attribute.name}" value="${attribute.values[0].value}"/>
+		</c:if>	
+	</c:forEach>			
+</c:if>
+
 <c:set var="name" value="${fn:escapeXml(catalogEntryDetails.name)}" />
 <c:set var="fullImageAltDescription" value="${catalogEntryDetails.fullImageAltDescription}" />
 <c:set var="actualType" value="${fn:toLowerCase(catalogEntryDetails.catalogEntryTypeCode)}" />
@@ -36,8 +44,6 @@
 <c:set var="displayPriceRange" value="true" />
 <c:set var="partNumber" value="${fn:escapeXml(catalogEntryDetails.partNumber)}" />
 <c:set var="longDescription" value="${catalogEntryDetails.longDescription}" />
-<c:set var="entitledItems" value="${catalogEntryDetails.sKUs}"/>
-<c:set var="numberOfSKUs" value="${catalogEntryDetails.numberOfSKUs}"/>
 
 		
 	<c:if test="${!empty catalogEntryDetails.fullImage}">
@@ -136,8 +142,28 @@
 	</c:if>
 </c:forEach>
 
+<!-- Retrieving the defining attribute, it should go to variant's parent product attributes-->
+
+<c:set var="parentCatEntryId" value="${catalogEntryDetails.parentCatalogEntryID}" />
+<c:if test="${type == 'variant' && not empty parentCatEntryId}">
+	<c:catch var="searchServerException">
+	<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/byId/${parentCatEntryId}" >	
+			<wcf:param name="langId" value="${langId}"/>
+			<wcf:param name="currency" value="${env_currencyCode}"/>
+			<wcf:param name="responseFormat" value="json"/>		
+			<wcf:param name="catalogId" value="${WCParam.catalogId}"/>
+	</wcf:rest>
+	</c:catch>
+	<c:if test="${!empty catalogNavigationView && !empty catalogNavigationView.catalogEntryView[0]}">
+		<c:set var="catalogEntryDetails" value="${catalogNavigationView.catalogEntryView[0]}"/>
+	</c:if>
+	
+</c:if>
+<c:set var="entitledItems" value="${catalogEntryDetails.sKUs}"/>
+<c:set var="numberOfSKUs" value="${catalogEntryDetails.numberOfSKUs}"/>
+
 <c:set var="skus" value=""/>
-<c:if test="${type == 'product'}">
+<c:if test="${type == 'product' || type == 'variant'}">
 	<c:forEach var='entitledItem' items='${entitledItems}' varStatus='outerStatus'>
 		<c:if test="${!empty skus}">
 			<c:set var="skus" value="${skus},"/>
@@ -166,6 +192,7 @@
 				<c:set var="attributes" value='${attributes}"${fn:replace(fn:replace(definingAttrValue.name, singleQuote, escapeSingleQuote), doubleQuote, escapeDoubleQuote)}"   : 
 					"${fn:replace(fn:replace(definingAttrValue.values[0].value, singleQuote, escapeSingleQuote), doubleQuote, escapeDoubleQuote)}"'/>
 			</c:if>
+			
 		</c:forEach>
 		
 		<c:set var="thumbnailAttachments" value=""/>
@@ -533,7 +560,7 @@
 		<c:if test="${empty maximumItemPrice}">
 			<c:set var="maximumPrice" value=""  />
 			<c:choose>
-				<c:when test="${type eq 'product'}">
+				<c:when test="${type eq 'product' || type eq 'variant'}">
 				 	<c:catch>
 						<wcf:rest var="entitledPricesResult" url="/store/{storeId}/price">
 							<wcf:var name="storeId" value="${WCParam.storeId}" />
@@ -676,7 +703,7 @@
 			<c:if test="${!isSubscription || (fulfillmentFrequency != '' && paymentFrequency != '' && aValidTimePeriod != '')}" >
 				<c:choose>
 					<%-- If it is a product iterate through all its SKUs --%>
-					<c:when test="${type eq 'product'}">
+					<c:when test="${type eq 'product' || type eq 'variant'}">
 						<c:forEach var="entitledItem" items="${entitledItems}">
 							<c:if test = "${entitledItem.buyable eq 'true'}">
 								<c:set var="available" value="true" scope="request"/> <%-- We have one item which is marked as buyable..Show AddToCart button --%>

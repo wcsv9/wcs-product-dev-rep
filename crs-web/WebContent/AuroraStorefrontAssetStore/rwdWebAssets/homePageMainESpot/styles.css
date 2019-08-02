@@ -14,7 +14,7 @@
 
 .homeHero {
 	position: relative;
-	min-height: 450px;
+	min-height: 322px;
 }
 
 .homeHero > .homeHero-pageButton {
@@ -34,8 +34,9 @@
 	background-position: center top;
 	opacity: 0.75;
 }
+/*
 #homeHero1-background {
-	background-image: url("scarf.jpg");
+	background-image: url("3M_Mustang_Comp.jpg");
 }
 #homeHero2-background {
 	background-image: url("robScarf.jpg");
@@ -43,14 +44,14 @@
 #homeHero3-background {
 	background-image: url("teenScarf.jpg");
 }
-
+*/
 /* Layered image */
 
 .homeHero > .imageContainer {
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 35%;
+	width: 100%;
 }
 .homeHero > .imageContainer > div {
 	width: 100%;
@@ -60,18 +61,18 @@
 }
 #homeHero1 > .imageContainer > div {
 	min-width: 240px;
-	max-width: 399px;
-	background-image: url("girl.png");
+    max-width: 100%;
+    background-image: url(3M_Mustang_Comp.jpg);
 }
 #homeHero2 > .imageContainer > div {
-	min-width: 310px;
-	max-width: 507px;
-	background-image: url("rob.png");
+	min-width: 240px;
+    max-width: 100%;
+	background-image: url("LIVI_web-banner.jpg");
 }
 #homeHero3 > .imageContainer > div {
-	min-width: 274px;
-	max-width: 446px;
-	background-image: url("teen.png");
+	min-width: 240px;
+    max-width: 100%;
+    background-image: url(Reflex_Banners_1200x300.jpg);
 }
 .homeHero > .imageContainer > img {
 	width: 100%;
@@ -97,6 +98,7 @@
 	padding: 3% 0 50px 0;
 	color: #073769;
 	font-size: 15px;
+	display: none;
 }
 .homeHero > .textContainer > h3 {
 	font-size: 10px;
@@ -127,7 +129,7 @@
 @media (max-width: 600px) {
 
 	.homeHero {
-		min-height: 250px;
+		min-height: 90px;
 	}
 
 	/* Background */
@@ -139,25 +141,25 @@
 	/* Image */
 
 	.homeHero > .imageContainer {
-		width: 30%;
+		width: 100%;
 	}
 	.homeHero > .imageContainer > div {
 		padding-bottom: 600%;
 	}
 	#homeHero1 > .imageContainer > div {
 		min-width: 170px;
-		margin-left: -41px;
-		background-image: url("girl_rwda.png");
+		margin-left: 0px;
+		background-image: url("3M_Mustang_Comp.jpg");
 	}
 	#homeHero2 > .imageContainer > div {
 		min-width: 187px;
-		margin-left: -36px;
-		background-image: url("rob_rwda.png");
+		margin-left: 0px;
+		background-image: url("Reflex_Banners_1200x300.jpg");
 	}
 	#homeHero3 > .imageContainer > div {
 		min-width: 180px;
-		margin-left: -20px;
-		background-image: url("teen_rwda.png");
+		margin-left: 0px;
+		background-image: url("LIVI_web-banner.jpg");
 	}
 
 	/* Flattened JPG - uncomment to use */
@@ -376,4 +378,11 @@ html[lang="he"] .homeHero > .textContainer > p {
 	html[lang="he"] .homeHero > .textContainer > .toggle:before {
 		background-image: url("../../images/responsive/rwdUI_rtl@2x.png");
 	}
+}
+@media (max-width:1023px) {
+
+.homeHero {
+    position: relative;
+    min-height: 212px;
+}
 }

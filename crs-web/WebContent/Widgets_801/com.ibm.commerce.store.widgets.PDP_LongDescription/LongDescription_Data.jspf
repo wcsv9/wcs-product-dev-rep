@@ -22,4 +22,5 @@
 
 <%@ include file="/Widgets_801/Common/PDP_CatalogEntryData.jspf" %>
 
-<c:set var="longDescription" value="${catalogEntryDetails.longDescription}" />
+<%--<c:set var="auxdesc2" value="${getAuxdesc.auxdesc2}" />--%>
+<c:set var="longDescription" value="${catalogEntryDetails.longDescription}" /> 

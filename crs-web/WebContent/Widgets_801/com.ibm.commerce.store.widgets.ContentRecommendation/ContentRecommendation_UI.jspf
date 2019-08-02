@@ -74,6 +74,94 @@
 							</c:import>
 						</c:if>
 					</flow:ifEnabled>
+				
+					<flow:ifEnabled feature="ConsentOptions">
+						<script type="text/javascript">
+							$( document ).ready(function() {
+								$('#contentRecommendationWidget${widgetSuffix} .privacyCheckbox').toggle(false);
+							});
+						</script>
+						<flow:ifEnabled feature="MarketingConsent">
+							<c:if test="${emsName == 'PrivacyPolicyPageCenter_Content' && contentPageName == 'PrivacyPolicyPage'  && WCParam.omitHeader != '1'}">
+								<c:set var="isSession" value="false"/>
+								<flow:ifEnabled feature="Session">
+									<c:set var="isSession" value="true"/>
+								</flow:ifEnabled>
+								
+								<div class="container_static_full_width container_margin_5px">
+									<div class="static_page_content instruction">
+										<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_OPTIN" var="acceptMarketing" >
+										<wcst:param><c:out value="${storeName}"/></wcst:param>
+										</wcst:message>
+										<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_OPTOUT" var="optOutMarketing" ></wcst:message>
+										<div id="privacyPageMarketingCheckboxHidden" style="display: none">
+											<div class="checkboxField marketingConsent">
+												<label for="PrivacyPolicyPageMarketingConsentOptIn" id="PrivacyPolicyPageMarketingConsentOptIn_Label"  class="radiocontainer">
+													<input type="radio" name="marketingConsent" id="PrivacyPolicyPageMarketingConsentOptIn" >
+													<span class="radiocheckmark"></span>
+												${acceptMarketing}</label>
+											</div>
+											<div class="checkboxField marketingConsent">
+												<label for="PrivacyPolicyPageMarketingConsentOptOut" id="PrivacyPolicyPageMarketingConsentOptOut_Label" class="radiocontainer">
+													<input type="radio" name="marketingConsent" id="PrivacyPolicyPageMarketingConsentOptOut" >
+													<span class="radiocheckmark"></span>
+												${optOutMarketing}</label>
+											</div>
+										</div>
+										<script type="text/javascript">
+											$( document ).ready(function() {
+												<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_UPDATED" var="marketingConsentUpdated"/>
+												<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_UPDATE_ERROR" var="marketingConsentUpdateError"/>
+												MessageHelper.setMessage("MARKETING_CONSENT_UPDATED", <wcf:json object="${marketingConsentUpdated}"/>);
+												MessageHelper.setMessage("MARKETING_CONSENT_UPDATE_ERROR", <wcf:json object="${marketingConsentUpdateError}"/>);
+
+												var marketingConsentCookie = getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId);
+												
+												if (marketingConsentCookie != null) {
+												marketingConsentCookie = parseInt(marketingConsentCookie);
+													if (marketingConsentCookie == 1) {
+														$('#PrivacyPolicyPageMarketingConsentOptIn').prop("checked", true);
+													}
+													else {
+														$('#PrivacyPolicyPageMarketingConsentOptOut').prop("checked", true);
+													}
+												}
+												else {
+													$('#PrivacyPolicyPageMarketingConsentOptOut').prop("checked", true);
+												}
+												$('#contentRecommendationWidget${widgetSuffix} .marketingConsentCheckbox').append($('#privacyPageMarketingCheckboxHidden div'));
+											});
+										</script>
+									</div>
+								</div>
+								<div class="footer">
+									<div class="container_static_full_width container_margin_5px">
+										<div class="button_container right">
+											<a id="PrivacyAppceptBtnPrivacyPage" class="button_primary tlignore"
+												tabindex="0"
+												href="javascript:acceptPrivacyPolicy('<c:out value="${eSpotDatas.baseMarketingSpotActivityData[0].contentName}"/>', 'PrivacyPolicyPageMarketingConsentOptIn', 'AcceptPrivacyPolicyPopupPrivacyPage', ${isSession});">
+												<div class="left_border"></div>
+												<div id="PrivacyAppceptBtnText" class="button_text">
+													<wcst:message bundle="${widgetText}"
+														key="PRIVACY_POLICY_ACCEPT_BUTTON" />
+												</div>
+												<div class="right_border"></div>
+											</a>
+											<div class="clear_float"></div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${emsName == 'PrivacyPolicyPageCenter_Content' && contentPageName == 'PrivacyPolicyPage'  && WCParam.omitHeader == '1'}">
+								<script type="text/javascript">
+									$( document ).ready(function() {
+										$('#contentRecommendationWidget${widgetSuffix} .marketingConsentCheckbox').toggle(false);
+									});
+								</script>
+							</c:if>
+						</flow:ifEnabled>
+					</flow:ifEnabled>
+					
 				</div>
 			</div>
 		</c:otherwise>

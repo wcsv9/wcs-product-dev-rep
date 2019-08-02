@@ -70,7 +70,7 @@
 	<c:set target="${previewWidgetProperties}" property="pageView" value="${param.pageView}" />	
 	<c:set target="${previewWidgetProperties}" property="sortBy" value="${param.sortBy}" />
 	<c:set target="${previewWidgetProperties}" property="disableProductCompare" value="${disableProductCompare}" />
-	<c:set target="${previewWidgetProperties}" property="enableSKUListView" value="${param.enableSKUListView}" />
+	<c:set target="${previewWidgetProperties}" property="enableSKUListView" value="${param.enableSKUListView}" /> 
 	<%@ include file="/Widgets_801/Common/StorePreviewShowInfo_Start.jspf" %>
 </c:if>
 	

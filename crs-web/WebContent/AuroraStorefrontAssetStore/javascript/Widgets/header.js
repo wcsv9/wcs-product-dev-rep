@@ -147,7 +147,7 @@ $(document).ready(function () {
         if (ajaxRefresh == "true" && startsWith) {
             setAjaxRefresh(""); // No more refresh till shopper leaves this page
             // Update the Context, so that widget gets refreshed..
-            wcRenderContext.updateRenderContext("departmentSubMenuContext", {
+            wcRenderContext.updateRenderContext("departmentSubMenuContext_" + target.id, {
                 "targetId": target.id
             });
             if (typeof cX === 'function') {
@@ -165,7 +165,9 @@ $(document).ready(function () {
         }
         if (parent) {
             activate(document.getElementById(parent));
-        }
+        }else {
+			setAjaxRefresh("true");
+		}
         $(target).addClass("active");
         $("a[data-activate='" + target.id + "']").addClass("selected");
         var toggleControl = $("a[data-toggle='" + target.id + "']");
@@ -425,17 +427,17 @@ function declareDeptDropdownRefreshArea(divId) {
     // Context and Controller to refresh department drop-down
 
     // common render context
-    wcRenderContext.declare("departmentSubMenuContext", [divId], { targetId: "" });
+    wcRenderContext.declare("departmentSubMenuContext_" + divId, [divId], { targetId: "" });
 
     // render content changed handler
     var renderContextChangedHandler = function() {
-        $("#"+divId).refreshWidget("refresh", wcRenderContext.getRenderContextProperties("departmentSubMenuContext"));
+        $("#"+divId).refreshWidget("refresh", wcRenderContext.getRenderContextProperties("departmentSubMenuContext_" + divId));
     };
 
     // post refresh handler
     var postRefreshHandler = function() {
         updateDepartmentsMenu(); // Browser may be re-sized. From server we return entire department list.. updateHeader to fit to the list within available size
-        activate(document.getElementById(wcRenderContext.getRenderContextProperties("departmentSubMenuContext").targetId)); // We have all the data.. Activate the menu...
+        activate(document.getElementById(wcRenderContext.getRenderContextProperties("departmentSubMenuContext_" + divId).targetId)); // We have all the data.. Activate the menu...
         cursor_clear();
     };
 

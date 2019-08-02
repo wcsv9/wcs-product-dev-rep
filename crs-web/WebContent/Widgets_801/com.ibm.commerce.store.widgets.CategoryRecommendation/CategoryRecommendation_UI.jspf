@@ -20,7 +20,7 @@
 	<wcst:message key="PC_MOVE_TO_PAGE_{0}" bundle="${widgetText}" var="PC_MOVE_TO_PAGE"/>
 	
     <c:set var="carouselOptions" value='{"prevButton": "a.prevPageButton", "nextButton": "a.nextPageButton", "contentContainer": "div.content", "paginationButtons": "div.pageControl>a", "columnCountByWidth": ${columnCountByWidth}, "owlCarouselOptions": {"itemsScaleUp": true}}'/>
-	<div dataci_toolbar="<c:out value='${param.pgl_widgetId}_espot'/>" id="categoryRecommendationWidget${widgetSuffix}" class="categoryRecommendationWidget carousel clip-true padding-true background-${background} border-${border}" data-widget-type="wc.Carousel" data-widget-options="${fn:escapeXml(carouselOptions)}" <c:if test="${!empty titleContentTypeMap}" >role="region" aria-labelledby="title${widgetSuffix}"</c:if>>
+	<div dataci_toolbar="<c:out value='${param.pgl_widgetId}_espot'/>" id="categoryRecommendationWidget${widgetSuffix}" class="categoryRecommendationWidget noTitleItems carousel clip-true padding-true background-${background} border-${border}" data-widget-type="wc.Carousel" data-widget-options="${fn:escapeXml(carouselOptions)}" <c:if test="${!empty titleContentTypeMap}" >role="region" aria-labelledby="title${widgetSuffix}"</c:if>>
 		<c:if test="${eSpotTitleIncluded == null || empty eSpotTitleIncluded[emsName]}" >
 			<h2 id="title${widgetSuffix}"><div dataci_espot ="<c:out value='${param.pgl_widgetId}_${emsName}'/>" id="ci_espot_<c:out value='${param.pgl_widgetId}_${emsName}'/>">
 			<%@include file="../Common/ESpot/ESpotTitle_UI.jspf"%></div></h2>
@@ -35,7 +35,7 @@
 				<%out.flush();%>
 			</c:if>
 		</flow:ifEnabled>
-		<div class="carouselWrapper">
+		<div class="carouselWrapper setItems">
 			<div>
 				<a id="prevPageButton${widgetSuffix}" href="#" class="prevPageButton" role="button" aria-label="${PC_PREVIOUS_PAGE}" alt="${PC_PREVIOUS_PAGE}"></a>
 			</div>

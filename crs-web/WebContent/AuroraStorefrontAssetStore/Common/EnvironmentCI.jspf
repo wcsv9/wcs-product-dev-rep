@@ -25,12 +25,11 @@
 </c:if>
 <script type="text/javascript">
 	var personalizationId = "<c:out value='${cookieValues[1]}'/>"
-	var cihostname = dojo.cookie("ciHostName");
 	function loadCIAssets(jsUrl, cssUrl, callback) {
 	    var script = document.createElement("script")
 	    script.type = "text/javascript";
-	
-	    if (script.readyState) { 
+
+	    if (script.readyState) {
 	        script.onreadystatechange = function () {
 	            if (script.readyState == "loaded" || script.readyState == "complete") {
 	                script.onreadystatechange = null;
@@ -42,17 +41,17 @@
 	            callback();
 	        };
 	    }
-	
+
 	    script.src = jsUrl;
 	    document.getElementsByTagName("head")[0].appendChild(script);
-	    
+
 	    var css = document.createElement("link");
 	    css.rel = "stylesheet";
 	    css.type = "text/css";
 	    css.href = cssUrl;
 	    document.getElementsByTagName("head")[0].appendChild(css);
 	}
-	
+
 	function getPageContext() {
 		var pageGroup = "<c:out value='${requestScope.pageGroup}'/>";
 		var storeId = "<c:out value='${WCParam.storeId}'/>";
@@ -60,16 +59,15 @@
 		var langId = "<c:out value='${WCParam.langId}'/>";
 		var objectParamName = "";
 		var objectParamValue = "";
-		var pageIdInPreview = "<c:out value='${pageIdInPreview}'/>"; 
-		var currency = "<c:out value='${env_currencyCode}'/>";
-		
+		var pageIdInPreview = "<c:out value='${pageIdInPreview}'/>";
+
 		switch (pageGroup) {
 			case "Category": {
 				objectParamName = "categoryId";
 				objectParamValue = "<c:out value='${WCParam.categoryId}'/>";
 				break;
 			}
-			
+
 			case "PredDynaKit":
 			case "DynamicKit":
 			case "Item":
@@ -80,80 +78,40 @@
 				objectParamValue = "<c:out value='${productId}'/>";
 				break;
 			}
-			case "Content": {				
+			case "Content": {
 				objectParamName = "pageId";
 				objectParamValue = pageIdInPreview;
 				break;
 			}
 		}
-		
-		return [{'pageGroup':pageGroup, 'objectParamName':objectParamName, 'objectParamValue':objectParamValue, 'storeId':storeId, 'catalogId':catalogId,'langId':langId, 'currency':currency}];
-	}
-	
-	
-	function retrieveCIHooks() {
-		productHooks = [];
-		categoryHooks = [];
-		espotHooks = [];
-		dojo.query('div[dataci_product]').forEach(function(node) {
-			var tokens = node.getAttribute("dataci_product");
-			productHooks.push(tokens);
-		});
-		dojo.query('div[dataci_category]').forEach(function(node){
-			var tokens = node.getAttribute("dataci_category").split("_");
-			categoryHooks.push(tokens.slice(0,1) + "_" + addSpaceToId(tokens.slice(1).join('_')));
-		});
-		dojo.query('div[dataci_espot]').forEach(function(node){
-			var tokens = node.getAttribute("dataci_espot");
-			espotHooks.push(tokens);
-		});
-		return [productHooks, categoryHooks, espotHooks, getPrimaryProduct()];
+
+		return [{'pageGroup':pageGroup, 'objectParamName':objectParamName, 'objectParamValue':objectParamValue,
+                'storeId':storeId, 'catalogId':catalogId,'langId':langId}];
 	}
 
-	function addSpaceToId(id) {
-		return id.split("--_-").join(" ");
-	}
 
-	function getPrimaryProduct() {
-		dojo.query('meta[name="pageGroup"]').forEach(function(node) {
-			if (node.getAttribute("content") !== "Product") {
-				return null;
-			};
-		});
-
-		var primaryProduct;
-		dojo.query('meta[name="pageIdentifier"]').forEach(function(node) {
-			primaryProduct = node.getAttribute("content");
-		});
-		return primaryProduct;
-	}
-	
-	dojo.addOnLoad(function() {
-		if (typeof(cihostname)!= "undefined" && cihostname){
-			parent.postMessage(JSON.stringify({
-				cmd : 'update_hooks',
-				hooks : JSON.stringify(retrieveCIHooks())
-			}), cihostname);
-		}
+	$(function() {
 		window.addEventListener("message", function _func(event) {
-			if (cihostname !== event.origin) {
-				dojo.cookie("ciHostName", event.origin);
-			}
-			var data;		
+			console.log("##being listened");
+			//event.stopImmediatePropagation();
+			var data;
 			try {
 				data = JSON.parse(event.data);
 				if (data.cmd && data.cmd === "ping") {
+				console.log("##being pinged");
 					event.source.postMessage(JSON.stringify({cmd:'connect'}), event.origin);
 					if (event.origin !== "https://commerceinsights.ibmcloud.com") {
 						console.warn("Unexpected CI server - " + event.origin);
 					}
 				}
-				
+
 				if (data.cmd && data.cmd === "connect_resp") {
-					loadCIAssets(event.origin + data.jsPath, event.origin + data.cssPath, function() {							
+						loadCIAssets(event.origin + data.jsPath, event.origin + data.cssPath, function() {
+						event.stopImmediatePropagation();
 						window.removeEventListener("message", _func);
-						window.addEventListener("message", receive)
-						event.source.postMessage(JSON.stringify({cmd:'ready', pagecontext:getPageContext()}), event.origin);
+						window.addEventListener("message", receive, false)
+						event.source.postMessage(JSON.stringify({cmd:'ready',
+                                              pagecontext:getPageContext()}), event.origin);
 					});
 				}
 			}

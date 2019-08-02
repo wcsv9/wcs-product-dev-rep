@@ -23,7 +23,7 @@
 	<c:set var="orgMemberGroupAttributes" value="wcType='RefreshArea' widgetId='orgMemberGroup' declareFunction='declareOrgMemberGroupController()' ariaMessage='${ariaMessage}' ariaLiveId='${ariaMessageNode}' role='region'"/>
 	<span id="orgMemberGroup_Label" class="spanacce" aria-hidden="true"><wcst:message bundle="${widgetText}" key="ACCE_ORG_MEMBER_APPROVAL_GROUPS_CONTENT"/></span>
 
-	<div class="pageSectionTitle">
+	<div class="pageSectionTitle" style="display:none;">
 	
 		<div class="spanacce" aria-hidden="true" id="organizationSelectedMemberGroups"><wcst:message bundle="${widgetText}" key="ACCE_ORG_SELECTED_MEMBER_GROUPS"/></div>
 		<span><h2 id="organizationApprovalMemberGroupDetails"> <wcst:message key="ORG_MEMBER_APPROVAL_GROUPS" bundle="${widgetText}"/></h2>
@@ -48,7 +48,7 @@
 	<%-- Organization Member Group Details --%>
 	<c:if test="${empty showMemberGroupSummary or showMemberGroupSummary eq 'true'}">
 		<%-- Organization Member Group Details - Summary Section --%>
-		<div id="${editSectionId}Read" class="readField" style="display: block;"  role="document" aria-labelledBy="organizationSelectedMemberGroups" tabindex="0">
+		<div id="${editSectionId}Read" class="readField" style="display: none;"  role="document" aria-labelledBy="organizationSelectedMemberGroups" tabindex="0">
 			<c:forEach var="memberGroupStatus" items="${summarySectionText}">
 				<div class="field">
 					<span class="readLabel">&nbsp;</span> <span class="readValue"><wcst:message key="${memberGroupStatus}" bundle="${widgetText}"/></span>
@@ -59,7 +59,7 @@
 
 	<%-- Organization Member Group Details - Edit Section --%>
 	<c:if test="${empty showMemberGroupEdit or showMemberGroupEdit eq 'true'}">
-		<div id="${editSectionId}" class="editField" style="display: none;">
+		<div id="${editSectionId}" class="editField"  >
 			<div id="memberGroup">
 				<div class="row">
 					<div class="col12">
@@ -89,7 +89,7 @@
 
 				<div class="row">
 					<div class="col12">
-						<h2><wcst:message key="ORG_MEMBER_APPROVAL_GROUP_PARENT_DESC" bundle="${widgetText}"/></h2>
+						<%-- <h2><wcst:message key="ORG_MEMBER_APPROVAL_GROUP_PARENT_DESC" bundle="${widgetText}"/></h2> --%>
 					</div>
 				</div>
 
@@ -119,15 +119,15 @@
 				<div class="editActions">
 					<a class="button_primary" role="button" onclick="javascript:widgetCommonJS.toggleReadEditSection('${editSectionId}', 'read');organizationMemberApprovalGroupJS.updateMemberApprovalGroup('${orgEntityId}','${editSectionId}', 'arrow');return false;" href="#">
 							<div class="left_border"></div>
-							<div class="button_text"><span><wcst:message bundle="${widgetText}" key="ORG_SAVE"/></span></div>								
+							<div class="button_text"><span><wcst:message bundle="${widgetText}" key="ORG_APPRO_SAVE"/></span></div>								
 							<div class="right_border"></div>
 					</a>
 
-					<a class="button_secondary" role="button" onclick="javascript:widgetCommonJS.toggleReadEditSection('${editSectionId}', 'read');return false;" href="#">
+					<%-- <a class="button_secondary" role="button" onclick="javascript:widgetCommonJS.toggleReadEditSection('${editSectionId}', 'read');return false;" href="#">
 							<div class="left_border"></div>
 							<div class="button_text"><span><wcst:message bundle="${widgetText}" key="ORG_CANCEL"/></span></div>								
 							<div class="right_border"></div>
-					</a>
+					</a> --%>
 				</div>
 			</div>
 		</div>

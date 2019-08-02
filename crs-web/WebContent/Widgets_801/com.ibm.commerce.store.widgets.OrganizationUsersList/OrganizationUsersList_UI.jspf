@@ -11,6 +11,174 @@
   IBM Corp.
  =================================================================
 --%>
-<!-- BEGIN OrganizationUsersList_UI.jspf -->
-<%@ include file="/Widgets_801/Common/MyAccountList/ItemTable_UI.jspf" %>
+<!-- BEGIN OrganizationUsersList_UI.jspf --><%-- 
+<%@ include file="/Widgets_801/Common/MyAccountList/ItemTable_UI.jspf" %> --%>
 <!-- END OrganizationUsersList_UI.jspf -->	
+<wcf:url var="buyerApprovalViewURL" value="BuyerApprovalView" >
+<wcf:param name="storeId"   value="${WCParam.storeId}"  />
+<wcf:param name="catalogId" value="${WCParam.catalogId}"/>
+<wcf:param name="langId" value="${langId}" />
+</wcf:url>	
+<div class="row orderHistoryPage organizations-and-users changeSetOrgAndUser">
+		<div class="col12 row btnsHolder">
+			<div class="col2 acol4 greenBtn"><a href="JavaScript:OrganizationUsersListJS.addUser()">Add User</a></div>
+			<div class="col2 acol4 redBtn" class="widthControleOrgnization"><a href="JavaScript:MyAccountDisplay.updateMemberStatus()">Enable/Disable</a></div>
+			<div class="col2 acol4 blueBtn"> <a href="JavaScript:MyAccountDisplay.resetPasswordFunction()">Reset Password</a></div>
+			<div class="col2 acol6 blueBtn"><a href="JavaScript:MyAccountDisplay.viewDetails()">Change Role</a></div>
+			<div class="col3 acol6 blueBtn"><a href="${buyerApprovalViewURL}">Buyer Approval</a></div>
+		</div>
+		<br/>
+		<div class="clear_float"></div>
+		<div class="col12">
+			<table class="orderHistoryTable" cellspacing="0" cellpadding="0" border="0">
+				<tbody> 
+			<tr class="headTr">
+			<th></th>
+					<th>Name <button><img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/arrow-down.png"></button></th>
+					<th>ID  <button><img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/arrow-down.png"></button></th>
+					<th>Status	<button><img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/arrow-down.png"></button></th>
+					<th>Roles 	<button><img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/arrow-down.png"></button></th>
+					<th>Last Login <button><img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/arrow-down.png"></button></th>
+					<th>Registration Date <button><img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/arrow-down.png"></button></th>
+					
+				</tr>
+
+
+
+
+				<c:forEach items="${usersList.userDataBeans}" var="user"
+					varStatus="aStatus">
+
+					<wcf:rest var="userRoles" url="store/{storeId}/person/{userId}">
+						<wcf:var name="storeId" value="${storeId}" encode="true" />
+						<wcf:var name="userId" value="${user.userId}" encode="true" />
+						<wcf:param name="responseFormat" value="json" />
+						<wcf:param name="profileName" value="IBM_Roles_Of_User_All" />
+					</wcf:rest>
+					
+					<wcf:rest var="userSession" url="store/{storeId}/person/{userId}">
+						<wcf:var name="storeId" value="${storeId}" encode="true" />
+						<wcf:var name="userId" value="${user.userId}" encode="true" />
+						<wcf:param name="responseFormat" value="json" />
+					</wcf:rest>
+
+					<wcf:useBean var="orgRoleMap" classname="java.util.HashMap" />
+					<c:forEach var="org" items="${userRoles.orgIdRoleDataBeans}">
+
+						<c:if test="${empty orgIdNameMap[org.key]}">
+							<%-- Check ifIcanAdmininster this organization. Only display roles played in Organizations I can administer --%>
+							<c:set var="iCanAdminister" value="false" />
+							<c:forEach var="orgDataBean"
+								items="${organizationList.organizationDataBeans}">
+								<c:if test="${org.key eq orgDataBean.organizationId}">
+									<c:set var="iCanAdminister" value="true" />
+								</c:if>
+							</c:forEach>
+							<c:if test="${iCanAdminister eq 'true'}">
+								<%-- Get orgName for this orgId and also save it in internal hashMap for later use --%>
+								<wcf:rest var="currentOrg"
+									url="store/{storeId}/organization/{organizationId}">
+									<wcf:var name="storeId" value="${storeId}" encode="true" />
+									<wcf:var name="organizationId" value="${org.key}" encode="true" />
+									<wcf:param name="responseFormat" value="json" />
+									<wcf:param name="profileName"
+										value="IBM_Organization_Short_Summary" />
+								</wcf:rest>
+								<wcf:set target="${orgIdNameMap}" key="${org.key}"
+									value="${currentOrg.displayName}" />
+								<c:remove var="currentOrg" />
+							</c:if>
+						</c:if>
+						<c:if test="${!empty orgIdNameMap[org.key]}">
+							<%-- I can administer this organizaiton. Proceed with displaying roles played in this Organization --%>
+							<c:set var="orgName" value="${orgIdNameMap[org.key]}" />
+							<c:set var="orgDisplayName" value="" />
+
+							<c:choose>
+								<c:when test="${not empty orgName}">
+									<wcst:message var="orgDisplayName"
+										key="ORGANIZATIONUSERSLIST_ORG_DISPLAY" bundle="${widgetText}">
+										<wcst:param>${orgName}</wcst:param>
+									</wcst:message>
+								</c:when>
+							</c:choose>
+
+							<c:forEach var="role" items="${org.value}">
+								<c:choose>
+									<c:when test="${empty orgRoleMap[orgDisplayName]}">
+										<wcf:set target="${orgRoleMap}" key="${orgDisplayName }"
+											value="${role.displayName}" />
+									</c:when>
+									<c:otherwise>
+										<wcf:set target="${orgRoleMap}" key="${orgDisplayName}"
+											value="${orgRoleMap[orgDisplayName]},&nbsp;${role.displayName}" />
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:if>
+					</c:forEach>
+
+					<c:set var="userRolesList" value="" />
+					<c:forEach var="orgRoleMapElement" items="${orgRoleMap}">
+						<c:if test="${not empty userRolesList }">
+							<c:set var="userRolesList" value="${userRolesList}<br/>" />
+						</c:if>
+						<c:set var="userRolesList"
+							value="${userRolesList}${orgRoleMapElement.value}&nbsp;${fn:escapeXml(orgRoleMapElement.key)}" />
+					</c:forEach>
+					<c:set var="userAccountStatus" value="" />
+					<c:if
+						test="${user.userRegistry.status == 0 || user.userRegistry.status == 1}">
+						<wcst:message var="userAccountStatus"
+							key="ORGANIZATIONUSERSLIST_USER_ACCOUNT_STATUS_${user.userRegistry.status}"
+							bundle="${widgetText}" />
+					</c:if>
+					<%-- Display the name of the buyers according to locale --%>
+					<c:choose>
+						<c:when
+							test="${locale eq 'ja_JP' || locale eq 'ko_KR' || locale eq 'zh_CN' || locale eq 'zh_TW'}">
+							<c:set var="userName" value="${user.lastName} ${user.firstName}" />
+						</c:when>
+						<c:otherwise>
+							<c:set var="userName" value="${user.firstName} ${user.lastName}" />
+						</c:otherwise>
+					</c:choose>
+
+					<tr>
+					
+						<td class="radioPaddingControl">
+							<input type="radio" name="groupradio" id="groupradio" 
+						 value="${user.logonId}">
+						 <input type="hidden" name="groupuserid" id="groupuserid" 
+						 value="${user.userId}_${user.userRegistry.status}">
+						</td>
+						<td class="orders">${userName}</td>
+
+						<td>${user.logonId}</td>
+
+						<td>${userAccountStatus}</td>
+
+						<td>${userRolesList}</td>
+
+						<td>${userSession.lastSession}</td>
+						
+						<td>${userSession.registration}</td>
+
+					</tr>
+
+				</c:forEach>
+
+
+
+
+
+
+
+
+
+
+
+
+			</tbody></table>
+		</div>
+	</div>

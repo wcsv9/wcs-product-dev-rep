@@ -11,6 +11,7 @@
   IBM Corp.
  =================================================================
 --%>
+
 <%@	page session="false"%><%@ 
 	page pageEncoding="UTF-8"%><%@
 	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%@
@@ -27,3 +28,4 @@
 <c:when test="${jsonp}">);</c:when>
 <c:otherwise><% out.print("*/"); %></c:otherwise>
 </c:choose>
+

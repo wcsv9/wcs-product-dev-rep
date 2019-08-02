@@ -250,9 +250,9 @@
     <property name="url" value="/ShoppingArea/CheckoutSection/SingleShipment/BillingAddressDropDownDisplay.jsp"/>  
     <property name="https" value="1"/> 
   </bean>
-  <bean id="OrderReceivedView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
-    <property name="url" value="/EmailTemplates/Order/OrderCreateNotify.jsp"/> 
-  </bean>  
+<!--   <bean id="OrderReceivedView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView">  -->
+<!--     <property name="url" value="/EmailTemplates/Order/OrderCreateNotify.jsp"/>  -->
+<!--   </bean>   -->
   <bean id="OrderReceivedView-Silverpop" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
     <property name="url" value="/EmailTemplates/Order/SilverpopOrderCreateNotify.jsp"/>
     <property name="skipAccessControlCheck" value="1"/>
@@ -464,5 +464,14 @@
     <property name="url" value="/UserArea/ServiceSection/TrackOrderStatusSubsection/GuestOrderDetailDisplay.jsp"/>  
     <property name="https" value="1"/>     
     <property name="credentialsAccepted" value="P"/> 
-  </bean>              
+  </bean>      
+
+  <bean id="OrderReceivedViewV2" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
+    <property name="url" value="/OrderReceived.jsp"/> 
+  </bean>  
+
+  <bean id="ON_OrderReceivedApproverNotifyView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
+    <property name="url" value="/OrderReceivedApprovalNotify.jsp"/> 
+  </bean>  
+            
 </beans>

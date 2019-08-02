@@ -17,7 +17,7 @@
 <%-- This widget is only designed to be used with single shipment. The shipping info returned from the first 
 		order item of the order is used to display the shipping address. --%>
 <c:if test="${shipmentTypeId == 1}">
-	<div class="col4" aria-labelledby="OrderDetail_Shipping_DetailDiv" tabindex="0">
+	<div class="col4 orderDetailShip" aria-labelledby="OrderDetail_Shipping_DetailDiv" tabindex="0">
 		<%-- shipping address --%>
 		<div id="OrderDetail_Shipping_DetailDiv"><p><h2><wcst:message key="ORDERDETAIL_SHIPPEDTO" bundle="${widgetText}"/></h2></p></div>
 		<c:set var="contact" value="${order.orderItem[0]}" />	
@@ -52,8 +52,6 @@
 			<wcst:param><c:out value="${shipMethod}"/></wcst:param>
 		</wcst:message>
 		<br />
-
-		
 		
 		<%-- shipping charge type --%>
 		<flow:ifEnabled feature="ShippingChargeType">
@@ -76,6 +74,7 @@
 			</c:if>
 		</flow:ifEnabled>
 		
+		
 		<%-- ship as complete --%>
 		<flow:ifEnabled feature="ShipAsComplete">
 			<br />
@@ -93,7 +92,9 @@
 			<br />
 			<br />
 		</flow:ifEnabled>
-		
+		<c:if test="${!empty order.comments }">
+			Purchase Order Number : ${order.comments }
+		</c:if>
 		<%-- shipping instructions --%>
 		<flow:ifEnabled feature="ShippingInstructions">
 			<c:if test="${!empty order.orderItem[0].shipInstruction}">

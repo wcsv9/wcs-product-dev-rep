@@ -192,7 +192,7 @@ shoppingActionsServicesDeclarationJS = {
 				}
 			}
 			if(typeof(ShipmodeSelectionExtJS)!= null && typeof(ShipmodeSelectionExtJS)!='undefined'){
-				ShipmodeSelectionExtJS.setOrderItemId(serviceResponse.orderItem[0].orderItemId);
+				ShipmodeSelectionExtJS.setOrderItemId((serviceResponse.orderItem != null && serviceResponse.orderItem[0].orderItemId != null) ? serviceResponse.orderItem[0].orderItemId : serviceResponse.orderItemId);
 			}
 		}
      /**

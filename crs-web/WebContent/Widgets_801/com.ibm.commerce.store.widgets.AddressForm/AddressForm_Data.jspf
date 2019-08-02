@@ -27,6 +27,9 @@
 <c:set var="nickName" value="${paramSource.nickName}"/>
 <c:set var="street" value="${paramSource.address1}"/>
 <c:set var="street2" value="${paramSource.address2}"/>
+<c:set var="street3" value="${paramSource.address3}"/>
+<c:set var="role" value="${paramSource.role}"/>
+<c:set var="title" value="${paramSource.title}"/>
 <c:set var="city" value="${paramSource.city}"/>
 <c:set var="state" value="${paramSource.state}"/>
 <c:set var="country1" value="${paramSource.countryReg}"/>
@@ -42,6 +45,7 @@
 <c:set var="gender" value="${paramSource.gender}"/>
 <c:set var="dateOfBirth" value="${paramSource.dateOfBirth}"/>
 <c:set var="phone1" value="${paramSource.phone}"/>
+<c:set var="phone2" value="${paramSource.phone2}"/>
 <c:set var="email1" value="${paramSource.email1}"/>
 <c:set var="addressType" value="${paramSource.addressType}"/>
 <c:set var="pageName" value="${paramSource.pageName}"/>
@@ -62,28 +66,28 @@
 	<c:when test="${pageName == 'UserRegistrationAddForm' || pageName == 'UserRegistrationUpdateForm'}">
 		<c:choose>
 			<c:when test="${locale == 'zh_CN'}">
-				<c:set var="addressFieldOrder" value="LAST_NAME,first_name,new_line,COUNTRY/REGION,STATE/PROVINCE,new_line,CITY,ADDRESS,ZIP,new_line,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="LAST_NAME,first_name,new_line,COUNTRY/REGION,STATE/PROVINCE,new_line,CITY,ADDRESS,ZIP,new_line,EMAIL1,phone1,title,role,phoneSec" />
 			</c:when>
 			<c:when test="${locale eq 'ar_EG'}">
-				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,ADDRESS,CITY,new_line,STATE/PROVINCE,new_line,ZIP,new_line,COUNTRY/REGION,new_line,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,ADDRESS,CITY,new_line,STATE/PROVINCE,new_line,ZIP,new_line,COUNTRY/REGION,new_line,EMAIL1,phone1,title,role,phoneSec" />
 			</c:when>
 			<c:when test="${locale == 'ru_RU'}">
-				<c:set var="addressFieldOrder" value="first_name,middle_name,new_line,LAST_NAME,ADDRESS,new_line,ZIP,CITY,new_line,state/province,COUNTRY/REGION,new_line,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="first_name,middle_name,new_line,LAST_NAME,ADDRESS,new_line,ZIP,CITY,new_line,state/province,COUNTRY/REGION,new_line,EMAIL1,phone1,title,role,phoneSec" />
 			</c:when>
 			<c:when test="${locale == 'zh_TW'}">
-				<c:set var="addressFieldOrder" value="LAST_NAME,first_name,new_line,COUNTRY/REGION,STATE/PROVINCE,new_line,CITY,ZIP,new_line,ADDRESS,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="LAST_NAME,first_name,new_line,COUNTRY/REGION,STATE/PROVINCE,new_line,CITY,ZIP,new_line,ADDRESS,EMAIL1,phone1,title,role,phoneSec" />
 			</c:when>
 			<c:when test="${locale == 'ja_JP' || locale == 'ko_KR'}">
-				<c:set var="addressFieldOrder" value="LAST_NAME,FIRST_NAME,new_line,COUNTRY/REGION,ZIP,new_line,STATE/PROVINCE,CITY,ADDRESS,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="LAST_NAME,FIRST_NAME,new_line,COUNTRY/REGION,ZIP,new_line,STATE/PROVINCE,CITY,ADDRESS,EMAIL1,phone1,title,role,phoneSec" />
 			</c:when>
 			<c:when test="${locale == 'de_DE' || locale == 'es_ES' || locale == 'fr_FR' || locale == 'it_IT' || locale == 'ro_RO'}">
-				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,ADDRESS,ZIP,new_line,CITY,state/province,new_line,COUNTRY/REGION,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,ADDRESS,ZIP,new_line,CITY,state/province,new_line,COUNTRY/REGION,EMAIL1,phone1,title,role,phoneSec" />
 			</c:when>
 			<c:when test="${locale == 'pl_PL'}">
-				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,ADDRESS,ZIP,new_line,CITY,STATE/PROVINCE,new_line,COUNTRY/REGION,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,ADDRESS,ZIP,new_line,CITY,STATE/PROVINCE,new_line,COUNTRY/REGION,EMAIL1,phone1,title,role,phoneSec" />
 			</c:when>
 			<c:otherwise>
-				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,ADDRESS,CITY,new_line,COUNTRY/REGION,STATE/PROVINCE,ZIP,new_line,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,EMAIL1,phone1,new_line,phoneSec,role,new_line,title,new_line,EmailOption,new_line,ADDRESS,CITY,new_line,COUNTRY/REGION,STATE/PROVINCE,ZIP,new_line" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
@@ -112,7 +116,7 @@
 				<c:set var="addressFieldOrder" value="new_line,ADDRESS,ZIP,new_line,CITY,STATE/PROVINCE,new_line,COUNTRY/REGION,EMAIL1,phone1" />
 			</c:when>
 			<c:otherwise>
-				<c:set var="addressFieldOrder" value="new_line,ADDRESS,CITY,new_line,COUNTRY/REGION,STATE/PROVINCE,ZIP,new_line,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="new_line,use_org_address,new_line,EMAIL1,phone1,new_line,ADDRESS,CITY,new_line,COUNTRY/REGION,STATE/PROVINCE,ZIP,new_line" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
@@ -141,7 +145,7 @@
 				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,use_org_address,ADDRESS,ZIP,new_line,CITY,STATE/PROVINCE,new_line,COUNTRY/REGION,EMAIL1,phone1" />
 			</c:when>
 			<c:otherwise>
-				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,use_org_address,ADDRESS,CITY,new_line,COUNTRY/REGION,STATE/PROVINCE,ZIP,new_line,EMAIL1,phone1" />
+				<c:set var="addressFieldOrder" value="first_name,LAST_NAME,new_line,EMAIL1,phone1,new_line,phoneSec,role,new_line,title,new_line,EmailOption,new_line,ADDRESS,CITY,new_line,COUNTRY/REGION,STATE/PROVINCE,ZIP,new_line" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>

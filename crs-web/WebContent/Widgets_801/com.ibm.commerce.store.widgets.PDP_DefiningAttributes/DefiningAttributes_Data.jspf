@@ -71,8 +71,10 @@
 		</c:if>
 	</c:if>
 </c:if>
-		
+
+<c:set var="queryParent" value="true" scope="request"/>	
 <%@ include file="/Widgets_801/Common/PDP_CatalogEntryData.jspf" %>
+
 
 <c:set var="replaceCmprStr" value=""/>
 <c:set var="ampersand" value="&amp;" />
@@ -113,7 +115,7 @@
 <jsp:useBean id="validTimePeriodAttrValues" class="java.util.HashMap" scope="page" />
 
 <c:choose>
-	<c:when test="${type eq 'product'}">
+	<c:when test="${type eq 'product' || type eq 'variant'}">
 		<c:if test="${numberOfSKUs eq 1}">
 			<%-- 
 			If there is only one SKU then let's just display the attributes of the one item as text without selection.
@@ -178,7 +180,7 @@
 			</c:forEach>
 		</c:if>
 
-		<c:if test="${type == 'product'}">
+		<c:if test="${type == 'product' || type == 'variant'}">
 				<c:forEach var='entitledItem' items='${entitledItems}' varStatus='outerStatus'>
 					<c:if test="${entitledItem.buyable eq 'true' || buyablePurchasable eq 'true'}">
 						<c:set var="sku" value="${entitledItem}"/>

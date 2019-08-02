@@ -52,13 +52,84 @@
 	</c:if>
 </c:if>
 
+<c:set var="pdpSKUs" value="true"/>
+
+<c:if test="${!empty param.cartSKUs && param.cartSKUs eq true}">
+	<c:set var="cartSKUs" value="${param.cartSKUs}"/>
+	<c:set var="pdpSKUs" value="false"/>
+</c:if>
+
 <script>
+	var is_iPad = navigator.userAgent.match(/iPad/i) != null;
+    var is_firefox = typeof window.InstallTrigger !== 'undefined';
+	var is_Iphone=navigator.platform.indexOf("iPhone") != -1;
 	<%-- When quantity input text box value changes, capture the new value and use it during Add to Req List action --%>
+	function SetMultipleTabsWidth(){
+		var getChilds = $(".multipleTabs li").length;
+		var i=0;
+		var visibleItems=0;
+		if(getChilds){
+		for(i=1; i <= getChilds; i++){
+			var getEachChild = ".multipleTabs li:nth-child("+i+")";
+			var getAttrDisplay = $(getEachChild).attr('style');
+			if((getAttrDisplay) && (getAttrDisplay.indexOf('none') > 0)){
+				//if($(getEachChild).css('display') === 'block' ){
+			}
+			else{
+				visibleItems = visibleItems + 1;
+			}
+		 }
+		 $(".multipleTabs li").css('width', 'calc('+100/visibleItems+'% - 2px)');
+		}
+	}
 	$(document).ready(function(){
 		wcTopic.subscribe("Quantity_Changed", function(newQuantity) {
 			eval("addReqListsJS<c:out value="${parentPage}"/>.setQuantity('"+newQuantity+"');");
 		});
-	});
+	 
+		  
+		if(is_iPad){
+			/* $(".pdpPage .quantity_section input").css("padding", "22px 0px"); */
+			//$(".addToFavouriteBtnControl p").css("padding", "9.5px 0px");  
+			/* $("#add2CartBtn").css("padding", "16px 0px");   
+			 $('.quantity_section input').attr('style', 'padding: 19px 0px !important');*/
+			 $('.navBase2').attr('style', 'margin-left: 5px !important');
+		} 
+		
+	}); 
+	if($('.addToFavouriteBtnControl').css('display') == 'block'){
+		setInterval(hidePopupAndSticky, 10);
+		
+	}
+	function hidePopupAndSticky(){
+		SetMultipleTabsWidth();
+		 if(is_firefox){ $('#printBtn').attr('style', 'padding: 14.9px 0px !important'); }
+		 /*if(is_iPad){$('.pdpPage .addToFavouriteBtnControl').attr('style', 'padding: 12.5px 0px !important'); }	 */
+		if($('#grayOut').css('display') == 'block'){ 
+			$("#grayOutRemainig").addClass("grayOutRemainig");
+			$("#header").css("z-index", "0");
+			$("#grayOut").css("z-index", "3");  
+		}
+		if($('#grayOut').css('display') == 'none'){
+			$("#grayOutRemainig").removeClass("grayOutRemainig");
+ 			$("#header").css("z-index", "10");
+			$("#grayOut").css("z-index", "100"); 
+		}
+		
+		if($(".nav2").hasClass("sticky") ){
+			/*if(is_iPad){$('.pdpPage .sticky .addToFavouriteBtnControl').attr('style', 'padding: 14px 0px !important');}
+			if(is_firefox){ $('#printBtn').attr('style', 'padding: 14px 0px !important'); }*/
+			if($('#grayOut').css('display') == 'none')
+				{$("#header").css("z-index", "3");} 
+		}
+		else if(!$(".nav2").hasClass( "sticky" ) && ($('#grayOut').css('display') == 'none')){
+			$("#header").css("z-index", "10"); 
+		}
+		
+	}
+	
+	
+
 </script>
 
 <%-- Check if adding multiple SKUs --%>
@@ -70,25 +141,25 @@
 <c:if test="${!empty param.addSavedOrder && param.addSavedOrder eq true}">
 	<c:set var="addToListFunction" value="addOrderToRequisitionList()" />
 </c:if>
-
-<div style="position:relative;">
+<div id="grayOutRemainig"></div>
+<div class="v9_orderDetails_favLink" style="position:relative;">
 	<c:choose>
 		<c:when test="${!empty buttonStyle && buttonStyle eq 'none'}">
 		</c:when>
 		<c:otherwise>
 			<div class="requisitionListBox" id="<c:out value="${parentPage}"/>requisitionList">
 				<div class="addRequisitionList">
-					<div class="button" id="<c:out value="${parentPage}"/>addToShoppingListBtn" 
-						onclick="javascript:addReqListsJS<c:out value="${parentPage}"/>.setProductId('${productId}');addReqListsJS<c:out value="${parentPage}"/>.setQuantity('${quantity}');addReqListsJS<c:out value="${parentPage}"/>.toggleDropDownMenu(${type == 'bundle' || !empty paramValues.type && paramValues.type[0] == 'bundle' ? 'true, false, false, null, true' : ''});" 
-						onkeypress="javascript:if(event.keyCode == 0 || event.keyCode === KeyCodes.RETURN){event.preventDefault();addReqListsJS<c:out value="${parentPage}"/>.setProductId('${productId}');addReqListsJS<c:out value="${parentPage}"/>.setQuantity('${quantity}');addReqListsJS<c:out value="${parentPage}"/>.toggleDropDownMenu(${type == 'bundle' || !empty paramValues.type && paramValues.type[0] == 'bundle' ? 'true, false, false, null, true' : ''});}" 
+					<div class="button addToFavouriteBtnControl" id="<c:out value="${parentPage}"/>addToShoppingListBtn" 
+						onclick="javascript:SKUListJS.updateItemQuantity('1','${productId}','${itemId}');addReqListsJS<c:out value="${parentPage}"/>.setProductId('${productId}');addReqListsJS<c:out value="${parentPage}"/>.setQuantity('1');addReqListsJS<c:out value="${parentPage}"/>.customToggleDropDownMenu(true, false,${pdpSKUs },false,${cartSKUs });" 
+						onkeypress="javascript:if(event.keyCode == 0 || event.keyCode === KeyCodes.RETURN){event.preventDefault();addReqListsJS<c:out value="${parentPage}"/>.setProductId('${productId}');addReqListsJS<c:out value="${parentPage}"/>.setQuantity('1');addReqListsJS<c:out value="${parentPage}"/>.customToggleDropDownMenu(true, false,'${pdpSKUs }',false,'${cartSKUs }');}" 
 						role="button" aria-haspopup="true" aria-label="<wcst:message key="SL_ADD_TO_REQUISITION" bundle="${widgetText}"/>" tabindex="0"
 						> 
 						<c:choose>
 							<c:when test="${!empty param.moveToRequisitionList && param.moveToRequisitionList eq true}">
-								<p class="button_text"><wcst:message key="SL_MOVE_TO_REQUISITION" bundle="${widgetText}"/></p>
+								<p class="button_text">+ Add to Favourites<!-- <wcst:message key="SL_ADD_TO_REQUISITION" bundle="${widgetText}"/> --></p>
 							</c:when>
 							<c:otherwise>
-								<p class="button_text"><wcst:message key="SL_ADD_TO_REQUISITION" bundle="${widgetText}"/></p>
+								<a class="remove_address_link hover_underline tlignore" href="#">+ Add to Favourites</a>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -112,27 +183,6 @@
 						<h1>
 							<wcst:message key="SL_SIGN_IN_OR_REGISTER_TO_ACCESS_LIST" bundle="${widgetText}"/>
 						</h1>
-	
-	<%--					<div class="signInForm">
-								<div class="container">
-								<input placeholder="<wcst:message key='SL_EMAIL' bundle='${widgetText}'/>" type="text" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"/>
-									<input placeholder="<wcst:message key='SL_PASSWORD' bundle='${widgetText}'/>" type="password" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-									<div class="row signInFormFooter">
-										<div class="col6">
-											<div class="saveButton">
-												<div class="button_text" onclick="MessageHelper.displayStatusMessage(storeNLS['SL_SIGNIN_HEADER'])">
-													<wcst:message key='SL_SIGN_IN' bundle='${widgetText}'/>
-												</div>
-											</div>
-										</div>
-										<div class="col6 forgotPassword">
-											<a href="<c:out value="${ForgetPasswordURL}"/>" class="ui-link">
-												<wcst:message key='SL_FORGOT_PASSWORD' bundle='${widgetText}'/>
-											</a>
-										</div>
-									</div>							
-								</div>
-							</div>--%>
 						<div class="register">
 							<div class="container">
 								<h2><wcst:message key="GLOBALLOGIN_HAVING_NEW_ACCOUNT" bundle="${widgetText}"/></h2>
@@ -148,12 +198,14 @@
 				</c:when>
 				<c:otherwise>
 					<div class="reqListSelect" id="<c:out value="${parentPage}"/>requisitionListSelect" style="display:<c:out value="${hideSuccessStyle}"/>;">
-						<div class="close" role="button" aria-label="<wcst:message key='CLOSE' bundle='${widgetText}'/>" 
+						<div class="close closePopup" role="button" aria-label="<wcst:message key='CLOSE' bundle='${widgetText}'/>" 
 								onclick="javascript:addReqListsJS<c:out value="${parentPage}"/>.toggleDropDownMenu();"
 								onkeypress="if(event.keyCode == 0 || event.keyCode === KeyCodes.RETURN){addReqListsJS<c:out value="${parentPage}"/>.toggleDropDownMenu();}" 
 								tabindex="0">
 						</div>
 						<div class="listSelect" role="radiogroup" aria-label="<wcst:message key="SL_SELECT_LIST_DESC" bundle="${widgetText}"/>">
+							<input type="hidden" id="addAgainInput" type="text"/ value="N"/>
+							<input type="hidden" id="<c:out value="${parentPage}"/>parentPageValue" type="text"/ value="<c:out value="${parentPage}"/>"/>
 							<div class="item">
 								<h1><wcst:message key="SL_SELECT_LIST_DESC" bundle="${widgetText}"/></h1>
 							</div>
@@ -188,6 +240,7 @@
 										</div>
 										<wcst:message key="SL_CREATE_NEW_REQUISITION_DESC" bundle="${widgetText}"/>
 										<div class="newList" id="<c:out value="${parentPage}"/>createNewListMenu" style="display:none;">
+											
 											<input id="<c:out value="${parentPage}"/>newListNameInput" type="text" maxlength="254" placeholder="<wcst:message key="SL_NEW_LIST_DESC" bundle="${widgetText}"/>" 
 											aria-label="<wcst:message key="SL_NEW_LIST_DESC" bundle="${widgetText}"/>"
 											class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"/>
@@ -207,6 +260,18 @@
 													</ul>
 												</div>
 											</div>
+											<br/><br/><br/><br/><br/>
+											<div class="favoritesCheckbox iconCheckBox">
+												<div class="checkBoxItem"><input id="<c:out value="${parentPage}"/>favoritesOrderCheck" type="checkbox" name="favoritesOrder" value="F"/></div> <div class="checkBoxLable">Favorites</div>
+												<div class="clearFloat"></div>
+												<div class="checkBoxItem"><input id="<c:out value="${parentPage}"/>quickOrderCheck" type="checkbox" name="quickOrder" value="Q"/></div> <div class="checkBoxLable"> Quick Order</div>
+												<div class="clearFloat"></div>
+												<div class="checkBoxItem"><input id="<c:out value="${parentPage}"/>recurringOrderCheck" type="checkbox" name="recurOrder" value="R"/></div> <div class="checkBoxLable"> Recurring Order</div>
+												
+												<script>
+													document.getElementById('${parentPage}'+"favoritesOrderCheck").checked = true;
+										        </script>
+											</div>											
 											<div class="clearFloat"></div>
 										</div>			
 									</div>
@@ -226,7 +291,7 @@
 						</div>
 					</div>
 					
-					<div class="productAdded" id="<c:out value="${parentPage}"/>productAdded" style="display:<c:out value="${showSuccessStyle}"/>;" aria-labelledby="<c:out value="${parentPage}"/>productAddedMessage" aria-live="polite" role="dialog">
+					<div class="productAdded savePopup" id="<c:out value="${parentPage}"/>productAdded" style="display:<c:out value="${showSuccessStyle}"/>;" aria-labelledby="<c:out value="${parentPage}"/>productAddedMessage" aria-live="polite" role="dialog">
 						<c:choose>
 							<c:when test="${!empty paramValues.addSavedOrder && paramValues.addSavedOrder[0]}">
 								<div id="<c:out value="${parentPage}"/>productAddedMessage" class="message">
@@ -249,7 +314,8 @@
 									<c:if test="${i < 3}">
 										<c:if test="${!empty paramValues.productThumbnail[i]}">
 											<div class="product">
-												<img src="<c:out value="${paramValues.productThumbnail[i]}"/>" alt="<c:out value="${addedMessage}"/>"/>
+												<img src="${s3ImageHost}<c:out value="${paramValues.productThumbnail[i]}"/>" alt="<c:out value="${addedMessage}"/>"/>
+												<br/>
 												<div class="productTitle" id="<c:out value="${parentPage}"/>addedProductTitle">
 													<c:out value="${paramValues.productName[i]}"/> <c:out value="${paramValues.productSKU[i]}"/>
 												</div>
@@ -268,7 +334,7 @@
 							<div id="<c:out value="${parentPage}"/>requisitionListsContShopButton" class="saveButton" onclick="addReqListsJS<c:out value="${parentPage}"/>.continueShopping();"
 								onkeypress="if(event.keyCode == 0 || event.keyCode === KeyCodes.RETURN){event.preventDefault();addReqListsJS<c:out value="${parentPage}"/>.continueShopping();}"
 								role="button" tabindex="0">
-								<div class="button_text"><wcst:message key="SL_CONTINUE_SHOPPING" bundle="${widgetText}"/></div>
+								<div class="button_text continueShopBtn"><wcst:message key="SL_CONTINUE_SHOPPING" bundle="${widgetText}"/></div>
 							</div>
 						</div>
 					</div>

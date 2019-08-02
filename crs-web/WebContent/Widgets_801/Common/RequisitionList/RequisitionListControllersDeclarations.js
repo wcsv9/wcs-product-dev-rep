@@ -30,7 +30,7 @@ if (typeof (RequistionListControllerDeclarationJS) == "undefined" || RequistionL
 
 
 
-            wcTopic.subscribe(["requisitionListAddItem", "requisitionListDeleteItem"], function (returnAction) {
+            wcTopic.subscribe(["requisitionListAddItemCustom", "requisitionListAddItem", "requisitionListDeleteItem"], function (returnAction) {
                 myRCProperties["requisitionListId"] = returnAction.data.requisitionListId[0];
                 myWidgetObj.refreshWidget("refresh", myRCProperties);
             });

@@ -12,4 +12,10 @@
   <import resource="classpath:/WEB-INF/spring/location-views.xml"/>
   <import resource="classpath:/WEB-INF/spring/widgets-views.xml"/>
   <import resource="classpath:/WEB-INF/spring/AuroraStorefrontAssetStore/views-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/ONB2BDirectStorefrontAssetStore/views-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/NationalAccountStorefrontAssetStore/views-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/ONetB2BStoreAssetStore/views-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/OPDB2BStorefrontAssetStore/views-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/ONNationalAccountStorefrontAssetStore/views-ext.xml"/>
+  <import resource="classpath:/WEB-INF/spring/OPDNZB2BStorefrontAssetStore/views-ext.xml"/>
 </beans>

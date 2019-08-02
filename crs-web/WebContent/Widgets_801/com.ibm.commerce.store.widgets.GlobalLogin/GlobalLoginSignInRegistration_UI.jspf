@@ -10,12 +10,43 @@
   disclosure restricted by GSA ADP Schedule Contract with
   IBM Corp.
  =================================================================
---%>
-
+--%> 
 <!-- BEGIN GlobalLoginSignInRegistration_UI.jspf -->
 
 <div id="<c:out value='${widgetId}'/>_signInDropdown" class="loginMenuDropdown sign_in_registration active" role="dialog" tabindex="0" aria-label="<wcst:message bundle="${widgetText}" key="GLOBALLOGIN_SIGN_IN_PANEL"/>">
 <div class="panel signInForm">
+	<!--Comment Custom changes  -->
+	<c:if test="${WCParam.storeId eq '80355' || WCParam.storeId eq '81852'}">
+		<div class="field nearestStore">
+			
+			<a href="${fn:escapeXml(StoreLocatorsB2CDisplayMapView)}" class="button_secondary find-nearest-store" role="button">
+				<div class="left_border"></div>
+				<div class="button_text"><span>Find A Nearest store</span></div>								
+				<div class="right_border"></div>
+			</a>
+			
+		</div>
+		<div class="field existCustomer">
+			
+			<a class="button_secondary find-nearest-store" id="existingLoginShow" onclick="javascript:login1('block');">
+				<div class="left_border"></div>
+				<div class="button_text">Existing customer login&nbsp;&nbsp;&nbsp; &#8667;</div>								
+				<div class="right_border"></div>
+			</a>
+			<a class="button_secondary find-nearest-store" id="existingLoginHide" style="display:none" onclick="javascript:login2('none');">
+				<div class="left_border"></div>
+				<div class="button_text">Existing customer login&nbsp;&nbsp;&nbsp; &#8667;</div>								
+				<div class="right_border"></div>
+			</a>
+			
+		</div>
+	
+	<style>
+		#Header_GlobalLogin_GlobalLogon {opacity:0;display:none;}
+	</style>
+	
+	</c:if>
+	<!--Comment  -->
 	<form name="<c:out value='${widgetId}'/>_GlobalLogon" id="<c:out value='${widgetId}'/>_GlobalLogon"> 
 		<input type="hidden" name="storeId" value="<c:out value="${WCParam.storeId}"/>" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_storeId_In_Logon_1"/>
 		<input type="hidden" name="catalogId" value="<c:out value="${WCParam.catalogId}"/>" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_catalogId_In_Logon_1"/>
@@ -79,26 +110,41 @@
 				</c:choose>
 			</c:otherwise>
 		</c:choose>
-		<div class="field">
-			<span class="myaccount_error" id="<c:out value='${widgetId}'/>_logonErrorMessage_GL"></span>	
+		<div class="loginId row">
+			<div class="field col5 acol5 ">
+				
+				<p class="label"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_SIGN_IN_PANEL_USER_ID"/></p>										
+			</div>
+			<div class="field col7 acol7">
+				<input <c:out value="${aria_invalid}"/> aria-required="true" aria-label="<wcst:message bundle="${widgetText}" key="ACCE_LOGON_INPUT_FIELD"/>"
+				<c:if test="${((!empty page) && (page == 'account') && (empty reLogonURL)) || (!empty WCParam.errorMessage)}">aria-describedby="<c:if test="${!empty WCParam.errorMessage}">logonErrorMessage </c:if><c:if test="${(!empty page) && (page == 'account') && (empty reLogonURL)}">logonWaitingActivationMessage</c:if>"</c:if>
+				name="logonId" type="text" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_logonId_In_Logon_1" value="<c:out value="${logonId}"/>" onkeypress="if(event.keyCode==13){ javascript:if(GlobalLoginJS.prepareSubmit('<c:out value='${widgetId}'/>')){setDeleteCartCookie();GlobalLoginJS.deleteLoginCookies();GlobalLoginJS.submitGLSignInForm('<c:out value='${widgetId}'/>_GlobalLogon','<c:out value='${widgetId}'/>');};};" class="input_field"/>
+			</div>
 		</div>
-		<div class="field">
-			<p class="label"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_SIGN_IN_PANEL_USER_ID"/></p>										
-			<p class="errorLabel" id="<c:out value='${widgetId}'/>_inlineLogonErrorMessage_GL_logonId"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_IN_ERROR_EMPTY_LOGONID"/></p>	
-			<input <c:out value="${aria_invalid}"/> aria-required="true" aria-label="<wcst:message bundle="${widgetText}" key="ACCE_LOGON_INPUT_FIELD"/>"
-			<c:if test="${((!empty page) && (page == 'account') && (empty reLogonURL)) || (!empty WCParam.errorMessage)}">aria-describedby="<c:if test="${!empty WCParam.errorMessage}">logonErrorMessage </c:if><c:if test="${(!empty page) && (page == 'account') && (empty reLogonURL)}">logonWaitingActivationMessage</c:if>"</c:if>
-			name="logonId" type="text" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_logonId_In_Logon_1" value="<c:out value="${logonId}"/>" onkeypress="if(event.keyCode==13){ javascript:if(GlobalLoginJS.prepareSubmit('<c:out value='${widgetId}'/>')){setDeleteCartCookie();GlobalLoginJS.deleteLoginCookies();GlobalLoginJS.submitGLSignInForm('<c:out value='${widgetId}'/>_GlobalLogon','<c:out value='${widgetId}'/>');};};" class="input_field"/>
+		<div class="row">
+			<div class="col12">
+				<p class="errorLabel" id="<c:out value='${widgetId}'/>_inlineLogonErrorMessage_GL_logonId"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_IN_ERROR_EMPTY_LOGONID"/></p>	
+			</div>
 		</div>
 
-		<div class="field">
+		<div class="loginId row">
+			<div class="field col5 acol5">
 			<p class="label" for="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_logonPassword_In_Logon_1"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_SIGN_IN_PANEL_PASSWORD"/></p>
-			<p class="errorLabel" id="<c:out value='${widgetId}'/>_inlinelogonErrorMessage_GL_logonPassword"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_IN_ERROR_EMPTY_PASSWORD"/></p>	
+			</div>
+			<div class="field col7 acol7">	
 			<input <c:out value="${aria_invalid}"/> aria-required="true" aria-label="<wcst:message bundle="${widgetText}" key="ACCE_PASSWORD_INPUT_FIELD"/>"
 			<c:if test="${((!empty page) && (page == 'account') && (empty reLogonURL)) || (!empty WCParam.errorMessage)}">aria-describedby="<c:if test="${!empty WCParam.errorMessage}">logonErrorMessage </c:if><c:if test="${(!empty page) && (page == 'account') && (empty reLogonURL)}">logonWaitingActivationMessage</c:if>"</c:if>
 			name="logonPassword" autocomplete="off" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_logonPassword_In_Logon_1" type="password" onkeypress="if(event.keyCode==13){ javascript:if(GlobalLoginJS.prepareSubmit('<c:out value='${widgetId}'/>')){setDeleteCartCookie();GlobalLoginJS.deleteLoginCookies();GlobalLoginJS.submitGLSignInForm('<c:out value='${widgetId}'/>_GlobalLogon','<c:out value='${widgetId}'/>');};};" class="input_field">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col12">
+				<span class="myaccount_error" id="<c:out value='${widgetId}'/>_logonErrorMessage_GL"></span>	
+				<p class="errorLabel" id="<c:out value='${widgetId}'/>_inlinelogonErrorMessage_GL_logonPassword"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_IN_ERROR_EMPTY_PASSWORD"/></p>	
+			</div>
 		</div>							
-		<c:if test="${rememberMeFlag == 'false'}">
-		<div class="field checkbox" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_div_10">						
+		<%-- <c:if test="${rememberMeFlag == 'false'}">
+		<div class="field checkbox col7 acol7" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_div_10">						
 			<input type="hidden" name="rememberMe" value="false" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_rememberMe_In_Logon_1" />																									
 			<img id="<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_rememberMe_In_Logon_1_img" alt="" class="checkedCheckBox" role="checkbox" aria-checked="false" aria-label="<wcst:message bundle="${widgetText}" key="GLOBALLOGIN_REMEMBER_ME"/>" tabindex="0" src="${jspStoreImgDir}images/checkbox.png"
 				onclick="javascript:GlobalLoginJS.changeRememberMeState('${jspStoreImgDir}','<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_rememberMe_In_Logon_1_img');"
@@ -118,35 +164,86 @@
 						GlobalLoginJS.changeRememberMeState('${jspStoreImgDir}','<c:out value='${widgetId}'/>_WC_AccountDisplay_FormInput_rememberMe_In_Logon_1_img');event.preventDefault();}">
 			<wcst:message bundle="${widgetText}" key="GLOBALLOGIN_REMEMBER_ME"/>
 		</div>
-		</c:if>
-		<div class="field">
-			<a href="#" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_2" onclick="javascript:if(GlobalLoginJS.prepareSubmit('<c:out value='${widgetId}'/>')){setDeleteCartCookie(); GlobalLoginJS.deleteLoginCookies(); GlobalLoginJS.submitGLSignInForm('<c:out value='${widgetId}'/>_GlobalLogon','<c:out value='${widgetId}'/>');return false;};" class="button_primary" role="button">
+		</c:if> --%> 
+		<div class="field signIn">
+			<a href="#" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_2" onclick="javascript:
+			if(document.getElementById('guestCheckLogon') != null && document.getElementById('guestCheckLogon').value == 'true'){
+				console.log('in guest logon');
+				document.getElementById('WC_CheckoutLogon_FormInput_logonId').value = document.getElementById('Header_GlobalLogin_WC_AccountDisplay_FormInput_logonId_In_Logon_1').value;
+				document.getElementById('WC_CheckoutLogon_FormInput_logonPassword').value = document.getElementById('Header_GlobalLogin_WC_AccountDisplay_FormInput_logonPassword_In_Logon_1').value;
+				TealeafWCJS.processDOMEvent(event);
+				if(CheckoutHelperJS.canCheckoutContinue() && CheckoutHelperJS.updateShoppingCart(document.ShopCartForm,true)){
+					ShipmodeSelectionExtJS.guestShopperLogon('javascript:LogonForm.SubmitAjaxLogin(document.AjaxLogon)', 'https://fep8.officebrandstech.com.au/shop/RESTMoveOrderItem?updatePrices=0&calculationUsageId=-1&createIfEmpty=1&deleteIfEmpty=.&continue=1&toOrderId=.&fromOrderId=.', 'https://fep8.officebrandstech.com.au/shop/OrderShippingBillingView?shipmentType=single&catalogId='+${WCParam.catalogId}+'&langId=-1&storeId='+${WCParam.storeId}, 'https://fep8.officebrandstech.com.au/shop/CheckoutStoreSelectionView?catalogId='+${WCParam.catalogId}+'&fromPage=ShoppingCart&langId=-1&storeId='+${WCParam.storeId});
+				}
+				return false;
+			}
+			else{
+				console.log('in logon');
+				if(GlobalLoginJS.prepareSubmit('<c:out value='${widgetId}'/>')){
+					setDeleteCartCookie();
+					GlobalLoginJS.deleteLoginCookies();
+					GlobalLoginJS.submitGLSignInForm('<c:out value='${widgetId}'/>_GlobalLogon','<c:out value='${widgetId}'/>');
+					return false;
+				}
+			};" class="button_primary" role="button">
 				<div class="left_border"></div>
 				<div class="button_text"><span><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_SIGN_IN_TEXT" /></span></div>
 				<div class="right_border"></div>
 			</a>
-			<a id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_1" class="link" href="<c:out value="${ForgetPasswordURL}"/>" aria-label="<wcst:message bundle="${widgetText}" key="GLOBALLOGIN_FORGOT_PASSWORD_TEXT"/>" class="link"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_FORGOT_PASSWORD_TEXT"/></a>								
-			
+		</div>
+		<div class="field forgetPass">
+			<a id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_1" class="button_secondary" href="<c:out value="${ForgetPasswordURL}"/>" aria-label="<wcst:message bundle="${widgetText}" key="GLOBALLOGIN_FORGOT_PASSWORD_TEXT"/>" class="link"><wcst:message bundle="${widgetText}" key="GLOBALLOGIN_FORGOT_PASSWORD_TEXT"/></a>
 			<c:if test="${accountActivationFlag == 'true'}">
 				<p id="<c:out value='${widgetId}'/>_resendActivationLink">
 				<br clear="all">
-				<a href="<c:out value="${ResendActivationURL}"/>" class="link" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_4" aria-label="<wcst:message bundle="${widgetText}" key="RESEND_ACTIVATION" />"><wcst:message bundle="${widgetText}" key="RESEND_ACTIVATION" /></a></p>
+				<a href="<c:out value="${ResendActivationURL}"/>" class="link" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_4" aria-label="<wcst:message bundle="${widgetText}" key="RESEND_ACTIVATION" />"><wcst:message bundle="${widgetText}" key="RESEND_ACTIVATION" />hidden</a></p>
 			</c:if>
-		</div>							
+		</div>
+		
+	</div>							
 	</form>	
+
+	<div class="footer registerLink">
+			<c:choose>
+				<c:when test="${WCParam.storeId eq '2'}">
+					<div class="field"><wcst:message key="GLOBALLOGIN_HAVING_NEW_ACCOUNT" bundle="${widgetText}" /></div>
+						<a href="#" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_3" onclick="javascript:setPageLocation('<c:out value="${RegisterURL}"/>')" class="button_secondary" role="button">
+							<div class="left_border"></div>
+							<div class="button_text"><span>Register to the current store</span></div>								
+							<div class="right_border"></div>
+						</a>
+					</div>
+				</c:when>
+				<c:when test="${WCParam.storeId eq '98552'}">
+					
+				</c:when>
+				<c:otherwise>
+					<div class="field"><wcst:message key="GLOBALLOGIN_HAVING_NEW_ACCOUNT" bundle="${widgetText}" /></div>
+					<a href='<c:out value="${RegisterURL}"/>' id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_3"  class="button_secondary<c:if test="${WCParam.storeId eq '80355' || WCParam.storeId eq '81852'}"> find-nearest-store</c:if>" role="button">
+						<div class="left_border"></div>
+						<div class="button_text"><span><wcst:message key="GLOBALLOGIN_SIGN_IN_PANEL_REGISTER" bundle="${widgetText}" /></span></div>								
+						<div class="right_border"></div>
+					</a>
+					</div>	
+				</c:otherwise>
+			</c:choose>			
 	
-	
-				
-	<div class="footer">
-		<div class="field"><wcst:message key="GLOBALLOGIN_HAVING_NEW_ACCOUNT" bundle="${widgetText}" /></div>
-		
-		<a href="#" id="<c:out value='${widgetId}'/>_WC_AccountDisplay_links_3" onclick="javascript:setPageLocation('<c:out value="${RegisterURL}"/>')" class="button_secondary" role="button">
-			<div class="left_border"></div>
-			<div class="button_text"><span><wcst:message key="GLOBALLOGIN_SIGN_IN_PANEL_REGISTER" bundle="${widgetText}" /></span></div>								
-			<div class="right_border"></div>
-		</a>
-		
-	</div>
 </div>		
 </div>
+
+<script type="text/javascript">
+function login1(){
+	document.getElementById("Header_GlobalLogin_GlobalLogon").style.opacity="1";
+	//document.getElementById("Header_GlobalLogin_GlobalLogon").style.height="200px";
+	document.getElementById("Header_GlobalLogin_GlobalLogon").style.display="block";
+	document.getElementById("existingLoginHide").style.display="block";
+	document.getElementById("existingLoginShow").style.display="none";
+	}
+	
+function login2(){
+	document.getElementById("Header_GlobalLogin_GlobalLogon").style.display="none";
+	document.getElementById("existingLoginHide").style.display="none";
+	document.getElementById("existingLoginShow").style.display="block";
+	}
+</script>
 <!-- END GlobalLoginSignInRegistration_UI.jspf -->

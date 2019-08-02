@@ -66,8 +66,18 @@
 		<div class="clear_float"></div>
 
 		<div id="price_display_${catalogEntryID}" class="product_price">
+			<c:set var="showButton" value="false"/>
 			<c:set var="displayPriceRange" value="true" />
-			<%@ include file="/Widgets_801/Common/PriceDisplay/PriceDisplay.jspf" %>
+			<flow:ifEnabled feature="ONDisplayPriceBeforeLogin">
+				<c:set var="showButton" value="true"/>
+				<%@ include file="/Widgets_801/Common/PriceDisplay/PriceDisplay.jspf" %>
+			</flow:ifEnabled>
+			<flow:ifDisabled feature="ONDisplayPriceBeforeLogin">
+			 	<c:if test="${userType ne 'G'}">
+			 	<c:set var="showButton" value="true"/>
+					<%@ include file="/Widgets_801/Common/PriceDisplay/PriceDisplay.jspf" %>
+			 	</c:if>
+			</flow:ifDisabled>
 		</div>
 
 	

@@ -98,7 +98,10 @@
 			</flow:ifDisabled>
 			<wcst:message bundle="${widgetText}" key="REGISTER_${fn:toUpperCase(field)}" var="label"/>
 			<wcf:set target="${row}" value='${label}' />
-			<wcf:set target="${row}" value='${preferredLanguage}' />
+			
+			<c:if test="${preferredLanguage eq '-1' }">
+				<wcf:set target="${row}" value='English' />
+			</c:if>			
 			<wcf:set target="${rows}" value="${row}" />
 		</c:when>
 		<c:when test="${field == 'preferredCurrency'}">

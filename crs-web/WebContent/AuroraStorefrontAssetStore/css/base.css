@@ -469,11 +469,7 @@ dl, ol, ul {
 	height: 43px;
 	margin: 16px 20px 16px 16px;
 	padding: 0 !important;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f9f9), to(#e5e8e9));
-	background-image: linear-gradient(#f7f9f9, #e5e8e9);
-	-ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorStr='#f7f9f9', endColorStr='#e5e8e9')";
-	border: 1px solid #e1e1e1 !important;
-	border-radius: 4px;
+	
 	overflow: hidden;
 }
 #widget_minishopcart:before {

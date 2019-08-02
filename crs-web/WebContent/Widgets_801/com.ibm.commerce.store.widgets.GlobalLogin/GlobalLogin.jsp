@@ -27,7 +27,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			GlobalLoginJS.setCommonParameters('<c:out value="${langId}"/>','<c:out value="${WCParam.storeId}"/>','<c:out value="${WCParam.catalogId}"/>');
-			GlobalLoginShopOnBehalfJS.setBuyerSearchURL('${GlobalLoginShopOnBehalf_buyerSearchURL}');
+			GlobalLoginShopOnBehalfJS.setBuyerSearchURL('<c:out value="${GlobalLoginShopOnBehalf_buyerSearchURL}"/>');
 		});
 	</script>
 </c:if>

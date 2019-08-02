@@ -27,6 +27,13 @@
 				<div class="button_text"><wcst:message bundle="${widgetText}" key="${widgetNameCaps}_BTN_ADD_USER"/></div>												
 				<div class="right_border"></div>
 			</a>
+			
+			<%-- <a id="${widgetName}_toolbar_addUser" class="button_secondary right" role="button" href="#" onClick="javascript:OrganizationUsersListJS.addUser('${addUserURL}');return false;">
+				<div class="left_border"></div>
+				<div class="button_text"><wcst:message bundle="${widgetText}" key="${widgetNameCaps}_BTN_ADD_USER"/></div>												
+				<div class="right_border"></div>
+			</a> --%>
+			
 			<div class="clearFloat"></div>
 			<form id="${widgetName}_toolbar_searchForm" name="${widgetName}_toolbar_searchForm" method="post" class="content" action="">
 				<div class="row" >

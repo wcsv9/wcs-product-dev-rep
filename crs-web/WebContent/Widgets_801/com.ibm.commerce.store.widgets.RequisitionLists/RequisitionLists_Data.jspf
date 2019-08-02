@@ -20,6 +20,7 @@
 <c:set var="replaceStr02" value='\\\\"'/>
 
 <%-- Indicates whether there are requisition lists or not --%>
+
 <c:set var="hideTable" value="false" scope="request"/>
 <c:set var="requisitionListPerPage" value="${pageSize}"/>
 <c:set var="beginIndex" value="${WCParam.beginIndex}" />
@@ -37,9 +38,17 @@
 	</c:otherwise>
 </c:choose>
 
-<wcf:rest var="response" url="store/{storeId}/requisition_list">
+<%-- <wcf:rest var="response" url="store/{storeId}/requisition_list">
 	<wcf:var name="storeId" value="${storeId}" encode="true"/>
 	<wcf:param name="q" value="usable"/>
+	<wcf:param name="pageNumber" value="${currentPage}"/>
+	<wcf:param name="pageSize" value="${pageSize}"/>
+	<wcf:param name="orderBy" value="D-lastUpdate"/>
+</wcf:rest> --%>
+<wcf:rest var="response" url="store/{storeId}/requisition_list_ext/@self">
+	<wcf:var name="storeId" value="${storeId}" encode="true"/>
+	<wcf:param name="q" value="usable"/>
+	<wcf:param name="field3" value="F"/>
 	<wcf:param name="pageNumber" value="${currentPage}"/>
 	<wcf:param name="pageSize" value="${pageSize}"/>
 	<wcf:param name="orderBy" value="D-lastUpdate"/>
@@ -76,6 +85,7 @@
 			<wcf:rest var="response" url="store/{storeId}/requisition_list">
 				<wcf:var name="storeId" value="${storeId}" encode="true"/>
 				<wcf:param name="q" value="usable"/>
+				<wcf:param name="field3" value="F"/>
 				<wcf:param name="pageNumber" value="${currentPage}"/>
 				<wcf:param name="pageSize" value="${pageSize}"/>
 			</wcf:rest>

@@ -29,7 +29,22 @@
     <wcf:param name="catalogId" value="${WCParam.catalogId}"/>
     <wcf:param name="langId" value="${WCParam.langId}" />
 </wcf:url>
-
+<div class="row headInsideMenu">
+		<div class="col1">&nbsp;</div>
+		<div class="col10 userIconLine">
+			<div class="addressBookUserIcon"> </div>
+			<hr>
+		</div>
+		<div class="col1">&nbsp;</div>
+	<div class="col12"><p>Address Book</p></div>
+	<div class="col12 links">
+		<div class="normalMenu" id="accDetailMenu">
+			<%out.flush();%>
+		        <c:import url="${env_jspStoreDir}Common/MyAccountPageURLs.jsp"/>
+		    <%out.flush();%>
+		</div>
+	</div>
+	</div>
 <span id="addressBookListDiv_ACCE_Label" class="spanacce"><wcst:message bundle="${widgetText}" key="ACCE_Region_Address_List" /></span>
 <div id="addressBookListDiv" refreshurl="<c:out value='${addressBookFormURL}'/>" wcType="RefreshArea" declareFunction="declareAccountAddressBookRefreshArea()" widgetId="addressBookMain" objectId="addressBookMain" ariaMessage="<wcst:message bundle="${widgetText}" key="ACCE_Status_Address_List_Updated"/>" ariaLiveId="${ariaMessageNode}" role="region" aria-labelledby="addressBookListDiv_ACCE_Label">
     <%out.flush();%>

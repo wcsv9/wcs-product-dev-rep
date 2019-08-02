@@ -1,5 +1,5 @@
 <%--
- ===============================================================
+ =================================================================
   Licensed Materials - Property of IBM
 
   WebSphere Commerce
@@ -50,7 +50,7 @@
 	<wcf:param name="pageGroup" value="${pageGroup}"/>
 </wcf:rest>
 
-<c:set var="pageTitle" value="Welcome to Aurora Store" />
+<c:set var="pageTitle" value="${page.title}" />
 <c:set var="metaDescription" value="${page.metaDescription}" />
 <c:set var="metaKeyword" value="${page.metaKeyword}" />
 <c:set var="fullImageAltDescription" value="${page.fullImageAltDescription}" scope="request" />
@@ -107,7 +107,7 @@ xmlns:waistate="http://www.w3.org/2005/07/aaa" lang="${shortLocale}" xml:lang="$
 		<div id="page">
 			<div id="grayOut"></div>
 			<div id="headerWrapper">
-				<c:set var="overrideLazyLoadDepartmentsList" value="true" scope="request"/>
+				<c:set var="overrideLazyLoadDepartmentsList" value="false" scope="request"/>
 				<%out.flush();%>
 				<c:import url = "${env_jspStoreDir}Widgets/Header/Header.jsp">
 					<c:param name="overrideLazyLoadDepartmentsList" value="${overrideLazyLoadDepartmentsList}" />

@@ -36,7 +36,7 @@
 <wcst:message var="home" key="BCT_HOME" bundle="${widgetText}" />
 <c:set target="${breadCrumbItemsMap}" property="${home}" value="${env_TopCategoriesDisplayURL}"/>
 
-<c:if test="${myAccountPage == true && myAccountLandingPage != true}">
+<c:if test="${myAccountPage == true && myAccountLandingPage != true || (WCParam.isQuickOrder eq 'true')}">
 	<wcst:message var="myAccount" key="MA_MYACCOUNT" bundle="${widgetText}" />
 	<wcf:url var="MyAccountURL" value="AjaxLogonForm">
 		  <wcf:param name="langId" value="${langId}" />
@@ -553,7 +553,15 @@
 		<c:set var="lastBreadCrumbURL" value="${breadCrumbItemsMap[lastBreadCrumbItem]}"/>
 		<c:if test="${empty lastBreadCrumbURL}">
 			<c:if test="${!empty WCParam.returnUrl}">
-				<c:set var="lastBreadCrumbURL" value="${WCParam.returnUrl}"/>
+				<c:set var="serverName"  value="<%= request.getServerName() %>"/>
+				<c:choose>
+					<c:when test="${fn:contains(WCParam.returnUrl, serverName)}">
+						<c:set var="lastBreadCrumbURL" value="${WCParam.returnUrl}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="lastBreadCrumbURL" value="${env_TopCategoriesDisplayURL}"/>
+					</c:otherwise>
+				</c:choose>
 			</c:if>
 		</c:if>
 		

@@ -57,15 +57,16 @@ $(document).ready(function () {
                 }
             }
             var displayContractPanel = getCookie("WC_DisplayContractPanel_" + WCParamJS.storeId);
-            if ((displayContractPanel != undefined && displayContractPanel != null && displayContractPanel.toString() == "true") || (logonUserCookie == undefined && logonUserCookie == null)) {
-                if (typeof isOnPasswordUpdateForm === 'undefined' || isOnPasswordUpdateForm == false) {
-                    //Right after user logged in, perform Global Login Ajax call and display Global Login Contract panel.				
-                    GlobalLoginJS.updateGlobalLoginContent(widgetId);
-                } else if (isOnPasswordUpdateForm == true) {
-                    GlobalLoginJS.updateGlobalLoginUserDisplay("...");
-                }
+            if (WCParamJS.omitHeader != 1 && (
+                    (displayContractPanel != undefined && displayContractPanel != null && displayContractPanel.toString() == "true") || (logonUserCookie == undefined && logonUserCookie == null))) {
+                    if (typeof isOnPasswordUpdateForm === 'undefined' || isOnPasswordUpdateForm == false) {
+                        //Right after user logged in, perform Global Login Ajax call and display Global Login Contract panel.
+                        GlobalLoginJS.updateGlobalLoginContent(widgetId);
+                    } else if (isOnPasswordUpdateForm == true) {
+                        GlobalLoginJS.updateGlobalLoginUserDisplay("...");
+                    }
 
+                }
             }
-        }
-    }, 100);
-});
+        }, 100);
+    });

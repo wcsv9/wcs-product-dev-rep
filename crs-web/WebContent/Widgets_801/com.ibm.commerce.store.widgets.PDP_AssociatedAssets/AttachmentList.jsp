@@ -156,6 +156,7 @@
 			<c:forTokens items="${mimeType}" delims="/" var="mimePartFromType" end="0">
 				<c:set var="mimePart" value="${mimePartFromType}" />
 			</c:forTokens>
+			
 			<c:choose>
 				<c:when test="${(fn:startsWith(attachment.attachmentAssetPath, 'http://') || fn:startsWith(attachment.attachmentAssetPath, 'https://'))}">
 					<c:if test="${env_WCMUsed}">
@@ -258,6 +259,11 @@
 					<c:set var="attachmentsList" value="${attachmentGrp[attachment.usage]}"/>
 				</c:otherwise>
 			</c:choose>
+			
+			<c:if test="${(fn:startsWith(assetPath, 'http://') || fn:startsWith(assetPath, 'https://'))}">
+				<c:set var="assetPath" value="${fn:replace(assetPath, 'http://localhost:80', '')}"/>
+			</c:if>
+					
 			<jsp:useBean id="attachmentDetails" class="java.util.HashMap" type="java.util.Map"/>
 			<c:set target="${attachmentDetails}" property="name" value="${attchName}"/>
 			<c:set target="${attachmentDetails}" property="assetPath" value="${assetPath}"/>
@@ -294,14 +300,14 @@
 											||(mimePart eq 'textyv' ) || (mimePart eq 'video') || (mimePart eq 'audio')	
 											|| (mimePart eq 'model')}"> 
 										<div class="icon">
-											<a href="${attachmentDetails['assetPath']}" target="_new" aria-describedby="acce_attachment_${fn:toLowerCase(attachmentsList.key)}_${status.count}" aria-label="<c:out value="${attachmentNameToDisplay}"/>" id="WC_TechnicalSpecification_Image_2_${status.count}">
+											<a href="${s3ImageHost}${attachmentDetails['assetPath']}" target="_new" aria-describedby="acce_attachment_${fn:toLowerCase(attachmentsList.key)}_${status.count}" aria-label="<c:out value="${attachmentNameToDisplay}"/>" id="WC_TechnicalSpecification_Image_2_${status.count}">
 												<img src="${attachmentDetails['image']}" alt="${attachmentNameToDisplay}" title="${attachmentNameToDisplay}"/>
 												<c:set var="acceAttachmentType" value="${fn:replace(attachmentDetails['mimeType'],'application/','')}" />
 												<span id="acce_attachment_${fn:toLowerCase(attachmentsList.key)}_${status.count}" class="spanacce"><c:out value="${acceAttachmentType}" /></span>
 											</a>
 										</div>
 										<div class="description">
-											<a href="${attachmentDetails['assetPath']}" tabIndex="-1" aria-hidden="true" target="_blank" id="WC_TechnicalSpecification_Links_1_${status.count}">
+											<a href="${s3ImageHost}${attachmentDetails['assetPath']}" tabIndex="-1" aria-hidden="true" target="_blank" id="WC_TechnicalSpecification_Links_1_${status.count}">
 												<c:out value="${attachmentNameToDisplay}"/>
 											</a>
 											<div class="clear_float"></div>

@@ -204,11 +204,6 @@
 		<c:set var = "pageNumber" value = "0" />
 	</c:if>
 
-	<c:set var="searchSource" value="Q" />
-	<c:if test="${WCParam.fromPage=='catalogEntryList' && empty intentSearchTerm}">
-		<c:set var="searchSource" value="N" />
-	</c:if>
-
 	<c:catch var="searchServerException">
 		<wcf:rest var="catalogNavigationView1" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/${restType}">
 			<wcf:param name="pageSize" value="${pageSize}" />
@@ -218,7 +213,7 @@
 			<wcf:param name="searchType" value="${searchType}" />
 			<c:choose>
 				<c:when test="${empty WCParam.searchSource}">
-					<wcf:param name="searchSource" value="${searchSource}"/>
+					<wcf:param name="searchSource" value="Q"/>
 				</c:when>
 				<c:otherwise>
 					<wcf:param name="searchSource" value="${WCParam.searchSource}"/>
@@ -268,6 +263,7 @@
 			<c:forEach var="contractId" items="${env_activeContractIds}">
 				<wcf:param name="contractId" value="${contractId}"/>
 			</c:forEach>
+			<wcf:param name="pageView" value="list"/>
 		</wcf:rest>
 	</c:catch>
 

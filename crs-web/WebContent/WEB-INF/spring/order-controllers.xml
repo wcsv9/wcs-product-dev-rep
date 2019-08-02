@@ -245,6 +245,10 @@
     <property name="authenticate" value="0"/>  
     <property name="parameter" value="orderlist.addPreConfigurationToCart"/> 
   </bean>  
+   <bean id="ajaxOrderUpdateConfigurationInCart" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController"> 
+    <property name="authenticate" value="0"/>  
+    <property name="parameter" value="orderlist.updateConfigurationInCart"/>
+  </bean>  
   <bean id="orderUpdateConfigurationInCart" class="com.ibm.commerce.store.mvc.controller.spring.RESTActionController"> 
     <property name="authenticate" value="0"/>  
     <property name="parameter" value="orderlist.updateConfigurationInCart"/>
@@ -491,7 +495,7 @@
     <property name="parameter" value="orderlist.repay"/>
     <property name="csrfProtected" value="1"/>
   </bean> 
-  <bean id="punchoutPaymentCallBack" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController"> 
+  <bean id="punchoutPaymentCallBack" class="com.ibm.commerce.store.mvc.controller.spring.RESTActionController"> 
     <property name="authenticate" value="0"/>
     <property name="parameter" value="orderlist.callback"/>
   </bean>   

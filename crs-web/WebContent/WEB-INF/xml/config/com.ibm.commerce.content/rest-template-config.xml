@@ -22,5 +22,14 @@
 	  <method name="resolveContentUrl" httpMethod="GET" path="">
 	  </method>	
 						
-	</resource>			
+	</resource>	
+	<resource path="{serverHost}/{contextPath}/store/{storeId}/content" name="getContentHandler">
+	  <serverParam name="serverHost">$WCParam.serverHost</serverParam>
+	  <serverParam name="contextPath">$WCParam.contextPath</serverParam>
+	  <serverParam name="storeId">$WCParam.storeId</serverParam>
+
+	  <method name="getContent" httpMethod="GET" path="">
+	  </method>	
+
+	</resource>
 </_config:rest-action-config>

@@ -20,6 +20,10 @@
   *****
 --%>
 
+<%
+    response.setHeader("Content-Security-Policy", "frame-ancestors 'self' https://commerceinsights.ibmcloud.com");
+%>
+
 <%@ include file="JSTLEnvironmentSetup.jspf" %>
 <%@ page import="com.ibm.commerce.server.ECConstants"%>
 
@@ -96,6 +100,7 @@ if( null == request.getAttribute(com.ibm.commerce.server.ECConstants.EC_INPUT_PA
 <wcst:mapper source="configInst" method="getWebModule" var="moduleConfig" />
 <wcst:mapper source="configInst" method="getValue" var="propertyConfig"/>
 <c:set var="restServerName" value="${propertyConfig['WebServer/HostName']}" scope="request"/>
+<c:set var="persistentCookieLifetimeInSecond" value="${propertyConfig['persistentCookieLifetimeInSecond']}" scope="request"/>
 <c:choose>
 	<c:when test="${pageContext.request.secure}">
 		<c:choose>
@@ -782,3 +787,10 @@ If set to true, department list will be loaded on-demand, when shopper clicks on
 
 <%-- enable/disable to display SKU URL instead of product URL when the product has only one single SKU --%>
 <c:set var="env_displaySKUContextData" value="false" scope="request"/>
+
+<wcst:alias name="UnRegisterMarketingEvent" var="unregisterMktEvent">
+	<wcf:param name="parameter" value=""/>
+	<wcf:param name="parameter" value="${storeId}"/>
+</wcst:alias>
+
+<c:set var="unregisterMktEvent" value="${unregisterMktEvent }" scope="request"/>

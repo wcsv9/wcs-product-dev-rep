@@ -24,21 +24,54 @@
 <script type="text/javascript">
 	$(document).ready(function() {		
 		<wcst:message key="ERROR_${widgetNameCaps}_NAME_EMPTY" bundle="${widgetText}" var="ERROR_LIST_NAME_EMPTY"/>	
-		<wcst:message var="ERROR_REQUISITION_UPLOAD_FILENAME_EMPTY" key="ERROR_REQUISITION_UPLOAD_FILENAME_EMPTY" bundle="${widgetText}"/>		
+		<wcst:message var="ERROR_REQUISITION_UPLOAD_FILENAME_EMPTY" key="ERROR_REQUISITION_UPLOAD_FILENAME_EMPTY" bundle="${widgetText}"/>	
+		<wcst:message key="ERROR_${widgetNameCaps}_CHECKBOX" bundle="${widgetText}" var="ERROR_LIST_CHECKBOX"/>
 		MessageHelper.setMessage("LIST_TABLE_NAME_EMPTY", <wcf:json object="${ERROR_LIST_NAME_EMPTY}"/>);
 		MessageHelper.setMessage("ERROR_REQUISITION_UPLOAD_FILENAME_EMPTY", <wcf:json object="${ERROR_REQUISITION_UPLOAD_FILENAME_EMPTY}"/>);
-		toggleMobileView();		
+		MessageHelper.setMessage("ERROR_LIST_CHECKBOX", <wcf:json object="${ERROR_LIST_CHECKBOX}"/>);
+		//toggleMobileView();		
+		OrderListServicesDeclarationJS.setCommonParameters(langId,WCParam.storeId,WCParam.catalogId);
 	});
 	
 	window.onresize = toggleMobileView;
 </script>
 
-<div class="listTable" id="<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_list_table" aria-labelledby="<c:out value="${widgetName}"/>_table_summary" role="grid">	
+<c:if test="${widgetName == 'RequisitionList'}">
+	<div class="row headInsideMenu">
+		<div class="col1">&nbsp;</div>
+		<div class="col10 userIconLine">
+			<div class="favouritesIcon"></div>
+			<hr>
+		</div>
+		<div class="col1">&nbsp;</div>
+		<div class="col12">
+			<p>Favourites</p>
+		</div>
+		<div class="col12 links">
+			<div class="normalMenu" id="accDetailMenu">
+				<%
+					out.flush();
+				%>
+				<c:import url="${env_jspStoreDir}Common/MyAccountPageURLs.jsp" />
+				<%
+					out.flush();
+				%>
+			</div>
+		</div>
+	</div>
+</c:if>
+<c:if test="${widgetPrefix == 'Recurring_'}">
+	<h2 class="myaccount_header">Recurring Orders List</h2>
+	<div class="col12">
+		<%@include file="Table_Recurring_FavouritesList.jspf"%>	
+	</div>
+</c:if>
+
+	<div class="listTable orderHistoryPage" id="<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_list_table" aria-labelledby="<c:out value="${widgetName}"/>_table_summary" role="grid">	
 	<%-- This is the hidden table summary used for Accessibility --%>
 	<div id="<c:out value="${widgetName}"/>_table_summary" class="hidden_summary" aria-hidden="true">
 		<wcst:message key="${widgetNameCaps}_TABLE_SUMMARY" bundle="${widgetText}"/>
-	</div>	
-
+	</div>
 	<c:if test="${!noToolBar}">
 	<div class="row">
 		<div class="col12">
@@ -100,321 +133,537 @@
 							</div>
 						</form>	
 					</div>		
-				</c:if>				
-				<div class="newList">
-					<a table-toggle="newListDropdown" id="newListButton" href="#" aria-label="<wcst:message key="ACCE_NEWLIST_POPUP_${widgetNameCaps}" bundle="${widgetText}"/>" class="button_secondary toolbarButton" role="menuitem" aria-haspopup="true">
-						<div class="left_border"></div>
-						<div class="button_text"><span><wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/></span></div>								
-						<div class="right_border"></div>
-					</a>						
-			     
-					<form id="newListDropdown" table-parent="listTable" onsubmit="javascript:${widgetJS}.createNewList();return false;" class="toolbarDropdown" role="menu" aria-label="<wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/>">
-						<div class="createTableList">
-							<label for="<c:out value="${widgetName}"/>_NewListForm_Name"><wcst:message key="${widgetNameCaps}_CREATE_LIST" bundle="${widgetText}"/></label>
-							<input id="<c:out value="${widgetName}"/>_NewListForm_Name" type="text" aria-label="<wcst:message key="LISTTABLE_ENTER_NAME" bundle="${widgetText}"/>" name="name" placeholder="<wcst:message key="LISTTABLE_ENTER_NAME" bundle="${widgetText}"/>" role="menuitem" class="input_field" maxlength="254">
-							<c:if test="${!hidePublicPrivateDropdown eq 'true'}">																			
-								<div id="newListPublicPrivateDropdown" class="selectWrapper">
-								<c:set var="selectOptions" value='{"appendTo": "#newListPublicPrivateDropdown"}' />								
-								<select name="status" data-widget-type="wc.Select" data-widget-options="${fn:escapeXml(selectOptions)}" title="<wcst:message key='SN_SORT_BY_USAGE' bundle='${widgetText}'/>" id="listType" baseClass="wcSelect dijitValidationTextBox orderBySelect">
-									<option selected="selected" value="Z"><wcst:message key="${widgetNameCaps}_TYPE_SHARED" bundle="${widgetText}"/></option>	
-									<option value="Y"><wcst:message key="${widgetNameCaps}_TYPE_PRIVATE" bundle="${widgetText}"/></option>		
-								</select>
-								</div>																																
-							</c:if>
-							<a id="<c:out value="${widgetName}"/>_NewListForm_Save" class="button_primary" role="button" href="#" onclick="javascript:${widgetJS}.createNewList();" role="menuitem">
-								<div class="left_border"></div>
-								<div class="button_text"><span><wcst:message key="LISTTABLE_SAVE" bundle="${widgetText}"/></span></div>								
-								<div class="right_border"></div>
-							</a>
-							<a table-toggle="newListDropdown" id="<c:out value="${widgetName}"/>_NewListForm_Cancel" class="button_secondary" href="#" role="menuitem">
-								<div class="left_border"></div>
-								<div class="button_text"><span><wcst:message key="LISTTABLE_CANCEL" bundle="${widgetText}"/></span></div>								
-								<div class="right_border"></div>
-							</a>
-							<div class="clearFloat"></div>
-						</div>
-					</form>
-				</div>
-					
+				</c:if>
 				
-			<div class="clearFloat"></div>
+				<c:choose>
+					<c:when test="${widgetNameCaps == 'REQUISITIONLIST'}">
+						<div class="newList">
+							<a table-toggle="newListDropdown" id="newListButton" href="#" aria-label="<wcst:message key="ACCE_NEWLIST_POPUP_${widgetNameCaps}" bundle="${widgetText}"/>" class="button_secondary toolbarButton" role="menuitem" aria-haspopup="true">
+								<div class="left_border"></div>
+								<div class="button_text"><span><wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/></span></div>								
+								<div class="right_border"></div>
+							</a>						
+					     
+							<form id="newListDropdown" table-parent="listTable" onsubmit="javascript:${widgetJS}.createNewListCustom();return false;" class="toolbarDropdown" role="menu" aria-label="<wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/>">
+								<div class="createTableList">
+									<label for="<c:out value="${widgetName}"/>_NewListForm_Name"><wcst:message key="${widgetNameCaps}_CREATE_LIST" bundle="${widgetText}"/></label>
+									<input id="<c:out value="${widgetName}"/>_NewListForm_Name" type="text" aria-label="<wcst:message key="LISTTABLE_ENTER_NAME" bundle="${widgetText}"/>" name="name" placeholder="<wcst:message key="LISTTABLE_ENTER_NAME" bundle="${widgetText}"/>" role="menuitem" class="input_field" maxlength="254">
+									<c:if test="${!hidePublicPrivateDropdown eq 'true'}">																			
+										<div id="newListPublicPrivateDropdown" class="selectWrapper">
+										<c:set var="selectOptions" value='{"appendTo": "#newListPublicPrivateDropdown"}' />								
+										<select name="status" data-widget-type="wc.Select" data-widget-options="${fn:escapeXml(selectOptions)}" title="<wcst:message key='SN_SORT_BY_USAGE' bundle='${widgetText}'/>" id="listType" baseClass="wcSelect dijitValidationTextBox orderBySelect">
+											<option selected="selected" value="Z"><wcst:message key="${widgetNameCaps}_TYPE_SHARED" bundle="${widgetText}"/></option>	
+											<option value="Y"><wcst:message key="${widgetNameCaps}_TYPE_PRIVATE" bundle="${widgetText}"/></option>		
+										</select>
+										</div>																																
+									</c:if>
+									<div class="favoritesCheckbox setCheckBoxes">  
+										<div class="checkBoxItem"><div><input id="<c:out value="${widgetName}"/>_Favorites" type="checkbox" name="favoritesOrder" value="F"/></div><div>Favorites</div></div>
+												<div class="clearFloat"></div>
+										<div class="checkBoxItem"><div><input id="<c:out value="${widgetName}"/>_Quick_Order" type="checkbox" name="quickOrder" value="Q"/></div><div>Quick Order</div></div>
+												<div class="clearFloat"></div>
+										<div class="checkBoxItem"><div><input id="<c:out value="${widgetName}"/>_Recurring_Order" type="checkbox" name="recurOrder" value="R"/></div><div>Recurring Order</div></div>
+												<div class="clearFloat"></div>
+									</div>									
+									<a id="<c:out value="${widgetName}"/>_NewListForm_Save" class="button_primary" role="button" href="#" onclick="javascript:${widgetJS}.createNewListCustom();" role="menuitem">
+										<div class="left_border"></div>
+										<div class="button_text"><span><wcst:message key="LISTTABLE_SAVE" bundle="${widgetText}"/></span></div>								
+										<div class="right_border"></div>
+									</a>
+									<a table-toggle="newListDropdown" id="<c:out value="${widgetName}"/>_NewListForm_Cancel" class="button_secondary" href="#" role="menuitem">
+										<div class="left_border"></div>
+										<div class="button_text"><span><wcst:message key="LISTTABLE_CANCEL" bundle="${widgetText}"/></span></div>								
+										<div class="right_border"></div>
+									</a>
+									<div class="clearFloat"></div>
+								</div>
+							</form>
+						</div>
+					</c:when>
+					<c:when test="${widgetNameCaps == 'ORDERLIST'}">
+						<div class="newList">
+							<a table-toggle="newListDropdown" id="newListButton" href="#" aria-label="<wcst:message key="ACCE_NEWLIST_POPUP_${widgetNameCaps}" bundle="${widgetText}"/>" class="button_secondary toolbarButton" role="menuitem" aria-haspopup="true">
+								<div class="left_border"></div>
+								<div class="button_text"><span><wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/></span></div>								
+								<div class="right_border"></div>
+							</a>						
+					     
+							<form id="newListDropdown" table-parent="listTable" onsubmit="javascript:${widgetJS}.createNewList();return false;" class="toolbarDropdown" role="menu" aria-label="<wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/>">
+								<div class="createTableList">
+									<label for="<c:out value="${widgetName}"/>_NewListForm_Name"><wcst:message key="${widgetNameCaps}_CREATE_LIST" bundle="${widgetText}"/></label>
+									<input id="<c:out value="${widgetName}"/>_NewListForm_Name" type="text" aria-label="<wcst:message key="LISTTABLE_ENTER_NAME" bundle="${widgetText}"/>" name="name" placeholder="<wcst:message key="LISTTABLE_ENTER_NAME" bundle="${widgetText}"/>" role="menuitem" class="input_field" maxlength="254">
+									<c:if test="${!hidePublicPrivateDropdown eq 'true'}">																			
+										<div id="newListPublicPrivateDropdown" class="selectWrapper">
+										<c:set var="selectOptions" value='{"appendTo": "#newListPublicPrivateDropdown"}' />								
+										<select name="status" data-widget-type="wc.Select" data-widget-options="${fn:escapeXml(selectOptions)}" title="<wcst:message key='SN_SORT_BY_USAGE' bundle='${widgetText}'/>" id="listType" baseClass="wcSelect dijitValidationTextBox orderBySelect">
+											<option selected="selected" value="Z"><wcst:message key="${widgetNameCaps}_TYPE_SHARED" bundle="${widgetText}"/></option>	
+											<option value="Y"><wcst:message key="${widgetNameCaps}_TYPE_PRIVATE" bundle="${widgetText}"/></option>		
+										</select>
+										</div>																																
+									</c:if>
+									<a id="<c:out value="${widgetName}"/>_NewListForm_Save" class="button_primary" role="button" href="#" onclick="javascript:${widgetJS}.createNewList();" role="menuitem">
+										<div class="left_border"></div>
+										<div class="button_text"><span><wcst:message key="LISTTABLE_SAVE" bundle="${widgetText}"/></span></div>								
+										<div class="right_border"></div>
+									</a>
+									<a table-toggle="newListDropdown" id="<c:out value="${widgetName}"/>_NewListForm_Cancel" class="button_secondary" href="#" role="menuitem">
+										<div class="left_border"></div>
+										<div class="button_text"><span><wcst:message key="LISTTABLE_CANCEL" bundle="${widgetText}"/></span></div>								
+										<div class="right_border"></div>
+									</a>
+									<div class="clearFloat"></div>
+								</div>
+							</form>
+						</div>
+					</c:when>
+				</c:choose>
+				<div class="clearFloat"></div>
+				</div>
 			</div>
 		</div>
-	</div>
-	</c:if>
-	
-	<div class="row tableHeader fullView ${hideTable == 'true' ? 'nodisplay' : ''}" role="row">		
-		<c:forEach var="field" items="${tableHeadings}" varStatus="colOrder">		
-			<c:if test="${colOrder.first && showStarCol}">					
-				<div role="columnheader" class="col1 ${field}"><div class="cell"></div></div>
-			</c:if>
-			<c:if test="${!(colOrder.first && showStarCol) && !colOrder.last}">	
-				<div role="columnheader" class="col2 ${field}">
-					<div class="cell" row-expand="${widgetName}_${fn:toUpperCase(field)}_Arrow">
-						<span><wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/></span>
-						<c:if test="${!empty sortingEnabled && sortingEnabled == 'true'}">
-							<img id="${widgetName}_${fn:toUpperCase(field)}_Arrow" class="listtable_arrow" alt="${field}" src="<c:out value='${arrowUpImgDir}'/>" />
-						</c:if>
-					</div>
-				</div>
-			</c:if>
-			<c:if test="${colOrder.last}">
-				<div role="columnheader" class="col1 ${field}" title="<wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/>">
-					<div class="cell"><span><wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/></span></div>
-				</div>
-			</c:if>
-		</c:forEach>
-	</div>
-	<c:choose>
-		<c:when test="${hideTable == 'false'}">
-		<div class="fullView">
-			<c:forEach var="tableValue" items="${tableValueMapping}" varStatus="row">	
-				<div role="row" class="row entry">			
-					<c:set var="isCurrentlySelectedRow" value="false"/>	
-					<c:forEach var="field" items="${tableHeadings}" varStatus="status2">			
-						<c:set var="cellValue" value="${tableValue[field]}"/>	
-						<c:if test="${status2.first && showStarCol}">
-							<c:set var="isRowLocked" value="${tableValue['isRowLocked']}"/>
-							<div role="gridcell" class="col1 <c:out value="${field}"/>">
-								<div class="cell" id="WC_<c:out value="${widgetName}"/>_TableContent_${fn:toUpperCase(field)}_<c:out value="${row.count}"/>">														
-									<c:choose>
-										<c:when test="${cellValue == 'true'}">										
-											<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_ON" bundle="${widgetText}" var="acceListON"/>
-											<img alt="<c:out value='${acceListON}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_ON.png">
-											<c:set var="isCurrentlySelectedRow" value="true"/>	
-										</c:when>
-										<c:otherwise>
-											<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_OFF" bundle="${widgetText}" var="acceListOFF"/>
-											<img alt="<c:out value='${acceListOFF}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_OFF.png">
-										</c:otherwise>
-									</c:choose>
-									<c:if test="${isRowLocked == 'true'}">
-										<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_LOCKED" bundle="${widgetText}" var="acceListLOCKED"/>
-										<img class="lockedIcon" alt="<c:out value='${acceListLOCKED}'/>" src="<c:out value='${jspStoreImgDir}'/>images/icon_locked_black.png">
-									</c:if>									
-								</div>		
-							</div>	
-						</c:if>	
+		</c:if>
+		<c:if test="${totalOrders != null &&  (widgetPrefix == 'Processed_' || widgetPrefix == 'Waiting_') && totalOrders != 0}">
+			<wcst:message var="inCart" key="MO_OrderStatus_P" bundle="${widgetText}"/>
+			<wcst:message var="scheduledOrder" key="MO_OrderStatus_I" bundle="${widgetText}"/>
+			<wcst:message var="wait" key="MO_OrderStatus_W" bundle="${widgetText}"/>
+			<wcst:message var="rejected" key="MO_OrderStatus_N" bundle="${widgetText}"/>
+			<wcst:message var="submitted" key="MO_OrderStatus_M" bundle="${widgetText}"/>
+			<wcst:message var="shipped" key="MO_OrderStatus_S" bundle="${widgetText}"/>
+			<wcst:message var="completed" key="MO_OrderStatus_C" bundle="${widgetText}"/>
+			<wcst:message var="cancelled" key="MO_OrderStatus_X" bundle="${widgetText}"/>
+			<div class="row">
+				<div class="col12">
+					<table class="orderHistoryTable" border="0" cellpadding="0" cellspacing="0">
+						<tr class="headTr">
+							<th>Order ID</th>
+							<th class="noDisplay">Date</th>
+							<th class="noDisplay">Status</th>
+							<th class="noDisplay">Cost Centre</th>
+							<th class="noDisplay">Total Cost</th>
+							<th class="action">Actions</th>
+						</tr>
+						<c:forEach var="tableValue" items="${tableValueMapping}" varStatus="row">
+							<tr>
+								<td class="orders"><a href="<c:out value="${tableValue['order'][0]}"/>" id="WC_<c:out value="${widgetName}"/>_Link_2_<c:out value="${row.count}"/>"><c:out value="${tableValue['order'][1]}"/></a></td>
+								<td class="noDisplay">${tableValue['date']}</td>
+								<td class="noDisplay">${tableValue['status']}</td>
+								<td class="noDisplay">${tableValue['x_field3']}</td>
+								<td class="noDisplay">${tableValue['total_price']}</td>
+								<td class="action">
+									<a href="<c:out value="${tableValue['order'][0]}"/>" id="WC_<c:out value="${widgetName}"/>_Link_2_<c:out value="${row.count}"/>" title="View order"><img src="${jspStoreImgDir}images/binoCulars.png"/></a>
+									<c:if test="${tableValue['status'] == inCart }">
+										<a href="javascript:void(0)" class="bin" title="Delete order" onclick="javascript:if(OrderListJS.confirmRemove()){OrderListJS.customRemoveOrder(${WCParam.storeId}, ${tableValue['order'][1]});}; "><img src="${jspStoreImgDir}images/recycle.png"/></a>
+									</c:if>
+									<c:if test="${tableValue['status'] != inCart }">
+										<a href="javascript:void(0)" class="copy" title="Copy order" onclick="<c:out value="${tableValue['reorder']}"/>"><img src="${jspStoreImgDir}images/copy.png"/></a>
+									</c:if>
+									<%-- <a href="javascript:void(0)" class="email" title="Resend Email Notice"><img src="${jspStoreImgDir}images/email.png"/></a> --%>
+								</td>
+							</tr>
+						</c:forEach>
 						
-						<c:if test="${!(status2.first && showStarCol) && field != 'actions'}" >
-							<c:set var="cellClass" value="cell"/>
-							<c:choose>
-								<c:when test="${status2.last}">
-									<c:set var="colClass" value="col1"/>
-								</c:when>
-								<c:otherwise>
-									<c:set var="colClass" value="col2"/>
-								</c:otherwise>
-							</c:choose>
-
-							<c:if test="${fn:toUpperCase(field) eq 'NAME' && widgetNameCaps eq 'REQUISITIONLIST'}">
-								<%-- used by requistion list widget --%>
-								<c:set var="cellClass" value="cell fileName" />
-							</c:if>
-							<c:set var="urlAvailable" value="false" />				
-							<c:forEach var="fieldHasUrl" items="${fieldsWithUrl}" varStatus="status3">			
-								<c:if test="${field == fieldHasUrl}">
-									<c:set var="urlAvailable" value="true" />
-								</c:if>
-							</c:forEach>
-							
-							<div class="${colClass} ${field}" role="gridcell">			
-								<div class="${cellClass}" id="WC_<c:out value="${widgetName}"/>_TableContent_<c:out value="${field}"/>_<c:out value="${row.count}"/>">				
-								<c:if test="${urlAvailable == 'true'}">																		
-									<a href="<c:out value="${cellValue[0]}"/>" id="WC_<c:out value="${widgetName}"/>_Link_2_<c:out value="${row.count}"/>"><c:out value="${cellValue[1]}"/></a>																				
-								</c:if>
-
-								<c:if test="${urlAvailable != 'true'}">
-									<c:choose>
-										<c:when test="${field == 'name' || field == 'creator'}">										
-											<c:out value="${cellValue}"/>
-										</c:when>
-										<c:otherwise>
-											<%-- Cannot use c:out due to Unicode currency symbols, such as Japanese Yen --%>
-											${cellValue}
-										</c:otherwise>
-									</c:choose>
-								</c:if>						
-								</div>		
-							</div>				
-						</c:if>
-
-						<c:if test="${field == 'actions'}">
-							<div class="col1 actions">
-								<div class="cell" id="WC_<c:out value="${widgetName}"/>_TableContent_Action_<c:out value="${row.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_POPUP_${widgetNameCaps}" bundle="${widgetText}"/>">
-									<a table-toggle="<c:out value="${widgetPrefix}"/>actionDropdown<c:out value="${row.count}"/>" table-parent="listTable" role="menuitem" id="<c:out value="${widgetPrefix}"/>actionButton<c:out value="${row.count}"/>" aria-haspopup="true" class="button_secondary actionButton" href="#">
-										<div class="left_border"></div>
-										<div class="button_text">
-											<span>
-												<img alt="<wcst:message key="${widgetNameCaps}_ACTIONS" bundle="${widgetText}"/>" src="<c:out value='${jspStoreImgDir}'/>images/action_icon.png">								
-											</span>
-										</div>
-										<div class="right_border"></div>
-									</a>
-									<div class="actionDropdown" table-parent="listTable" id="<c:out value="${widgetPrefix}"/>actionDropdown<c:out value="${row.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_MENU_${widgetNameCaps}" bundle="${widgetText}"/>">
-										
-										<c:set var="rowActions" value="${actions}" />
-										<c:if test="${not empty tableValue['tableRowActionOverride']}">
-											<c:set var="rowActions" value="${fn:split(tableValue['tableRowActionOverride'],';')}" />
-										</c:if>
-										
-										<c:forEach var="action" items="${rowActions}" varStatus="actionOrder">	
-											<c:if test="${!(action eq 'set_as_current' && isCurrentlySelectedRow eq true) && tableValue[action] != null}">
-												<div class="actionItem">
-													<div id="WC_<c:out value="${widgetName}"/>_Action_<c:out value="${action}"/>_${row.count}"
-															class="actionTitle" onclick="<c:out value="${tableValue[action]}"/>" tabindex="-1" role="menuitem"
-															aria-label="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/>"
-															onkeypress="if(event.keyCode == 0 || event.keyCode == 13){<c:out value="${tableValue[action]}"/>}">
-														<span><wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/></span>
-													</div>
-												</div>	
-											</c:if>
-										</c:forEach>
-									</div>
-								</div>
-							</div>
-						</c:if>
-					</c:forEach>
-
-					<input type="hidden" id="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" name="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" value="${tableValue['cancelMessage']}">
-				</div>	
-				</c:forEach>	
+					</table>
+				</div>
+			</div>			
+		</c:if>
+		
+		<c:if test="${totalOrders != null && widgetPrefix == 'Recurring_' && totalOrders != 0}">
+			<wcst:message var="scheduledOrder" key="MO_OrderStatus_I" bundle="${widgetText}"/>
+			<div class="row">
+				<div class="col12">
+					<table class="orderHistoryTable orderShedule" border="0" cellpadding="0" cellspacing="0">
+						<tr class="headTr">
+							<th>Scheduled Order Number</th>
+							<th class="">Order Is Scheduled</th>
+							<th class="">Next Order</th>
+							<th class="">Status</th>
+							<th class="">Total Cost</th>
+							<th class="action">Actions</th>
+						</tr>
+						<c:forEach var="tableValue" items="${tableValueMapping}" varStatus="row">
+							<tr>
+								<td class="orders"><a href="<c:out value="${tableValue['order'][0]}"/>" id="WC_<c:out value="${widgetName}"/>_Link_2_<c:out value="${row.count}"/>"><c:out value="${tableValue['order'][1]}"/></a></td>
+								<td class="">${tableValue['scheduled']}</td>
+								<td class="">${tableValue['next_order']}</td>
+								<td class="">${tableValue['status']}</td>
+								<td class="">${tableValue['total_price']}</td>
+								<td class="action">
+									<a href="<c:out value="${tableValue['order'][0]}"/>" id="WC_<c:out value="${widgetName}"/>_Link_2_<c:out value="${row.count}"/>" title="View Order Details"><img src="${jspStoreImgDir}images/binoCulars.png"/></a>
+									<a href="javascript:void(0)" class="bin" title="Cancel Order" onclick="javascript:if(OrderListJS.confirmRemove()){OrderListJS.customRemoveOrder(${WCParam.storeId}, ${tableValue['order'][1]});}; "><img src="${jspStoreImgDir}images/recycle.png"/></a>
+								</td>
+							</tr>
+						</c:forEach>						
+					</table>
+				</div>
 			</div>
-			
-			<div class="listTableMobile">
-				<c:forEach var="tableValue" items="${tableValueMapping}" varStatus="row">
-					<div class="entry">
-						<div class="row">
-							<c:set var="isCurrentlySelectedRow" value="false"/>	
-							<c:forEach var="field" items="${tableHeadings}" varStatus="status2">
-								<c:set var="cellValue" value="${tableValue[field]}"/>	
-								<c:if test="${status2.first && showStarCol}">
-									<c:set var="isRowLocked" value="${tableValue['isRowLocked']}"/>
-									<div class="<c:out value="${field}"/>">
-										<div class="cell" id="WC_<c:out value="${widgetName}"/>_Mobile_TableContent_${fn:toUpperCase(field)}_<c:out value="${row.count}"/>">														
+		</c:if>
+		
+		<c:if test="${widgetPrefix != 'Processed_' && widgetPrefix != 'Waiting_' && widgetPrefix != 'Recurring_' && widgetPrefix != 'Invoices_'}">
+			<div class="row tableHeader FavouritesPageHeader fullView ${hideTable == 'true' ? 'nodisplay' : ''}" role="row">		
+				<c:forEach var="field" items="${tableHeadings}" varStatus="colOrder">		
+					<c:if test="${colOrder.first && showStarCol}">					
+						<div role="columnheader" class="col1 ${field}"><div class="cell"></div></div>
+					</c:if>
+					<c:if test="${!(colOrder.first && showStarCol) && !colOrder.last}">	
+						<div role="columnheader" class="col2 ${field}">
+							<div class="cell" row-expand="${widgetName}_${fn:toUpperCase(field)}_Arrow">
+								<span><wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/></span>
+								<c:if test="${!empty sortingEnabled && sortingEnabled == 'true'}">
+									<img id="${widgetName}_${fn:toUpperCase(field)}_Arrow" class="listtable_arrow" alt="${field}" src="<c:out value='${arrowUpImgDir}'/>" />
+								</c:if>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${colOrder.last}">
+						<div role="columnheader" class="col1 ${field}" title="<wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/>">
+							<div class="cell"><span><wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/></span></div>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+		</c:if>
+		<c:if test="${widgetPrefix != 'Processed_' && widgetPrefix != 'Waiting_' && widgetPrefix != 'Recurring_' && widgetPrefix != 'Invoices_'}">
+			<c:choose>
+				<c:when test="${hideTable == 'false'}">				
+						<div class="fullView FavouritesFullViewPage">
+							<c:forEach var="tableValue" items="${tableValueMapping}" varStatus="row">	
+								<div role="row" class="row entry">			
+									<c:set var="isCurrentlySelectedRow" value="false"/>	
+									<c:forEach var="field" items="${tableHeadings}" varStatus="status2">			
+										<c:set var="cellValue" value="${tableValue[field]}"/>	
+										<c:if test="${status2.first && showStarCol}">
+											<c:set var="isRowLocked" value="${tableValue['isRowLocked']}"/>
+											<div role="gridcell" class="col1 <c:out value="${field}"/>">
+												<div class="cell" id="WC_<c:out value="${widgetName}"/>_TableContent_${fn:toUpperCase(field)}_<c:out value="${row.count}"/>">														
+													<c:choose>
+														<c:when test="${cellValue == 'true'}">										
+															<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_ON" bundle="${widgetText}" var="acceListON"/>
+															<img alt="<c:out value='${acceListON}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_ON.png">
+															<c:set var="isCurrentlySelectedRow" value="true"/>	
+														</c:when>
+														<c:otherwise>
+															<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_OFF" bundle="${widgetText}" var="acceListOFF"/>
+															<img alt="<c:out value='${acceListOFF}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_OFF.png">
+														</c:otherwise>
+													</c:choose>
+													<c:if test="${isRowLocked == 'true'}">
+														<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_LOCKED" bundle="${widgetText}" var="acceListLOCKED"/>
+														<img class="lockedIcon" alt="<c:out value='${acceListLOCKED}'/>" src="<c:out value='${jspStoreImgDir}'/>images/icon_locked_black.png">
+													</c:if>									
+												</div>		
+											</div>	
+										</c:if>	
+										
+										<c:if test="${!(status2.first && showStarCol) && field != 'actions'}" >
+											<c:set var="cellClass" value="cell"/>
 											<c:choose>
-												<c:when test="${cellValue == 'true'}">										
-													<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_ON" bundle="${widgetText}" var="acceListON"/>
-													<img alt="<c:out value='${acceListON}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_ON.png">
-													<c:set var="isCurrentlySelectedRow" value="true"/>	
+												<c:when test="${status2.last}">
+													<c:set var="colClass" value="col1"/>
 												</c:when>
 												<c:otherwise>
-													<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_OFF" bundle="${widgetText}" var="acceListOFF"/>
-													<img alt="<c:out value='${acceListOFF}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_OFF.png">
+													<c:set var="colClass" value="col2"/>
 												</c:otherwise>
 											</c:choose>
-											<c:if test="${isRowLocked == 'true'}">
-												<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_LOCKED" bundle="${widgetText}" var="acceListLOCKED"/>
-												<img class="lockedIcon" alt="<c:out value='${acceListLOCKED}'/>" src="<c:out value='${jspStoreImgDir}'/>images/icon_locked_black.png">
+				
+											<c:if test="${fn:toUpperCase(field) eq 'NAME' && widgetNameCaps eq 'REQUISITIONLIST'}">
+												<%-- used by requistion list widget --%>
+												<c:set var="cellClass" value="cell fileName" />
 											</c:if>
-										</div>		
-									</div>
-								</c:if>	
-								
-								<c:set var="urlIndex" value="${showStarCol eq true ? 2 : 1}"/>
-								
-								<c:if test="${status2.count == urlIndex}">
-									<c:set var="urlAvailable" value="false" />				
-									<c:forEach var="fieldHasUrl" items="${fieldsWithUrl}" varStatus="status3">			
-										<c:if test="${field == fieldHasUrl}">
-											<c:set var="urlAvailable" value="true" />
-										</c:if>
-									</c:forEach>
-									<c:set var="cellClass" value="cell"/>
-										<c:if test="${fn:toUpperCase(field) eq 'NAME' && widgetNameCaps eq 'REQUISITIONLIST'}">
-											<%-- used by requistion list widget --%>
-											<c:set var="cellClass" value="cell fileName" />
-										</c:if>
-									<div class="col9 <c:out value="${field}"/>">			
-										<div class="${cellClass}" id="WC_<c:out value="${widgetName}"/>_Mobile_TableContent_<c:out value="${field}"/>_<c:out value="${row.count}"/>">				
-										<c:if test="${urlAvailable == 'true'}">																		
-											<a href="<c:out value="${cellValue[0]}"/>" id="WC_<c:out value="${widgetName}"/>_Mobile_Link_2_<c:out value="${row.count}"/>"><c:out value="${cellValue[1]}"/></a>																				
-										</c:if>
-										<c:if test="${urlAvailable != 'true'}">
-											<c:out value="${cellValue}"/>
-										</c:if>							
-										</div>		
-									</div>				
-								</c:if>							
-							</c:forEach>
-							<div class="toggle">
-								<div class="cell">
-									<img role="button" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_TableContent_ExpandButton_<c:out value="${row.count}"/>" class="expandIcon" src="<c:out value='${jspStoreImgDir}'/>images/icon_plus.png" aria-expanded="true" onclick="toggleExpandedContent('<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>','<c:out value="${row.count}"/>');" />
-									<img role="button" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_TableContent_CollapseButton_<c:out value="${row.count}"/>" class="collapseIcon nodisplay" src="<c:out value='${jspStoreImgDir}'/>images/icon_minus.png" aria-expanded="false" onclick="toggleExpandedContent('<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>','<c:out value="${row.count}"/>');" />
-								</div>		
-							</div>
-						</div>
-						<div class="expandedContent nodisplay" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_ExpandedContent_<c:out value="${row.count}"/>">
-							<c:forEach var="field" items="${tableHeadings}" varStatus="col">
-								<c:set var="cellValue" value="${tableValue[field]}"/>
-								
-								<c:if test="${col.count > urlIndex && field != 'actions'}">
-									<c:set var="urlAvailable" value="false" />				
-									<c:forEach var="fieldHasUrl" items="${fieldsWithUrl}" varStatus="status4">			
-										<c:if test="${field == fieldHasUrl}">
-											<c:set var="urlAvailable" value="true" />
-										</c:if>
-									</c:forEach>
-									
-									<div role="gridcell" class="${skuAttributeMap.name} expandedCol">
-										<div class="row">
-											<div class="leftCol">
-												<span><wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/></span>
-											</div>
-											<div class="rightCol">
+											<c:set var="urlAvailable" value="false" />				
+											<c:forEach var="fieldHasUrl" items="${fieldsWithUrl}" varStatus="status3">			
+												<c:if test="${field == fieldHasUrl}">
+													<c:set var="urlAvailable" value="true" />
+												</c:if>
+											</c:forEach>
+											
+											<div class="${colClass} ${field}" role="gridcell">			
+												<div class="${cellClass}" id="WC_<c:out value="${widgetName}"/>_TableContent_<c:out value="${field}"/>_<c:out value="${row.count}"/>">				
 												<c:if test="${urlAvailable == 'true'}">																		
-													<a href="<c:out value="${cellValue[0]}"/>"><c:out value="${cellValue[1]}"/></a>																				
+													<a href="<c:out value="${cellValue[0]}"/>" id="WC_<c:out value="${widgetName}"/>_Link_2_<c:out value="${row.count}"/>"><c:out value="${cellValue[1]}"/></a>																				
 												</c:if>
+				
 												<c:if test="${urlAvailable != 'true'}">
-													<c:out value="${cellValue}"/>
-												</c:if>
+													<c:choose>
+														<c:when test="${field == 'name' || field == 'creator'}">										
+															<c:out value="${cellValue}"/>
+														</c:when>
+														<c:otherwise>
+															<%-- Cannot use c:out due to Unicode currency symbols, such as Japanese Yen --%>
+															${cellValue}
+														</c:otherwise>
+													</c:choose>
+												</c:if>						
+												</div>		
+											</div>				
+										</c:if>
+				
+										<c:if test="${field == 'actions'}">
+											<div class="col1 actions">
+												<div class="cell actionsImages">
+													<c:set var="rowActions" value="${actions}" />
+													<c:if test="${not empty tableValue['tableRowActionOverride']}">
+														<c:set var="rowActions" value="${fn:split(tableValue['tableRowActionOverride'],';')}" />
+													</c:if>
+													
+													<c:forEach var="action" items="${rowActions}" varStatus="actionOrder">
+														<c:if test="${!(action eq 'set_as_current' && isCurrentlySelectedRow eq true) && tableValue[action] != null}">
+															<div class="actionItem">
+																<a id="WC_<c:out value="${widgetName}"/>_Action_<c:out value="${action}"/>_${row.count}"
+																	class="actionTitle" onclick="<c:out value="${tableValue[action]}"/>" tabindex="-1" role="menuitem"
+																	aria-label="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/>"
+																	title="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/>"
+																	onkeypress="if(event.keyCode == 0 || event.keyCode == 13){<c:out value="${tableValue[action]}"/>}">
+																	
+																	<c:if test="${action eq 'add_to_cart'}">
+																		<img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/shopSmall.png">
+																	</c:if>
+																	<c:if test="${action eq 'duplicate'}">
+																		<img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/copy.png">
+																	</c:if>
+																	<c:if test="${action eq 'delete'}">
+																		<img src="/wcsstore/ONB2BDirectStorefrontAssetStore/images/recycle.png">
+																	</c:if>
+																</a>
+															</div>	
+														</c:if>
+													</c:forEach>
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+				
+									<input type="hidden" id="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" name="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" value="${tableValue['cancelMessage']}">
+								</div>	
+								</c:forEach>	
+							</div>
+					
+							<%-- <div class="listTableMobile">
+								<c:forEach var="tableValue" items="${tableValueMapping}" varStatus="row">
+									<div class="entry">
+										<div class="row">
+											<c:set var="isCurrentlySelectedRow" value="false"/>	
+											<c:forEach var="field" items="${tableHeadings}" varStatus="status2">
+												<c:set var="cellValue" value="${tableValue[field]}"/>	
+												<c:if test="${status2.first && showStarCol}">
+													<c:set var="isRowLocked" value="${tableValue['isRowLocked']}"/>
+													<div class="<c:out value="${field}"/>">
+														<div class="cell" id="WC_<c:out value="${widgetName}"/>_Mobile_TableContent_${fn:toUpperCase(field)}_<c:out value="${row.count}"/>">														
+															<c:choose>
+																<c:when test="${cellValue == 'true'}">										
+																	<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_ON" bundle="${widgetText}" var="acceListON"/>
+																	<img alt="<c:out value='${acceListON}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_ON.png">
+																	<c:set var="isCurrentlySelectedRow" value="true"/>	
+																</c:when>
+																<c:otherwise>
+																	<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_OFF" bundle="${widgetText}" var="acceListOFF"/>
+																	<img alt="<c:out value='${acceListOFF}'/>" src="<c:out value='${jspStoreImgDir}'/>images/star_icon_OFF.png">
+																</c:otherwise>
+															</c:choose>
+															<c:if test="${isRowLocked == 'true'}">
+																<wcst:message key="ACCE_${widgetNameCaps}_${fn:toUpperCase(field)}_LOCKED" bundle="${widgetText}" var="acceListLOCKED"/>
+																<img class="lockedIcon" alt="<c:out value='${acceListLOCKED}'/>" src="<c:out value='${jspStoreImgDir}'/>images/icon_locked_black.png">
+															</c:if>
+														</div>		
+													</div>
+												</c:if>	
+												
+												<c:set var="urlIndex" value="${showStarCol eq true ? 2 : 1}"/>
+												
+												<c:if test="${status2.count == urlIndex}">
+													<c:set var="urlAvailable" value="false" />				
+													<c:forEach var="fieldHasUrl" items="${fieldsWithUrl}" varStatus="status3">			
+														<c:if test="${field == fieldHasUrl}">
+															<c:set var="urlAvailable" value="true" />
+														</c:if>
+													</c:forEach>
+													<c:set var="cellClass" value="cell"/>
+														<c:if test="${fn:toUpperCase(field) eq 'NAME' && widgetNameCaps eq 'REQUISITIONLIST'}">
+															used by requistion list widget
+															<c:set var="cellClass" value="cell fileName" />
+														</c:if>
+													<div class="col9 <c:out value="${field}"/>">			
+														<div class="${cellClass}" id="WC_<c:out value="${widgetName}"/>_Mobile_TableContent_<c:out value="${field}"/>_<c:out value="${row.count}"/>">				
+														<c:if test="${urlAvailable == 'true'}">																		
+															<a href="<c:out value="${cellValue[0]}"/>" id="WC_<c:out value="${widgetName}"/>_Mobile_Link_2_<c:out value="${row.count}"/>"><c:out value="${cellValue[1]}"/></a>																				
+														</c:if>
+														<c:if test="${urlAvailable != 'true'}">
+															<c:out value="${cellValue}"/>
+														</c:if>							
+														</div>		
+													</div>				
+												</c:if>							
+											</c:forEach>
+											<div class="toggle">
+												<div class="cell">
+													<img role="button" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_TableContent_ExpandButton_<c:out value="${row.count}"/>" class="expandIcon" src="<c:out value='${jspStoreImgDir}'/>images/icon_plus.png" aria-expanded="true" onclick="toggleExpandedContent('<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>','<c:out value="${row.count}"/>');" />
+													<img role="button" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_TableContent_CollapseButton_<c:out value="${row.count}"/>" class="collapseIcon nodisplay" src="<c:out value='${jspStoreImgDir}'/>images/icon_minus.png" aria-expanded="false" onclick="toggleExpandedContent('<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>','<c:out value="${row.count}"/>');" />
+												</div>		
 											</div>
 										</div>
-									</div>
-								</c:if>
-							</c:forEach>
-							<c:if test="${tableHeadings[fn:length(tableHeadings)-1] eq 'actions'}">
-							<div class="row actions">
-								<div class="cell" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_ExpandedContent_Action_<c:out value="${row.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_POPUP_${widgetNameCaps}" bundle="${widgetText}"/>">
-									<a table-toggle="<c:out value="${widgetPrefix}"/>mobile_actionDropdown<c:out value="${row.count}"/>" table-parent="listTable" role="menuitem" id="<c:out value="${widgetPrefix}"/>mobile_actionButton<c:out value="${row.count}"/>" aria-haspopup="true" class="button_secondary actionButton" href="#">
-										<div class="left_border"></div>
-										<div class="button_text">
-											<span>
-												<wcst:message key="${widgetNameCaps}_ACTIONS" bundle="${widgetText}"/>
-												<img class="actionImage" alt="<wcst:message key="${widgetNameCaps}_ACTIONS" bundle="${widgetText}"/>" src="<c:out value='${jspStoreImgDir}'/>images/action_icon.png">
-											</span>								
-										</div>												
-										<div class="right_border"></div>
-									</a>
-									<div class="actionDropdown" table-parent="listTable" id="<c:out value="${widgetPrefix}"/>mobile_actionDropdown<c:out value="${row.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_MENU_${widgetNameCaps}" bundle="${widgetText}"/>">
-										<c:set var="rowActions" value="${actions}" />					
-										<c:if test="${not empty tableValue['tableRowActionOverride']}">
-											<c:set var="rowActions" value="${fn:split(tableValue['tableRowActionOverride'],';')}" />
-										</c:if>
-										
-										<c:forEach var="action" items="${rowActions}" varStatus="actionOrder">	
-											<c:if test="${!(action eq 'set_as_current' && isCurrentlySelectedRow eq true) && tableValue[action] != null}">
-												<div class="actionItem">
-													<div id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Action_<c:out value="${action}"/>_${row.count}"
-															class="actionTitle" onclick="<c:out value="${tableValue[action]}"/>" role="menuitem" tabindex="-1"
-															aria-label="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/>"
-															onkeypress="if(event.keyCode == 0 || event.keyCode == 13){<c:out value="${tableValue[action]}"/>}">
-														<span><wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/></span>
+										<div class="expandedContent nodisplay" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_ExpandedContent_<c:out value="${row.count}"/>">
+											<c:forEach var="field" items="${tableHeadings}" varStatus="col">
+												<c:set var="cellValue" value="${tableValue[field]}"/>
+												
+												<c:if test="${col.count > urlIndex && field != 'actions'}">
+													<c:set var="urlAvailable" value="false" />				
+													<c:forEach var="fieldHasUrl" items="${fieldsWithUrl}" varStatus="status4">			
+														<c:if test="${field == fieldHasUrl}">
+															<c:set var="urlAvailable" value="true" />
+														</c:if>
+													</c:forEach>
+													
+													<div role="gridcell" class="${skuAttributeMap.name} expandedCol">
+														<div class="row">
+															<div class="leftCol">
+																<span><wcst:message key="${widgetNameCaps}_${fn:toUpperCase(field)}" bundle="${widgetText}"/></span>
+															</div>
+															<div class="rightCol">
+																<c:if test="${urlAvailable == 'true'}">																		
+																	<a href="<c:out value="${cellValue[0]}"/>"><c:out value="${cellValue[1]}"/></a>																				
+																</c:if>
+																<c:if test="${urlAvailable != 'true'}">
+																	<c:out value="${cellValue}"/>
+																</c:if>
+															</div>
+														</div>
+													</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${tableHeadings[fn:length(tableHeadings)-1] eq 'actions'}">
+											<div class="row actions">
+												<div class="cell" id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Mobile_ExpandedContent_Action_<c:out value="${row.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_POPUP_${widgetNameCaps}" bundle="${widgetText}"/>">
+													<a table-toggle="<c:out value="${widgetPrefix}"/>mobile_actionDropdown<c:out value="${row.count}"/>" table-parent="listTable" role="menuitem" id="<c:out value="${widgetPrefix}"/>mobile_actionButton<c:out value="${row.count}"/>" aria-haspopup="true" class="button_secondary actionButton" href="#">
+														<div class="left_border"></div>
+														<div class="button_text">
+															<span>
+																<wcst:message key="${widgetNameCaps}_ACTIONS" bundle="${widgetText}"/>
+																<img class="actionImage" alt="<wcst:message key="${widgetNameCaps}_ACTIONS" bundle="${widgetText}"/>" src="<c:out value='${jspStoreImgDir}'/>images/action_icon.png">
+															</span>								
+														</div>												
+														<div class="right_border"></div>
+													</a>
+													<div class="actionDropdown" table-parent="listTable" id="<c:out value="${widgetPrefix}"/>mobile_actionDropdown<c:out value="${row.count}"/>" role="menu" aria-label="<wcst:message key="ACCE_ACTION_MENU_${widgetNameCaps}" bundle="${widgetText}"/>">
+														<c:set var="rowActions" value="${actions}" />					
+														<c:if test="${not empty tableValue['tableRowActionOverride']}">
+															<c:set var="rowActions" value="${fn:split(tableValue['tableRowActionOverride'],';')}" />
+														</c:if>
+														
+														<c:forEach var="action" items="${rowActions}" varStatus="actionOrder">	
+															<c:if test="${!(action eq 'set_as_current' && isCurrentlySelectedRow eq true) && tableValue[action] != null}">
+																<div class="actionItem">
+																	<div id="WC_<c:out value="${widgetPrefix}"/><c:out value="${widgetName}"/>_Action_<c:out value="${action}"/>_${row.count}"
+																			class="actionTitle" onclick="<c:out value="${tableValue[action]}"/>" role="menuitem" tabindex="-1"
+																			aria-label="<wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/>"
+																			onkeypress="if(event.keyCode == 0 || event.keyCode == 13){<c:out value="${tableValue[action]}"/>}">
+																		<span><wcst:message key="${widgetNameCaps}_ACTION_${fn:toUpperCase(action)}" bundle="${widgetText}"/></span>
+																	</div>
+																</div>	
+															</c:if>
+														</c:forEach>
 													</div>
 												</div>	
+											</div>
 											</c:if>
-										</c:forEach>
+										</div>
+									</div>		
+									<input type="hidden" id="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" name="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" value="${tableValue['cancelMessage']}">
+								</c:forEach>				
+							</div> --%>
+						<div class="row footer">
+							<c:choose>
+								<c:when test="${param.isMyAccountMainPage eq 'true'}">
+									<a href="<c:out value='${trackOrderStatusURL}'/>" class="myaccount_link hover_underline" id="<c:out value="${widgetPrefix}"/>View_All_Orders"><c:out value='${viewAllMessage}'/></a>
+								</c:when>
+								<c:otherwise>
+									<div class="col12">
+										<div class="pageCount">
+											<b><span><wcst:message key="${widgetNameCaps}_LISTTABLE_RESULTS_LISTS" bundle="${widgetText}"/></span></b>
+											<wcst:message key="LISTTABLE_RESULTS_DISPLAYING" bundle="${widgetText}">
+												<wcst:param><wcst:formatNumber value="${beginIndex + 1}"/></wcst:param>
+												<wcst:param><wcst:formatNumber value="${endIndex}"/></wcst:param>
+												<wcst:param><wcst:formatNumber value="${totalCount}"/></wcst:param>
+											</wcst:message>
+										</div>
+										<c:if test="${totalPages > 1}">
+											<div class="pageButtons">
+												<c:set var="linkPrefix" value=""/>
+												<%@include file="/Widgets_801/Common/PaginationControls.jspf" %>
+											</div>
+										</c:if>
 									</div>
-								</div>	
-							</div>
-							</c:if>
+								</c:otherwise>
+							</c:choose>
 						</div>
-					</div>
-
-					<input type="hidden" id="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" name="<c:out value="${widgetPrefix}"/>cancelMessage_<c:out value='${row.count}'/>" value="${tableValue['cancelMessage']}">
-				</c:forEach>				
+					</c:when>
+					<c:when test="${hideTable == 'true'}">
+						<%-- Only show a message indicating the table is empty --%>
+						<div class="row entry">
+							<div class="col12 noListsMessage">
+								<div class="cell">
+									<c:choose>
+										<c:when test="${widgetPrefix == 'Saved_'}">
+											<wcst:message key="SAVED${widgetNameCaps}_TABLE_EMPTY" bundle="${widgetText}">
+												<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/></b></wcst:param>
+												<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW_UPLOAD" bundle="${widgetText}"/></b></wcst:param>
+											</wcst:message>
+										</c:when>
+										<c:when test="${widgetNameCaps == 'REQUISITIONLIST'}">
+											<wcst:message key="${widgetNameCaps}_TABLE_EMPTY" bundle="${widgetText}">
+												<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/></b></wcst:param>
+												<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW_UPLOAD" bundle="${widgetText}"/></b></wcst:param>
+											</wcst:message>
+										</c:when>
+										<c:otherwise>
+											<wcst:message key="${widgetNameCaps}_TABLE_EMPTY" bundle="${widgetText}"/>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+						</div>
+						<c:if test="${param.isMyAccountMainPage eq 'true'}">
+							<div class="row footer">
+								<a href="<c:out value='${trackOrderStatusURL}'/>" class="myaccount_link hover_underline" id="<c:out value="${widgetPrefix}"/>View_All_Orders"><c:out value='${viewAllMessage}'/></a>
+							</div>
+						</c:if>
+					</c:when>
+			</c:choose>
+		</c:if>
+		<c:if test="${widgetPrefix == 'Invoices_' && invoices.count != '0'}">
+			<div class="row">
+				<div class="col12">
+					<table class="orderHistoryTable" border="0" cellpadding="0" cellspacing="0">
+						<tr class="headTr">
+							<th class="noDisplay">Transaction Number</th>
+							<th class="noDisplay">Date</th>
+							<th class="noDisplay">Date Due</th>
+							<th class="noDisplay">Value</th>
+							<th class="noDisplay">Balance</th>
+							<th class="noDisplay">Description</th>
+							<th class="noDisplay">Value Ex Tax</th>
+							<th class="noDisplay">Tax Value</th>
+						</tr>
+						<c:forEach var="tableValue" items="${invoices.invoiceList}" varStatus="row">
+							<tr>
+								<td class="orders">
+									<a id="invoice_${tableValue['invoiceNumber']}" href="javascript:void(0)" title="View Invoice" onclick="javascript:OrderListJS.viewInvoice('${invoices.userName}', '${invoices.password}', '${tableValue['ExternalCode']}', '${tableValue['invoiceNumber']}','${invoices.downloadUrl}');">
+										${tableValue['invoiceNumber']}
+									</a>
+									
+								</td>
+								<td class="noDisplay">${tableValue['Date']}</td>
+								<td class="noDisplay">${tableValue['DateDue']}</td>
+								<td class="noDisplay">${tableValue['Value']}</td>
+								<td class="noDisplay">${tableValue['Balance']}</td>
+								<td class="noDisplay">${tableValue['Description']}</td>
+								<td class="noDisplay">${tableValue['ValueExTax']}</td>
+								<td class="noDisplay">${tableValue['TaxValue']}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
 			</div>
-			
+		</c:if>
+		<c:if test="${(widgetPrefix == 'Processed_' || widgetPrefix == 'Waiting_' || widgetPrefix == 'Recurring_' || widgetPrefix == 'Invoices_') && totalOrders != null && totalOrders != 0 }">
 			<div class="row footer">
 				<c:choose>
 					<c:when test="${param.isMyAccountMainPage eq 'true'}">
@@ -440,39 +689,6 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-		</c:when>
-		<c:when test="${hideTable == 'true'}">
-			<%-- Only show a message indicating the table is empty --%>
-			<div class="row entry">
-				<div class="col12 noListsMessage">
-					<div class="cell">
-						<c:choose>
-							<c:when test="${widgetPrefix == 'Saved_'}">
-								<wcst:message key="SAVED${widgetNameCaps}_TABLE_EMPTY" bundle="${widgetText}">
-									<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/></b></wcst:param>
-									<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW_UPLOAD" bundle="${widgetText}"/></b></wcst:param>
-								</wcst:message>
-							</c:when>
-							<c:when test="${widgetNameCaps == 'REQUISITIONLIST'}">
-								<wcst:message key="${widgetNameCaps}_TABLE_EMPTY" bundle="${widgetText}">
-									<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW" bundle="${widgetText}"/></b></wcst:param>
-									<wcst:param><b><wcst:message key="${widgetNameCaps}_ADD_NEW_UPLOAD" bundle="${widgetText}"/></b></wcst:param>
-								</wcst:message>
-							</c:when>
-							<c:otherwise>
-								<wcst:message key="${widgetNameCaps}_TABLE_EMPTY" bundle="${widgetText}"/>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-			</div>
-			<c:if test="${param.isMyAccountMainPage eq 'true'}">
-				<div class="row footer">
-					<a href="<c:out value='${trackOrderStatusURL}'/>" class="myaccount_link hover_underline" id="<c:out value="${widgetPrefix}"/>View_All_Orders"><c:out value='${viewAllMessage}'/></a>
-				</div>
-			</c:if>
-		</c:when>
-	</c:choose>
-</div>
-		
+		</c:if>
+	</div>
 <!-- END ListTable_UI.jspf -->

@@ -117,35 +117,35 @@
 <c:set var="flexFlowsFieldOrder" value="preferredLanguage,preferredCurrency,Age,Gender" />
 <c:choose>
 	<c:when test="${locale == 'zh_CN'}">
-		<c:set var="detailsFieldOrder" value="LAST_NAME,first_name,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="COUNTRY/REGION,STATE/PROVINCE,new_line,CITY,ADDRESS,new_line,ZIP"/>
 	</c:when>
 	<c:when test="${locale eq 'ar_EG'}">
-		<c:set var="detailsFieldOrder" value="first_name,LAST_NAME,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="ADDRESS,CITY,new_line,STATE/PROVINCE,new_line,ZIP,new_line,COUNTRY/REGION"/>
 	</c:when>
 	<c:when test="${locale == 'ru_RU'}">
-		<c:set var="detailsFieldOrder" value="first_name,middle_name,LAST_NAME,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="ADDRESS,ZIP,new_line,CITY,state/province,new_line,COUNTRY/REGION"/>
 	</c:when>
 	<c:when test="${locale == 'zh_TW'}">
-		<c:set var="detailsFieldOrder" value="LAST_NAME,first_name,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="COUNTRY/REGION,STATE/PROVINCE,new_line,CITY,ZIP,new_line,ADDRESS" />
 	</c:when>
 	<c:when test="${locale == 'ja_JP' || locale == 'ko_KR'}">
-		<c:set var="detailsFieldOrder" value="LAST_NAME,FIRST_NAME,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="COUNTRY/REGION,ZIP,new_line,STATE/PROVINCE,CITY,ADDRESS"/>
 	</c:when>
 	<c:when test="${locale == 'de_DE' || locale == 'es_ES' || locale == 'fr_FR' || locale == 'it_IT' || locale == 'ro_RO'}">
-		<c:set var="detailsFieldOrder" value="first_name,LAST_NAME,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="ADDRESS,ZIP,new_line,CITY,state/province,new_line,COUNTRY/REGION"/>
 	</c:when>
 	<c:when test="${locale == 'pl_PL'}">
-		<c:set var="detailsFieldOrder" value="first_name,LAST_NAME,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="ADDRESS,ZIP,new_line,CITY,STATE/PROVINCE,new_line,COUNTRY/REGION"/>
 	</c:when>
 	<c:otherwise>
-		<c:set var="detailsFieldOrder" value="first_name,LAST_NAME,new_line,phone1,EMAIL1" />
+		<c:set var="detailsFieldOrder" value="FIRST_NAME,LAST_NAME,new_line,PHONE1,EMAIL1" />
 		<c:set var="addressFieldOrder" value="ADDRESS,CITY,new_line,COUNTRY/REGION,STATE/PROVINCE,new_line,ZIP"/>
 	</c:otherwise>
 </c:choose>

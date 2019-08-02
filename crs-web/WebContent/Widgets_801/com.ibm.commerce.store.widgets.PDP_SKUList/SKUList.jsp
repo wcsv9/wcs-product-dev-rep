@@ -41,6 +41,7 @@
 				SKUListJS.setCommonParameters('<c:out value="${langId}"/>','<c:out value="${storeId}" />','<c:out value="${catalogId}" />','<c:out value="${disableProductCompare}" />');
 				SKUListJS.arrangeProductDetailTables();
 				SKUListJS.checkOnlineAvailability('${productId}');
+				SKUListJS.filterSkusByAttribute(null,'${productId}');
 				SKUListJS.populateStoreLinks();
                                 wcTopic.subscribe('DefiningAttributes_Resolved', SKUListJS.filterSkusByAttribute);
                                 wcTopic.subscribe('DefiningAttributes_Changed', SKUListJS.filterSkusByAttribute);

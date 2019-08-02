@@ -303,9 +303,9 @@
 				<c:catch var="searchServerException">
 					<wcf:rest var="dkComponents" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/byIds" >
 							<c:forEach var="orderItem" items="${pagorder.orderItem}">
-								<wcf:param name="id" value="${orderItem.productId}"/>
+								
 								<c:forEach var="orderItemComponents" items="${orderItem.orderItemComponent}">
-									<wcf:param name="id" value="${orderItemComponents.productId}"/>
+									<wcf:param name="id" value="${orderItemComponents.catalogEntryIdentifier.uniqueID}"/>
 								</c:forEach>
 							</c:forEach>
 							<wcf:param name="langId" value="${langId}" />
@@ -405,8 +405,8 @@
 					<c:set var="col2Data" value="${col2Data}<p>${Configuration_txt} : </p>"/>
 					<c:forEach var="oiComponent" items="${orderItem.orderItemComponent}">
 						<c:forEach var="savedDKComponent" items="${dkComponents.catalogEntryView}">
-							<c:if test="${savedDKComponent.uniqueID == oiComponent.productId}">
-								<fmt:formatNumber var="itemComponentQuantity" value="${oiComponent.quantity}" type="number" maxFractionDigits="0"/>
+							<c:if test="${savedDKComponent.uniqueID == oiComponent.catalogEntryIdentifier.uniqueID}">
+								<fmt:formatNumber var="itemComponentQuantity" value="${oiComponent.quantity.value}" type="number" maxFractionDigits="0"/>
 
 								<c:choose>
 									<c:when test="${itemComponentQuantity>1}">

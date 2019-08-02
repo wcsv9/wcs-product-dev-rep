@@ -652,29 +652,25 @@ CheckoutPayments = {
 
 		if(this.jQlocale == 'ar_EG')
 		{
-			var formattedPaymentAmountValue = Utils.formatNumber(paymentAmount.value, {
+			var formattedPaymentAmountValue = Utils.formatEnUSLocaleNumberIntoTargetLocaleNumber(paymentAmount.value, {
 				maximumFractionDigits: 2,
 				minimumFractionDigits: 2
 			});
+		} else if (this.jQlocale.indexOf('zh') === 0 || this.jQlocale.indexOf('ja') === 0 || this.jQlocale.indexOf('ko') === 0) {
+			// Add trailing 0 only if necessary.  Only useful for double-byte languages
+			var formattedPaymentAmountValue = Utils.formatEnUSLocaleNumberIntoTargetLocaleNumber(paymentAmount.value, {
+				locale: this.jQlocale,
+				maximumFractionDigits: 1
+			});
+		} else {
+			// Always add 2 trailing 0.  Only useful for single-byte languages
+			var formattedPaymentAmountValue = Utils.formatEnUSLocaleNumberIntoTargetLocaleNumber(paymentAmount.value, {
+				locale: this.jQlocale,
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2
+			});
 		}
-		else
-		{
-			if (this.jQlocale.indexOf('zh') === 0 || this.jQlocale.indexOf('ja') === 0 || this.jQlocale.indexOf('ko') === 0) {
-				// Add trailing 0 only if necessary.  Only useful for double-byte languages
-				var formattedPaymentAmountValue = Utils.formatNumber(paymentAmount.value, {
- 					locale: this.jQlocale,
- 					maximumFractionDigits: 1
- 				});
-			}
-			else {
-				// Always add 2 trailing 0.  Only useful for single-byte languages
-				var formattedPaymentAmountValue = Utils.formatNumber(paymentAmount.value, {
- 					locale: this.jQlocale,
- 					minimumFractionDigits: 2,
- 					maximumFractionDigits: 2
- 				});
-			}
-		}
+		
 
 		//If the displayed payment amount is different from the hidden payment amount
 		//Synchronize the display payment amount according to the hidden payment amount
@@ -1121,7 +1117,7 @@ CheckoutPayments = {
 			formName = document.forms["PaymentForm1"];
 			if (formName.piAmount != null && formName.piAmount.value != "" && !isNaN(formName.piAmount.value)){
 				formName.piAmount.value = updatedTotal;
-				formName.piAmount_display.value = updatedTotal;
+				//formName.piAmount_display.value = updatedTotal;
 				this.formatAmountDisplayForLocale("1");
 				if(this.retrievePaymentObject(1) != null){
 					this.updatePaymentObject(1, 'piAmount');

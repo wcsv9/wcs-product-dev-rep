@@ -17,17 +17,17 @@
 <%@ include file="/Widgets_801/Common/nocache.jspf" %>
 
 <%-- Default to value set in env file. If passed as parameter, give perference to parameter --%>
+
 <c:set var="displayType" value="${orgListDisplayType}"/>
 <c:if test="${!empty param.orgListDisplayType}">
 	<c:set var="displayType" value="${param.orgListDisplayType}"/>
 </c:if>
 
 <%-- Add Pagination support and check for total page size. Rather than checking the actual returned size TODO --%>
-<c:if test="${empty displayType || displayType eq 'dropDown' || displayType eq 'depends'}">
+ <c:if test="${empty displayType || displayType eq 'dropDown' || displayType eq 'depends'}">
 	<%@ include file="OrganizationList_Data.jspf" %>
 	<c:set var="orgLength" value="${organizationList.recordSetTotal}"/>
-</c:if>
-
+</c:if>  
 <c:choose>
 	<c:when test="${empty displayType || displayType eq 'dropDown' || (displayType eq 'depends' && orgLength <= orgListPageSizeBreakPoint)}">
 		<%@ include file="OrganizationList_DropDown_Data.jspf" %>

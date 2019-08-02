@@ -15,7 +15,9 @@
 	wcTopic.subscribe('AttachmentPagination_Context', $.proxy(productDisplayJS.showAttachmentPage, productDisplayJS));
 	
 </script>
+
 <div wcType="RefreshArea" refreshurl="${AttachmentPaginationURL}" id="attachmentPaginationContainer">
+<div id="pdp-tab-4di">
 	<%out.flush();%>
 		<c:import url="${env_siteWidgetsDir}com.ibm.commerce.store.widgets.PDP_AssociatedAssets/AttachmentList.jsp">
 			<c:param name="catalogId" value="${param.catalogId}" />
@@ -26,4 +28,5 @@
 			<c:param name="displayAttachmentCount" value="${displayAttachmentCount}" />
 		</c:import>
 	<%out.flush();%>
+</div>
 </div>

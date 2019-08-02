@@ -302,21 +302,22 @@
 				<wcf:set target="${rCells}" value="${rCell}" />
 				<c:remove var="rCell"/>
 				
-				<%-- table row column 3 --%>
-				<wcf:useBean var="rCell" classname="java.util.HashMap"/>
-					<wcf:set key="div1Class" value="col5 roles orgUsersColumn" target="${rCell}" />
-					<wcf:set key="div2Class" value="cell" target="${rCell}" />
-					<wcf:set key="div2Id" value="" target="${rCell}" />
-					<wcf:set key='cellContent' value='${userRolesList}' target='${rCell}' />
-				<wcf:set target="${rCells}" value="${rCell}" />
-				<c:remove var="rCell"/>
 				
-				<%-- table row column 4 --%>
+				<%-- table row column 3 --%>
 				<wcf:useBean var="rCell" classname="java.util.HashMap"/>
 					<wcf:set key="div1Class" value="col1 status orgUsersColumn" target="${rCell}" />
 					<wcf:set key="div2Class" value="cell" target="${rCell}" />
 					<wcf:set key="div2Id" value="" target="${rCell}" />
 					<wcf:set key='cellContent' value='${userAccountStatus}' target='${rCell}' />
+				<wcf:set target="${rCells}" value="${rCell}" />
+				<c:remove var="rCell"/>
+				
+				<%-- table row column 4 --%>
+				<wcf:useBean var="rCell" classname="java.util.HashMap"/>
+					<wcf:set key="div1Class" value="col5 roles orgUsersColumn" target="${rCell}" />
+					<wcf:set key="div2Class" value="cell" target="${rCell}" />
+					<wcf:set key="div2Id" value="" target="${rCell}" />
+					<wcf:set key='cellContent' value='${userRolesList}' target='${rCell}' />
 				<wcf:set target="${rCells}" value="${rCell}" />
 				<c:remove var="rCell"/>
 				

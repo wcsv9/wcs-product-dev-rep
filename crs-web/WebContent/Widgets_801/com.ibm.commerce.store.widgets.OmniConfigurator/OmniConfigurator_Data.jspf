@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2011, 2015 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--%>
+<%--
+  *****
+  * This page launches the sterling configurator by building and automatically submitting a form.
+  * This page is also called once the sterling configurator is submitted and an item is add to the
+  * shopping cart.  In this scenario, this page simply redirects to either the shopping cart or
+  * the shipping page.
+  *****
+--%>
+<%@ taglib uri="http://commerce.ibm.com/foundation" prefix="wcf" %>
+
+<%-- get the customers cookie activity data --%>
+<c:choose>
+	<c:when test="${env_inPreview}">
+		<c:set var="cookiePrefix" value="WCP_USERACTIVITY_"/>
+		<c:set var="cookiePrefixAuth" value="WC_AUTHENTICATION_"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="cookiePrefix" value="WC_USERACTIVITY_"/>
+		<c:set var="cookiePrefixAuth" value="WC_AUTHENTICATION_"/>
+	</c:otherwise>
+</c:choose>
+<c:forEach items="${pageContext.request.cookies}" var="tmpCookie">
+  <c:if test="${fn:contains(tmpCookie.name, cookiePrefix)}">
+    <c:set var="userActivity" value="${tmpCookie.value}"/>
+    <c:set var="userLoginId" value="${fn:split(tmpCookie.name, '_')[2]}"/>
+  </c:if>
+  <c:if test="${fn:contains(tmpCookie.name, cookiePrefixAuth)}">
+    <c:set var="userAuthentication" value="${tmpCookie.value}"/>
+  </c:if>
+</c:forEach>
+
+
+
+
+<wcf:rest var="getConfiguratorURL" url="store/{storeId}/configurator/url" cached="true">
+		<wcf:var name="storeId" value="${WCParam.storeId}" />
+</wcf:rest>
+	
+	<!--By default, we suppose ConfiguratorUI was deployed in store server.  -->
+	<c:set var="configuratorUIURL" value=""/>
+	<c:set var="configuratorURL" value="" />
+
+<!-- BEGIN LaunchConfigurator.jsp -->
+<c:if test="${!empty getConfiguratorURL}">
+	<c:if test="${!empty getConfiguratorURL.ConfiguratorUIUrl}">
+		<c:set var="configuratorUIURL" value="${getConfiguratorURL.ConfiguratorUIUrl}"/>
+	</c:if>
+	<c:if test="${!empty getConfiguratorURL.ConfiguratorUrl}">
+		<c:set var="configuratorURL" value="${getConfiguratorURL.ConfiguratorUrl}"/>
+	</c:if>
+</c:if>
+
+<!-- END LaunchConfigurator.jsp -->

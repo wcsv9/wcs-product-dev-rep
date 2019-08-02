@@ -172,7 +172,6 @@
 	</c:otherwise>
 </c:choose>
 
-
 	<c:if test="${!redirected}">
 		<%-- No redirection happend at server side.. But we may still redirect from client side, if redirect = true --%>
 		<c:if test="${empty redirect}">
@@ -216,7 +215,9 @@
 						<script type="text/javascript">
 							$(document).ready(function() { 
 								shoppingActionsServicesDeclarationJS.setCommonParameters('<c:out value="${langId}" />','<c:out value="${storeId}" />','<c:out value="${catalogId}" />');
-								shoppingActionsServicesDeclarationJS.registerMarketingEvent({searchTerm:'<c:out value="${WCParam.searchTerm}"/>',DM_ReqCmd:'SearchDisplay',storeId:'<c:out value="${storeId}"/>'});
+								<c:if test="${CommandContext.user.userId ne '-1002' && unregisterMktEvent ne '1'}">
+									shoppingActionsServicesDeclarationJS.registerMarketingEvent({searchTerm:'<c:out value="${WCParam.searchTerm}"/>',DM_ReqCmd:'SearchDisplay',storeId:'<c:out value="${storeId}"/>'});
+								</c:if>
 								<c:if test="${!empty updatedSearchTermHistory}">
 									SearchJS.updateSearchTermHistoryCookie("<c:out value='${updatedSearchTermHistory}'/>");										
 								</c:if>

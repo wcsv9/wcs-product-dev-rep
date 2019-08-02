@@ -136,6 +136,19 @@ categoryDisplayJS={
 	allSwatchesArray : [],
 	
 	/**
+	 * Add customized parameter for add to order
+	 * "reverse":"$reverse",
+	 * "contractId":"$contractId",
+	 * "physicalStoreId":"$physicalStoreId",
+	 * "catEntryId":"$catEntryId",
+	 **/
+	customParams :{},
+	
+	setCustomParams:function(customParams){
+		this.customParams = customParams;
+	},
+	
+	/**
 	* setCommonParameters This function initializes storeId, catalogId, and langId.
 	*
 	* @param {String} langId The language id to use.
@@ -1214,12 +1227,12 @@ getDefaultItem : function(productId){
 	* @param {Object} customParams - Any additional parameters that needs to be passed to the configurator page.
 	*
 	**/
-	ConfigureDynamicKit : function(catEntryIdentifier, quantity, customParams)
+	ConfigureDynamicKit : function(catEntryId, quantity, customParams)
 	{
 		var params = {storeId: this.storeId,
 catalogId: this.catalogId,
 langId: this.langId,
-catEntryId: catEntryIdentifier,
+catEntryId: catEntryId,
 quantity: quantity};
 		
 		if(!isPositiveInteger(quantity)){
@@ -1258,6 +1271,80 @@ quantity: quantity};
 		document.location.href = getAbsoluteURL() + appendWcCommonRequestParameters(configureURL);
 	},
 	
+	/**
+	* addDynamicKitToCart This function is used to add dynamic kit to cart.
+	*
+	* @param {String} catalogId The catalog entry of the item to replace to the cart.
+	* @param {int} quantity The quantity of the item to add.
+	* @param {String} langId 
+	*
+	**/
+	
+	updateDynamicKitInCart : function (langId, storeId, catalogId,orderItemId){
+		generateBOM( function (bomXML) {
+				ServicesDeclarationJS.setCommonParameters(langId, storeId, catalogId);
+				service = wcService.getServiceById('AjaxOrderUpdateConfigurationInCart');
+	        
+				var params = {
+	         		configXML:bomXML,
+	         		orderItemId:orderItemId,
+				};
+				//Pass any other customParams set by other add on features
+				if(this.customParams != null && this.customParams != 'undefined'){
+					for(i in this.customParams){
+						params[i] = this.customParams[i];
+					}
+				}
+				
+	        /*For Handling multiple clicks. */
+	        if(!submitRequest()){
+	            return;
+	        }
+	        cursor_wait();
+	        wcService.invoke('AjaxOrderUpdateConfigurationInCart',params);
+			}
+		);
+		
+		},
+	
+		/**
+		* addDynamicKitToCart This function is used to add dynamic kit to cart.
+		*
+		* @param {String} catalogId The catalog entry of the item to replace to the cart.
+		* @param {int} quantity The quantity of the item to add.
+		* @param {String} langId 
+		*
+		**/
+		
+		addDynamicKitToCart : function (langId, storeId, catalogId,catEntryId, quantity){
+			generateBOM( function (bomXML) {
+					ServicesDeclarationJS.setCommonParameters(langId, storeId, catalogId);
+					service = wcService.getServiceById('AjaxRESTOrderAddConfigurationToCart');
+		        
+					var params = {
+		         		configXML:bomXML,
+						catEntryId:catEntryId,
+						quantity:quantity
+					};
+					//Pass any other customParams set by other add on features
+					if(this.customParams != null && this.customParams != 'undefined'){
+						for(i in this.customParams){
+							params[i] = this.customParams[i];
+						}
+					}
+					
+		        /*For Handling multiple clicks. */
+		        if(!submitRequest()){
+		            return;
+		        }
+		        cursor_wait();
+		        wcService.invoke('AjaxRESTOrderAddConfigurationToCart',params);
+				}
+			);
+			
+			},
+		
+			
 	/**
 	* ReplaceItemAjaxHelper This function is used to replace an item in the cart. This will be called from the {@link this.ReplaceItemAjax} method.
 	*

@@ -12,13 +12,15 @@
  =================================================================
 --><beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">  
   <bean id="ajaxWishListCreate" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController"> 
-    <property name="authenticate" value="0"/>  
+    <property name="authenticate" value="0"/>
+    <property name="csrfProtected" value="1"/>  
     <property name="parameter" value="wishlist.create"/>  
     <property name="https" value="1"/> 
   </bean>  
   <bean id="ajaxWishListAddItem" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController"> 
     <property name="authenticate" value="0"/>  
-    <property name="https" value="1"/>  
+    <property name="https" value="1"/>
+    <property name="csrfProtected" value="1"/>   
     <property name="parameter" value="wishlist.addItem"/> 
   </bean>  
   <bean id="wishListAddItem" class="com.ibm.commerce.store.mvc.controller.spring.RESTActionController"> 
@@ -33,7 +35,8 @@
   </bean>  
   <bean id="ajaxWishListAddItemByPartNumber" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController"> 
     <property name="authenticate" value="1"/>  
-    <property name="https" value="1"/>  
+    <property name="https" value="1"/>
+    <property name="csrfProtected" value="1"/>   
     <property name="parameter" value="wishlist.addItemByPartNumber"/> 
   </bean>  
   <bean id="wishListDisplay" class="com.ibm.commerce.store.mvc.controller.spring.RESTActionController"> 
@@ -118,7 +121,8 @@
   </bean>  
   <bean id="ajaxRestWishListCreateWithItem" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController"> 
     <property name="authenticate" value="0"/>  
-    <property name="https" value="1"/>  
+    <property name="https" value="1"/>
+    <property name="csrfProtected" value="1"/>   
     <property name="parameter" value="wishlist.createWithItem"/>   
   </bean>  
 </beans>

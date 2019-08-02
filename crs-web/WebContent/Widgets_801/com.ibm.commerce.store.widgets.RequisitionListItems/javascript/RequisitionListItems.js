@@ -38,7 +38,29 @@
 		* This variable stores the ID of the requisition list. Its default value is empty.
 		*/
 		requisitionListId: "",
+		
+		addPDK: false,
+		
+		addDK: false,
+		
+		configurationXML: "",
 
+	    setAddPDK: function (addpdk) {
+	        this.addPDK = addpdk;
+	    },
+
+		setAddDK: function(adddk) {
+			this.addDK = adddk;
+		},
+		
+		setConfigurationXML: function(configXML) {
+			this.configurationXML = configXML;
+		},
+		
+		unEscapeXml: function(str){
+			return str.replace(/&lt;/gm, "<").replace(/&gt;/gm, ">").replace(/&#034;/gm,"\"");
+		},
+		
 		/**
 		 * Sets the common parameters for the current page. 
 		 * For example, the language ID, store ID, and catalog ID.
@@ -57,7 +79,7 @@
 
 		/**
 		 * Adds an item to the requisition list.
-		 * @param (object) formName The form that contains the items to add to the requisition list.
+		 * @param (object) formName The form that contains the items to add to the requisition list. (Arsalan - Call Custom Service for check duplicate item in the list).
 		 */
 		addItemToReqList:function(formName){
 			MessageHelper.hideAndClearMessage();
@@ -75,18 +97,52 @@
 			partNumber: form.skuAdd.value.replace(/^\s+|\s+$/g, ''),
 			quantity: form.quantityAdd.value.replace(/^\s+|\s+$/g, ''),
 			operation: "addItem",
+			formName: "RequisitionListItemAddForm",
 			storeId: this.storeId,
 			catalogId: this.catalogId,
 			langId: this.langId			
 			};
+			
 			/*For Handling multiple clicks. */
-			if(!submitRequest()){
+			/*if(!submitRequest()){
 				return;
-			}			
+			}*/			
 			cursor_wait();
-			wcService.invoke('requisitionListAddItem',params);
+			wcService.invoke('requisitionListAddItemCustom',params);
+			//wcService.invoke('requisitionListAddItem',params);
 		},
 	
+		/**
+		 * Adds an item to the requisition list.
+		 * @param (object) formName The form that contains the items to add to the requisition list. (Arsalan - If user want to add item again in the Requisition List call this function).
+		 */
+		addItemToReqListAgain:function(formName, partNum, qty){
+			MessageHelper.hideAndClearMessage();
+			var form = document.forms[formName];
+			var skuAdd = partNum;
+			var quantityAdd = qty;
+			
+			var params = {
+			requisitionListId: form.requisitionListId.value,
+			partNumber: skuAdd,
+			quantity: quantityAdd,
+			addItemAgain: "Y",
+			operation: "addItem",
+			formName: "RequisitionListItemAddForm",
+			storeId: this.storeId,
+			catalogId: this.catalogId,
+			langId: this.langId			
+			};
+			
+			/*For Handling multiple clicks. */
+			/*if(!submitRequest()){
+				return;
+			}*/			
+			cursor_wait();
+			wcService.invoke('requisitionListAddItemCustom',params);
+			//wcService.invoke('requisitionListAddItem',params);
+		},
+		
 		/**
 		 * Updates the quantities of each item in the requisition list, if the quantities are changed.
 		 * This function is automatically called by the sucessHandler of requisitionListUpdate.
@@ -200,14 +256,32 @@
 						// just add quantity of the specified row to params
 						params["quantity"] = formElements[i].value;
 					}
+				} if (formElements[i].name.indexOf("catEntryId") != -1) {
+					if(formElements[i].name.indexOf("catEntryId_"+row) != -1) {
+						// just add catEntryId of the specified row to params
+						params["catEntryId"] = formElements[i].value;
+					}
 				} else if (formElements[i].name.indexOf("ProductInfo") == -1) {
 					// ingore all hidden "ProductInfo" inputs - do not add to params
 					params[formElements[i].name] = formElements[i].value;
 				}
 			}
+						
+			if (params["quantity"] == 0) {
+				MessageHelper.displayErrorMessage(Utils.getLocalizationMessage('QUANTITY_INPUT_ERROR'));
+				return;
+			}
+			
 			params["partNumber"] = partNumber;
 			params["inventoryValidation"] = true;
 			params["orderId"] = ".";
+			
+			if (this.addDK){
+				params.configXML = this.unEscapeXml(this.configurationXML);
+				wcService.getServiceById("ReqListAddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddConfigurationToCart");
+			}else {
+				wcService.getServiceById("ReqListAddOrderItem").setUrl(getAbsoluteURL() + "AjaxRESTOrderAddPreConfigurationToCart");
+			}
 			
 			// used by mini shopcart
 			var selectedAttrList = new Object();

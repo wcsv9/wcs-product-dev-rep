@@ -27,7 +27,7 @@
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-	<c:if test="${env_schemeToUse eq 'https' && (empty pageGroup || (pageGroup ne 'Content' && pageGroup ne 'Category' && pageGroup ne 'Search' && pageGroup ne 'Product' && pageGroup ne 'Item' && pageGroup ne 'Kit' && pageGroup ne 'Bundle' && pageGroup ne 'DynamicKit' && pageGroup ne 'PredDynaKit'))}">
+	<c:if test="${env_schemeToUse eq 'https'}">
 		<%@ include file="CSRFProtection.jspf"%>
 	</c:if>
 	
@@ -51,5 +51,15 @@
 	<%out.flush();%>
 		<c:import url="${env_jspStoreDir}Common/CallCenterIntegrationSetup.jsp"/>
 	<%out.flush();%>
+	
+	<flow:ifEnabled feature="ConsentOptions">
+	<%out.flush();%>
+		<wcpgl:widgetImport useIBMContextInSeparatedEnv="${isStoreServer}" url= "${env_siteWidgetsDir}Common/PrivacyPolicy/PrivacyPolicyPopup.jsp">
+			<wcpgl:param name="storeId" value="${storeId}" />
+			<wcpgl:param name="catalogId" value="${catalogId}" />
+			<wcpgl:param name="emsName" value="PrivacyPolicyPageCenter_Content"/>
+		</wcpgl:widgetImport>
+	<%out.flush();%>
+	</flow:ifEnabled>
 	
 <!-- END CommonJSPFToInclude.jspf -->

@@ -78,6 +78,7 @@ xmlns:waistate="http://www.w3.org/2005/07/aaa" lang="${shortLocale}" xml:lang="$
 											<form name="AdvancedSearchForm" action="SearchDisplay" method="get" id="AdvancedSearchForm">
 												<input type="hidden" name="advancedSearch" value= "1"/>
 												<input type="hidden" name="searchSource" value="A" id="searchSource"/>
+												<input type="hidden" name="pageGroup" value= "Search"/>
 												<input type="hidden" name="storeId" value= "${storeId}"/>
 												<input type="hidden" name="catalogId" value= "${catalogId}"/>
 												<div class="form" id="WC_AdvancedSearchForm_div_3">

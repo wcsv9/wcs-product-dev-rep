@@ -53,10 +53,11 @@
     			 "lastName" : "$lastName",
     			 "address1" : "$address1",
     			 "address2" : "$address2",
+    			 "address3" : "$address3",
 			 "addressLine": [
 			      		"$address1",
 			      		"$address2",
-			      		""
+			      		"$address3"
 			      		],
 
     			 "city" : "$city",
@@ -85,7 +86,13 @@
     			 "mobileDeviceEnabled" : "$mobileDeviceEnabled",
     			 "mobilePhone1Country" : "$mobilePhone1Country",
     			 "mobileCountryCode" : "$mobileCountryCode",
-    			 "mobilePhone1" : "$mobilePhone1"
+    			 "mobilePhone1" : "$mobilePhone1",
+    			 "userField1"           : "$userField1",
+				 "userField2"           : "$userField2",
+				 "userField3"           : "$userField3",
+				 "phone2"           	: "$phone2",
+    			 "privacyNoticeVersion" : "$privacyNoticeVersion",
+    			 "marketingTrackingConsent" : "$marketingTrackingConsent"
      			}]]>
 		</template>	
 		</method>	
@@ -106,6 +113,14 @@
     			 "challengeAnswer" : "$challengeAnswer"
      			}]]>
 		</template>	
+		</method>
+		<method name="updatePrivacyAndMarketingConsent" httpMethod="PUT" path="@self">
+		<template>
+			<![CDATA[{
+				 "privacyNoticeVersion" : "$privacyNoticeVersion",
+    			 "marketingTrackingConsent" : "$marketingTrackingConsent"
+     			}]]>
+		</template>
 		</method>		
 		<method name="registerPerson" httpMethod="POST" path="">
 			<template>
@@ -161,7 +176,7 @@
 				"addressLine": [
 			      		"$address1",
 			      		"$address2",
-			      		""
+			      		"$address2"
 			      		],
 	
 				"email1" : "$email1",
@@ -180,7 +195,10 @@
 				"dateOfBirth" : "$dateOfBirth",
 				"birth_year" : "$birth_year",
 				"birth_month" : "$birth_month",
-				"birth_date" : "$birth_date"
+				"birth_date" : "$birth_date",
+				"privacyNoticeVersion" : "$privacyNoticeVersion",
+    			"marketingTrackingConsent" : "$marketingTrackingConsent"
+				
 	     			}
 				]]>
 			</template>
@@ -322,7 +340,7 @@
 				"addressLine": [
 			      		"$address1",
 			      		"$address2",
-			      		""
+			      		"$address3"
 			      		],
 	
 				"email1" : "$email1",
@@ -350,7 +368,7 @@
 				"addressLine": [
 			      		"$address1",
 			      		"$address2",
-			      		""
+			      		"$address3"
 			      		],
 				"email1" : "$email1",
 			    	"email2" : "$email2",
@@ -481,7 +499,10 @@
 		<method name="logIn" httpMethod="POST" path="?assignPersonalizationId=true">
 			<template>
 				<![CDATA[{
-	  				"migrateGuestUser" : "$migrateGuest"
+	  				"migrateGuestUser" : "$migrateGuest",
+	  				"privacyNoticeVersion": "$privacyNoticeVersion",
+					"marketingTrackingConsent": "$marketingTrackingConsent"
+	  				
 					}
 				]]>
 			</template>
@@ -511,6 +532,8 @@
 			]]>
 		</template>
 		</method>
+		<method name="oauth" httpMethod="POST" path="oauth"/>
+		<method name="oauth_validate" httpMethod="POST" path="oauth_validate"/>
 		<method name="logout" httpMethod="DELETE" path="@self"/>
 		<method name="getPerson" httpMethod="GET" path="@self"/>
 		<method name="resetPassword" httpMethod="POST" path="">

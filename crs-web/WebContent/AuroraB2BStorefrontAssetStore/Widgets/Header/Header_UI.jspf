@@ -148,13 +148,14 @@
         </a>
 
         <%-- Start Refresh Area --%>
-        <div wcType="RefreshArea" id="drop_down_${department.uniqueID}" refreshurl="${deptDropDownURL}" declareFunction="declareDeptDropdownRefreshArea('drop_down_${department.uniqueID}')" widgetId="drop_down_${department.uniqueID}" aria-labelledby="departmentsButton">
+        <div id="drop_down_${department.uniqueID}" aria-labelledby="departmentsButton" >
         <ul id="departmentsMenu" role="menu" data-parent="header" aria-labelledby="departmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}"><li class="hidden">
-            <a id="departmentButton_${department.uniqueID}" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_${department.uniqueID}">
-                <span><c:out value="${department.name}"/></span>
-                <div class="arrow_button_icon"></div>
-            </a>
-            <div id="departmentMenu_${department.uniqueID}" class="departmentMenu" ${!empty department.catalogGroupView ? 'role="menu"' : ''} data-parent="departmentsMenu" data-id="${department.uniqueID}" aria-label="${department.name}">
+	    <a id="departmentButton_${department.uniqueID}" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_${department.uniqueID}">
+		<span><c:out value="${department.name}"/></span>
+		<div class="arrow_button_icon"></div>
+	    </a>
+            <c:set var="deptDropDownURL" value="${env_absoluteUrl}DepartmentDropdownViewRWD?storeId=${storeId}&catalogId=${catalogId}&langId=${langId}&uniqueID=${department.uniqueID}"/>
+            <div wcType="RefreshArea" refreshurl="${deptDropDownURL}" declareFunction="declareDeptDropdownRefreshArea('departmentMenu_${department.uniqueID}')" widgetId="departmentMenu_${department.uniqueID}" id="departmentMenu_${department.uniqueID}" class="departmentMenu" role="menu" data-parent="departmentsMenu" data-id="${department.uniqueID}" aria-label="${department.name}" lazyLoad="${lazyLoad}">
                 <div class="header">
                     <a id="departmentLink_${department.uniqueID}" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="link menuLink" role="menuitem" tabindex="-1"><c:out value="${department.name}"/></a>
                     <a id="departmentToggle_${department.uniqueID}" href="#" class="toggle" role="button" data-toggle="departmentMenu_${department.uniqueID}" aria-labelledby="departmentLink_${department.uniqueID}"><span role="presentation"></span></a>
@@ -196,9 +197,9 @@ $(document).ready(function() {
     var passwordForm = document.getElementById("WC_PasswordUpdateForm_div_1");
     var changePasswordPage = "<c:out value='${changePasswordPage}'/>";
     if (changePasswordPage == "true" || changePasswordPage == true || passwordForm != null){
-        $('#drop_down_${department.uniqueID}').attr("refreshurl",getAbsoluteURL()+"DepartmentDropdownViewRWD?storeId=<c:out value='${storeId}'/>&catalogId=<c:out value='${catalogId}'/>&langId=<c:out value='${langId}'/>&changePasswordPage=true");
+        //$('#drop_down_${department.uniqueID}').attr("refreshurl",getAbsoluteURL()+"DepartmentDropdownViewRWD?storeId=<c:out value='${storeId}'/>&catalogId=<c:out value='${catalogId}'/>&langId=<c:out value='${langId}'/>&changePasswordPage=true");
     }else{
-        $('#drop_down_${department.uniqueID}').attr("refreshurl",getAbsoluteURL()+"DepartmentDropdownViewRWD?storeId=<c:out value='${storeId}'/>&catalogId=<c:out value='${catalogId}'/>&langId=<c:out value='${langId}'/>");
+       //$('#drop_down_${department.uniqueID}').attr("refreshurl",getAbsoluteURL()+"DepartmentDropdownViewRWD?storeId=<c:out value='${storeId}'/>&catalogId=<c:out value='${catalogId}'/>&langId=<c:out value='${langId}'/>");
     }
 });
 </script>

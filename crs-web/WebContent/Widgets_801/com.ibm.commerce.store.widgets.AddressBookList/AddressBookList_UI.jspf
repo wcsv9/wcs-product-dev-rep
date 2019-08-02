@@ -15,16 +15,45 @@
 <!-- BEGIN AddressBookList_UI.jspf -->
 
 <span id="drop_down_address_book_ACCE_DESC" class="spanacce" style="display:none;"><wcst:message bundle="${widgetText}" key="ACCE_ADDRESS_SELECT" /></span>
-<div class="addressSelectionEditPage">
+<div class="row addressBookPage">
+<div class="EditPage col6 acol12">
+<fieldset class="addjustButtonLocation">
+<legend><label for="addressList"><wcst:message bundle="${widgetText}" key="ADDRESS_LIST" /></label></legend>
+
+<div class="editButtons addrbook_header row" id="addrbook_header_check">
+        <div class="col9 acol4"><%-- <a href="#" aria-label="<wcst:message bundle="${widgetText}" key="ACCE_ADDRESS_REMOVE" />" role="button" class="button_secondary button_left_padding" id="WC_AjaxAddressBookForm_links_2" onclick="javascript:AddressBookListJS.newDeleteAddress('addressId','<c:out value="${AddressDeleteURL}" />','<c:out value="${addressBookFormURL}"/>'); return false;" waistate:controls="addressId">
+            <div class="left_border"></div>
+            <div class="button_text"><wcst:message bundle="${widgetText}" key="REMOVE" /></div>
+            <div class="right_border"></div>
+        </a> --%> &nbsp;</div>
+        <div class="col3 acol4 addBookAddBtn"><a href="#" aria-label="<wcst:message bundle="${widgetText}" key="ACCE_ADDRESS_NEW" />" role="button" class="button_secondary" id="WC_AjaxAddressBookForm_links_1" onclick="JavaScript:MessageHelper.hideAndClearMessage();AddressBookListJS.addAddress();">
+            <div class="left_border"></div>
+            <div class="button_text"><wcst:message bundle="${widgetText}" key="AB_ADDNEW" /></div>
+            <div class="right_border"></div>
+        </a>
+        </div>
+        <c:if test="${_worklightHybridApp}"><div class="col6 acol4">
+        <script type="text/javascript" src="${jspStoreImgDir}${mobileBasePath}/javascript/DeviceEnhancement.js"></script>
+        <a href="#" aria-label="<wcst:message bundle="${widgetText}" key="CHOOSE_CONTACT" />" role="button" class="button_secondary button_left_padding" id="WC_AjaxAddressBookForm_links_3" onclick="javascript:selectContactFromAddressBook();">
+            <div class="left_border"></div>
+            <div class="button_text"><wcst:message bundle="${widgetText}" key="CHOOSE_CONTACT" /></div>
+            <div class="right_border"></div>
+        </a></div>
+        </c:if>
+    </div>
     <span class="spanacce">
         <label for="addressId"><wcst:message bundle="${widgetText}" key="NICKNAME_INT" /></label>
     </span>
-    
-    <div id="AddressSelection" class="addrbook_header">
-        <c:set var="selectOptions" value='{"appendTo": "#AddressSelection"}' />
+    <%-- <div>
+    		<label for="addressList"><wcst:message bundle="${widgetText}" key="ADDRESS_LIST" /></label>
+    	</div> --%>
+    <div id="" class="addrbook_header row">
+    	
+        <c:set var="selectOptions" value='{"appendTo": "#"}' />
+        <%--
         <select data-widget-type="wc.Select" data-widget-options="${fn:escapeXml(selectOptions)}" class="wcSelect" maxHeight="500" aria-describedby="drop_down_address_book_ACCE_DESC" width="10" class="drop_down_address_book" name="addressId" id="addressId" onChange="JavaScript:MessageHelper.hideAndClearMessage();
         wcRenderContext.updateRenderContext('myAcctAddressDetailContext', {'addressId':$(this).val()});" class="drop_down">
-            <%-- Make sure the selected address is displayed --%>
+            <%-- Make sure the selected address is displayed -%>
             <c:choose>
                 <c:when test="${selectedAddress == person.addressId}">
                     <option selected="selected" value="<c:out value="${person.addressId}"/>">
@@ -38,11 +67,10 @@
                     </option>
                 </c:otherwise>
             </c:choose>
-
             <c:forEach items="${addressBookBean.contact}" var="contact" varStatus="status">
-                <%-- Do not show the special addresses used for quick checkout profile --%>
+                <%-- Do not show the special addresses used for quick checkout profile -%>
                 <c:if test="${ contact.nickName != profileShippingNickname && contact.nickName != profileBillingNickname }" >
-                    <%-- Make sure the seleted address is displayed --%>
+                    <%-- Make sure the seleted address is displayed -%>
                     <c:choose>
                         <c:when test="${selectedAddress == contact.addressId}">
                             <option selected="selected" value="<c:out value="${contact.addressId}"/>">
@@ -59,30 +87,97 @@
                 </c:if>
             </c:forEach>
         </select>
-    </div>
+ --%>
+ 
 
-    <div class="editButtons addrbook_header">
-        <a href="#" aria-label="<wcst:message bundle="${widgetText}" key="ACCE_ADDRESS_REMOVE" />" role="button" class="button_secondary button_left_padding" id="WC_AjaxAddressBookForm_links_2" onclick="javascript:AddressBookListJS.newDeleteAddress('addressId','<c:out value="${AddressDeleteURL}" />','<c:out value="${addressBookFormURL}"/>'); return false;" waistate:controls="addressId">
-            <div class="left_border"></div>
-            <div class="button_text"><wcst:message bundle="${widgetText}" key="REMOVE" /></div>
-            <div class="right_border"></div>
-        </a>
-        <a href="#" aria-label="<wcst:message bundle="${widgetText}" key="ACCE_ADDRESS_NEW" />" role="button" class="button_secondary" id="WC_AjaxAddressBookForm_links_1" onclick="JavaScript:MessageHelper.hideAndClearMessage();AddressBookListJS.addAddress();">
-            <div class="left_border"></div>
-            <div class="button_text"><wcst:message bundle="${widgetText}" key="AB_ADDNEW" /></div>
-            <div class="right_border"></div>
-        </a>
-        <c:if test="${_worklightHybridApp}">
-        <script type="text/javascript" src="${jspStoreImgDir}${mobileBasePath}/javascript/DeviceEnhancement.js"></script>
-        <a href="#" aria-label="<wcst:message bundle="${widgetText}" key="CHOOSE_CONTACT" />" role="button" class="button_secondary button_left_padding" id="WC_AjaxAddressBookForm_links_3" onclick="javascript:selectContactFromAddressBook();">
-            <div class="left_border"></div>
-            <div class="button_text"><wcst:message bundle="${widgetText}" key="CHOOSE_CONTACT" /></div>
-            <div class="right_border"></div>
-        </a>
-        </c:if>
+
+            <%-- Make sure the selected address is displayed --%>
+            
+            <c:choose>
+                <c:when test="${selectedAddress == person.addressId}">
+                    
+                    <div class="switchSliderInPages ">
+						<label class="switch">
+							<input class="checkRadioChecked" disabled type="checkbox" id ="<c:out value="${person.nickName}"/>" name="<c:out value="${person.nickName}"/>" checked>
+						  <span class="slider round"></span>
+						</label>
+					</div>
+                    
+                    <div class="addressBookRadioBtn"><input  data-widget-options="${fn:escapeXml(selectOptions)}"  aria-describedby="drop_down_address_book_ACCE_DESC"  name="addressId" id="addressId" onChange="JavaScript:MessageHelper.hideAndClearMessage(); wcRenderContext.updateRenderContext('myAcctAddressDetailContext', {'addressId':$(this).val()});" type="radio" checked="checked" name="addressId" id="addressId" value="<c:out value="${person.addressId}"/>" checked></div> <div id="<c:out value="${person.addressId}"/>" class="addressBookRadioTxt"><c:out value="${person.nickName}" checked/> </input></div><br/>
+                     <c:set var="selectedContact" value="${person}"/> 
+                   
+                </c:when>
+                <c:otherwise>
+                			 
+		                    
+		                    <div class="switchSliderInPages">
+								<label class="switch">
+								  <input class="checkRadioChecked" disabled type="checkbox" id ="<c:out value="${person.nickName}"/>" name="<c:out value="${person.nickName}"/>"  checked>
+								  <span class="slider round"></span>
+								</label>
+							</div>
+                   			 <div class="addressBookRadioBtn"><input  data-widget-options="${fn:escapeXml(selectOptions)}"  aria-describedby="drop_down_address_book_ACCE_DESC"  name="addressId" id="addressId" onChange="JavaScript:MessageHelper.hideAndClearMessage(); wcRenderContext.updateRenderContext('myAcctAddressDetailContext', {'addressId':$(this).val()});" type="radio" checked="checked" name="addressId" id="addressId" value="<c:out value="${person.addressId}"/>"></div> <div id="<c:out value="${person.addressId}"/>" class="addressBookRadioTxt"><c:out value="${person.nickName}" /></div><br/>
+                   			 </input>
+                   			 
+                </c:otherwise>
+            </c:choose>
+            <c:forEach items="${addressBookBean.contact}" var="contact" varStatus="status">
+                <%-- Do not show the special addresses used for quick checkout profile --%>
+                
+                <c:if test="${ contact.nickName != profileShippingNickname && contact.nickName != profileBillingNickname }" >
+                    <%-- Make sure the seleted address is displayed --%>
+                    <c:choose>
+                        <c:when test="${selectedAddress == contact.addressId}">
+                            <div class="col2 acol4">
+                            	<div class="switchSliderInPages">
+								<label class="switch">
+								<c:choose>
+									<c:when test="${contact.fax2 eq 'true' }">
+										<input class="checkRadioChecked" disabled type="checkbox"  id ="<c:out value="${contact.nickName}"/>" name="<c:out value="${contact.nickName}"/>" checked>
+									</c:when>
+									<c:otherwise>
+										<input class="checkRadioChecked" disabled type="checkbox"  id ="<c:out value="${contact.nickName}"/>" name="<c:out value="${contact.nickName}"/>">
+									</c:otherwise>
+								</c:choose>
+								  
+								  <span class="slider round"></span>
+								</label>
+								</div>
+							</div>
+		                    <div class="col6  txtCenter">
+                    		<%--<div class="addressBookRadioBtn"><input  data-widget-options="${fn:escapeXml(selectOptions)}"  aria-describedby="drop_down_address_book_ACCE_DESC"   name="addressId" id="addressId" onChange="JavaScript:MessageHelper.hideAndClearMessage();MessageHelper.checkAddressColorBox('<c:out value="${contact.nickName}"/>');MessageHelper.checkAddressColorBoxMain('<c:out value="${contact.addressId}"/>','P'); wcRenderContext.updateRenderContext('myAcctAddressDetailContext', {'addressId':$(this).val()});" type="radio" name="addressId" id="addressId" value="<c:out value="${contact.addressId}"/>" checked></div> <div id="<c:out value="${contact.addressId}"/>" class="addressBookRadioTxt"><c:out value="${contact.nickName}"/></input></div><br/> --%>
+                    		<div class="addressBookRadioBtn"><input  data-widget-options="${fn:escapeXml(selectOptions)}"  aria-describedby="drop_down_address_book_ACCE_DESC"   name="addressId" id="addressId" onChange="JavaScript:MessageHelper.hideAndClearMessage(); wcRenderContext.updateRenderContext('myAcctAddressDetailContext', {'addressId':$(this).val()});" type="radio" name="addressId" id="addressId" value="<c:out value="${contact.addressId}"/>" checked></div> <div id="<c:out value="${contact.addressId}"/>" class="addressBookRadioTxt"><c:out value="${contact.nickName}"/></input></div><br/>
+                            <div class="addressBookRadioTxt"><c:set var="selectedContact" value="${contact}"/></div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                       		 <div class="switchSliderInPages">
+								<label class="switch">
+								<c:choose>
+									<c:when test="${contact.fax2 eq 'true' }">
+										<input class="checkRadioChecked" disabled type="checkbox" id ="<c:out value="${contact.nickName}"/>" name="<c:out value="${contact.nickName}"/>" checked >
+									</c:when>
+									<c:otherwise>
+										<input class="checkRadioChecked" disabled type="checkbox" id ="<c:out value="${contact.nickName}"/>" name="<c:out value="${contact.nickName}"/>" >
+									</c:otherwise>
+								</c:choose>
+								  
+								  <span class="slider round"></span>
+								</label>
+							</div>
+                            <%--<div class="addressBookRadioBtn"><input data-widget-options="${fn:escapeXml(selectOptions)}"  aria-describedby="drop_down_address_book_ACCE_DESC"  name="addressId" id="addressId" onChange="JavaScript:MessageHelper.hideAndClearMessage();MessageHelper.checkAddressColorBox('<c:out value="${contact.nickName}"/>');MessageHelper.checkAddressColorBoxMain('<c:out value="${contact.addressId}"/>','P'); wcRenderContext.updateRenderContext('myAcctAddressDetailContext', {'addressId':$(this).val()});" type="radio" name="addressId" id="addressId" value="<c:out value="${contact.addressId}"/>" ></div> <div id="<c:out value="${contact.addressId}"/>" class="addressBookRadioTxt"><c:out value="${contact.nickName}"/></input></div><br/> --%>
+                            <div class="addressBookRadioBtn"><input data-widget-options="${fn:escapeXml(selectOptions)}"  aria-describedby="drop_down_address_book_ACCE_DESC"  name="addressId" id="addressId" onChange="JavaScript:MessageHelper.hideAndClearMessage(); wcRenderContext.updateRenderContext('myAcctAddressDetailContext', {'addressId':$(this).val()});" type="radio" name="addressId" id="addressId" value="<c:out value="${contact.addressId}"/>" ></div> <div id="<c:out value="${contact.addressId}"/>" class="addressBookRadioTxt"><c:out value="${contact.nickName}"/></input></div><br/>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </c:forEach>
+        
     </div>
+	
+    
+    </fieldset>
 </div>
-
+<div class="col6 acol12">
 <%out.flush();%>
     <wcpgl:widgetImport useIBMContextInSeparatedEnv="${isStoreServer}" url="${env_siteWidgetsDir}com.ibm.commerce.store.widgets.AddressBookDetail/AddressBookDetail.jsp">
         <wcpgl:param name="storeId" value="${WCParam.storeId}"/>
@@ -90,5 +185,6 @@
         <wcpgl:param name="langId" value="${langId}"/>
     </wcpgl:widgetImport>
 <%out.flush();%>
-
+</div>
+</div>
 <!-- END AddressBookList_UI.jspf -->

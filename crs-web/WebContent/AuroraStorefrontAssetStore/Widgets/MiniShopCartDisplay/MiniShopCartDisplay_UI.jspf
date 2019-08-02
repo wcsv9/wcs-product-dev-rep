@@ -29,6 +29,7 @@
 	<div id="minishopcart_total" ${cartTotalDisplayAttribute}>
 		${orderQuantity}
 	</div>
+	<span>Cart</span>
 	<img id="minishopcart_lock" ${lockDisplayAttribute} src="${jspStoreImgDir}images/icon_lock_shopping_cart.png" alt=""/>
 	<div class="arrow_button_icon"></div>
 </a>

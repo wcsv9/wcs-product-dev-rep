@@ -145,7 +145,7 @@
 			</div>
 		</c:when>
 		
-		<c:when test="${field == 'phone1'}">
+		<c:when test="${field == 'PHONE1' || field == 'phone1'}">
 			<div class="col4 formField" >
 				<div class="field" >
 					<div class="column_label">

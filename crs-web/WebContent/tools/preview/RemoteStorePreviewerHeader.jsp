@@ -51,7 +51,7 @@
 <c:set var="mbrGroupIncludedNames" value=""/>
 <c:if test="${!empty param.includedMemberGroupIds}">
 	<c:forTokens items="${param.includedMemberGroupIds}" delims="," var="includedMemberGroupId" varStatus="status">
-		<wcf:rest var="segmentData" url="store/{storeId}/segment/{segmentId}" cached="true" disablePreview="true"  scope="request">
+		<wcf:rest var="segmentData" url="store/{storeId}/segment/{segmentId}" disablePreview="true"  scope="request">
 			<wcf:var name="storeId" value="${CommandContext.storeId}" encode="true"/>
 			<wcf:var name="segmentId" value="${includedMemberGroupId}" encode="true"/>
 		</wcf:rest>
@@ -70,7 +70,7 @@
 </c:if>
 <c:set var="searchIndextingStatus" value=""/>
 
-<wcf:rest var="searchIndexting" url="store/{storeId}/searchindex" cached="true" scope="request">
+<wcf:rest var="searchIndexting" url="store/{storeId}/searchindex" scope="request">
 	<wcf:var name="storeId" value="${CommandContext.storeId}" encode="true"/>
 </wcf:rest>
 <c:if test="${!empty searchIndexting}">
@@ -79,7 +79,7 @@
 
 <c:set var="searchThresholdStatus" value=""/>
 
-<wcf:rest var="searchThreshold" url="store/{storeId}/searchindex/threshold" cached="true" scope="request">
+<wcf:rest var="searchThreshold" url="store/{storeId}/searchindex/threshold" scope="request">
 	<wcf:var name="storeId" value="${CommandContext.storeId}" encode="true"/>
 </wcf:rest>
 <c:if test="${!empty searchThreshold}">

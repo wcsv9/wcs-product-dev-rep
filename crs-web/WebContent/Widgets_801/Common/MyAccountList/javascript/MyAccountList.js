@@ -170,6 +170,8 @@ toggleMenu, toggleExpand, eventActionsInitialization, toggleExpandedContent, tog
         
         if (containerWidth < 600) {
             $(".fullView").css("display", "none");
+            $(".fullView.FavouritesPageHeader").css("display", "block");
+            $(".fullView.FavouritesFullViewPage").css("display", "block");
             $(".listTableMobile").css("display", "block");
         } else {
             $(".fullView").each(function (i, node) {

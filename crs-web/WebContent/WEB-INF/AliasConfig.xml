@@ -121,4 +121,10 @@
 		<aliasurl:Instance className="com.ibm.commerce.component.helper.SpecialCharacterHelper" method="escapeDollar" isAlias="true"/>
 		<aliasurl:Instance className="com.ibm.commerce.foundation.internal.server.services.search.util.SpecialCharacterHelper" method="escapeDollar" isAlias="false"/>
 	</aliasurl:aliasConfig>
+	
+	<aliasurl:aliasConfig name="UnRegisterMarketingEvent">
+		<aliasurl:Instance className="com.ibm.commerce.foundation.internal.server.services.search.util.StoreHelper"  method="getUnRegisterMarketingEvent" isAlias="false"/>
+		<aliasurl:Instance className="com.ibm.commerce.store.utils.StoreHelper" method="getUnRegisterMarketingEvent" isAlias="true"/>
+	</aliasurl:aliasConfig>
+	
 </aliasurl:aliasList>

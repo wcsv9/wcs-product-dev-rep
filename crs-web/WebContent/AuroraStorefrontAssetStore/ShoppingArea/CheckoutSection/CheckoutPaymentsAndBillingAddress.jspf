@@ -278,8 +278,11 @@ the final confirmation -->
 				</c:if>
 				
 				<%-- entire amount will be added to the first payment option in quick checkout profile --%>
+				<%-- 
 				<fmt:parseNumber var="piAmount" value="${order.grandTotal}"/>
-				<c:set var="piAmount" value="${piAmount}"/>
+				<c:set var="piAmount" value="${piAmount}"/> 
+				--%>
+				<c:set var="piAmount" value="${order.grandTotal}"/>
 			</c:if>
 		</c:otherwise>
 	</c:choose>

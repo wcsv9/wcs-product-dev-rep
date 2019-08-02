@@ -162,7 +162,7 @@ MyAccountDisplay={
         }
         wcRenderContext.updateRenderContext(contextId,{'beginIndex':currentBeginIndex,'pageSize':pageSize,'isQuote':isQuote,'lastExternalOrderIds':lastRecordInfo,'recordSetTotal':recordSetTotal});
     },
-
+    
     escapeXML: function(value) {
         //don't use jazz.util.html.escape(value). This function doesn't encode character "
         if (!value) {
@@ -477,7 +477,9 @@ MyAccountDisplay={
         else {
             form.receiveEmail.value = false;
         }
-
+        if(form.marketingTrackingConsent){
+            setPrivacyCookies(null, form.marketingTrackingConsent.value);
+        }
         if(form.sendMeSMSNotification && form.sendMeSMSNotification.checked){
             form.receiveSMSNotification.value = true;
         }
@@ -828,5 +830,29 @@ MyAccountDisplay={
         this.setOff(this.currentOrderTabId);
         this.setOn(tabId);
         this.currentOrderTabId = tabId;
+    },
+    
+    validateOauthToken:function(token, isToken, provider, url, parameters){
+    	var params = {};
+    	if(isToken == '1'){
+    		params = {
+    				accessToken: token,
+        			URL: url,
+        			authorizationProvider: provider
+        	};
+    	}else{
+    		params = {
+        			code: token,
+        			URL: url,
+        			authorizationProvider: provider
+        	};
+    	}
+
+        $.each(parameters,function(name,value) {
+            params[name]=value;
+        });
+    	
+    	cursor_wait();
+        wcService.invoke("AjaxValidateOauthToken", params);
     }
 }

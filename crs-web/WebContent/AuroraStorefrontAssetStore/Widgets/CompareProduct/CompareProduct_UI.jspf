@@ -18,9 +18,21 @@
 <c:set var="replaceStr01" value="\\'"/>
 <c:set var="replaceStr02" value="'"/>
 <c:set var="returnUrl" value="${param.returnUrl}" />
+<c:set var="serverName"  value="<%= request.getServerName() %>"/>
+
+<c:if test="${!empty returnUrl}">
+	<c:choose>
+		<c:when test="${fn:contains(returnUrl, serverName)}">
+			<c:set var="returnUrlClean" value="${returnUrl}"/>
+		</c:when>
+		<c:otherwise>
+			<c:set var="returnUrlClean" value="${env_TopCategoriesDisplayURL}"/>
+		</c:otherwise>
+	</c:choose>
+</c:if>
 
 <script>
-	CompareProductJS.setCommonParameters('<c:out value="${langId}"/>','<c:out value="${storeId}"/>','<c:out value="${catalogId}"/>','<c:out value="${param.compareReturnName}"/>','<c:out value="${param.returnUrl}"/>');
+	CompareProductJS.setCommonParameters('<c:out value="${langId}"/>','<c:out value="${storeId}"/>','<c:out value="${catalogId}"/>','<c:out value="${param.compareReturnName}"/>','<c:out value="${returnUrlClean}"/>');
 </script>
 <div class="widget_product_compare">
 	<div class="compare_heading">
@@ -29,7 +41,7 @@
 
 	<c:if test="${!empty param.compareReturnName}">
 	<div class="compare_back">
-		<a id="compareBackLink" href="javascript:getReturnUrl('<c:out value="${returnUrl}"/>');">
+		<a id="compareBackLink" href="javascript:getReturnUrl('<c:out value="${returnUrlClean}"/>');">
 			<fmt:message bundle="${storeText}" key="CPG_BACK_TO_{0}" >
 				<fmt:param><c:out value="${param.compareReturnName}"/></fmt:param>
 			</fmt:message>

@@ -188,6 +188,9 @@ LogonForm ={
                 return false;
             }
         }
+        if(form.marketingTrackingConsent){
+            setPrivacyCookies(null, form.marketingTrackingConsent.value);
+        }
         return true;
     },
 

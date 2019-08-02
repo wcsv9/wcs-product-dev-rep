@@ -112,6 +112,7 @@
 					"purchaseorder_id" : "$purchaseorder_id",
 					"notify_EMailSender_recipient" : "$notify_EMailSender_recipient",
 					"SMS" : "$SMS",
+					"x_field3" : "$field3",
 					"inventoryValidation" : "$inventoryValidation",
 					"orderExtendAttribute": [
 					{
@@ -263,6 +264,7 @@
                     "shipAsComplete" : "$shipAsComplete",
                     "x_listId" : "$listId",
                     "x_continue" : "$continue",
+                    "x_isCheckout" : "$isCheckout",
                     "x_orderField1" : "$orderField1",
                     "x_orderField2" : "$orderField2",
                     "x_orderField3" : "$orderField3"
@@ -271,12 +273,49 @@
 		</method>
 
 		<method name="addConfigurationToCart" httpMethod="POST" path="@self/add_configuration_to_cart">
+		<template>
+				<![CDATA[{
+				"ConfigXML":"$configXML",
+				"catEntryId":"$catEntryId",
+				"quantity":"$quantity",
+				"comment":"$comment",
+				"addressId":"$addressId",
+				"check":"$check",
+				"UOM":"$UOM",
+				"inventoryValidation":"$inventoryValidation",
+				"fulfillmentCenterId":"$fulfillmentCenterId",
+				"shipModeId":"$shipModeId",
+				"contractId":"$contractId",
+				"physicalStoreId":"$physicalStoreId",
+				"allocate":"$allocate",
+				"doPrice":"$doPrice",
+				"doInventory":"$doInventory",
+				"orderItemId":"$orderItemId",
+				"calculationUsage":"$calculationUsage",
+				"reverse":"$reverse",
+				"remerge":"$remerge",
+				"calculateOrder":"$calculateOrder",
+				"merge":"$merge",
+				"backorder":"$backorder",
+				"partNumber":"$partNumber"
+				}
+				]]>
+
+			</template>
 		</method>
 
 		<method name="addPreConfigurationToCart" httpMethod="POST" path="@self/add_preconfiguration_to_cart">
 		</method>
 
 		<method name="updateConfigurationInCart" httpMethod="PUT" path="@self/update_configuration_in_cart">
+		<template>
+				<![CDATA[{
+				"ConfigXML":"$configXML",
+				"orderItemId":"$orderItemId"
+				}
+				]]>
+
+			</template>
 		</method>
 
 		<method name="addPaymentInstruction" httpMethod="POST" path="@self/payment_instruction">
@@ -290,6 +329,7 @@
 					"paymentTermConditionId" : "$paymentTCId",
 					"cc_brand" : "$cc_brand",
 					"cc_cvc" : "$cc_cvc",
+					"cc_nameoncard" : "$cc_nameoncard",
 					"account" : "$account",
 					"payment_token" : "$payment_token",
 					"expire_month" : "$expire_month",
@@ -301,6 +341,9 @@
 					"valueFromPaymentTC" : "$valueFromPaymentTC",
 					"requesttype" : "$requesttype",
 					"authToken" : "$authToken",
+					"domainNameForON" : "$domainNameForON",
+					"cCentreId" : "$cCentreId",
+					"POId" : "$POId",
 					"x_unbound" : "$unbound"
 				}]]>
 			</template>
@@ -599,6 +642,19 @@
                 }]]>
             </template>
 		</method>	
+	</resource>
+	<resource path="{serverHost}/{contextPath}/store/{storeId}/invoices" name="customorderremove">
+		<serverParam name="serverHost">$WCParam.serverHost</serverParam>
+	 	<serverParam name="contextPath">$WCParam.contextPath</serverParam>
+		<serverParam name="storeId">$WCParam.storeId</serverParam>
+		<method name="removeorder" httpMethod="POST" path="removeorder">
+			<template>
+				<![CDATA[{
+	    			 "storeId" : "$storeId",
+	    			 "orderId" : "$orderId"
+	     		}]]>
+			</template>	
+		</method>		
 	</resource>
 	
 </_config:rest-action-config>

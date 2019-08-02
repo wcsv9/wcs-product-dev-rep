@@ -11,10 +11,13 @@
   IBM Corp.
  =================================================================
 --%>
-
+<div class="col12 row">
+<div class="col5">
 <c:if test="${!empty param.orgListHeading}">
 	<p id="currentOrganization" class="subTitle">${param.orgListHeading}</p>
 </c:if>
+</div>
+<div class="col7">
 <span class="spanacce" id="ACCE_ORGANIZATION"><wcst:message bundle="${widgetText}" key="ORGANIZATION"/></span>
 <div id="organizationSelection" class="organizationSelectionEditPage">
 	<div class="dijitContentPane OrganizationListWidget">
@@ -33,7 +36,8 @@
 	</c:if>
 
 </div>
-
+</div>
+</div>
 <script>
 	$(document).ready(function() {
 		<%--

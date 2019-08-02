@@ -34,10 +34,10 @@
 <div id="assignedRoleNameMap" class="nodisplay" aria-hidden="true"><wcf:json object="${assignedRoleNameMap}"/></div>
 <div id="userRoles" class="nodisplay" aria-hidden="true"><wcf:json object="${userRoles }"/></div>
 
-<div class="pageSection ${displayAttribute}" id="WC_${widgetName}_pageSection" role="region" aria-labelledBy="WC_${widgetName}_title" ${ariaExpanded}>
+<div class="orgnizationSection pageSection ${displayAttribute}" id="WC_${widgetName}_pageSection" role="region" aria-labelledBy="WC_${widgetName}_title" ${ariaExpanded}>
 	<span class="spanacce" aria-hidden="true" id="WC_${widgetName}_pageSection_collapsible"><wcst:message key="ACCE_${widgetNameCaps}_COLLAPSIBLE_BUTTON" bundle="${widgetText}" /></span>
 	<c:if test="${fromPage == 'createUser' }">
-		<a href="#" class="toggle" role="button" aria-describedBy='WC_${widgetName}_pageSection_collapsible' 
+		<a href="#" class="toggle blutPlusMinus" role="button" aria-describedBy='WC_${widgetName}_pageSection_collapsible' 
 			aria-labelledBy="WC_${widgetName}_title" aria-controls="WC_${widgetName}_pageSection"><span></span></a>
 	</c:if>
 	<div class="pageSectionTitle" >
@@ -94,7 +94,7 @@
  			</div>
 		</div>
 		<c:if test="${fromPage == 'editUser' }" >
-			<div class="button_footer_line no_float" id="WC_${widgetName}_Buttons">
+			<div class="button_footer_line no_float organizationFooter" id="WC_${widgetName}_Buttons">
 				<c:set var="saveChangeJS" value="UserRoleManagementJS.saveChange();return false;"/>
 				<a href="#" role="button" class="button_primary" id="WC_${widgetName}_links_1" tabindex="0" onclick="${saveChangeJS}">
 					<div class="left_border"></div>

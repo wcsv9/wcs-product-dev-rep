@@ -125,7 +125,7 @@
 							</c:when>
 						</c:choose>
 					</c:forEach>
-					<wcf:url var="urlValue" patternName="${SEOPatternName}">
+					<wcf:url var="urlValue" patternName="${SEOPatternName}" value="Category3">
 						<wcf:param name="langId" value="${langId}" />
 						<wcf:param name="urlLangId" value="${urlLangId}" />
 						<wcf:param name="storeId" value="${storeId}" />

@@ -25,6 +25,10 @@
         <wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
     </wcf:rest>
 </c:if>
+<wcf:rest var="getPerson" url="store/{storeId}/userRegister/getPersonContact/{userId}">
+        <wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
+        <wcf:var name="userId" value="${person.userId}" encode="true"/>
+</wcf:rest>
 
 <c:set var="addressBookBean" value="${person}" scope="request"/>
 <c:choose>
@@ -41,11 +45,13 @@
 <c:set var="foundSelectedAddress" value="false"/>
 <c:set var="defaultAddress" value="${person.addressId}"/>
 <c:set var="final_accountaddr" value="${person}"/>
+
 <c:choose>
     <c:when test="${selectedAddress == person.addressId}">
         <c:set var="foundSelectedAddress" value="true"/>
     </c:when>
 </c:choose>
+
 <c:if test="${!foundSelectedAddress}" >
     <c:forEach items="${addressBookBean.contact}" var="contact" varStatus="status">
         <%-- Do not show the special addresses used for quick checkout profile --%>

@@ -732,10 +732,10 @@ need to first assign a valid address id to these order items before proceeding w
 												<c:choose>
 													<c:when test="${scheduledOrderEnabled == 'true'}">
 														<%out.flush();%>
-														<c:import url="/${sdb.jspStoreDir}/ShoppingArea/CheckoutSection/ScheduleOrderDisplayExt.jsp">
+														<%-- <c:import url="/${sdb.jspStoreDir}/ShoppingArea/CheckoutSection/ScheduleOrderDisplayExt.jsp">
 															<c:param value="true" name="isShippingBillingPage"/>
 															<c:param value="${currentOrderId}" name="orderId"/>
-														</c:import>
+														</c:import> --%>
 														<%out.flush();%>
 													</c:when>
 													<c:when test="${recurringOrderEnabled == 'true' && currentOrderIsRecurringOrder == 'true'}">
@@ -760,7 +760,7 @@ need to first assign a valid address id to these order items before proceeding w
 												<div class="left_corner" id="WC_ShipmentDisplay_div_27"></div>
 												<div class="left_drop_down_shipment" id="WC_ShipmentDisplay_div_28">
 													<span class="content_text"><label for="numberOfPaymentMethods"><fmt:message bundle="${storeText}" key="BILL_MULTIPLE_BILLING_MESSAGE"/></label>
-														<select class="drop_down_billing" name="numberOfPaymentMethods" id="numberOfPaymentMethods" onchange="JavaScript:CheckoutPayments.setNumberOfPaymentMethods(<c:out value="${numberOfPaymentMethods}"/>,this,'paymentSection');CheckoutPayments.reinitializePaymentObjects(this);">
+														<select class="drop_down_billing" name="numberOfPaymentMethods" id="numberOfPaymentMethods" onchange="JavaScript:CheckoutPayments.setNumberOfPaymentMethods('1',this,'paymentSection');CheckoutPayments.reinitializePaymentObjects(this);">
 															<c:set var="selectStr" value="" />
 															<c:forEach var="i" begin="1" end="${numberOfPaymentMethods}">
 																<c:if test="${i == totalExistingPaymentMethods}">

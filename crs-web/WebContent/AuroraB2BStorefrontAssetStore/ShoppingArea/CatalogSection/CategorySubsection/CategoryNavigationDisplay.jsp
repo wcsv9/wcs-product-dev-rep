@@ -152,7 +152,9 @@ xmlns:waistate="http://www.w3.org/2005/07/aaa" lang="${shortLocale}" xml:lang="$
 		<script type="text/javascript">
 			$(document).ready(function() { 
 				shoppingActionsServicesDeclarationJS.setCommonParameters('<c:out value="${langId}" />','<c:out value="${storeId}" />','<c:out value="${catalogId}" />');
-				shoppingActionsServicesDeclarationJS.registerMarketingEvent({categoryId:'<c:out value="${WCParam.categoryId}"/>',DM_ReqCmd:'CategoryDisplay',storeId:'<c:out value="${storeId}"/>'});
+				<c:if test="${CommandContext.user.userId ne '-1002' && unregisterMktEvent ne '1'}">
+					shoppingActionsServicesDeclarationJS.registerMarketingEvent({categoryId:'<c:out value="${WCParam.categoryId}"/>',DM_ReqCmd:'CategoryDisplay',storeId:'<c:out value="${storeId}"/>'});
+				</c:if>
 				});
 			<c:if test="${!empty requestScope.deleteCartCookie && requestScope.deleteCartCookie[0]}">					
 				document.cookie = "WC_DeleteCartCookie_${requestScope.storeId}=true;path=/";				

@@ -13,10 +13,32 @@
 --%>
 
 <%-- General Organization Details --%>		
-<div class="pageSection"  role="document" aria-labelledBy="organizationInfo" tabindex="0">
+<div class="col12 row parentOrgDivs">
+		<div class="col5">Enter Name:</span></div>
+		<div class="col7"><input type="text" class="inputField" value="<c:out value='${orgEntityDetails.parent.displayName}'/>"/></div>
+</div>
+<div class="col12 row parentOrgDivs">
+		<div class="col5">Enter ABN:</div>
+		<div class="col7"><input class="inputField" type="text" /></span></div>
+</div>
+<div class="col12 row parentOrgDivs">
+		<div class="col5">Enter ID:</div>
+		<div class="col7"><input class="inputField" type="text" /></div>
+</div>
+<div class="col12 row parentOrgDivs">
+		<div class="col5">&nbsp;</div>
+		<div class="col7">
+			<a class="button_primary right" href="#" >
+						<div class="left_border"></div>
+						<div class="button_text"><span style="font-weight: normal;">Link Organization</span>	</div>								
+						<div class="right_border"></div>
+				</a>
+		</div>
+</div>
+<%-- <div class="pageSection"  role="document" aria-labelledBy="organizationInfo" tabindex="0">
 	<div class="readField">						
 		<div class="field">
 			<span class="readLabel"><wcst:message bundle="${widgetText}" key="ORG_PARENT_ORG_NAME"/></span> <span class="readValue"><c:out value='${orgEntityDetails.parent.displayName}'/></span>
 		</div>
 	</div>
-</div>
+</div> --%>

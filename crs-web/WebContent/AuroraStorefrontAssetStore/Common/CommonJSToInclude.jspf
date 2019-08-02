@@ -68,13 +68,16 @@
 		"pageView":'<c:out value = "${WCParam.pageView}"/>',
 		"orderBy":'<c:out value = "${WCParam.orderBy}"/>',
 		"orderByContent":'<c:out value = "${WCParam.orderByContent}"/>',
-		"searchTerm":'<wcf:out value = "${WCParam.searchTerm}" escapeFormat="js"/>',
+		"searchTerm":'<c:out value = "${WCParam.searchTerm}"/>',
 		"homePageURL" : '${env_TopCategoriesDisplayURL}',
 		"commandContextCurrency": "${CommandContext.currency}",
 		"urlPrefixForHTTPS":"${urlPrefixForHTTPS}",
 		"urlPrefixForHTTP":"${urlPrefixForHTTP}",
 		"wcc_integration_origin":"${wcc_integration_origin}"
 	};
+	<c:if test="${WCParam.omitHeader == '1'}">
+		WCParamJS['omitHeader'] = 1;
+	</c:if>
 	var absoluteURL = "<c:out value="${env_absoluteUrl}"/>";
 	var absoluteBaseURL = "<c:out value="${env_absoluteBaseUrl}"/>";
 	var imageDirectoryPath = "<c:out value="${jspStoreImgDir}"/>";
@@ -194,7 +197,18 @@
 	}
 </script>
 
+<flow:ifEnabled feature="sterlingConfigurator">  
+<!-- OmniConfigurator app.js and lib.js should include before store.js because there are conflicts on JQuery library.  -->
+    <%@ include file="/Widgets_801/com.ibm.commerce.store.widgets.OmniConfigurator/OmniConfigurator_Data.jspf" %>
+	<link rel="stylesheet" type="text/css" href="/wcsstore/Widgets_801/com.ibm.commerce.store.widgets.OmniConfigurator/ConfiguratorUI/styles/lib.css"/>
+	<link rel="stylesheet" type="text/css" href="/wcsstore/Widgets_801/com.ibm.commerce.store.widgets.OmniConfigurator/ConfiguratorUI/styles/app.css"/>
+	<script type="text/javascript" src="/wcsstore/Widgets_801/com.ibm.commerce.store.widgets.OmniConfigurator/ConfiguratorUI/js/lib.js"></script>
+	<script type="text/javascript" src="/wcsstore/Widgets_801/com.ibm.commerce.store.widgets.OmniConfigurator/ConfiguratorUI/js/app.js"/></script>
+</flow:ifEnabled>
+
 <script type="text/javascript" src="${jspStoreImgDir}javascript/store.js"></script>
+<%-- We need to load English locale cldr data for globalization.Exchange currency in payment page --%>
+<script type="text/javascript" src="${jspStoreImgDir}nls/en_US/nls.js"></script>
 <script type="text/javascript" src="${jspStoreImgDir}nls/${locale}/nls.js" onerror='localeExceptionHandler()'></script>
 
 <%-- The page will be reloaded with the selected catalogId --%>
@@ -207,7 +221,7 @@
 <script type="text/javascript">
 	if(typeof Globalize !== 'undefined') {
 		var GlobalizeLoaded = false;
-
+		Globalize.load( cldrData_en_US );
 		if(!useShortLocale) {
 			Globalize.load( cldrData_<c:out value="${locale}"/> );
 			Globalize.loadMessages( nlsMessages_<c:out value="${locale}"/> );

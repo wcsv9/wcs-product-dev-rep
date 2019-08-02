@@ -88,26 +88,40 @@
 
 <c:forTokens items="${addressFieldOrder}" delims="," var="field">
 	<c:choose>
-		<c:when test="${(field == 'first_name' || field == 'FIRST_NAME') && (empty B2BShowNameField || B2BShowNameField eq 'true')}">
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_firstname">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_17" class="column_label">
+		<c:when test="${(field == 'first_name' || field == 'FIRST_NAME') }">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_firstname">
+				<div class="col4" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_17" class="column_label">
 					<span class="spanacce">
 						<label for="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}firstName_1'/>">
 							<wcst:message bundle="${widgetText}" key="FIRST_NAME"/>
 						</label>
 					</span>
-					<wcst:message bundle="${widgetText}" key="FIRST_NAME"/>
-					<c:if test="${field == 'FIRST_NAME'}">
+					<c:choose>
+						<c:when test="${pageName ne 'AccountForm' }">
+							<wcst:message bundle="${widgetText}" key="FIRST_NAME"/>
+						</c:when>
+						<c:otherwise>
+							<wcst:message bundle="${widgetText}" key="FIRST_NAME_Addr"/>
+						</c:otherwise>
+					</c:choose>
+					
+					<!-- ali change start-->
+					<!-- <c:if test="${field == 'FIRST_NAME'}">
 						<span class="required-field"  id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_18"> *</span>
 					</c:if>
+					 -->
+					 <span class="required-field"  id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_18"> *</span>
+					 <!-- ali change end-->
 				</div>
-				<input class="inputField" type="text" maxlength="40" size="35" id="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}firstName_1'/>" name="<c:out value="${paramPrefix}firstName"/>" value="<c:out value='${firstName}'/>"/>
+				<div class="col8">
+					<input class="inputField" type="text" maxlength="40" size="35" id="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}firstName_1'/>" name="<c:out value="${paramPrefix}firstName"/>" value="<c:out value='${firstName}'/>"/>
+				</div>
 			</div>
 		</c:when>
 		
-		<c:when test="${field == 'middle_name' && (empty B2BShowNameField || B2BShowNameField eq 'true')}">
-		    <div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_middleName">
-		         <div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_19" class="column_label">
+		<c:when test="${field == 'middle_name'}">
+		    <div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_middleName">
+		         <div class="col4" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_19" class="column_label">
 					  <span class="spanacce">
 						  <label for="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}middleName_1'/>">
 						  <wcst:message bundle="${widgetText}" key="MIDDLE_NAME"/>
@@ -115,13 +129,15 @@
 					  </span>
 		              <wcst:message bundle="${widgetText}" key="MIDDLE_NAME"/>
 		         </div>
-		         <input class="inputField" type="text" maxlength="40" size="35" id="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}middleName_1'/>" name="<c:out value="${paramPrefix}middleName"/>" value="<c:out value='${middleName}'/>" />
+		         <div class="col8">
+		         	<input class="inputField" type="text" maxlength="40" size="35" id="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}middleName_1'/>" name="<c:out value="${paramPrefix}middleName"/>" value="<c:out value='${middleName}'/>" />
+		         </div>
 		    </div>
 	    </c:when>
 		
-		<c:when test="${field == 'LAST_NAME' && (empty B2BShowNameField || B2BShowNameField eq 'true')}">
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_lastname">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_20" class="column_label">
+		<c:when test="${field == 'LAST_NAME' && (empty B2BShowNameField || B2BShowNameField eq 'true') }">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_lastname">
+				<div class="col4" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_20" class="column_label">
 					<span class="spanacce">
 						<label for="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}lastName_1'/>">
 							<wcst:message bundle="${widgetText}" key="LAST_NAME"/>
@@ -130,25 +146,192 @@
 					<wcst:message bundle="${widgetText}" key="LAST_NAME"/>
 					<span class="required-field" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_21"> *</span> 
 				</div>
-				<input class="inputField" type="text" maxlength="40" size="35" aria-required="true" id="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}lastName_1'/>" name="<c:out value="${paramPrefix}lastName"/>" value="<c:out value='${lastName}'/>"/>
+				<div class="col8">
+					<input class="inputField" type="text" maxlength="40" size="35" aria-required="true" id="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}lastName_1'/>" name="<c:out value="${paramPrefix}lastName"/>" value="<c:out value='${lastName}'/>"/>
+				</div>
+			</div>
+		</c:when>
+		<c:when test="${field == 'LAST_NAME' && (empty B2BShowNameField || B2BShowNameField eq 'true') && pageName eq 'AccountForm1'}">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_lastname" style="display:none;">
+				<div class="col4" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_20" class="column_label">
+					<span class="spanacce">
+						<label for="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}lastName_1'/>">
+							<wcst:message bundle="${widgetText}" key="LAST_NAME"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="LAST_NAME"/>
+					<span class="required-field" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_21"> *</span> 
+				</div>
+				<div class="col8">
+					<input class="inputField" type="text" maxlength="40" size="35" aria-required="true" id="<c:out value='WC_${pageName}_NameEntryForm_FormInput_${paramPrefix}lastName_1'/>" name="<c:out value="${paramPrefix}lastName"/>" value="<c:out value='${lastName}'/>"/>
+				</div>
 			</div>
 		</c:when>
 		
-		<c:when test="${field == 'use_org_address' && B2BShowUseOrgAddress eq 'true'}">
-			<br clear="all" />
-			<div id="WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1_1" class="checkboxField">
-				<img id="WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1" class="checkedCheckBox" role="checkbox" alt=""
+		<c:when test="${(field == 'EMAIL1' || field == 'email1')}">
+			<div class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_19">
+				<div class="column_label col4" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_20">
+					<span class="spanacce">
+						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}email1_In_Register_1">
+							<wcst:message bundle="${widgetText}" key="EMAIL"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="EMAIL"/>
+					<c:if test="${field == 'EMAIL1'}">
+						<span class="required-field" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_21"> *</span>
+					</c:if>
+				</div>
+				<div class="col8">
+					<input class="inputField" type="text" size="35" maxlength="50" aria-required="true" name="${paramPrefix}email1" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}email1_In_Register_1" value="<c:out value='${email1}'/>" />
+				</div>
+			</div>
+		</c:when>
+		<c:when test="${(field == 'EMAIL1' || field == 'email1') && pageName eq 'AccountForm1'}">
+			<div style="display:none;" class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_19">
+				<div class="column_label col4" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_20">
+					<span class="spanacce">
+						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}email1_In_Register_1">
+							<wcst:message bundle="${widgetText}" key="EMAIL"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="EMAIL"/>
+					<c:if test="${field == 'EMAIL1'}">
+						<span class="required-field" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_21"> *</span>
+					</c:if>
+				</div>
+				<div class="col8">
+					<input class="inputField" type="text" size="35" maxlength="50" aria-required="true" name="${paramPrefix}email1" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}email1_In_Register_1" value="<c:out value='${email1}'/>" />
+				</div>
+			</div>
+		</c:when>
+		
+		<c:when test="${field == 'phone1' }">
+			<div class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_22">
+				<div class="column_label col4" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_23">
+					<span class="spanacce">
+						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNum_In_Register_1">
+							<wcst:message bundle="${widgetText}" key="PHONE_NUMBER2"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="PHONE_NUMBER2"/>
+					<c:if test="${field == 'phone1'}">
+						<span class="required-field" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_21"> *</span>
+					</c:if>
+				</div>
+				<div class="col8">
+					<input class="inputField" type="tel" size="35" maxlength="32" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNum_In_Register_1" name="${paramPrefix}phone1" value="<c:out value='${phone1}'/>"/>
+				</div>
+			</div>
+		</c:when>
+		<c:when test="${field == 'phone1' && pageName eq 'AccountForm1'}">
+			<div style="display:none;" class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_22">
+				<div class="column_label col4" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_23">
+					<span class="spanacce">
+						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNum_In_Register_1">
+							<wcst:message bundle="${widgetText}" key="PHONE_NUMBER2"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="PHONE_NUMBER2"/>
+					<c:if test="${field == 'phone1'}">
+						<span class="required-field" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_21"> *</span>
+					</c:if>
+				</div>
+				<div class="col8">
+					<input class="inputField" type="tel" size="35" maxlength="32" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNum_In_Register_1" name="${paramPrefix}phone1" value="<c:out value='${phone1}'/>"/>
+				</div>
+			</div>
+		</c:when>
+		
+		
+		
+		<c:when test="${field == 'phoneSec'}">
+		<!-- ali change start -->
+			<div class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_22">
+				<div class="column_label col4" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_23">
+					<span class="spanacce">
+						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNumSec_In_Register_1">
+							<wcst:message bundle="${widgetText}" key="PHONE_NUMBER_SECONDARY"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="PHONE_NUMBER_SECONDARY"/>
+				</div>
+				<div class="col8">
+					<input class="inputField" type="tel" size="35" maxlength="32" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNumSec_In_Register_1" name="${paramPrefix}phone2" value="<c:out value='${phone2}'/>"/>
+				</div>
+			</div>
+		</c:when>
+		<c:when test="${field == 'role' }">
+			<div class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_22">
+				<div class="column_label col4" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_23">
+					<span class="spanacce">
+						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNumSec_In_Register_1">
+							<wcst:message bundle="${widgetText}" key="ROLE"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="ROLE"/>
+				</div>
+				<div class="col8">
+					<input class="inputField" type="text" size="35" maxlength="32" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}role_In_Register_1" name="${paramPrefix}userField3" value="<c:out value='${role}'/>"/>
+				</div>
+			</div>
+		</c:when>
+		<c:when test="${field == 'title' }">	
+			<div class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_22">
+				<div class="column_label col4" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_23">
+					<span class="spanacce">
+						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNumSec_In_Register_1">
+							<wcst:message bundle="${widgetText}" key="TITLE"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="TITLE"/>
+				</div>
+				<div class="col8">
+				<input class="inputField" type="text" size="35" maxlength="32" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}title_In_Register_1" name="${paramPrefix}userField2" value="<c:out value='${title}'/>"/>
+				</div>
+			</div>
+			<!-- ali change start -->
+		</c:when>	
+		<c:when test="${field == 'EmailOption'}">
+		<%--	<flow:ifEnabled  feature="EmailOption"> --%>
+				<div class="column row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_24">
+					<div class="input_label col12 row" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_25">
+						<div class="checkboxField marketingSubScription row col12">
+							<div class="col4"><label class="checkboxLabel" for="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Label"><wcst:message bundle="${widgetText}" key="REGNEW_SENDMEEMAIL"/></label>
+							</div>
+							<div class="col8 markInputBox"><input class="nodisplay" type="checkbox" name="sendMeEmail" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1" />
+							<img id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img" class="checkedCheckBox" role="checkbox" alt="" 
+									aria-checked="false" aria-label="<wcst:message bundle="${widgetText}" key="REGNEW_SENDMEEMAIL"/>" tabindex="0" 
+									src="${jspStoreImgDir}images/checkbox.png" onclick="javascript:AddressHelper.changeCheckboxState('${jspStoreImgDir}','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img','on','off')"
+									onkeypress="javascript:if(event.keyCode == 0 || event.keyCode == 13 || event.keyCode == 32){event.preventDefault();AddressHelper.changeCheckboxState('${jspStoreImgDir}','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img','on','off');}" />
+								</div>
+						</div>
+						<c:if test="${sendMeEmail eq 'on' || bnEmailUserReceive.userReceive}">
+							<script type="text/javascript">
+								$( document ).ready(function() { 
+									AddressHelper.changeCheckboxState('${jspStoreImgDir}','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img','on','off');
+								});
+							</script>
+						</c:if>
+					</div>
+				</div> 
+		<%--</flow:ifEnabled> --%>
+		</c:when>	
+		
+		<c:when test="${field == 'use_org_address'}"> 
+			<div class="row col12 checkBoxOrgDetails" id="WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1_1" class="checkboxField">
+				<div class="customerAddress"><img id="WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1" class="checkedCheckBox" role="checkbox" alt=""
 						aria-checked="false" aria-label="<wcst:message bundle="${widgetText}" key="OR_USE_ORG_ADD"/>" tabindex="0" 
 						src="${jspStoreImgDir}images/checkbox.png" onclick="javascript:B2BLogonForm.fillAdminAddress(document.Register, '${jspStoreImgDir}', 'WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1');"
 						onkeypress="javascript:if(event.keyCode == 0 || event.keyCode == 13 || event.keyCode == 32){event.preventDefault();B2BLogonForm.fillAdminAddress(document.Register, '${jspStoreImgDir}', 'WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1');}" />
-				<span class="checkboxLabel" id="WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1_Label"><wcst:message bundle="${widgetText}" key="OR_USE_ORG_ADD"/></span>
-			</div>
-			<br clear="all" />
+					</div>
+				<div class="note"><span class="checkboxLabel" id="WC_OrganizationRegistrationAddForm<c:out value='_${paramPrefix}'/>Checkbox1_Label">Use the same address as Customer Account Administrator</span></div>
+
+			</div><br/>
 		</c:when>
 		
 		<c:when test="${field == 'ADDRESS'}">
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_1">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2" class="column_label">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_1">
+				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2" class="column_label col4">
 					<span class="spanacce">
 						<label for="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}address1_1'/>">
 							<wcst:message bundle="${widgetText}" key="STREET_ADDRESS"/>
@@ -157,10 +340,12 @@
 					<wcst:message bundle="${widgetText}" key="STREET_ADDRESS"/>
 					<span class="required-field" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_3"> *</span>
 				</div>
+				<div class="col8">
 				<input class="inputField" type="text" maxlength="99" size="35" aria-required="true" id="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}address1_1'/>" name="<c:out value="${paramPrefix}address1"/>" value="<c:out value='${street}'/>"/>
+				</div>
 			</div>
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2_1">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2_2" class="column_label">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2_1">
+				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2_2" class="column_label col4">
 					<span class="spanacce">
 						<label for="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}address2_1'/>">
 							<wcst:message bundle="${widgetText}" key="STREET_ADDRESS_LINE_2"/>
@@ -168,13 +353,28 @@
 					</span>
 					<wcst:message bundle="${widgetText}" key="STREET_ADDRESS_LINE_2"/>
 				</div>
+				<div class="col8">
 				<input class="inputField" type="text" maxlength="49" size="35" id="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}address2_1'/>" name="<c:out value="${paramPrefix}address2"/>" value="<c:out value='${street2}'/>"/>
+				</div>
+			</div><br/>
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2_1">
+				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_2_2" class="column_label col4">
+					<span class="spanacce">
+						<label for="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}address2_1'/>">
+							<wcst:message bundle="${widgetText}" key="STREET_ADDRESS_LINE_3"/>
+						</label>
+					</span>
+					<wcst:message bundle="${widgetText}" key="STREET_ADDRESS_LINE_3"/>
+				</div>
+				<div class="col8">
+				<input class="inputField" type="text" maxlength="49" size="35" id="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}address3_1'/>" name="<c:out value="${paramPrefix}address3"/>" value="<c:out value='${street3}'/>"/>
+				</div>
 			</div>
 		</c:when>
 		
 		<c:when test="${field == 'CITY'}">
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_4">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_5" class="column_label">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_4">
+				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_5" class="column_label col4">
 					<span class="spanacce">
 						<label for="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}city_1'/>">
 							<wcst:message bundle="${widgetText}" key="CITY2"/>
@@ -183,13 +383,15 @@
 					<wcst:message bundle="${widgetText}" key="CITY2"/>
 					<span class="required-field" id="WC_AddressEntryForm<c:out value="_${paramPrefix}"/>_div_6"> *</span>					
 				</div>
+				<div class="col8">
 				<input class="inputField" type="text" maxlength="40" size="35" aria-required="true" id="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}city_1'/>" name="<c:out value="${paramPrefix}city"/>" value="<c:out value='${city}'/>"/>
+				</div>
 			</div>
 		</c:when>
 		
 		<c:when test="${field == 'COUNTRY/REGION'}">
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_7">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_8" class="column_label">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_7">
+				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_8" class="column_label col4">
 					<span class="spanacce">
 						<label for="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}country_1'/>">
 							<wcst:message bundle="${widgetText}" key="COUNTRY2_ACCE"/>
@@ -198,11 +400,13 @@
 					<wcst:message bundle="${widgetText}" key="COUNTRY2"/>
 					<span class="required-field" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_9"> *</span>
 				</div>
+				<div class="col8">
 				<c:set var="lang" value="${locale}" />
 				<c:set var="country_language_select" value="${fn:split(lang, '_')}" />
 				<c:set var="selectOptions" value='{"wcMenuClass": "wcSelectMenu"}' />
 				<select data-widget-type="wc.Select" class="wcSelect inputField" data-widget-options="${fn:escapeXml(selectOptions)}" aria-required="true" id="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}country_1'/>" name="<c:out value="${paramPrefix}country"/>" onBlur="setFocus('WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}state_1')" onChange="javascript:AddressHelper.loadAddressFormStatesUI(<c:out value="${formName}"/>, '<c:out value="${paramPrefix}"/>','<c:out value="${paramPrefix}stateDiv"/>','<c:out value="WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}state_1"/>','','',true)">
 					<c:forEach var="country" items="${countryBean.countries}">
+					<c:if test="${country.displayName eq 'Australia' || country.displayName eq 'New Zealand'}">
 						<option value="<c:out value="${country.code}"/>"
 							<c:choose>
 								<c:when test="${!empty country1}">
@@ -219,14 +423,16 @@
 							</c:choose>
 						>
 						<c:out value="${country.displayName}"/></option>
+					</c:if>	
 					</c:forEach>
 				</select>
+				</div>
 			</div>
 		</c:when>
 		
 		<c:when test="${field == 'STATE/PROVINCE' || field == 'state/province'}">
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_10">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_11" class="column_label">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_10">
+				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_11" class="column_label col4">
 					<span class="spanacce">
 						<label for="<c:out value='${paramPrefix}WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}state_1'/>">
 							<wcst:message bundle="${widgetText}" key="REG_STATE"/>
@@ -238,9 +444,10 @@
 					</c:if>
 				</div>
 
+				<div class="col8">
 				<%-- Retrieve states list from existing databean --%>
 				<c:forEach var="country" items="${countryBean.countries}"  varStatus='outerStatus'>
-					<c:if test="${country.code eq country1}">
+					<c:if test="${country.code eq 'AU'}">
 						<c:set var="countryCodeStates" value="${country.states}"/>
 					</c:if>
 				</c:forEach>
@@ -267,12 +474,13 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
+				</div>
 			</div>
 		</c:when>
 		
 		<c:when test="${field == 'ZIP'}">
-			<div class="column" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_13">
-				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_14" class="column_label">
+			<div class="column row" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_13">
+				<div id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_14" class="column_label col4">
 					<span class="spanacce">
 						<label for="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}zipCode_1'/>">
 							<wcst:message bundle="${widgetText}" key="ZIP_CODE"/>
@@ -281,40 +489,13 @@
 					<wcst:message bundle="${widgetText}" key="ZIP_CODE"/>
 					<span class="required-field" id="WC_AddressEntryForm<c:out value='_${paramPrefix}'/>div_15"> *</span>
 				</div>
+				<div class="col8">
 				<input class="inputField" type="text" maxlength="30" size="35" aria-required="true" id="<c:out value='WC_${pageName}_AddressEntryForm_FormInput_${paramPrefix}zipCode_1'/>" name="<c:out value="${paramPrefix}zipCode"/>" value="<c:out value='${zipCode}'/>"/>
+				</div>
 			</div>
 		</c:when>
 		
-		<c:when test="${field == 'EMAIL1' || field == 'email1'}">
-			<div class="column" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_19">
-				<div class="column_label" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_20">
-					<span class="spanacce">
-						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}email1_In_Register_1">
-							<wcst:message bundle="${widgetText}" key="EMAIL"/>
-						</label>
-					</span>
-					<wcst:message bundle="${widgetText}" key="EMAIL"/>
-					<c:if test="${field == 'EMAIL1'}">
-						<span class="required-field" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_21"> *</span>
-					</c:if>
-				</div>
-				<input class="inputField" type="text" size="35" maxlength="50" aria-required="true" name="${paramPrefix}email1" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}email1_In_Register_1" value="<c:out value='${email1}'/>" />
-			</div>
-		</c:when>
 		
-		<c:when test="${field == 'phone1'}">
-			<div class="column" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_22">
-				<div class="column_label" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_23">
-					<span class="spanacce">
-						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNum_In_Register_1">
-							<wcst:message bundle="${widgetText}" key="PHONE_NUMBER2"/>
-						</label>
-					</span>
-					<wcst:message bundle="${widgetText}" key="PHONE_NUMBER2"/>
-				</div>
-				<input class="inputField" type="tel" size="35" maxlength="32" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}phoneNum_In_Register_1" name="${paramPrefix}phone1" value="<c:out value='${phone1}'/>"/>
-			</div>
-		</c:when>
 		
 		<c:when test="${field == 'new_line'}">
 			<br clear="all" />
@@ -338,31 +519,64 @@
 		
 <c:forTokens items="${flexFlowsFieldOrder}" delims="," var="field">
 	<c:choose>
-		<c:when test="${field == 'EmailOption'}">
-			<flow:ifEnabled  feature="EmailOption">
-				<div class="column" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_24">
-					<div class="input_label" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_25">
-						<div class="checkboxField">
-							<input class="nodisplay" type="checkbox" name="sendMeEmail" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1" />
-							<img id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img" class="checkedCheckBox" role="checkbox" alt="" 
-									aria-checked="false" aria-label="<wcst:message bundle="${widgetText}" key="REGNEW_SENDMEEMAIL"/>" tabindex="0" 
-									src="${jspStoreImgDir}images/checkbox.png" onclick="javascript:AddressHelper.changeCheckboxState('${jspStoreImgDir}','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img','on','off')"
-									onkeypress="javascript:if(event.keyCode == 0 || event.keyCode == 13 || event.keyCode == 32){event.preventDefault();AddressHelper.changeCheckboxState('${jspStoreImgDir}','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img','on','off');}" />
-							<label class="checkboxLabel" for="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Label"><wcst:message bundle="${widgetText}" key="REGNEW_SENDMEEMAIL"/></label>
-						</div>
-						<c:if test="${sendMeEmail eq 'on' || bnEmailUserReceive.userReceive}">
+		
+
+		<c:when test="${field == 'MarketingConsent'}">
+			<flow:ifEnabled feature="ConsentOptions">
+				<flow:ifEnabled feature="MarketingConsent">
+					<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT" var="acceptMarketing" >
+						<wcst:param><c:out value="${storeName}"/></wcst:param>
+					</wcst:message>
+					<div class="column" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_27">
+						<div class="input_label" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_28">
+							<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_OPTIN" var="acceptMarketing" >
+								<wcst:param><c:out value="${storeName}"/></wcst:param>
+							</wcst:message>
+							<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_OPTOUT" var="optOutMarketing" ></wcst:message>
+							<br><div class="checkboxField marketingConsent">
+								<label class="radiocontainer" for="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optin_1" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optin_1_Label">${acceptMarketing}
+								<input type="radio" name="marketingTrackingConsent" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optin_1" value="1">
+								<span class="radiocheckmark"></span>
+								</label>
+							</div>
+							<div class="checkboxField marketingConsent">
+								<label class="radiocontainer" for="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optout_1" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optout_1_Label">${optOutMarketing}
+								<input type="radio" name="marketingTrackingConsent" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optout_1" value="0">
+								<span class="radiocheckmark"></span>
+								</label>
+							</div>
 							<script type="text/javascript">
-								$( document ).ready(function() { 
-									AddressHelper.changeCheckboxState('${jspStoreImgDir}','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1','WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>EmailOption_Checkbox_1_Img','on','off');
+								$( document ).ready(function() {
+									var marketingConsentOptedIn = false;
+									<c:if test="${marketingConsent == 1 }">
+									marketingConsentOptedIn = true;
+									</c:if>
+									var marketingConsentCookie = getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId);
+									if( marketingConsentOptedIn == true){
+									// for logged in user with MarketingConsent opt in
+										$('#WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optin_1').prop("checked", true);
+									}
+									else if (marketingConsentCookie != null ) {
+										marketingConsentCookie = parseInt(marketingConsentCookie);
+										if (marketingConsentCookie == 1) {
+											$('#WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optin_1').prop("checked", true);
+										}
+										else {
+											$('#WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optout_1').prop("checked", true);
+										}
+									}
+									else {
+										$('#WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>marketingConsent_optout_1').prop("checked", true);
+									}
 								});
 							</script>
-						</c:if>
+						</div>
 					</div>
-				</div>
 				<br clear="all" />
+				</flow:ifEnabled>
 			</flow:ifEnabled>
 		</c:when>
-
+		<%--
 		<c:when test="${field == 'preferredLanguage'}">
 			<flow:ifEnabled feature="preferredLanguage">
 				<c:set var="preferredLanguage" value="${paramSource.preferredLanguage}"/>
@@ -370,10 +584,11 @@
 					<c:set var="preferredLanguage" value="${CommandContext.languageId}"/>
 				</c:if>
 		
-				<div class="column"  id="WC_OrganizationRegistration<c:out value='_${paramPrefix}'/>66">
-					<div  id="WC_OrganizationRegistration<c:out value='_${paramPrefix}'/>67">
+				<div class="column row"  id="WC_OrganizationRegistration<c:out value='_${paramPrefix}'/>66">
+					<div class="col4" id="WC_OrganizationRegistration<c:out value='_${paramPrefix}'/>67">
 						<label for="WC_UserRegistrationAddForm_FormInput_${paramPrefix}_preferredLanguage_In_Register_1"><wcst:message bundle="${widgetText}" key="REGISTER_PREFERREDLANGUAGE"/></label>
 					</div>
+					<div class="col8">
 					<c:set var="selectOptions" value='{"wcMenuClass": "wcSelectMenu"}' />
 					<select data-widget-type="wc.Select" class="wcSelect inputField" data-widget-options="${fn:escapeXml(selectOptions)}" name="<c:out value="${paramPrefix}preferredLanguage"/>" id="WC_UserRegistrationAddForm_FormInput_${paramPrefix}_preferredLanguage_In_Register_1">
 						<c:forEach items="${sdb.supportedLanguages}" var="language">
@@ -382,12 +597,12 @@
 							</option> 
 						</c:forEach>
 					</select>
+					</div>
 				</div>
 			</flow:ifEnabled>
-
 			<flow:ifDisabled feature="preferredLanguage">
 				<%-- The value is set to the previously entered preferredLanguage if available.  Otherwise, the value is set to the locale in the CommandContext. 
-				The default language code for B2C is the locale - en_US. But that cannot be used for B2B. The default preferredLanguage for B2B is an integerger.. --%>
+				The default language code for B2C is the locale - en_US. But that cannot be used for B2B. The default preferredLanguage for B2B is an integerger..
 				<c:set var="preferredLanguage" value="${paramSource.preferredLanguage}"/>
 				<c:if test="${empty preferredLanguage}">				
 					<c:set var="preferredLanguage" value="${CommandContext.locale}"/>
@@ -401,9 +616,9 @@
 				</c:if>				
 				<input type="hidden" name="preferredLanguage" value="<c:out value="${preferredLanguage}" default="${CommandContext.locale}" />" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>inputs_1"/>
 			</flow:ifDisabled>
-		</c:when>
+		</c:when> --%>
 
-		<c:when test="${field == 'preferredCurrency'}">
+		<c:when test="${field == 'preferredCurrencys'}">
 			<flow:ifEnabled feature="preferredCurrency">
 				<c:set var="preferredCurrency" value="${paramSource.preferredCurrency}"/>
 				<c:if test="${empty preferredCurrency}">
@@ -457,7 +672,7 @@
 			</flow:ifDisabled>
 		</c:when>
 
-		<c:when test="${field == 'Age'}">
+		<c:when test="${field == 'Ages'}">
 			<flow:ifEnabled feature="Age">
 				<div class="column" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_32">
 					<div id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_33">
@@ -489,7 +704,7 @@
 			</flow:ifEnabled>
 		</c:when>
 
-		<c:when test="${field == 'Gender'}">
+		<c:when test="${field == 'Genders'}">
 			<flow:ifEnabled feature="Gender">
 				<div class="column" id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_34">
 					<div id="WC_UserRegistrationAddForm<c:out value='_${paramPrefix}'/>div_35">
@@ -515,7 +730,7 @@
 			</flow:ifEnabled>
 		</c:when>
 
-		<c:when test="${field == 'DateOfBirth'}">
+		<c:when test="${field == 'DateOfBirths'}">
 			<flow:ifEnabled feature="DateOfBirth">
 				<jsp:useBean id="now" class="java.util.Date" />
 				<input type="hidden" name="birthdayEnabled" value="true" id="WC_PersonalInfoExtension<c:out value='_${paramPrefix}'/>HiddenField_1"/>

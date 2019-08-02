@@ -66,5 +66,14 @@
     <property name="https" value="1"/>  
     <property name="csrfProtected" value="1"/>
     <property name="parameter" value="assigned_coupon.removeCoupon"/> 
+  </bean>
+  <bean id="ajaxRESTUpdateMarketingTrackingConsent" class="com.ibm.commerce.store.mvc.controller.spring.AjaxRESTActionController">
+    <property name="supportedMethods" value="POST"/>
+    <property name="https" value="1"/>
+    <property name="credentialsAccepted" value="P"/>
+    <property name="authenticate" value="0"/>
+    <property name="generic" value="1"/>
+    <property name="csrfProtected" value="1"/>
+    <property name="parameter" value="marketingEvent.updateMarketingTrackingConsent"/>
   </bean>  
 </beans>

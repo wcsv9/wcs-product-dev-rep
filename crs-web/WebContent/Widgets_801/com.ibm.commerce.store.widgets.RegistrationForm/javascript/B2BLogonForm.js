@@ -94,19 +94,22 @@ B2BLogonForm ={
             $('#'+checkbox).attr("src", jspStoreImgDir + "images/checkbox_checked.png");
             $('#'+checkbox).attr("aria-checked", "true");
 
-            form.usr_address1.value = this.getFieldValue(form.org_address1);
-            form.usr_address2.value = this.getFieldValue(form.org_address2);
-            form.usr_zipCode.value = this.getFieldValue(form.org_zipCode);
-
+            
+            
+            form.org_address1.value = this.getFieldValue(form.usr_address1);
+            form.org_address2.value = this.getFieldValue(form.usr_address2);
+            form.org_zipCode.value = this.getFieldValue(form.usr_zipCode);
+            form.org_email1.value =  this.getFieldValue(form.usr_email1);
+			form.org_phone1.value =  this.getFieldValue(form.usr_phone1);
             var $orgCountry = $('#WC_OrganizationRegistrationAddForm_AddressEntryForm_FormInput_org_country_1');
             var $usrCountry = $('#WC_OrganizationRegistrationAddForm_AddressEntryForm_FormInput_usr_country_1');
 
-            $usrCountry.val($orgCountry.val());
-            $usrCountry.Select("refresh");
+            $orgCountry.val($usrCountry.val());
+            $orgCountry.Select("refresh");
 
             //see AddressHelper.loadAddressFormStatesUI
-            AddressHelper.loadAddressFormStatesUI(form.name,'usr_','usr_stateDiv','WC_OrganizationRegistrationAddForm_AddressEntryForm_FormInput_usr_state_1',false,this.getFieldValue(form.org_state));
-            form.usr_city.value = this.getFieldValue(form.org_city);
+            AddressHelper.loadAddressFormStatesUI(form.name,'org_','org_stateDiv','WC_OrganizationRegistrationAddForm_AddressEntryForm_FormInput_org_state_1',false,this.getFieldValue(form.usr_state));
+            form.org_city.value = this.getFieldValue(form.usr_city);
         }
    },
 

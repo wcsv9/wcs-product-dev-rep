@@ -28,23 +28,51 @@
 		<wcf:var name="personId" value="${userId}" encode="true"/>
 	</wcf:rest>
 </c:if>	
-	
+
+	<wcf:rest var="getUserRoleTitle" url="store/{storeId}/userRegister/getUserRoleTitle/{userId}" scope="request">
+		<wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
+		<wcf:var name="userId" value="${userId}" encode="true"/>
+	</wcf:rest>
+<c:set var="userId" value="${userId}"/>
 <c:set var="firstName" value="${person.firstName}"/>
 <c:set var="lastName" value="${person.lastName}"/>
 <c:set var="middleName" value="${person.middleName}"/>
 <c:set var="street" value="${person.addressLine[0]}"/>
 <c:set var="street2" value="${person.addressLine[1]}"/>
+<c:set var="street3" value="${person.addressLine[2]}"/>
+
 <c:set var="city" value="${person.city}"/>
+<c:choose>
+	<c:when test="${getUserRoleTitle.role eq 'null' || getUserRoleTitle.role eq 'NULL'}">
+		<c:set var="role" value=""/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="role" value="${getUserRoleTitle.role}"/>
+	</c:otherwise>
+</c:choose>
+
+<c:choose>
+	<c:when test="${getUserRoleTitle.title eq 'null' || getUserRoleTitle.title eq 'NULL'}">
+		<c:set var="title" value=""/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="title" value="${getUserRoleTitle.title}"/>
+	</c:otherwise>
+</c:choose>
+
+
 <c:set var="state" value="${person.state}"/>
 <c:set var="country1" value="${person.country}"/>
 <c:set var="zipCode" value="${person.zipCode}"/>
 <c:set var="phone1" value="${person.phone1}"/>
+<c:set var="phone2" value="${person.phone2}"/>
 <c:set var="email1" value="${person.email1}"/>
 <c:set var="emailOption" value="${person.receiveEmailPreference[0].value}"/>
 <c:set var="preferredLanguage" value="${person.preferredLanguage}"/>
 <c:set var="preferredCurrency" value="${person.preferredCurrency}"/>
 
 <c:set var="foundAge" value="false"/>
+<c:set var="marketingConsent" value=""/>
 <c:forEach var="attributes" items="${person.attributes}">
 	<c:set var="attrKey" value="${attributes.pProfileAttrKey}"/>
 	<c:if test="${attrKey=='age' && !foundAge}">
@@ -53,7 +81,12 @@
 	</c:if>
 </c:forEach>
 <c:set var="age" value="${attrValue}"/>
-
+<c:set var="marketingConsent" value="" scope="request"/>
+<c:forEach var="attribute" items="${person.contextAttribute}">
+	<c:if test="${attribute.attributeName =='marketingTrackingConsent'}">
+		<c:set var="marketingConsent" value="${attribute.attributeValue[0].value[0]}" scope="request"/>
+	</c:if>
+</c:forEach>
 <c:set var="gender" value="${person.gender}"/>
 <c:set var="dateOfBirth" value="${person.dateOfBirth}"/>
 <c:set var="mobilePhoneNumber1" value="${person.mobilePhone1}"/>

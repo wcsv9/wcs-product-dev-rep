@@ -21,6 +21,7 @@
 <c:set var="cookieVal" value="${cookie.WC_physicalStores.value}" />
 <c:set var="cookieVal" value="${fn:replace(cookieVal, '%2C', ',')}" />
 
+<c:set var="queryParent" value="true" scope="request"/>
 <%@ include file="/Widgets_801/Common/PDP_CatalogEntryData.jspf" %>
 <c:set var="catalogEntryId" value="${catalogEntryID}" />
 <c:set var="catalogEntryView" value="${catalogEntryDetails}"/>
@@ -28,7 +29,7 @@
 <c:set var="skus" value=""/>
 <c:choose>
 	<%-- If the catalog entry is a ProductBean --%>
-	<c:when test="${catalogEntryView.catalogEntryTypeCode eq 'ProductBean'}">
+	<c:when test="${catalogEntryView.catalogEntryTypeCode eq 'ProductBean' || catalogEntryView.catalogEntryTypeCode eq 'VariantBean'}">
 		<c:choose>
 			<%-- If the catalog entry is a ProductBean and it has only one SKU, then it is as good as ItemBean.
 			So identify the uniqueID of the single SKU and mark it as ItemBean --%>

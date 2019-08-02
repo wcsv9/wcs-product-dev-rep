@@ -148,6 +148,10 @@ wcService.declare({
                     }
                 }
             }
+            if (getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId) != serviceResponse.privacyNoticeVersion
+                    || getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId) != serviceResponse.marketingTrackingConsent){
+                        setCookie("WC_PrivacyNoticeVersion_" + WCParamJS.storeId, null, {path: "/", domain: cookieDomain, expires: -1});
+            }
 
             if (serviceResponse["MERGE_CART_FAILED_SHOPCART_THRESHOLD"] == "1") {
                 setCookie("MERGE_CART_FAILED_SHOPCART_THRESHOLD", "1", {path: "/", domain: cookieDomain});
@@ -171,4 +175,44 @@ wcService.declare({
         }
         cursor_clear();
     }
-});
+}),
+
+
+wcService.declare({
+    id: "OauthLoginAjaxLogon",
+    actionId: "OauthLoginAjaxLogon",
+    url: getAbsoluteURL() + "OauthLogon",
+    formId: ""
+
+        /**
+         *  Copies all the items from the existing order to the shopping cart and redirects to the shopping cart page.
+        *  @param (object) serviceResponse The service response object, which is the
+        *  JSON object returned by the service invocation.
+        */
+    ,successHandler: function(serviceResponse) {
+    	cursor_clear();
+    	//if (serviceResponse.redirectUrl != null) {
+    	var currUri = window.location.href;
+    	var url = serviceResponse.redirectUrl.replace(/&amp;/g, '&');
+    	var postLogonUrl = serviceResponse.URL.replace(/&amp;/g, '&');
+    	var provider = serviceResponse.provider;
+    	var redirectUrl = currUri.substring(0, currUri.lastIndexOf("\/")) + '/OauthLoginView?storeId=' +WCParamJS.storeId+ '&provider='+provider+ '&URL=' +postLogonUrl;
+    	//alert(currUri);
+    	//redirectUrl = redirectUrl.replace('&', /&amp;/g);
+    	url = url + "&redirect_uri=" +encodeURIComponent(redirectUrl);
+    	//alert(url);
+    	window.location = url;
+    	//}
+    	
+    }
+
+    /**
+    * display an error message.
+    * @param (object) serviceResponse The service response object, which is the
+    * JSON object returned by the service invocation.
+    */
+    ,failureHandler: function(serviceResponse) {
+        console.log('failed!');
+        cursor_clear();
+    }
+})

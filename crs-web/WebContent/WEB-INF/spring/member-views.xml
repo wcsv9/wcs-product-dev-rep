@@ -91,6 +91,11 @@
     <property name="https" value="1"/>  
     <property name="generic" value="1"/> 
   </bean>  
+  <bean id="OauthLoginView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
+    <property name="url" value="/UserArea/AccountSection/OauthLogin.jsp"/>  
+    <property name="https" value="1"/> 
+    <property name="generic" value="1"/>
+  </bean>   
   <bean id="RememberMeLogonFormView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
     <property name="url" value="/UserArea/AccountSection/AccountDisplay.jsp"/>  
     <property name="https" value="1"/>  
@@ -113,13 +118,13 @@
     <property name="url" value="/EmailTemplates/User/SilverpopPasswordResetNotify.jsp"/> 
     <property name="skipAccessControlCheck" value="1"/> 
   </bean>  
-  <bean id="ApproversNotifyView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
-    <property name="url" value="/EmailTemplates/User/ApproverNotify.jsp"/> 
-  </bean>
-  <bean id="ApproversNotifyView-Silverpop" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
-    <property name="url" value="/EmailTemplates/User/SilverpopApproverNotify.jsp"/> 
-    <property name="skipAccessControlCheck" value="1"/> 
-  </bean> 
+<!--   <bean id="ApproversNotifyView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView">  -->
+<!--     <property name="url" value="/EmailTemplates/User/ApproverNotify.jsp"/>  -->
+<!--   </bean> -->
+<!--   <bean id="ApproversNotifyView-Silverpop" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView">  -->
+<!--     <property name="url" value="/EmailTemplates/User/SilverpopApproverNotify.jsp"/>  -->
+<!--     <property name="skipAccessControlCheck" value="1"/>  -->
+<!--   </bean>  -->
   <bean id="UserRegistrationErrorView" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
     <property name="url" value="/UserArea/AccountSection/RegistrationSubsection/UserRegistrationSetup.jsp"/>  
     <property name="credentialsAccepted" value="P"/> 
@@ -250,5 +255,6 @@
   <bean id="OrganizationRegistrationAddForm" class="com.ibm.commerce.store.mvc.view.spring.StoreInternalResourceView"> 
     <property name="url" value="/UserArea/AccountSection/RegistrationSubsection/OrganizationRegistrationAddForm.jsp"/>  
     <property name="https" value="1"/> 
-  </bean>           
+  </bean> 
+         
 </beans>

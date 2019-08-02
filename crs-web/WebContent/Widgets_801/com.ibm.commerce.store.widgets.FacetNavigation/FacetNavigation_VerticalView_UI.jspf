@@ -41,7 +41,7 @@
 													<a role='button' href='${facetProp.url}'>
 														<div class='filter_option'>
 															<div class='close'></div>
-															<span>${facetProp.name}</span>
+															<span><c:out value="${facetProp.name}"/></span>
 															<span class='spanacce' id='ACCE_Label_Remove'>
 																<wcst:message key="REMOVE" bundle="${widgetText}"/>
 															</span>
@@ -90,7 +90,7 @@
 												</div>
 												<div id="section_list_${facetSection}<c:out value="${widgetSuffix}"/>" class="facetSelectContainer" role="group" aria-expanded="true" aria-labelledby="section_button_${facetSection}<c:out value="${widgetSuffix}"/>">
 
-													<ul class="facetSelect">														
+													<ul id="categoryFacetList${facetSection}" class="facetSelect">														
 														<c:set var="FacetValueCountIncrementer" value="1" scope="page" />
 														<c:forEach var="facetValues" items="${a_facet.facets}" varStatus="aStatus" >
 															<c:set var="escapeFlag" value="${env_escapeXmlFlag}"/>
@@ -99,6 +99,12 @@
 															</c:if>
 															<c:set var="facetId" value="${facetValues.id}"/>
 															<c:set var="singleFacetClass" value="${!empty facetValues.imgURL ? 'singleFacet' : ''}"/>
+															
+															<c:if test="${aStatus.count == 5}">
+																<li class="more">
+																	<a style="color: #002c75; font-weight: bold; font-size: 13px;" id="modeLink${widgetSuffix}" href="#" data-activate="categoryFacetList${facetSection}">More...</a>
+																</li>
+															</c:if>															
 															<li id="facet_${facetId}<c:out value="${widgetSuffix}"/>" class="${singleFacetClass}">
 																<input tabindex="-1" class="nodisplay" type="checkbox" <c:if test="${facetValues.selected}">checked="checked"</c:if> aria-labelledby="${facetId}_ACCE_Label" id="${facetId}" value="<c:out value='${facetValues.value}' escapeXml='false'/>"
 																	onkeypress="if(event.keyCode === KeyCodes.RETURN) {this.checked=!this.checked;if(this.checked){wcTopic.publish('Facet_Add', '${facetId}');}else{wcTopic.publish('Facet_Remove', '${facetId}');}}"
@@ -125,6 +131,7 @@
 																	<span class="spanacce" id="${facetId}_ACCE_Label"><c:out value="${facetValues.name}" escapeXml="${escapeFlag}"/> <div class="facetCountContainer" id="${facetId}_ACCE_Label_Count">(<c:out value="${facetValues.count}"/>)</div></span>
 																</a>
 															</li>
+															<c:set var="countli" value="${aStatus.count}" />
 														</c:forEach>
 														<div class="clear_float"></div>
 
@@ -152,27 +159,30 @@
 															<input type="hidden" aria-hidden="true" id="low_price_value" name="low_price_value" value=""/>
 															<input type="hidden" aria-hidden="true" id="high_price_value" name="high_price_value" value=""/>
 														</c:if>
+														<c:if test="${countli > 4}">
+															<li><a style="color: #002c75;" id="modeLink${widgetSuffix}" href="#" data-deactivate="categoryFacetList${facetSection}">Less...</a></li>
+														</c:if>
 													</ul>
 
 													<c:choose>
 														<c:when test="${!empty a_facet.showMoreURL}">
 															<ul class="facetSelect" id="more_<c:out value='${facetSection}' escapeXml='false'/>"><div class="clear_float"></div></ul>
 															<div class="showMore" id="morebutton_<c:out value='${facetSection}' escapeXml='false'/>">
-																<a role="checkbox" href="${a_facet.showMoreURL}" data-for="more_<c:out value='${facetSection}' escapeXml='false'/>" >
-																	<span id="showMoreLabel_${facetSection}">
-																		<wcst:message key="LN_SEARCH_FACET_SHOW_ALL" bundle="${widgetText}"/>
-																	</span>
-																</a>
+<%-- 																<a role="checkbox" href="${a_facet.showMoreURL}" data-for="more_<c:out value='${facetSection}' escapeXml='false'/>" > --%>
+<%-- 																	<span id="showMoreLabel_${facetSection}"> --%>
+<%-- 																		<wcst:message key="LN_SEARCH_FACET_SHOW_ALL" bundle="${widgetText}"/> --%>
+<!-- 																	</span> -->
+<!-- 																</a> -->
 															</div>
 														</c:when>
 														<c:when test="${!empty a_facet.showLessURL}">
 															<ul class="facetSelect" id="more_<c:out value='${facetSection}' escapeXml='false'/>"><div class="clear_float"></div></ul>
 															<div class="showLess" id="morebutton_<c:out value='${facetSection}' escapeXml='false'/>">
-																<a role="checkbox" href="${a_facet.showLessURL}" data-for="more_<c:out value='${facetSection}' escapeXml='false'/>" >
-																	<span id="showLessLabel_${facetSection}">
-																		<wcst:message key="LN_SEARCH_FACET_SHOW_LESS" bundle="${widgetText}"/>
-																	</span>
-																</a>
+<%-- 																<a role="checkbox" href="${a_facet.showLessURL}" data-for="more_<c:out value='${facetSection}' escapeXml='false'/>" > --%>
+<%-- 																	<span id="showLessLabel_${facetSection}"> --%>
+<%-- 																		<wcst:message key="LN_SEARCH_FACET_SHOW_LESS" bundle="${widgetText}"/> --%>
+<!-- 																	</span> -->
+<!-- 																</a> -->
 															</div>
 														</c:when>
 													</c:choose>
