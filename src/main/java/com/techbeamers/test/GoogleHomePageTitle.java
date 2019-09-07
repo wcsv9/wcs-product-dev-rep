@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class GoogleHomePageTitle {
 	
 	private WebDriver driver; 
-	String URL = "http://google.com";
+	String URL = "https://wcs.demoqaauth.ibm.com/wcs/shop/en/auroraesite";
 
 	@BeforeClass
 	public void testSetUp() {
@@ -24,7 +24,7 @@ public class GoogleHomePageTitle {
 	public void verifyGooglePageTittle() {
 		driver.navigate().to(URL);
 		String getTitle = driver.getTitle();
-		Assert.assertEquals(getTitle, "Google");
+		Assert.assertEquals(getTitle, "Welcome to AuroraESite");
 	}
 	
 	@AfterClass
