@@ -12,7 +12,7 @@ pipeline {
 		stage('Running Test and Checking Title') {
             agent { label 'wcsv9' }
             steps { 
-             sh "mvn  install"
+             sh "cd /data/wcscode && mvn  install"
               
             }
         }
