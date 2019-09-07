@@ -2,6 +2,9 @@ pipeline {
     agent none
     
         stages {
+	wrap([$class: 'Xvfb', screen: '1440x900x24']) {
+  // execute selenium tests
+}
         stage('checking out') {
             agent { label 'wcsv9' }
             steps { 
