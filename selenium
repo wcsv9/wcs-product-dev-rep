@@ -29,10 +29,10 @@ pipeline {
             }
             success {
                 emailext(
-                    subject: "Deployment to TS-WEB UAT Passed",
+                    subject: "Deployment Passed",
                     body: "Build URL: $BUILD_URL",
-                    to: "syedfawadtariq@gmail.com",
-                    from: "tariq.mustafa@royalcyber.com"
+                    to: "tariq.mustafa@royalcyber.com",
+                    from: "syedfawadtariq@gmail.com"
                 )
             }
         }
