@@ -1,5 +1,6 @@
 pipeline {
     agent none
+    
         stages {
         stage('checking out') {
             agent { label 'wcsv9' }
@@ -11,7 +12,7 @@ pipeline {
 		stage('Running Test and Checking Title') {
             agent { label 'wcsv9' }
             steps { 
-             echo "mvn install"
+             sh "mvn  install"
               
             }
         }
