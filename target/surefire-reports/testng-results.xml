@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="2973" started-at="2019-09-07T03:12:19Z" finished-at="2019-09-07T03:12:22Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="2973" started-at="2019-09-07T03:12:19Z" finished-at="2019-09-07T03:12:22Z">
+      <class name="com.techbeamers.test.GoogleHomePageTitle">
+        <test-method status="PASS" signature="testSetUp()[pri:0, instance:com.techbeamers.test.GoogleHomePageTitle@3f3afe78]" name="testSetUp" is-config="true" duration-ms="1577" started-at="2019-09-06T22:12:19Z" finished-at="2019-09-06T22:12:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetUp -->
+        <test-method status="PASS" signature="verifyGooglePageTittle()[pri:0, instance:com.techbeamers.test.GoogleHomePageTitle@3f3afe78]" name="verifyGooglePageTittle" duration-ms="668" started-at="2019-09-06T22:12:21Z" finished-at="2019-09-06T22:12:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyGooglePageTittle -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.techbeamers.test.GoogleHomePageTitle@3f3afe78]" name="tearDown" is-config="true" duration-ms="723" started-at="2019-09-06T22:12:22Z" finished-at="2019-09-06T22:12:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.techbeamers.test.GoogleHomePageTitle -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
