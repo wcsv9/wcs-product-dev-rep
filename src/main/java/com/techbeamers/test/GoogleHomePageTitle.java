@@ -15,7 +15,7 @@ public class GoogleHomePageTitle {
 
 	@BeforeClass
 	public void testSetUp() {
-		System.setProperty("webdriver.firefox.driver","/opt/fawad/geckodriver"); // <– Change this path
+		System.setProperty("webdriver.firefox.driver","/data/wcscode/geckodriver"); // <– Change this path
 		
 		driver = new FirefoxDriver();
 	}
