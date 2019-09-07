@@ -1,0 +1,20 @@
+pipeline {
+    agent none
+        stages {
+        stage('checking out') {
+            agent { label 'wcsv9' }
+            steps { 
+             echo "Checking out to Mounted Volume"
+              
+            }
+        }
+		stage('Running Test and Checking Title') {
+            agent { label 'wcsv9' }
+            steps { 
+             echo "mvn install"
+              
+            }
+        }
+            
+            }
+            }
