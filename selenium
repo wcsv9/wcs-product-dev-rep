@@ -32,7 +32,7 @@ pipeline {
                     subject: "Deployment to TS-WEB UAT Passed",
                     body: "Build URL: $BUILD_URL",
                     to: "tariq.mustafa@royalcyber.com",
-                    from: "tariq.mustafa@royalcyber.com"
+                    from: "syedfawadtariq@gmail.com"
                 )
             }
         }
