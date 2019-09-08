@@ -77,7 +77,7 @@ pipeline {
             }
             success {
                 emailext(
-                    subject: "Deployment to TS-WEB UAT Passed",
+                    subject: 'Deployment demoqaauth"$apptype"-app Passed',
                     body: "Build URL: $BUILD_URL",
                     to: "tariq.mustafa@royalcyber.com",
                     from: "tariq.mustafa@royalcyber.com"
