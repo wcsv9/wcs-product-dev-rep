@@ -36,9 +36,9 @@ Assert.assertEquals(Actualtitle, Expectedtitle);
 System.out.println("After Assertion " + Expectedtitle + Actualtitle + " Title matched ");
 	}
 	
-	@AfterClass
-	public void tearDown() {
-		driver.quit();
-	}
+	//@AfterClass
+	//public void tearDown() {
+	//	driver.quit();
+	//}
 }
 
