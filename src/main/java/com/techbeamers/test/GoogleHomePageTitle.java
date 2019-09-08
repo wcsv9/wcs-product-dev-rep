@@ -38,7 +38,7 @@ public class GoogleHomePageTitle
 {
 
 @Test
-publicvoidtestgooglrsearch(){
+public void testgooglrsearch(){
 
 WebDriver driver = newFirefoxDriver();
 //it will open the goggle page
