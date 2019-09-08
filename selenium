@@ -25,7 +25,7 @@ pipeline {
             }
 	         post {
             failure {
-                echo "Opening Jira Ticket"
+               sh 'curl -D- -u tariq.mustafa\@royalcyber\.com:6ZPdjgd6AjR29tksYOW9EB9F -X POST --data '{"fields":{"project":{"key": "MSI"},"summary": "Jenkins Build Failed","description": "Build URL: $BUILD_URL","issuetype": {"name": "Bug"}}}' -H "Content-Type: application/json" https://royalcyber.atlassian.net/rest/api/2/issue/'
             }
             success {
                 emailext(
