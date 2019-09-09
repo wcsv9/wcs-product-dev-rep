@@ -21,7 +21,7 @@ public class GoogleHomePageTitle {
 	}
 	
 	@Test
-	public void verifyGooglePageTittle() {
+	public void verifyPageTittle() {
 		driver.navigate().to(URL);
 		//String getTitle = driver.getTitle();
 		//Assert.assertEquals(getTitle, "Welcome to AuroraESite");
