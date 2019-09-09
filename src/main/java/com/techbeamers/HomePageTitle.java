@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-public class GoogleHomePageTitle {
+public class HomePageTitle {
 	
 	private WebDriver driver; 
 	String URL = "https://wcs.demoqaauth.ibm.com/wcs/shop/en/auroraesite";
