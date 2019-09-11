@@ -7,7 +7,7 @@ endtime=$(date -ud "$runtime" +%s)
 
 while [[ $(date -u +%s) -le $endtime ]]
    do
-   status=`kubectl get deployment  demoqaauth$1-app |awk '{ print $5 }' | awk '{if (NR!=1) {print}}'`
+   status=`kubectl get deployment $1-app |awk '{ print $5 }' | awk '{if (NR!=1) {print}}'`
    if [ $status = 1 ]; then
 
         echo "$status"
