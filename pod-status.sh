@@ -2,7 +2,7 @@
 export env=$1
 #status=`kubectl get deployment demoqaauthcrs-app |awk '{ print $5 }' | awk '{if (NR!=1) {print}}'`
 # until [ $n -ge 5 ]
-runtime="5 minute"
+runtime="15 minute"
 endtime=$(date -ud "$runtime" +%s)
 
 while [[ $(date -u +%s) -le $endtime ]]
