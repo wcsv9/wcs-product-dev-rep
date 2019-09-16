@@ -1,0 +1,460 @@
+<%--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2013, 2014 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--%>
+
+<%-- Note: for any e-Marketing Spots included on the footer page, then the parameter --%>
+<%--       cacheWithParent should be set to true if the footer is dynacached         --%>
+	
+<div id="footer" role="navigation" aria-label="<fmt:message bundle="${storeText}" key="FOOTER_REGION"/>">
+
+<div class="row">
+	<div class="col12 product-requirements-home">
+			<h1>Office National - for all your office products requirements </h1>
+			<p class="col12 requirements-title">
+			With over 90 independent stores across Sydney, Melbourne, Brisbane, Perth and Adelaide, Office National is the largest Australian office products group and a trusted source of quality office supplies. We specialise in stationery, inks &amp; toners, chairs &amp; desks, business technology, packaging, kitchen, cleaning, workwear, education and art supplies. At Office National, you'll find all your office products from leading brands such as: Artline, Avery, Brother, Dymo, Epson, HP, Paper Mate, Pilot, 
+			Post - It, Quill, Reflex, Sharpie, Staedtler, Scotch and many more. <br>Shop online from your local store and we can deliver directly to your office.
+		</p>
+	</div>
+	</div>
+	
+	<div style="height:50px"></div>
+	
+	<div class="row">
+	<div class="col12 product-requirements-home">
+			<h2>Office National - for all your office products requirements </h2>
+			
+	</div>
+	</div>
+	<div style="height:20px"></div>
+	<div class="row footer_eNews">
+	<div class="col12" id="eNews">
+				
+	<!-- BEGIN ENews.jsp -->
+	<div class="row">
+	<div class="col6 kcol12 eNews-title">
+		<strong>eNews</strong> stay updated with our latest news and specials. 
+	</div>
+	<div class="col6 kcol12 right">
+		<input type="text" name="eNewsMail" id="eNewsFooter_eNewsMail" value="" placeholder="enter your email address">
+		<input type="button" name="eNewsButton" id="eNewsButton" value="SIGN UP" onclick="validateENewsEmail('eNewsFooter');">
+	</div>
+	</div>
+	<!-- END ENews.jsp -->
+					
+	</div>
+	</div>
+
+
+	<div id="footerRow1" class="topFooterRow">
+		
+		<div id="footerCustomerServiceSection" class="section">
+			<div class="header">
+				<a class="toggle" href="#" data-toggle="footerCustomerServiceSection" role="button"><span id="footerCustomerServiceSection_div_ACCE_Label" class="spanacce"><fmt:message bundle="${storeText}" key="FOOTER_CUSTOMER_SERVICE"/></span></a>
+				<h3><fmt:message bundle="${storeText}" key="FOOTER_CUSTOMER_SERVICE"/></h3>
+			</div>
+			<ul>
+				<flow:ifEnabled feature="QuickOrder">
+					<li><a id="footerQuickOrderLink" href="${fn:escapeXml(QuickOrderURL)}"><fmt:message bundle="${storeText}" key="FOOTER_QUICK_ORDER"/></a></li>
+				</flow:ifEnabled>
+				<li><a id="footerHelpLink" href="${fn:escapeXml(HelpPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_HELP"/></a></li>
+				<li><a id="footerContactUsLink" href="${fn:escapeXml(ContactUsPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_CONTACT_US"/></a></li>
+				<li><a id="footerReturnPolicyLink" href="${fn:escapeXml(ReturnPolicyPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_RETURN_POLICY"/></a></li>
+				<li><a id="footerPrivacyPolicyLink" href="${fn:escapeXml(PrivacyPolicyPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_PRIVACY_POLICY"/></a></li>
+			</ul>
+		</div><div id="footerCorporateInfoSection" class="section">
+			<div class="header">
+				<a class="toggle" href="#" data-toggle="footerCorporateInfoSection" role="button"><span id="footerCorporateInfoSection_div_ACCE_Label" class="spanacce"><fmt:message bundle="${storeText}" key="FOOTER_CORPORATE_INFO"/></span></a>
+				<h3><fmt:message bundle="${storeText}" key="FOOTER_CORPORATE_INFO"/></h3>
+			</div>
+			<ul>
+				<li><a id="footerAboutUsLink" href="${fn:escapeXml(CorporateInfoPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_ABOUT_US"/></a></li>
+				<li><a id="footerCorporateContactUsLink" href="${fn:escapeXml(CorporateContactUsPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_CONTACT_US"/></a></li>
+				<flow:ifEnabled feature="StoreLocator">
+					<li><a id="footerStoreLocatorLink" href="${fn:escapeXml(StoreLocatorURL)}"><fmt:message bundle="${storeText}" key="FOOTER_STORE_LOCATOR"/></a></li>
+				</flow:ifEnabled>
+			</ul>
+		</div><div id="footerExploreSection" class="section">
+			<div class="header">
+				<a class="toggle" href="#" data-toggle="footerExploreSection" role="button"><span id="footerExploreSection_div_ACCE_Label" class="spanacce"><fmt:message bundle="${storeText}" key="FOOTER_EXPLORE"/></span></a>
+				<h3><fmt:message bundle="${storeText}" key="FOOTER_EXPLORE"/></h3>
+			</div>
+			<ul>
+				<li><a id="footerSiteMapLink" href="${fn:escapeXml(SiteMapPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_SITE_MAP"/></a></li>
+				<flow:ifEnabled feature="CoShopping">
+					<li><a id="footerCoShoppingLink" href="#"><fmt:message bundle="${storeText}" key="FOOTER_CO_SHOPPING"/></a></li>
+				</flow:ifEnabled>
+				<flow:ifEnabled feature="search">
+					<li><a id="footerAdvancedSearchLink" href="${fn:escapeXml(AdvancedSearchDisplayURL)}"><fmt:message bundle="${storeText}" key="TITLE_ADVANCED_SEARCH"/></a></li>
+				</flow:ifEnabled>
+			</ul>
+		</div><flow:ifEnabled feature="FacebookIntegration"><div id="footerFollowUsSection" class="section">
+			<div class="header">
+				<a class="toggle" href="#" data-toggle="footerFollowUsSection" role="button"><span id="footerFollowUsSection_div_ACCE_Label" class="spanacce"><fmt:message bundle="${storeText}" key="FOOTER_FOLLOW_US"/></span></a>
+				<h3><fmt:message bundle="${storeText}" key="FOOTER_FOLLOW_US"/></h3>
+			</div>
+			<ul>
+				<li><a id="footerFacebookLink" href="${facebookURL}"><fmt:message bundle="${storeText}" key="FOOTER_FACEBOOK"/></a></li>
+			</ul>
+		</div></flow:ifEnabled>
+	</div>
+	
+	
+	
+	
+	<div class="header footer-sitemap">
+		<a class="toggle" href="#" data-toggle="ShopByProduct" role="button"><span id="footerCustomerServiceSection_div_ACCE_Label" class="spanacce">Shop by Product</span></a>
+		<a href="https://www.officenational.com.au/shop/SiteMapView?catalogId=10051&amp;langId=-1&amp;storeId=24101"><h3>Site Map</h3>	</a>
+	</div>
+	
+<div id="footerRow1" class="last-child">
+		
+			<div id="OFFICE SUPPLIES" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="OFFICE SUPPLIES" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">OFFICE SUPPLIES</span></a>
+					<h3>OFFICE SUPPLIES</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/adhesives--glues-and-tapes">Adhesives, Glues and Tapes</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/books--pads-and-self-adhesive-notes">Books, Pads and Self-Adhesive Notes</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/brief-cases--bags-and-compendiums">Brief Cases, Bags and Compendiums</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/writing-and-correction">Writing</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/desk-accessories">Desk Accessories</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/diaries-planners-2">Diaries and Planners</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/envelopes">Envelopes</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/filing--storage-and-dividers">Filing, Storage and Dividers</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/labels">Labels</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/identification-products">Identification Products</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/presentation">Presentation</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/office-supplies">Retail Supplies</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/rubber-stamps">Rubber Stamps and Banners</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/stationery/staplers-and-punches">Staplers and Punches</a></li>
+					
+				</ul>
+			</div>
+		
+
+
+		
+			<div id="INKS &amp; TONERS" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="INKS &amp; TONERS" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">INKS &amp; TONERS</span></a>
+					<h3>INKS &amp; TONERS</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/ink-and-toner/copier-toners-and-cartridges">Copier Toners and Cartridges</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/ink-and-toner/fax-consumables">Fax Consumables</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/ink-and-toner/inkjet-cartridges">Inkjet Cartridges</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/ink-and-toner/laser-toners-and-accessories">Laser Toners and Accessories</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/ink-and-toner/printer-and-typewriter-ribbons">Printer and Typewriter Ribbons</a></li>
+					
+				</ul>
+			</div>
+		
+
+
+		
+			<div id="PAPER" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="PAPER" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">PAPER</span></a>
+					<h3>PAPER</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/paper-supplies/adding-machine-and-cash-register-rolls">Adding Machine, Cash Register and Fax Rolls</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/paper-supplies/computer-paper">Computer Paper</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/paper-supplies/copy-paper">Copy Paper</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/paper-supplies/specialty-paper">Specialty Paper</a></li>
+					
+				</ul>
+			</div>
+		
+		
+			<div id="TECHNOLOGY" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="TECHNOLOGY" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">TECHNOLOGY</span></a>
+					<h3>TECHNOLOGY</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/headphones-and-earphones">Headphones and Earphones</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/telephones-and-accessories">Audio Communications</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/calculators-and-organisers">Calculators</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/digital-cameras--1">Cameras</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/computer-accessories">Computer Accessories</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/computers-and-monitors">Computers and Monitors</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/data-storage">Data Storage</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/labelling-machines-and-tapes">Labelling Machines and Tapes</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/laminators--binders-and-presentation-supplies">Laminating, Binding and Presentation Supplies</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/led-televisions">LED Televisions</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/hubs--switches-and-routers">Networking</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/printers--faxes-and-multifunctions">Printers and Hardware</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/shredders-and-accessories">Shredders and Accessories</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/technology/support">Support</a></li>
+					
+				</ul>
+			</div>
+		
+		
+			<div id="FURNITURE" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="FURNITURE" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">FURNITURE</span></a>
+					<h3>FURNITURE</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/chairmats">Chairmats</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/chairs">Chairs</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/cupboards--bookcases-and-credenzas">Cupboards, Bookcases and Credenzas</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/desking">Desking</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/reception">Ergonomic Furniture</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/storage-and-metal-cabinets">Filing and Storage</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/furniture-accessories">Furniture Accessories</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/partitioning">Workplace Screens</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/furniture/tables">Tables</a></li>
+					
+				</ul>
+			</div>
+		
+		
+			<div id="FACILITIES SUPPLIES" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="FACILITIES SUPPLIES" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">FACILITIES SUPPLIES</span></a>
+					<h3>FACILITIES SUPPLIES</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/canteen-and-kitchen-supplies">Canteen and Kitchen Supplies</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/electrical--power-protection-and-batteries">Electrical, Power Protection and Batteries</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/gift-and-party-supplies">Gift and Party Supplies</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/janitorial-and-cleaning-supplies">Janitorial and Cleaning Supplies</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/tool-kits-and-padlocks">Tool Kits and Padlocks</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/mail-room-equipment-and-supplies">Mail Room Equipment and Supplies</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/occupational-health-and-safety">Occupational Health and Safety</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/warehouse-and-packaging/packaging-and-shipping">Packaging and Shipping</a></li>
+					
+				</ul>
+			</div>
+		
+		
+			<div id="WORKWEAR" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="WORKWEAR" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">WORKWEAR</span></a>
+					<h3>WORKWEAR</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/workwear-accessories">Workwear Accessories</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/corporate-wear--1">Corporate Wear</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/disposable-clothing">Disposable Clothing</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/flame-retardents-workwear">Flame Retardant Workwear</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/footware">Footwear</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/headwear--1">Headwear</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/hospitality">Hospitality</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/jackets">Jackets</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/pants-and-shorts">Pants and Shorts</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/polar-fleece-vests-and-jumpers">Polar Fleece Vests and Jumpers</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/polo-and-tee-shirts">Polo and Tee Shirts</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/ppe">PPE</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/safety-vests--1">Safety Vests</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/shirts--1">Shirts</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/sports-and-leisure-wear">Sports and Leisure Wear</a></li>
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/workwear--1/wet-weather-clothing">Wet Weather Clothing</a></li>
+					
+				</ul>
+			</div>
+		
+		
+			<div id="PRINT &amp; PROMOTION" class="section">
+				<div class="header">
+					<a class="toggle" href="#" data-toggle="PRINT &amp; PROMOTION" role="button"><span id="footerSocialSection_div_ACCE_Label" class="spanacce">PRINT &amp; PROMOTION</span></a>
+					<h3>PRINT &amp; PROMOTION</h3>
+				</div>
+					
+					<ul>
+					
+					
+						
+						<li><a href="https://www.officenational.com.au/shop/en/officebrands/print-and-promotion/custom-print">Custom Print</a></li>
+					
+				</ul>
+			</div>
+		
+	</div>
+	<div id="footerBottom">
+		<div class="copy"> 
+			
+			© 2017 <a href="https://www.officenational.com.au/shop/en/obb2cstore">Office National</a> - Australia's largest independent office products group, a member of <a href="https://www.officebrands.net.au">Office Brands</a>
+		</div>
+	</div>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+

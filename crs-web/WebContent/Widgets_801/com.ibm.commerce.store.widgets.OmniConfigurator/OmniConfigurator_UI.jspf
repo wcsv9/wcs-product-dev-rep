@@ -1,0 +1,325 @@
+<%@ page import="java.io.StringReader"%>
+<%@ page import="java.io.StringWriter"%>
+<%@ page import="javax.xml.parsers.DocumentBuilderFactory"%>
+<%@ page import="javax.xml.parsers.DocumentBuilder"%>
+<%@ page import="org.w3c.dom.Document"%>
+<%@ page import="org.w3c.dom.Element"%>
+<%@ page import="java.lang.Exception"%>
+<%@ page import="org.xml.sax.InputSource"%>
+<%@ page import="javax.xml.transform.Transformer"%>
+<%@ page import="javax.xml.transform.TransformerFactory"%>
+<%@ page import="javax.xml.transform.stream.StreamResult"%>
+<%@ page import="javax.xml.transform.dom.DOMSource"%>
+
+<c:set var="pageCategory" value="Configurator" scope="request"/>
+
+<!-- BEGIN OmniConfigurator_UI.jspf -->
+
+<%-- Get the configuration for this particular dynamic kit --%>
+<c:catch var="searchServerException">
+	<wcf:rest var="catalogNavigationView" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/productview/byId/${WCParam.catEntryId}" >	
+		<wcf:param name="langId" value="${langId}"/>
+		<wcf:param name="currency" value="${env_currencyCode}"/>
+		<wcf:param name="responseFormat" value="json"/>		
+		<wcf:param name="catalogId" value="${WCParam.catalogId}"/>
+		<c:forEach var="contractId" items="${env_activeContractIds}">
+			<wcf:param name="contractId" value="${contractId}"/>
+		</c:forEach>
+	</wcf:rest>
+</c:catch>
+
+
+<c:set var="catalogEntryView" value="${catalogNavigationView.catalogEntryView[0]}" scope="request"/>
+
+<%-- Get the model name.  We remove the item name from the dynamicKitModelReference --%>
+<c:set var="modelName" value=""/>
+<c:if test="${!empty catalogEntryView}">
+	<c:set var="modelName" value="${catalogEntryView.dynamicKitModelReference}" />
+</c:if>
+<c:set var="modelName" value="${modelName}" scope="request"/>
+
+<c:if test="${!empty catalogEntryView.dynamicKitDefaultConfiguration}">
+		<c:set var="ConfigXML" value="${catalogEntryView.dynamicKitDefaultConfiguration}" scope="request"/>
+	</c:if>
+	
+	<c:if test="${!empty WCParam.orderItemId}">
+	<%-- An orderItemId is set if a dynamic kit is in the shopping cart and
+	is requested to be reconfigured.  We need to retrieve the order item configuration (oiconifg).
+	--%>
+	<wcf:rest var="itemConfiguration" url="store/{storeId}/order">
+		<wcf:var name="storeId" value="${WCParam.storeId}" encode="true"/>
+		<wcf:param name="q" value="findConfigurationByOrderItemId"/>
+		<wcf:param name="orderItemId" value="${WCParam.orderItemId}"/>
+	</wcf:rest>
+	
+	<c:if test="${!empty itemConfiguration.Order && !empty itemConfiguration.Order[0].orderItem && !empty itemConfiguration.Order[0].orderItem[0].orderItemConfiguration}">
+		<c:set var="ConfigXML" value="${itemConfiguration.Order[0].orderItem[0].orderItemConfiguration}" scope="request"/>		
+	</c:if>
+</c:if>
+<%-- If a request failed for some reason, capture the ConfigXML in the request and pass it back to the configurator --%>
+<c:if test="${!empty errorMessage}">
+	<c:set var="ConfigXML" value="${WCParam.ConfigXML}" scope="request"/>
+</c:if>
+
+<c:set var="modelLanguage" value="${fn:split(locale, '_')[0]}"  scope="request" />
+<c:set var="modelCountry" value="${fn:split(locale, '_')[1]}"  scope="request" />
+
+<%
+String strConfig = (String)(request.getAttribute("ConfigXML"));
+String modelName = (String)(request.getAttribute("modelName"));
+
+if(strConfig != null && !strConfig.isEmpty())
+{
+	strConfig = strConfig.replaceAll("ConfiguratorBOM", "ExtractPicks");
+	if(strConfig.contains("\r\n")){
+		strConfig = strConfig.replaceAll("\r\n", "");
+	}
+	if(strConfig.contains("\n")){
+		strConfig = strConfig.replaceAll("\n", "");
+	}
+	
+  StringReader xmlInput = new StringReader(strConfig);
+  
+		try {
+
+		  DocumentBuilderFactory bldrFactory = DocumentBuilderFactory.newInstance();
+
+		  DocumentBuilder docBldr = bldrFactory.newDocumentBuilder();
+		  Document doc = docBldr.parse(new InputSource(xmlInput));
+		  Element root = doc.getDocumentElement();
+		  
+		  if (root.getNodeName().equals("ExtractPicks")) {
+			  root.setAttribute("Language", (String)(request.getAttribute("modelLanguage")));
+			  root.setAttribute("Country", (String)(request.getAttribute("modelCountry")));
+			  root.setAttribute("Currency", (String)(request.getAttribute("env_currencyCode")));
+		  }
+		  	DOMSource domSource = new DOMSource(doc);
+		    Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		    StringWriter sw = new StringWriter();
+		    StreamResult sr = new StreamResult(sw);
+		    transformer.transform(domSource, sr);
+		    
+			
+			if(!modelName.equals(root.getAttribute("ModelName")))
+			{
+				 request.setAttribute("ConfigXML", "");
+			}else{
+				request.setAttribute("ConfigXML", sw.toString());
+			}
+		}catch(Exception e){
+			
+		}finally{
+			xmlInput.close();
+		}
+}
+%>
+
+
+<%-- Get the contract ID --%>
+<c:set var="contractId" value=""/>
+<c:if test="${!empty WCParam.contractId}">
+	<c:set var="contractId" value="${WCParam.contractId}"/>
+</c:if>
+<c:if test="${empty contractId && !empty CommandContext.currentTradingAgreementIdsAsString}">
+	<%-- pick the first contract if not specified --%>
+	<c:set var="localContractIds" value="${fn:split(CommandContext.currentTradingAgreementIdsAsString, ';')}" />
+	<c:set var="contractId" value="${localContractIds[0]}"/>
+</c:if>
+
+<c:set var="showConfigure" value="${catalogEntryView.buyable}"/>
+<c:set var="isPreConfigured" value="${catalogEntryView.dynamicKitDefaultConfigurationComplete}"/>
+<c:set var="priceValueIndex" value="1"/>
+<c:set var="quantity" value="${WCParam.quantity}"/>
+<c:if test="${empty quantity}">
+	<c:set var="quantity" value="1"/>
+</c:if>
+<c:if test="${isPreConfigured == '1'}">
+	<c:set var="isPreConfigured" value="true"/>				
+</c:if>
+
+	<%@ include file="OmniConfigurator_Data.jspf" %>
+
+<!--Start Page Content-->
+			<div class="content_wrapper_position">
+				<div class="content_wrapper">
+					<!--For border customization -->
+					<div class="content_top">
+						<div class="left_border"></div>
+						<div class="middle"></div>
+						<div class="right_border"></div>
+					</div>
+					<!-- Main Content Area -->
+					<div class="content_left_shadow">
+						<div class="content_right_shadow">				
+							<div class="main_content">
+								<!-- Start Main Content -->
+								<!-- Configurator Content -->
+								<div class="container_configurator_full_width container_margin_5px">
+								
+									<div class="configurator_page_content">
+										<div class="content_box">
+											<div class="box_header">
+												<c:if test="${!empty catalogEntryView.name}">
+													<fmt:message bundle="${storeText}" key="CONFIGURE_YOUR" > 
+														<fmt:param><c:out value="${catalogEntryView.name}"/></fmt:param>
+													</fmt:message>
+												</c:if>
+											</div>
+											<div class="product_add right">
+												<c:if test="${!empty catalogEntryView.price && isPreConfigured}">
+													<p>
+														
+														<fmt:message bundle="${storeText}" key="DK_PRICE_AS_CONFIGURED" />
+														<span class="price">
+														 <fmt:formatNumber value="${catalogEntryView.price[priceValueIndex].value}" type="currency" 
+                                                             currencyCode="${catalogEntryView.price[priceValueIndex].currency}" />
+														</span>
+														
+													</p>
+												</c:if>
+										
+												<div class="clear_float"></div>
+											</div>
+											<div class="clear_float"></div>
+										
+											<c:choose>
+												<c:when test="${!showConfigure}">
+													<div id="configErrorDiv">
+														<fmt:message bundle="${storeText}" key="KIT_NOT_BUYABLE" /><br/><br/>
+														<c:set var="buttonLink" value="${env_TopCategoriesDisplayURL}"/>
+														<fmt:message var="buttonMessage" bundle="${storeText}" key="GOBACK"/>
+														<%@ include file="../Common/ReusableObjects/StoreButton.jspf" %>
+													</div>
+												</c:when>
+												<c:when test="${empty catalogEntryView.dynamicKitModelReference}">
+													<div id="configErrorDiv">
+														<fmt:message bundle="${storeText}" key="MISSING_MODEL_REFERENCE" /><br/><br/>
+														<c:set var="buttonLink" value="${env_TopCategoriesDisplayURL}"/>
+														<fmt:message var="buttonMessage" bundle="${storeText}" key="GOBACK"/>
+														<%@ include file="../Common/ReusableObjects/StoreButton.jspf" %>
+													</div>
+												</c:when>
+												
+												<c:otherwise>
+												
+												
+												<c:set var="doubleQuote" value="\""/>
+												<c:set var="escapeDoubleQuote" value="\\\""/>
+												
+												<div ng-app="ibmConfiguratorApp">
+													<div class="shell ibm-omni-configurator"
+														ng-controller="ShellController as vm" id="divId">
+														<section class="well">
+															<ibm-configurator resize="vm.resize()" model="vm.data" />
+														</section>
+													</div>
+												</div>
+																								
+												<c:choose>
+													<c:when test="${!empty WCParam.orderItemId}">
+														<div id="WC_ShipmentDisplay_div_32_1">
+															<a role="button" class="button_secondary tlignore"
+																id="WC_dk_back" tabindex="0"
+																href="#" onclick="JavaScript:window.history.back();return false;">
+																<div class="left_border"></div>
+																<div class="button_text"><fmt:message key="CANCEL" bundle="${storeText}" /></div>
+																<div class="right_border"></div>
+															</a>
+															 <a role="button" class="button_primary button_left_padding tlignore" id="addToCart" tabindex="0"
+																href="javascript:categoryDisplayJS.setCustomParams({contractId:'<c:out value="${ contractId}"/>'});categoryDisplayJS.updateDynamicKitInCart('<c:out value="${WCParam.langId}"/>','<c:out value="${WCParam.storeId}"/>','<c:out value="${WCParam.catalogId}"/>', '<c:out value="${param.orderItemId}"/>');"
+																title="<fmt:message key="SHOPCART_UPDATE" bundle="${storeText}"/>">
+																<div class="left_border"></div>
+																<div class="button_text">
+																	<fmt:message key="SHOPCART_UPDATE"
+																		bundle="${storeText}" />
+																</div>
+															</a>
+
+														</div>
+													</c:when>
+													<c:otherwise>
+													
+													 <a role="button" class="button_primary button_left_padding tlignore" id="addToCart" tabindex="0"
+																href="javascript:categoryDisplayJS.setCustomParams({contractId:'<c:out value="${ contractId}"/>'});categoryDisplayJS.addDynamicKitToCart('<c:out value="${WCParam.langId}"/>','<c:out value="${WCParam.storeId}"/>','<c:out value="${WCParam.catalogId}"/>', '<c:out value="${WCParam.catEntryId}"/>', '<c:out value="${param.quantity}"/>');"
+																title="<fmt:message key="PRODUCT_ADD_TO_CART" bundle="${storeText}"/>">
+																<div class="left_border"></div>
+																<div class="button_text">
+																	<fmt:message key="PRODUCT_ADD_TO_CART" bundle="${storeText}" />
+																</div>
+															</a>
+													</c:otherwise>
+												</c:choose>
+												</div>
+												</c:otherwise>
+											</c:choose>
+											
+										</div>
+									</div>
+									
+								</div>
+								<!-- End Configurator Content -->
+							
+								<!-- End Main Content -->
+							</div>
+						</div>				
+					</div>
+					<!--For border customization -->
+					<div class="content_bottom">
+						<div class="left_border"></div>
+						<div class="middle"></div>
+						<div class="right_border"></div>
+					</div>
+				</div>
+			</div>
+			<!--End Page Content-->
+<style type="text/css">
+.collapsed {
+	display: block;
+}
+</style>
+
+<script type="text/javascript">
+
+
+var bomXml = "<c:out value="${fn:replace(ConfigXML, doubleQuote, escapeDoubleQuote)}" escapeXml="false"/>";
+
+	
+   var configModelData = {                                            
+                'modelPath': "<c:out value =  "${catalogEntryView.dynamicKitModelReference}"/>",                                            
+                'organizationCode': "<c:out value =  "${catalogEntryView.dynamicKitOrgCode}"/>",                                            
+                'modellanguage':"<c:out value ="${modelLanguage}"/>",                                           
+                'modelcountry':"<c:out value ="${modelCountry}"/>",
+				'customerID':"<c:out value ="${userLoginId}"/>",
+				'ignoreCustomerEntitlements': false,
+                'currency': "<c:out value =  "${env_currencyCode}"/>",
+                'firingPhase':"Initiate",
+                'clientProperties': [
+                			{
+					      	 "name": "<c:out value ="WC_AUTHENTICATION_${userLoginId}"/>",
+					      	 "value":  "<c:out value =  "${userAuthentication}"/>"
+					    	},
+						    {
+						      "name": "<c:out value ="WC_USERACTIVITY_${userLoginId}"/>",
+						      "value":  "<c:out value =  "${userActivity}"/>"
+						    },
+						    {
+						    	"name":"storeId",
+						    	"value":"<c:out value="${storeId}"/>"
+						    },
+							{
+						    	"name":"contractId",
+						    	"value":"<c:out value="${contractId}"/>"
+						    }
+						  ]
+                }; 
+                
+
+        var configuratorServer = "${configuratorURL}";
+		var standAloneMode = false;
+		var configurator_translationdata_path = "/wcsstore/Widgets_801/com.ibm.commerce.store.widgets.OmniConfigurator/ConfiguratorUI";
+		var sfdcDetails = {
+				resourcePath:"/wcsstore/Widgets_801/com.ibm.commerce.store.widgets.OmniConfigurator/ConfiguratorUI"
+		};
+		
+</script>
+<!--End OmniConfigurator_UI.jspf-->

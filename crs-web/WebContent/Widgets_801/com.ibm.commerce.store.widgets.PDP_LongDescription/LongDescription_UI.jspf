@@ -1,0 +1,44 @@
+<%--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2011, 2015 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--%>
+<c:if test="${!empty catalogEntryID}">
+	
+	<div id="product_longdescription">
+
+	<c:set var="longDescText" value="${longDescription}"/>
+							<c:choose>
+							
+							<c:when test="${fn:contains(longDescText, '| ')}">
+								<c:forEach var="num" items="${fn:split(longDescText, '|')}" varStatus="lngDescCounter">
+									<c:if test="${lngDescCounter.count == '1'}">
+										<p style="font-weight: bold;">
+											 <c:out value="${num}" /><br/>
+										</p> 
+									</c:if>
+									<ul>
+									<c:if test="${lngDescCounter.count > '1'}">
+										<li>
+											<c:out value="${num}" />
+										</li>
+									</c:if>
+									</ul>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${longDescText}" />
+							</c:otherwise>
+							</c:choose>
+	
+	</div>
+	
+</c:if>	

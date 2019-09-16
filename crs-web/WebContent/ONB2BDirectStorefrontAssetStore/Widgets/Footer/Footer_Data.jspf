@@ -1,0 +1,145 @@
+<%--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2011, 2014 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--%>
+
+<c:set var="footerLinkPages" value="HelpPage,ContactUsPage,PrivacyPolicyPage,ReturnPolicyPage,CorporateContactUsPage,CorporateInfoPage,SiteMapPage,BlogListPage,BlogDetailPage,SpecialOffersPage,OnlineCataloguesPage,AboutUs,UserAgreementPage,TermCondPage,LoyaltyTermCondPage,LoyaltyProgramPage,LiquorLicensePage,Blog,EthicalSourcingPage,FastDeliveryPage,CompetitionAnnouncementPage,ReturnPolicy,PrivacyPolicyNewPage"/>
+<c:set var="key1" value="store/${storeId}/page+byNames+${footerLinkPages}"/>
+<c:set var="pages" value="${cachedOnlineStoreMap[key1]}"/>
+<c:if test="${empty pages}">
+	<wcf:rest var="queryPageResult" url="store/{storeId}/page" cached="true">
+		<wcf:var name="storeId" value="${storeId}"/>
+		<wcf:param name="q" value="byNames"/>
+		<c:forEach var="footerLinkpage" items="${footerLinkPages}">
+			<wcf:param name="name" value="${footerLinkpage}"/>
+		</c:forEach>
+	</wcf:rest>
+	<c:set var="pages" value="${queryPageResult.resultList}" />
+	<wcf:set target = "${cachedOnlineStoreMap}" key="${key1}" value="${pages}"/>
+</c:if>
+
+<c:forEach var="page" items="${pages}">
+	<wcf:url var="${page.name}ViewURL" patternName="StaticPagesPattern" value="GenericStaticContentPageLayoutView">
+		<wcf:param name="urlLangId" value="${urlLangId}" />
+		<wcf:param name="storeId"   value="${storeId}"  />
+		<wcf:param name="catalogId" value="${catalogId}"/>
+		<wcf:param name="langId" value="${langId}" />
+		<wcf:param name="pageId" value="${page.pageId}" />
+	</wcf:url>
+</c:forEach>
+
+<wcf:url var="AdvancedSearchDisplayURL" value="AdvancedSearchDisplay">
+	<wcf:param name="storeId"   value="${storeId}"  />
+	<wcf:param name="catalogId" value="${catalogId}"/>
+	<wcf:param name="langId" value="${langId}" />
+</wcf:url>
+
+<flow:ifEnabled feature="QuickOrder">
+	<wcf:url var="QuickOrderURL" value="QuickOrderView">
+		<wcf:param name="storeId" value="${storeId}" />
+		<wcf:param name="catalogId" value="${catalogId}" />
+		<wcf:param name="langId" value="${langId}" />
+		<wcf:param name="isQuickOrder" value="true" />
+	</wcf:url>
+</flow:ifEnabled>
+<%-- Start - Old Code (Arsalan) --%>
+<wcf:url var="requisitionListURL" value="RequisitionListDisplayView">
+	<wcf:param name="storeId"   value="${WCParam.storeId}"  />
+	<wcf:param name="catalogId" value="${WCParam.catalogId}"/>
+	<wcf:param name="langId" value="${langId}" />
+	<wcf:param name="requisitionListStyle" value="strong"/>	
+</wcf:url>
+<%-- End - Old Code (Arsalan) --%>
+<flow:ifEnabled feature="StoreLocator">
+	<wcf:url var="StoreLocatorURL" value="AjaxStoreLocatorDisplayView">
+		<wcf:param name="storeId" value="${storeId}" />
+		<wcf:param name="catalogId" value="${catalogId}" />
+		<wcf:param name="langId" value="${langId}" />
+	</wcf:url>
+</flow:ifEnabled>
+
+<%-- Mobile store link --%>
+<c:if test="${env_mobileStoreSupport == true}">
+	<wcf:url var="mobileHome" value="m20Index">
+		<wcf:param name="catalogId" value="${catalogId}"/>
+		<wcf:param name="storeId" value="${storeId}"/>
+	</wcf:url>
+</c:if>
+<%-- Start - Old Code (Arsalan) --%>
+<wcf:url var="MyAccountURL" value="AjaxLogonForm">
+	<wcf:param name="storeId"   value="${WCParam.storeId}"  />
+	<wcf:param name="catalogId" value="${WCParam.catalogId}"/>
+	<wcf:param name="langId" value="${langId}" />
+	<wcf:param name="myAcctMain" value="1"/>
+</wcf:url>
+
+<c:set var="key1" value="categoryview/@top"/>
+<c:set var="subcategoryLimit" value="15"/>
+<c:set var="depthAndLimit" value="${subcategoryLimit + 1},${subcategoryLimit + 1}"/>
+<wcf:rest var="categoryHierarchy" url="${searchHostNamePath}${searchContextPath}/store/${WCParam.storeId}/categoryview/@top" >
+	<c:if test="${!empty WCParam.langId}">
+	<wcf:param name="langId" value="${WCParam.langId}"/>
+	</c:if>
+	<c:if test="${empty WCParam.langId}">
+	<wcf:param name="langId" value="${langId}"/>
+	</c:if>
+
+	<wcf:param name="responseFormat" value="json"/>		
+	<wcf:param name="catalogId" value="${WCParam.catalogId}"/>
+	<wcf:param name="depthAndLimit" value="${depthAndLimit}"/>
+	<c:forEach var="contractId" items="${env_activeContractIds}">
+		<wcf:param name="contractId" value="${contractId}"/>
+	</c:forEach>
+</wcf:rest>
+
+<jsp:useBean id="categoryURLMap" class="java.util.HashMap"/>
+
+<c:forEach var="department" items="${categoryHierarchy.catalogGroupView}">
+	<wcf:url var="categoryURL" value="Category3" patternName="CanonicalCategoryURL">
+		<wcf:param name="storeId" value="${storeId}"/>
+		<wcf:param name="catalogId" value="${catalogId}"/>		
+		<wcf:param name="langId" value="${langId}"/>
+		<wcf:param name="urlLangId" value="${urlLangId}"/>
+		<wcf:param name="categoryId" value="${department.uniqueID}"/>
+		<wcf:param name="pageView" value="${env_defaultPageView}"/>
+		<wcf:param name="beginIndex" value="0"/>
+	</wcf:url>
+	<c:set target="${categoryURLMap}" property="${department.uniqueID}" value="${categoryURL}"/>
+	<c:forEach var="category" items="${department.catalogGroupView}">
+		<wcf:url var="categoryURL" value="Category3" patternName="CategoryURL">
+			<wcf:param name="storeId" value="${storeId}"/>
+			<wcf:param name="catalogId" value="${catalogId}"/>
+			<wcf:param name="langId" value="${langId}"/>
+			<wcf:param name="urlLangId" value="${urlLangId}"/>
+			<wcf:param name="categoryId" value="${category.uniqueID}"/>
+			<wcf:param name="top_category" value="${department.uniqueID}"/>
+			<wcf:param name="pageView" value="${env_defaultPageView}"/>
+			<wcf:param name="beginIndex" value="0"/>
+		</wcf:url>
+		<c:set target="${categoryURLMap}" property="${department.uniqueID}_${category.uniqueID}" value="${categoryURL}"/>
+		<c:forEach var="subcategory" items="${category.catalogGroupView}">
+			<wcf:url var="categoryURL" value="Category3" patternName="CategoryURLWithParentCategory">
+				<wcf:param name="storeId" value="${storeId}"/>
+				<wcf:param name="catalogId" value="${catalogId}"/>
+				<wcf:param name="langId" value="${langId}"/>
+				<wcf:param name="urlLangId" value="${urlLangId}"/>
+				<wcf:param name="categoryId" value="${subcategory.uniqueID}"/>
+				<wcf:param name="parent_category_rn" value="${category.uniqueID}"/>
+				<wcf:param name="top_category" value="${department.uniqueID}"/>
+				<wcf:param name="pageView" value="${env_defaultPageView}"/>
+				<wcf:param name="beginIndex" value="0"/>
+			</wcf:url>
+			<c:set target="${categoryURLMap}" property="${department.uniqueID}_${category.uniqueID}_${subcategory.uniqueID}" value="${categoryURL}"/>
+		</c:forEach>
+	</c:forEach>
+</c:forEach>
+<%-- End - Old Code (Arsalan) --%>

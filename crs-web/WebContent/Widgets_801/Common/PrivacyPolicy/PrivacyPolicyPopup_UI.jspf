@@ -1,0 +1,153 @@
+<%--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2018 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--%>
+<!-- BEGIN PrivacyPolicy_UI.jsp -->
+<c:set var="dialogOptions" value='{"closeOnEscape": false}' />
+<div id="privacyPolicyPopup" role="dialog"
+	data-widget-type="wc.WCDialog" style="display: none;" data-widget-options="${fn:escapeXml(dialogOptions)}"
+	aria-label="<wcst:message key="PRIVACY_POLICY" bundle="${widgetText}"/>">
+
+	<div id="grayOutPopup"></div>
+	<div class="widget_quick_info_popup">
+
+		<!-- Top Border Styling -->
+		<div class="top">
+			<div class="left_border"></div>
+			<div class="middle"></div>
+			<div class="right_border"></div>
+		</div>
+		<div class="clear_float"></div>
+		<!-- Main Content Area -->
+		<div class="middle">
+			<div class="content_left_border">
+				<div class="content_right_border">
+					<div class="content">
+						<c:forEach var="contentFormat" items="${contentFormatMap}">
+							<c:set var="key" value="${contentFormat.key}" />
+							<%@include
+								file="../../com.ibm.commerce.store.widgets.ContentRecommendation/Content_UI.jspf"%>
+						</c:forEach>
+						<div class="container_static_full_width container_margin_5px">
+							<div class="static_page_content instruction">
+								<wcst:message bundle="${widgetText}" key="ACCEPT_PRIVACY_POLICY" var="acceptPrivacy" >
+									<wcst:param><c:out value="${storeName}"/></wcst:param>
+								</wcst:message>
+								<div id="privacyPopupPrivacyCheckboxHidden" style="display: none">
+									<div class="checkboxField marketingConsent">
+										<input class="nodisplay" type="checkbox" name="acceptPrivacy" id="AcceptPrivacyPolicyPopup" />
+										<img id="AcceptPrivacyPolicyPopup_Img" class="checkedCheckBox" role="checkbox" alt=""
+												aria-checked="false" aria-label="${acceptPrivacy}" tabindex="0"
+												src="${jspStoreImgDir}images/checkbox.png" onclick="javascript:AddressHelper.changeCheckboxState('${jspStoreImgDir}','AcceptPrivacyPolicyPopup','AcceptPrivacyPolicyPopup_Img','1','0');$('#AcceptPrivacyPolicyPopup_Error').toggle(false);"
+												onkeypress="javascript:if(event.keyCode == 0 || event.keyCode == 13 || event.keyCode == 32){event.preventDefault();AddressHelper.changeCheckboxState('${jspStoreImgDir}','AcceptPrivacyPolicyPopup','AcceptPrivacyPolicyPopup_Img','1','0');$('#AcceptPrivacyPolicyPopup_Error').toggle(false);}" />
+										<label class="checkboxLabel" for="AcceptPrivacyPolicyPopup" id="AcceptPrivacyPolicyPopup_Label"><span class="required-field"> * </span>${acceptPrivacy}</label>
+										<div id="AcceptPrivacyPolicyPopup_Error" class="error_msg" style="display: none"><br><wcst:message bundle="${widgetText}" key="ACCEPT_PRIVACY_POLICY_ERROR"/></div>
+									</div>
+								</div>
+								
+								<script type="text/javascript">
+									$( document ).ready(function() {
+										var privacyCookie = getCookie('WC_PrivacyNoticeVersion_' + WCParamJS.storeId);
+										if (privacyCookie != null) {
+											AddressHelper.changeCheckboxState('${jspStoreImgDir}','AcceptPrivacyPolicyPopup','AcceptPrivacyPolicyPopup_Img','1','0');
+										}
+										$('#privacyPolicyPopup .privacyCheckbox').append($('#privacyPopupPrivacyCheckboxHidden div'));
+									});
+								</script>
+								<flow:ifEnabled feature="MarketingConsent">
+									<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_OPTIN" var="acceptMarketing" >
+										<wcst:param><c:out value="${storeName}"/></wcst:param>
+									</wcst:message>
+									<wcst:message bundle="${widgetText}" key="MARKETING_CONSENT_OPTOUT" var="optOutMarketing" ></wcst:message>
+									<div id="privacyPopupMarketingCheckboxHidden" style="display: none">
+										<div class="checkboxField marketingConsent">
+											<label class="radiocontainer" for="PrivacyPolicyPopupMarketingConsentOptIn" id="PrivacyPolicyPopupMarketingConsentOptIn_Label">${acceptMarketing}
+												<input type="radio" name="marketingConsent" id="PrivacyPolicyPopupMarketingConsentOptIn" >
+												<span class="radiocheckmark"></span>
+											</label>
+										</div>
+										<div class="checkboxField marketingConsent">
+											<label class="radiocontainer" for="PrivacyPolicyPopupMarketingConsentOptOut" id="PrivacyPolicyPopupMarketingConsentOptOut_Label">${optOutMarketing}
+												<input type="radio" name="marketingConsent" id="PrivacyPolicyPopupMarketingConsentOptOut" >
+												<span class="radiocheckmark"></span>
+											</label>
+										</div>
+									</div>
+
+									<script type="text/javascript">
+										$( document ).ready(function() {
+											var marketingConsentCookie = getCookie('WC_MarketingTrackingConsent_' + WCParamJS.storeId);
+											if (marketingConsentCookie != null) {
+												marketingConsentCookie = parseInt(marketingConsentCookie);
+												if (marketingConsentCookie == 1) {
+													$('#PrivacyPolicyPopupMarketingConsentOptIn').prop("checked", true);
+												}
+												else {
+													$('#PrivacyPolicyPopupMarketingConsentOptOut').prop("checked", true);
+												}
+											}
+											else {
+												$('#PrivacyPolicyPopupMarketingConsentOptOut').prop("checked", true);
+											}
+											$('#privacyPolicyPopup .marketingConsentCheckbox').append($('#privacyPopupMarketingCheckboxHidden div'));
+										});
+									</script>
+								</flow:ifEnabled>
+								</div>
+							</div>
+						<input name="privacyPolicyContentName" type="hidden" value="${contentName}" id="PrivacyPolicyPopupContentName">
+						<div class="footer">
+							<div class="button_container right">
+								<a id="PrivacyAppceptBtn" class="button_primary tlignore"
+									tabindex="0"
+									href="javascript:acceptPrivacyPolicy('<c:out value="${contentName}"/>', 'PrivacyPolicyPopupMarketingConsentOptIn', 'AcceptPrivacyPolicyPopup', ${isSession});">
+									<div class="left_border"></div>
+									<div id="PrivacyAppceptBtnText" class="button_text">
+										<wcst:message bundle="${widgetText}"
+											key="PRIVACY_POLICY_ACCEPT_BUTTON" />
+									</div>
+									<div class="right_border"></div>
+								</a>
+								<div class="clear_float"></div>
+							</div>
+						</div>
+						<div class="clear_float"></div>
+					</div>
+					<!-- End content_right_border -->
+				</div>
+				<!-- End content_left_border -->
+			</div>
+		</div>
+		<div class="clear_float"></div>
+		<!-- Bottom Border Styling -->
+		<div class="bottom">
+			<div class="left_border"></div>
+			<div class="middle"></div>
+			<div class="right_border"></div>
+		</div>
+		<div class="clear_float"></div>
+	</div>
+</div>
+<script type="text/javascript">
+
+		<c:if test="${not empty persistentCookieLifetimeInSecond}" >
+			var persistentCookieLifetimeInDay = ${persistentCookieLifetimeInSecond}/24/60/60;
+		</c:if>
+		var storePrivacyVersionCookieInSession = false;
+		<c:if test="${isSession}" >
+			storePrivacyVersionCookieInSession = true;;
+		</c:if>
+	$(document).ready(function() {
+		isCurrentPrivacyPolicyAccepted();
+	});
+</script>
+<!-- END PrivacyPolicy_UI.jsp -->

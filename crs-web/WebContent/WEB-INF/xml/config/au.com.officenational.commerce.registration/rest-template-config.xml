@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2014, 2015 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+<_config:rest-action-config xmlns:_config="http://www.ibm.com/xmlns/prod/commerce/foundation/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ibm.com/xmlns/prod/commerce/foundation/config ../../xsd/rest-action-config.xsd ">
+	<resource path="{serverHost}/{contextPath}/store/{storeId}/userRegister" name="userRegisterationHandler">
+	 <serverParam name="serverHost">$WCParam.serverHost</serverParam>
+	 <serverParam name="contextPath">$WCParam.contextPath</serverParam>
+	 <serverParam name="storeId">$WCParam.storeId</serverParam>
+		
+		
+		<method name="checkOrgAndUsr" httpMethod="PUT" path="@self/checkOrgAndUsr">
+		<template>
+			<![CDATA[{
+    			 "storeId" : "$storeId",
+    			 "logonid" : "$logonid",
+    			 "orgname" : "$orgname",
+    			 "lat" 	   : "$lat",
+    			 "long"    : "$long",
+    			 "country"    :"$country",
+    			 "flag"    : "$flag"
+     			}]]>
+		</template>	
+		</method>
+		<method name="addressInactive" httpMethod="PUT" path="addressInactive">
+		<template>
+			<![CDATA[{
+    			 "storeId" : "$storeId",
+    			 "status" : "$status",
+    			 "naddress" : "$naddress",
+    			 "addressId" : "$addressId"
+     			}]]>
+		</template>	
+		</method>
+		
+		<method name="registerBuyerOrganization" httpMethod="POST" path="buyer" https="true">
+			<template>
+				<![CDATA[{
+          	      	"receiveSMSNotification"             : "$receiveSMSNotification",
+					"challengeAnswer"                    : "$challengeAnswer",
+					"registerOrg"                        : "$registerOrg",
+					"primary"                            : "$primary",
+					"usr_zipCode"                        : "$usr_zipCode",
+					"usr_preferredCurrency"              : "$usr_preferredCurrency",
+					"usr_address1"                       : "$usr_address1",
+					"usr_address2"                       : "$usr_address2",
+					"usr_address3"                       : "$usr_address3",
+					"usr_logonPasswordVerify"            : "$usr_logonPasswordVerify",
+					"usr_lastName"                       : "$usr_lastName",
+					"usr_preferredLanguage"              : "$usr_preferredLanguage", 
+					"usr_phone1"                         : "$usr_phone1",
+					"usr_phone2"                         : "$usr_phone2",
+					"URL"                                : "$URL",
+					"page"                               : "$page",
+					"org_email1"                         : "$org_email1",
+					"registrationType"                   : "$registrationType",
+					"org_zipCode"                        : "$org_zipCode",
+					"catalogId"                          : "$catalogId",
+					"isBuyerUser"                        : "$isBuyerUser",
+					"URLOrg"                             : "$URLOrg",
+					"usr_profileType"                    : "$usr_profileType",
+					"storeId"                            : "$storeId",
+					"new"                                : "$new",
+					"usr_email1"                         : "$usr_email1",
+					"org_city"                           : "$org_city",
+					"usr_state"                          : "$usr_state",
+					"challengeQuestion"                  : "$challengeQuestion",
+					"usr_country"                        : "$usr_country",
+					"usr_firstName"                      : "$usr_firstName",
+					"authToken"                          : "$authToken",
+					"usr_logonId"                        : "$usr_logonId",
+					"usr_logonPassword"                  : "$usr_logonPassword",
+					"org_state"                          : "$org_state",
+					"receiveSMS"                         : "$receiveSMS",
+					"usr_city"                           : "$usr_city",
+					"approvalGroups"                     : "$approvalGroups",
+					"org_orgEntityName"                  : "$org_orgEntityName",
+					"errorViewName"                      : "$errorViewName",
+					"org_address1"                       : "$org_address1",
+					"org_address2"                       : "$org_address2",
+					"org_address3"                       : "$org_address3",
+					"myAcctMain"                         : "$myAcctMain",
+					"org_address2"                       : "$org_address2",
+					"org_country"                        : "$org_country",
+					"registerType"                       : "$registerType",
+					"userField1"                   	 	 : "$usr_userField1",
+					"userField2"                         : "$usr_userField2",
+					"userField3"                         : "$usr_userField3",
+					"orgEntityField1"                    : "$org_abnNo",
+					"parentMemberId"                 	 : "$parentMemberId",
+					"orgEntityType"                      : "$orgEntityType",
+					"contractName"                       : "$contractName",
+					"org_phone1"                         : "$org_phone1"
+          	      }]]> 
+			</template>
+		</method>	
+		
+		<method name="updateAddressForPerson" httpMethod="PUT" path="contact/{addressId}" https="true" authentication="partial">
+		<var name="addressId">$WCParam.addressId</var>
+			<template>
+				<![CDATA[{
+				"storeId" : "$storeId",
+				"catalogId" : "$catalogId",
+				"authToken" : "$authToken",
+				"nickName" : "$nickName",
+				"firstName" : "$firstName",
+			    	"lastName" : "$lastName",
+			    	"addressType" : "$addressType",
+				"city" : "$city",
+				"state" : "$state",
+				"country" : "$country",
+				"zipCode" : "$zipCode",
+				"addressLine": [
+			      		"$address1",
+			      		"$address2",
+			      		"$address3"
+			      		],
+				"email1" : "$email1",
+			    	"email2" : "$email2",
+			    	"phone1" : "$phone1"
+	     		}
+				]]>
+			</template>
+		</method>
+		
+		<method name="getUserRoleTitle" httpMethod="GET" path="getUserRoleTitle/{userId}">
+			<var name="storeId">$WCParam.storeId</var>
+			<var name="userId">$WCParam.userId</var>
+		</method>
+		
+		<method name="getCostCenter" httpMethod="GET" path="getCostCenter/{userId}">
+			<var name="storeId">$WCParam.storeId</var>
+			<var name="userId">$WCParam.userId</var>
+		</method>
+		
+		<method name="getPersonContact" httpMethod="GET" path="getPersonContact/{userId}">
+			<var name="storeId">$WCParam.storeId</var>
+			<var name="userId">$WCParam.userId</var>
+		</method>
+		
+		<method name="getPersonActiveFlag" httpMethod="GET" path="getPersonActiveFlag/{addressId}">
+			<var name="storeId">$WCParam.storeId</var>
+			<var name="addressId">$WCParam.addressId</var>
+		</method>
+	</resource>	
+	
+
+	
+	<!-- 
+	<resource path="{serverHost}/{contextPath}/store/{storeId}/segment" name="segmentHandler">
+	 <serverParam name="serverHost">$WCParam.serverHost</serverParam>
+	 <serverParam name="contextPath">$WCParam.contextPath</serverParam>
+	 <serverParam name="storeId">$WCParam.storeId</serverParam>
+		<method name="segment" httpMethod="GET" path="/{segmentId}">
+			<var name="segmentId">$WCParam.segmentId</var>
+		</method>
+	</resource>
+	 -->
+	
+    
+</_config:rest-action-config>
