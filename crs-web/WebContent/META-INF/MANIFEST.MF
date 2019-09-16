@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.10.1
-Created-By: 8.0.5.20 - pxa6480sr5fp20-20180802_01(SR5 FP20) (IBM Corpo
- ration)
-Class-Path: properties xml
-
