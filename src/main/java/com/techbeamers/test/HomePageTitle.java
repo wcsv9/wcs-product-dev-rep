@@ -74,7 +74,7 @@ public class HomePageTitle {
 			driver.findElement(By.id("WC_CatalogEntryDBThumbnailDisplayJSPF_11948_link_9b")).click();
 			driver.findElement(By.id("productPageAdd2Cart")).click();
 			
-			System.out.print("\nPDP Executed");
+			System.out.print("\nAdd to Cart Executed\n");
 
 		}
 		catch(Exception e)
