@@ -71,7 +71,9 @@ public class HomePageTitle {
 	@Test(priority = 2)
 	public static void PDP() throws Exception  {  
 		try{
-			driver.findElement(By.xpath("(//a[@id='WC_CatalogEntryDBThumbnailDisplayJSPF_11948_link_9b']")).click();
+			driver.findElement(By.id("(WC_CatalogEntryDBThumbnailDisplayJSPF_11948_link_9b")).click();
+			driver.findElement(By.id("(productPageAdd2Cart")).click();
+			
 			System.out.print("\nPDP Executed");
 
 		}
