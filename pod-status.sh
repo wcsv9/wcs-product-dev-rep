@@ -23,7 +23,7 @@ done
 if [ $status = 1 ]; then
 
 echo "POD is UP"
-sleep 40
+sleep 120
 
 else
 echo "POD is not coming up"
