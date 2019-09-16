@@ -1,0 +1,541 @@
+/*!
+ * Licensed Materials - Property of IBM 
+ * IBM Configure, Price , Quote (5725 D11)
+ * (c) Copyright IBM Corp. 2015 All Rights Reserved.
+ * US Government Users Restricted Rights - Use, duplication or disclosure restricted
+ * by GSA ADP Schedule Contract with IBM Corp. 
+ */
+
+.ibm-omni-configurator .alert {
+  padding: 8px;
+  margin-bottom: 5px;
+}
+
+.ibm-omni-configurator .panel-default > .panel-heading {
+  background-color: #EEE;
+  cursor: pointer;
+  font-size: 5px;
+}
+
+.ibm-omni-configurator .panel-heading .accordion-toggle:after {
+  /* symbol for "opening" panels */
+  font-family: 'Glyphicons Halflings';
+  /* essential for enabling glyphicon */
+  content: "\e114";
+  /* adjust as needed, taken from bootstrap.css */
+  float: right;
+  /* adjust as needed */
+  color: grey;
+  /* adjust as needed */
+}
+
+.ibm-omni-configurator .panel-heading .accordion-toggle.collapsed:after {
+  /* symbol for "collapsed" panels */
+  content: "\e080";
+  /* adjust as needed, taken from bootstrap.css */
+}
+
+.ibm-omni-configurator .panel-default {
+  padding-left: 0px;
+  border-color: #FFFFFF;
+  border-bottom-color: #EEE;
+}
+
+.ibm-omni-configurator .panel-collapse > .panel-body {
+  border: 2px solid;
+  border-color: #E0E0E0;
+}
+
+.ibm-omni-configurator .well {
+  background-color: #ffffff;
+  border: 0;
+}
+
+.ibm-omni-configurator input:hover + label,
+.ibm-omni-configurator input:active + label,
+.ibm-omni-configurator input:focus + label {
+  background-color: #DCFFFF;
+  color: #000066;
+}
+
+/*
+.nav > li > a:focus {
+	background-color: #ccedec;
+	color:#5a5a5a;
+}
+
+h4 > div:focus {
+	background-color: #ccedec;
+	color:#5a5a5a;
+}*/
+
+.ibm-omni-configurator .breadcrumb {
+  margin: 0px 0px 0px 0px;
+  background: #EEE;
+  padding-left: 0;
+  padding-right: 0;
+  /*
+    border: 2px solid #AEAEAE;
+    border-radius: 2px;
+*/
+}
+
+.ibm-omni-configurator dl {
+  margin-top: 0;
+  margin-bottom: 5px;
+  border-bottom: 2px solid #00a6a0;
+}
+
+.ibm-omni-configurator label {
+  font-weight: normal;
+}
+
+/*!
+ * Licensed Materials - Property of IBM 
+ * IBM Configure, Price , Quote (5725 D11)
+ * (c) Copyright IBM Corp. 2015, 2016 All Rights Reserved.
+ * US Government Users Restricted Rights - Use, duplication or disclosure restricted
+ * by GSA ADP Schedule Contract with IBM Corp. 
+ */
+
+/** Common - Starts **/
+
+.ibm-omni-configurator .title_info {
+  font-weight: 700;
+  line-height: 1.42857;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  border-bottom: 2px solid #00A6A0;
+}
+
+/*==For Callcenter==*/
+
+.ibm-omni-configurator .repeating-option-item > div:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.ibm-omni-configurator .multi-list-box-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ibm-omni-configurator .table-uev {
+  margin-bottom: 0;
+  border: none;
+}
+
+.ibm-omni-configurator .table-uev tbody > tr > td {
+  padding-left: 0;
+}
+
+.ibm-omni-configurator .uev-label {
+  margin: 15px 0;
+}
+
+.ibm-omni-configurator .list-box-icon-width {
+  min-width: 25px;
+}
+
+.ibm-omni-configurator .input-quantity {
+  max-width: 40%;
+  display: inline-block;
+  text-align: center;
+  margin-left: 5px;
+}
+
+.ibm-omni-configurator .form-group-uev {
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .summary-row {
+  border-bottom: 1px solid #eee;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/*==For Callcenter==*/
+
+.ibm-omni-configurator .title_info > label {
+  margin: 0px;
+}
+
+.ibm-omni-configurator .link-size {
+  font-size: 36px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.ibm-omni-configurator .list_border {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.ibm-omni-configurator .list_content {
+  position: relative;
+  display: block;
+}
+
+.ibm-omni-configurator .list_content > a {
+  padding: 10px 15px;
+  position: relative;
+  display: block;
+}
+
+.ibm-omni-configurator .list_content > a:hover,
+.ibm-omni-configurator .list_content > a:focus {
+  text-decoration: none;
+  background-color: #EEE;
+}
+
+.ibm-omni-configurator .wordwrap {
+  word-wrap: break-word;
+}
+
+.ibm-omni-configurator .option_class_constant {
+  word-wrap: break-word;
+  line-height: 1.0;
+  font-weight: 400;
+}
+
+.ibm-omni-configurator .nav_buttons {
+  padding: 4px;
+}
+
+.ibm-omni-configurator .padding-5 {
+  padding: 5px;
+}
+
+.ibm-omni-configurator .margin-top5 {
+  margin-top: 5px;
+}
+
+.ibm-omni-configurator .summary_item_section {
+  padding-top: 100px;
+}
+
+.ibm-omni-configurator .well {
+  padding-top: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+}
+
+@media screen and (max-width: 991px) {
+  .ibm-omni-configurator .well {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+
+  .ibm-omni-configurator .quantity {
+    width: 80px;
+    height: 40px;
+  }
+
+  .ibm-omni-configurator .uev-label {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .ibm-omni-configurator .quantity-large-screen {
+    width: 60px;
+    height: 40px;
+  }
+}
+
+.ibm-omni-configurator .input[type=radio],
+.ibm-omni-configurator input[type=checkbox] {
+  width: 15px;
+  height: 15px;
+}
+
+.ibm-omni-configurator .nav-tabs {
+  margin-bottom: 0;
+}
+
+.ibm-omni-configurator .row-centered {
+  text-align: center;
+}
+
+.ibm-omni-configurator .col-centered {
+  display: inline-block;
+  float: none;
+  /* reset the text-align */
+  text-align: left;
+  /* inline-block space fix */
+  margin-right: -4px;
+}
+
+.ibm-omni-configurator .panel {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.05);
+}
+
+.ibm-omni-configurator .panel-body {
+  padding: 5px;
+}
+
+/*todo*/
+
+.ibm-omni-configurator .shell > section {
+  margin: 0;
+}
+
+/** Common - Ends **/
+
+/** Configurator Module - Starts **/
+
+.ibm-omni-configurator .container .nav-tabs,
+.ibm-omni-configurator .container-fluid .nav-tabs {
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
+.ibm-omni-configurator .navbar-collapse {
+  overflow-x: hidden;
+  padding-left: 0px;
+}
+
+.ibm-omni-configurator .padding-left-2 {
+  padding: 0px 0px 0px 2px;
+}
+
+.ibm-omni-configurator .padding-right-5 {
+  padding-right: 5px;
+}
+
+.ibm-omni-configurator .padding-left-5 {
+  padding-left: 5px;
+}
+
+.ibm-omni-configurator .message {
+  background-color: transparent;
+  border-style: none;
+}
+
+.ibm-omni-configurator .product-img > img {
+  width: 100%;
+}
+
+.ibm-omni-configurator .page_model_img {
+  padding-right: 30px;
+}
+
+.ibm-omni-configurator .page_model_tab {
+  padding-right: 30px;
+}
+
+.ibm-omni-configurator .summary_section {
+  padding-top: 25px;
+}
+
+.ibm-omni-configurator .product-img {
+  text-align: center;
+}
+
+.ibm-omni-configurator .img-responsive {
+  margin: 0 auto;
+}
+
+.ibm-omni-configurator .product-img-sm > img {
+  width: 50%;
+  height: 50%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ibm-omni-configurator .pull-right-sm {
+    float: right;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ibm-omni-configurator .pull-right-md {
+    float: right;
+  }
+}
+
+.ibm-omni-configurator .tabs_style {
+  padding-right: 25px;
+}
+
+.ibm-omni-configurator .summary_itemdesc {
+  padding-left: 25px;
+  word-wrap: break-word;
+}
+
+.ibm-omni-configurator .radio_ip,
+.ibm-omni-configurator checkbox_ip {
+  margin-top: 2px;
+}
+
+.ibm-omni-configurator .radio_price,
+.ibm-omni-configurator checkbox_price {
+  padding-left: 5px;
+}
+
+.ibm-omni-configurator .padding-top-5 {
+  padding-top: 5px;
+}
+
+.ibm-omni-configurator .control-widget-listbox {
+  display: block;
+  max-height: 800px;
+  overflow-x: hidden;
+}
+
+.ibm-omni-configurator .control-widget-listbox > ul {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.ibm-omni-configurator .control-widget-listbox > ul > div > div > li {
+  width: 100%;
+}
+
+.ibm-omni-configurator .control-widget-listbox-left {
+  padding-left: 8px;
+}
+
+.ibm-omni-configurator .control-widget-listbox-right {
+  position: relative;
+  left: 0;
+  top: 0;
+  float: right;
+  width: 20%;
+  padding-right: 5%;
+  text-align: right;
+}
+
+.ibm-omni-configurator .tabular-item {
+  padding-left: 5%;
+}
+
+.ibm-omni-configurator .option_child {
+  padding-left: 10%;
+}
+
+/** Debug Module - Ends **/
+
+/**Loading Mask **/
+
+.ibm-omni-configurator #loadingMask {
+  z-index: 99999 !important;
+}
+
+.ibm-omni-configurator #loadingMask .bar {
+  width: 100%;
+}
+
+.ibm-omni-configurator #loadingImg {
+  width: 50px;
+  height: 50px;
+}
+
+.ibm-omni-configurator .page-splash {
+  z-index: 99999 !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  pointer-events: auto;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: opacity 0.3s linear;
+}
+
+.ibm-omni-configurator .page-splash-message {
+  text-align: center;
+  margin: 20% auto 0 auto;
+  -webkit-text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.65);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0;
+}
+
+.ibm-omni-configurator .page-splash-message.page-splash-message-subtle {
+  margin: 30% auto 0 auto;
+  font-size: 200%;
+}
+
+.ibm-omni-configurator .form-control {
+  height: 34px;
+  padding: 0px 0px 0px 2px;
+}
+
+.ibm-omni-configurator .item-price-parent {
+  padding: 1% 0;
+  margin: 10px 0;
+}
+
+.ibm-omni-configurator .item-price-child {
+  padding: 0% 0;
+  margin: 10px 0;
+}
+
+.ibm-omni-configurator .unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ibm-omni-configurator .horizontal-line {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ibm-omni-configurator .tabnamespace {
+  margin-left: 3px;
+}
+
+.ibm-omni-configurator .configurator-title {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.ibm-omni-configurator .ul-margin {
+  margin: 0px;
+}
+
+.ibm-omni-configurator .mobile-summary-padding {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.ibm-omni-configurator .icon-space {
+  padding-right: 3px;
+}
+
+.ibm-omni-configurator .margin-left-zero {
+  margin: 0px;
+}
+
+.ibm-omni-configurator .uev-text-size {
+  font-size: inherit;
+}
+
+.ibm-omni-configurator .padding-right-0 {
+  padding-right: 0px;
+}
+
+.ibm-omni-configurator .bottom-margin-5 {
+  margin-bottom: 5px;
+}
+
+.ibm-omni-configurator table.table tbody tr td {
+  word-break: break-word;
+}
+
+.ibm-omni-configurator .modal-content {
+  height: 700px;
+  overflow: auto;
+}
