@@ -1,0 +1,43 @@
+pipeline {
+    agent none
+        stages {
+        stage('checking out') {
+            agent { label 'wcsv9' }
+            steps { 
+             echo "Checking out to Mounted Volume"
+              
+            }
+        }
+           
+		 stage('Updating Image with Changes ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/data/wcscode/ts-web') {
+                    sh 'docker build -f Dockerfile . -t  192.168.17.90:5000/"$image"'
+                    
+                    }
+            }
+            }	        
+		
+		stage('Pushing to Repo ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/home/Deploy/CustDeploy/CustDeploy') {
+                    sh 'docker push 192.168.17.90:5000/"$image"'
+                    
+                    }
+            }
+            }
+			stage('Updating Pod') {
+            agent { label 'wcsv9' }
+                steps { 
+                   sh 'kubectl set image deployment/demoqaauthts-web ts-web=192.168.17.90:5000/"$image"'
+                  
+                    
+            }
+            }
+            
+            
+            
+        }
+}
