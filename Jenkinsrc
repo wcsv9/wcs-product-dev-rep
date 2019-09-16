@@ -23,7 +23,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                             
-                   dir ('/data/Deploy') {
+                   dir ('/data/wcscode') {
                    sh 'rm -rf /data/Deploy/CustDeploy/CustDeploy/*'
                   sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /data/Deploy/CustDeploy/CustDeploy'
              
