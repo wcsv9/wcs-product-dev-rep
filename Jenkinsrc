@@ -10,6 +10,14 @@ pipeline {
               
             }
         }
+	stage('Sonar Review') {
+            agent { label 'wcsv9' }
+                steps { 
+             
+                    sh '/data/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar/bin/sonar-scanner scan -Dsonar.host.url=http://192.168.7.187:9000 -Dproject.settings=/data/wcscode/sonar-scanner.properties'
+              
+            }
+            }
             stage('Creating WCB Commerce Build') {
             agent { label 'wcsv9' }
                 steps { 
