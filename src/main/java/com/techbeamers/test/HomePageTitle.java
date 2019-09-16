@@ -34,7 +34,7 @@ public class HomePageTitle {
 		//String getTitle = driver.getTitle();
 		//Assert.assertEquals(getTitle, "Welcome to AuroraESite");
 		//Assert.assertEquals(getTitle, "GGG");
-		String Expectedtitle = "Testing";
+		String Expectedtitle = "Welcome to AuroraESite";
         //it will fetch the actual title 
         String Actualtitle = driver.getTitle();
         System.out.println("\nBefore Assetion= " + Expectedtitle + Actualtitle);
