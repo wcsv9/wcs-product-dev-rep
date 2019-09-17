@@ -63,7 +63,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
 		   
-                    sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauth"$apptype"-app "$apptype"-app=192.168.17.90:5000/"$apptype"-app:"$image" && chmod 777  /data/wcscode/pod-status.sh && /data/wcscode/pod-status.sh  demoqaauth"$apptype" && sleep 120s '
+                    sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauth"$apptype"-app "$apptype"-app=192.168.17.90:5000/"$apptype"-app:"$image" && chmod 777  /data/wcscode/pod-status.sh && /data/wcscode/pod-status.sh  demoqaauth"$apptype" && sleep 120s && curl -k "https://wcs.demoqaauth.ibm.com/wcs/shop/SearchDisplay?categoryId=&storeId=1&catalogId=10502&langId=-1&sType=SimpleSearch&resultCatEntryType=2&showResultsPage=true&searchSource=Q&pageView=&pageGroup=Search&beginIndex=0&pageSize=12&searchTerm=shoes" '
                   
                     
             }
