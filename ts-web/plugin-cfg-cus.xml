@@ -117,7 +117,7 @@
    <UriGroup Name="default_host_default_default_node_Cluster_URIs">
       <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/webapp/remote/preview/*"/>
       <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/wcsstore/*"/>
-      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/*"/>
+      <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/wcs/*"/>
    </UriGroup>
    <Route ServerCluster="default_default_node_Cluster" UriGroup="default_host_default_default_node_Cluster_URIs" VirtualHostGroup="default_host"/>
   <RequestMetrics armEnabled="false" loggingEnabled="false" rmEnabled="false" traceLevel="HOPS">
