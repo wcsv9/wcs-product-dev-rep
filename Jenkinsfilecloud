@@ -41,6 +41,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/Deploy/CustDeploy') {
+		    sh 'cp /opt/deploy/Dockerfile-$apptype /opt/Deploy/CustDeploy/'
                     sh 'docker build -f Dockerfile-$apptype . -t  us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
                     
                     }
