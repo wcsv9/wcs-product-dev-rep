@@ -41,7 +41,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/Deploy/CustDeploy') {
-                    sh 'docker build -f Dockerfile . -t  gcr.io/coastal-antler-216919/crs-app:9.0.0."$image"'
+                    sh 'docker build -f Dockerfile . -t  us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
                     
                     }
             }
@@ -51,7 +51,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/Deploy/CustDeploy/CustDeploy') {
-                    sh 'docker push us.gcr.io/gcpwcs/crs-app:9.0.1."$image"'
+                    sh 'docker push us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
                     
                     }
             }
