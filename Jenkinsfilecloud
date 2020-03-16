@@ -59,7 +59,7 @@ pipeline {
 			stage('Updating Pod') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'kubectl set image deployment/demoqaauthcrs-app $apptype-app=us.gcr.io/gcpwcs/crs-$apptype:9.0.1."$image"'
+                   sh 'kubectl set image deployment/demoqaauth$apptype-app $apptype-app=us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
                   
                     
             }
