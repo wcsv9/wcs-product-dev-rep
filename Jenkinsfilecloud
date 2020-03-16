@@ -62,7 +62,7 @@ pipeline {
 			stage('Updating Pod') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'kubectl set image deployment/demoqaauth$apptype-app $apptype-app=us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
+                   sh 'export PATH=$PATH:/root/google-cloud-sdk/bin:/home/kubernetes/bin:/home/kubernetes/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin && kubectl set image deployment/demoqaauth$apptype-app $apptype-app=us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
                   
                     
             }
