@@ -12,7 +12,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
              echo "Building Image in Utility Container"
-                    sh 'docker exec -i 32227494aebd bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/WebSphere/CommerceServer90/wcbd"'
+                    sh 'docker exec -i wcbd-server bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/deploy"'
               
             }
             }
@@ -20,7 +20,7 @@ pipeline {
             stage('Copying Package to Deploy Folder') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'docker cp -L 32227494aebd:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /opt/Deploy/'
+                   sh 'docker cp -L wcbd-server:/opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /opt/Deploy/'
                   
                     
             }
@@ -51,7 +51,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/opt/Deploy/CustDeploy/CustDeploy') {
-                    sh 'docker push gcr.io/coastal-antler-216919/crs-app:9.0.0."$image"'
+                    sh 'docker push us.gcr.io/gcpwcs/crs-app:9.0.1."$image"'
                     
                     }
             }
@@ -59,7 +59,7 @@ pipeline {
 			stage('Updating Pod') {
             agent { label 'wcsv9' }
                 steps { 
-                   sh 'kubectl set image deployment/demoqalivecrs-app crs-app=gcr.io/coastal-antler-216919/crs-app:9.0.0."$image"'
+                   sh 'kubectl set image deployment/demoqaauthcrs-app $apptype-app=us.gcr.io/gcpwcs/crs-$apptype:9.0.1."$image"'
                   
                     
             }
