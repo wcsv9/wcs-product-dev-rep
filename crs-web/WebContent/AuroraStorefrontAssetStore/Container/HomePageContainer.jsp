@@ -37,14 +37,14 @@ div#page div#contentWrapper .row.margin-true .col4.acol12 img#contentImage_4 {
                 <div class="col6 acol12" data-slot-id="2"><wcpgl:widgetImport slotId="2"/></div>
         </div>
         <div class="row margin-true">
-                <div class="col12" data-slot-id="3"><img id="contentImage_1" src="/wcsstore/AuroraStorefrontAssetStore//images/one.jpeg" alt="AuroraStorefrontAssetStore"></div>
+                <div class="col12" data-slot-id="3"><img id="contentImage_1" src="/wcsstore/AuroraStorefrontAssetStore//images/one.jpg" alt="AuroraStorefrontAssetStore"></div>
         </div>
         <div class="row margin-true">
                 <div class="col8 acol12" data-slot-id="4"><img id="contentImage_2" src="/wcsstore/AuroraStorefrontAssetStore//images/two.jpeg" alt="AuroraStorefrontAssetStore"></div>
-                <div class="col4 acol12" data-slot-id="5"><img id="contentImage_3" src="/wcsstore/AuroraStorefrontAssetStore//images/three.jpeg" alt="AuroraStorefrontAssetStore"></div>
+                <div class="col4 acol12" data-slot-id="5"><img id="contentImage_3" src="/wcsstore/AuroraStorefrontAssetStore//images/three.jpg" alt="AuroraStorefrontAssetStore"></div>
         </div>
         <div class="row margin-true">
-                <div class="col4 acol12" data-slot-id="6"><img id="contentImage_4" src="/wcsstore/AuroraStorefrontAssetStore//images/four.jpeg" alt="AuroraStorefrontAssetStore"></div>
+                <div class="col4 acol12" data-slot-id="6"><img id="contentImage_4" src="/wcsstore/AuroraStorefrontAssetStore//images/four.jpg" alt="AuroraStorefrontAssetStore"></div>
         </div>
         <div class="row">
                 <div class="col12" data-slot-id="9"><wcpgl:widgetImport slotId="9"/></div>
