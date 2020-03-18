@@ -18,6 +18,10 @@ div#page div#contentWrapper .row.margin-true .col4.acol12 img#contentImage_3 {
 div#page div#contentWrapper .row.margin-true .col4.acol12 img#contentImage_4 {
     width: 100%;
 }
+    div#page div#contentWrapper .row.margin-true {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 </style>
         <div class="row">
                 <div class="col6 acol12" data-slot-id="2"><wcpgl:widgetImport slotId="2"/></div>
