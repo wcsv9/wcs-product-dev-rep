@@ -149,7 +149,7 @@
 
         <%-- Start Refresh Area --%>
         <div id="drop_down_${department.uniqueID}" aria-labelledby="departmentsButton" >
-        <ul id="departmentsMenu" role="menu" data-parent="header" aria-labelledby="departmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}"><li class="hidden">
+        <ul id="departmentsMenu" role="menu" data-parent="header" aria-labelledby="departmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}" end="1"><li class="hidden">
 	    <a id="departmentButton_${department.uniqueID}" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_${department.uniqueID}">
 		<span><c:out value="${department.name}"/></span>
 		<div class="arrow_button_icon"></div>
@@ -161,7 +161,7 @@
                     <a id="departmentToggle_${department.uniqueID}" href="#" class="toggle" role="button" data-toggle="departmentMenu_${department.uniqueID}" aria-labelledby="departmentLink_${department.uniqueID}"><span role="presentation"></span></a>
                 </div>
                 <c:if test="${!empty department.catalogGroupView}">
-                    <ul class="categoryList"><c:forEach var="category" items="${department.catalogGroupView}" end="${subcategoryLimit - 1}"><li>
+                    <ul class="categoryList"><c:forEach var="category" items="${department.catalogGroupView}" end="1"><li>
                         <c:set var="key" value="${department.uniqueID}_${category.uniqueID}"/>
                         <a id="categoryLink_${key}" href="${fn:escapeXml(categoryURLMap[key])}" class="menuLink" role="menuitem" tabindex="-1"><c:out value="${category.name}"/></a>
                         <c:if test="${!empty category.catalogGroupView}">
@@ -178,15 +178,8 @@
                     </li></c:if></ul>
                 </c:if>
             </div>
-        </li></c:forEach><li class="active">
-            <a id="allDepartmentsButton" href="#" class="departmentButton" role="button" aria-haspopup="true" data-toggle="allDepartmentsMenu">
-                <span><fmt:message bundle="${storeText}" key="SEARCH_ALL_DEPARTMENTS"/></span>
-                <div class="arrow_button_icon"></div>
-            </a>
-            <ul id="allDepartmentsMenu" class="departmentMenu" role="menu" data-parent="departmentsMenu" aria-labelledby="allDepartmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}"><li>
-                <a id="departmentLink_${department.uniqueID}_alt" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="menuLink"  role="menuitem" tabindex="-1"><c:out value="${department.name}"/></a>
-            </li></c:forEach></ul>
-        </li></ul></div><%-- End Refresh Area --%>
+        </li></c:forEach>
+		</ul></div><%-- End Refresh Area --%>
         <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/Search/Search.jsp"/><%out.flush();%>
     </div>
 </div>
