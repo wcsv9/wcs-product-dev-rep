@@ -1,0 +1,71 @@
+pipeline {
+    agent none
+    
+        stages {
+        stage('checking out') {
+            agent { label 'wcsv9' }
+            steps { 
+             echo "Checking out to Mounted Volume"
+	     checkout scm
+              
+            }
+        }
+	
+            stage('Creating WCB Commerce Build') {
+            agent { label 'wcsv9' }
+                steps { 
+             echo "Building Image in Utility Container"
+                    sh 'docker exec -i wcbd-server-1 bash -c  "cd /opt/WebSphere/CommerceServer90/wcbd/ ; ./setenv ; ./wcbd-ant -buildfile wcbd-build.xml -Dbuild.type=local -Dapp.type=$apptype -Dbuild.label=$label -Dwork.dir=/opt/deploy && mv /opt/WebSphere/CommerceServer90/wcbd/dist/server/wcbd-deploy-server-local-"$apptype"-"$label".zip /opt/deploy && rm -rf /opt/WebSphere/CommerceServer90/wcbd/source/demo && rm -rf /opt/WebSphere/CommerceServer90/wcbd/working/* "'
+              
+            }
+            }
+			
+           stage('Unpacking Deploy package') {
+            agent { label 'wcsv9' }
+                steps { 
+                            
+                   dir ('/data/wcscode') {
+                   sh 'rm -rf /data/Deploy/CustDeploy/CustDeploy/*'
+                  sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /data/Deploy/CustDeploy/CustDeploy'
+             
+              }
+                    
+            }
+            }
+		 stage('Updating Image with Changes ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/data/Deploy/CustDeploy/') {
+                    sh 'docker build -f Dockerfile."$apptype" . -t 192.168.17.90:5000/"$apptype"-app:"$image"'
+                    
+                    }
+            }
+            }	        
+		
+		stage('Pushing to Repo ') {
+            agent { label 'wcsv9' }
+                steps { 
+                    dir ('/data/Deploy/CustDeploy/CustDeploy') {
+                    sh 'docker push 192.168.17.90:5000/"$apptype"-app:"$image"'
+		   
+                    
+                    }
+            }
+            }
+			stage('Updating Pod') {
+            agent { label 'wcsv9' }
+                steps { 
+		   
+                    sh 'export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl set image deployment/demoqaauth"$apptype"-app "$apptype"-app=192.168.17.90:5000/"$apptype"-app:"$image" '
+                  
+                    
+            }
+            }
+	   
+        
+		}
+            
+         
+            
+        
+}
