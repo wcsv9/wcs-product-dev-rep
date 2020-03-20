@@ -14,7 +14,35 @@
 
 <%-- Note: for any e-Marketing Spots included on the footer page, then the parameter --%>
 <%--       cacheWithParent should be set to true if the footer is dynacached         --%>
-			
+<div class="social-media">
+<ul class="nav">
+<li>
+<a href="https://twitter.com/mooresclothing" title="Twitter" target="_blank">
+<img src="wcsstore/AuroraStorefrontAssetStore/images/twiter.jpg" alt="">
+</a>
+</li>
+<li>
+<a href="https://www.facebook.com/MooresClothing/" title="Facebook" target="_blank">
+<img src="wcsstore/AuroraStorefrontAssetStore/images/facebook.jpg" alt="">
+</a>
+</li>
+<li>
+<a href="https://www.instagram.com/mooresclothing/" title="Instagram" target="_blank">
+<img src="wcsstore/AuroraStorefrontAssetStore/images/instagram.jpg" alt="">
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/channel/UC3h4hpX_Y-RpRbZdsAF5gEA" title="Youtube" target="_blank">
+<img src="wcsstore/AuroraStorefrontAssetStore/images/youtube.jpg" alt="">
+</a>
+</li>
+<li><a href="https://www.pinterest.com/mooresclothing/
+" title="Pinterest" target="_blank">
+<img src="wcsstore/AuroraStorefrontAssetStore/images/pin.jpg" alt="">
+</a>
+</li>
+</ul>
+</div>			
 <div id="footer" role="navigation" aria-label="<fmt:message bundle="${storeText}" key="FOOTER_REGION"/>">
 	<div id="footerRow1">
 		<div id="footerCustomerServiceSection" class="section">
@@ -68,3 +96,11 @@
 		</div></flow:ifEnabled>
 	</div>
 </div>
+<style>
+
+.social-media {border-top: solid 1px lightgray;    text-align: center;    max-width: 1100px;    margin: 32px auto 0;}
+.social-media ul {    border: solid lightgray;    border-width: 0 1px;    -webkit-transform: translateY(-50%);    transform: translateY(-50%);}
+.social-media ul {   display: inline-block;    padding: 0 20px;    background: #fefefe;    margin: 0 auto;    width: 272px;    text-align: center;}
+.social-media li {    display: inline-block;}
+.social-media img {    font-size: 25px;    padding: 0 10px;    color: black;}
+</style>
