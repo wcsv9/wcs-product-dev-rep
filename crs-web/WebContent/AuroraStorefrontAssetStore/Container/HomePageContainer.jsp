@@ -33,7 +33,11 @@ div#page div#contentWrapper .row .col6.acol12 {
     float: none;
 }
     
-    
+.social-media {border-top: solid 1px lightgray;text-align: center;}
+.social-media ul {    border: solid lightgray;    border-width: 0 1px;    -webkit-transform: translateY(-50%);    transform: translateY(-50%);}
+.social-media ul {   display: inline-block;    padding: 0 20px;    background: #fefefe;    margin: 0 auto;    width: 272px;    text-align: center;}
+.social-media li {    display: inline-block;}
+.social-media img {    font-size: 25px;    padding: 0 10px;    color: black;} 
 </style>
 <div class="rowContainer" id="container_${pageDesign.layoutId}">
         <div class="row">
