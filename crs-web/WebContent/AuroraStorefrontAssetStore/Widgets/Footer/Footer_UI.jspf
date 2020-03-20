@@ -18,27 +18,27 @@
 <ul class="nav">
 <li>
 <a href="https://twitter.com/mooresclothing" title="Twitter" target="_blank">
-<img src="wcsstore/AuroraStorefrontAssetStore/images/twiter.jpg" alt="">
+<img src="/wcsstore/AuroraStorefrontAssetStore/images/twiter.jpg" alt="">
 </a>
 </li>
 <li>
 <a href="https://www.facebook.com/MooresClothing/" title="Facebook" target="_blank">
-<img src="wcsstore/AuroraStorefrontAssetStore/images/facebook.jpg" alt="">
+<img src="/wcsstore/AuroraStorefrontAssetStore/images/facebook.jpg" alt="">
 </a>
 </li>
 <li>
 <a href="https://www.instagram.com/mooresclothing/" title="Instagram" target="_blank">
-<img src="wcsstore/AuroraStorefrontAssetStore/images/instagram.jpg" alt="">
+<img src="/wcsstore/AuroraStorefrontAssetStore/images/instagram.jpg" alt="">
 </a>
 </li>
 <li>
 <a href="https://www.youtube.com/channel/UC3h4hpX_Y-RpRbZdsAF5gEA" title="Youtube" target="_blank">
-<img src="wcsstore/AuroraStorefrontAssetStore/images/youtube.jpg" alt="">
+<img src="/wcsstore/AuroraStorefrontAssetStore/images/youtube.jpg" alt="">
 </a>
 </li>
 <li><a href="https://www.pinterest.com/mooresclothing/
 " title="Pinterest" target="_blank">
-<img src="wcsstore/AuroraStorefrontAssetStore/images/pin.jpg" alt="">
+<img src="/wcsstore/AuroraStorefrontAssetStore/images/pin.jpg" alt="">
 </a>
 </li>
 </ul>
