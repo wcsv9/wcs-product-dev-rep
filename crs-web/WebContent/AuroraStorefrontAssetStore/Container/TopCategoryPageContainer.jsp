@@ -18,10 +18,10 @@
 <%@taglib uri="http://commerce.ibm.com/pagelayout" prefix="wcpgl"%>
 <style>
 	div#page div#contentWrapper .row .col6.acol12 {
-width: 100%;
-max-width: 1100px;
-margin: 0 auto;
-float: none;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    float: none;
 }
 </style>
 <div class="rowContainer" id="container_${pageDesign.layoutId}">
