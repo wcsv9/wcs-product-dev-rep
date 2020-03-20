@@ -21,13 +21,16 @@ div#page div#contentWrapper .row.margin-true .col4.acol12 img#contentImage_3 {
 div#page div#contentWrapper .row.margin-true .col4.acol12 img#contentImage_4 {
     width: 100%;
 }
+        
     div#page div#contentWrapper .row.margin-true {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
-    
-    div#page div#contentWrapper .row .col6.acol12 {
+div#page div#contentWrapper .row .col6.acol12 {
     width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    float: none;
 }
     
     
