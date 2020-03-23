@@ -69,7 +69,7 @@
 	<c:set var="page" value="${getPageResponse.resultList[0]}"/>
 </c:if>
 
-<c:set var="seoTitle" value="${page.title}" />
+<c:set var="seoTitle" value="Moores Clothing For Men" />
 <c:set var="metaDescription" value="${page.metaDescription}" />
 <c:set var="metaKeyword" value="${page.metaKeyword}" />
 <c:set var="categoryName" value="${catGroupDetailsView.catalogGroupView[0].name}"/>
