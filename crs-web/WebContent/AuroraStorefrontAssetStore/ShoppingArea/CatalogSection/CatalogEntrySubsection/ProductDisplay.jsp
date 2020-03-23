@@ -131,7 +131,7 @@
 
 <c:set var="displaySKUContextData" value="false" scope="request" />
 <c:set var="singleSKUProductWithoutDefiningAttribute" value="false" scope="request"/>
-<c:set var="pageTitle" value="${page.title}" />
+<c:set var="pageTitle" value="Moores Clothing For Men" />
 <c:set var="metaDescription" value="${page.metaDescription}" />
 <c:set var="metaKeyword" value="${page.metaKeyword}" />
 <c:set var="fullImageAltDescription" value="${page.fullImageAltDescription}" scope="request" />
