@@ -31,7 +31,7 @@
 			<div class="col12 slot1" data-slot-id="1"><wcpgl:widgetImport slotId="1"/></div>
 		</div>
 		<div class="row">
-			<div class="col6 acol12 slot2" data-slot-id="2"><wcpgl:widgetImport slotId="2"/></div>
+			
 			<div class="col6 acol12 slot3" data-slot-id="3"><wcpgl:widgetImport slotId="3"/></div>
 		</div>
 		<div class="row margin-true ${fn:toLowerCase(pageDesign.pageGroup)}_pageDesign_pageGroup">
