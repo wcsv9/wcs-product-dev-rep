@@ -69,7 +69,7 @@
 	<c:set var="page" value="${getPageResponse.resultList[0]}"/>
 </c:if>
 
-<c:set var="pageTitle" value="${page.title}" />
+<c:set var="pageTitle" value="Moores Clothing For Men" />
 <c:set var="metaDescription" value="${page.metaDescription}" />
 <c:set var="metaKeyword" value="${page.metaKeyword}" />
 <c:set var="fullImageAltDescription" value="${page.fullImageAltDescription}" scope="request" />
