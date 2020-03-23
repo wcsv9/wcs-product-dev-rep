@@ -177,7 +177,7 @@
 		font-family: arial, Helvetica, sans-serif;
 		font-size: 38px;
 		line-height: 35px;
-		color: #2166cd;
+		color: #000000;
 		border-bottom: 1px solid #b1b1b1;
 		padding-bottom: 4px;
 		text-align: center;
@@ -208,7 +208,7 @@
 	}
 
 		#albiniCollect .title3 .link {
-			color: #0a4caf;
+			color: #000000;
 			font-weight: bold;
 			font-size: 12px;
 			line-height: 29px;
@@ -294,7 +294,7 @@
 		margin-top: -5px;
 		border-width: 5px 0 5px 5px;
 		border-style: solid;
-		border-color: transparent transparent transparent blue;
+		border-color: transparent transparent transparent black;
 		right:-2px;
 		top: 50%;
 	}
@@ -312,7 +312,7 @@
 		margin-top: -5px;
 		border-width: 5px 5px 5px 0;
 		border-style: solid;
-		border-color: transparent blue transparent transparent;
+		border-color: transparent black transparent transparent;
 		left:-2px;
 		top: 50%;
 	}
@@ -535,7 +535,7 @@
 
 			#albiniCollect .title3 .link,
 			#albiniCollect.container.wide .title3 .link {
-				color: #0a4caf;
+				color: #000000;
 				font-weight: bold;
 				font-size: 14px;
 				line-height: 36px;
