@@ -40,9 +40,7 @@ div#page div#contentWrapper .row .col6.acol12 {
 
 </style>
 <div class="rowContainer" id="container_${pageDesign.layoutId}">
-        <div class="row">
-                <div class="col6 acol12" data-slot-id="2"><wcpgl:widgetImport slotId="2"/></div>
-        </div>
+        
         <div class="row margin-true">
                 <div class="col12" data-slot-id="3"><img id="contentImage_1" src="/wcsstore/AuroraStorefrontAssetStore//images/one.jpg" alt="AuroraStorefrontAssetStore"></div>
         </div>
