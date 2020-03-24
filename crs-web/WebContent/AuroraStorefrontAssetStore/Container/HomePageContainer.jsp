@@ -23,8 +23,9 @@ div#page div#contentWrapper .row.margin-true .col4.acol12 img#contentImage_4 {
 }
         
     div#page div#contentWrapper .row.margin-true {
-    max-width: 1100px;
+    max-width: 1444px;
     margin: 0 auto;
+    padding: 0 0px;
 }
 div#page div#contentWrapper .row .col6.acol12 {
     width: 100%;
