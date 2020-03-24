@@ -77,20 +77,7 @@ z-index: 100010 !important;
 </div>
 <div id="header" role="banner">
     <div id="headerRow1">
-        <div id="logo">
-            <%out.flush();%>
-            <%-- Note: for any e-Marketing Spots included on the header page, then the parameter --%>
-            <%--       cacheWithParent should be set to true if the header is dynacached         --%>
-            <wcpgl:widgetImport useIBMContextInSeparatedEnv="${isStoreServer}" url="${env_siteWidgetsDir}com.ibm.commerce.store.widgets.ContentRecommendation/ContentRecommendation.jsp">
-                <wcpgl:param name="storeId" value="${storeId}"/>
-                <wcpgl:param name="catalogId" value="${catalogId}"/>
-                <wcpgl:param name="emsName" value="HeaderStoreLogo_Content"/>
-                <wcpgl:param name="contentClickUrl" value="${env_TopCategoriesDisplayURL}"/>
-                <wcpgl:param name="marketingSpotBehavior" value="0"/>
-                <wcpgl:param name="cacheWithParent" value="true"/>
-            </wcpgl:widgetImport>
-            <%out.flush();%>
-        </div>
+  
         <ul id="quickLinksBar">
             <c:if test="${!env_globalLoginViewDisabled eq true}">
                 <li>
@@ -132,7 +119,7 @@ z-index: 100010 !important;
                 </li>
                     <li>
                     <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/LanguageCurrency/LanguageCurrency.jsp"/><%out.flush();%>
-                </li><flow:ifEnabled feature="StoreLocator"><li>
+                </li><flow:ifEnabled feature="StoreLocator"><li class="storeLocatorQuickLink">
                     <a id="storeLocatorQuickLink" href="${fn:escapeXml(StoreLocatorView)}"><fmt:message bundle="${storeText}" key="HEADER_STORE_LOCATOR"/></a>
                 </li></flow:ifEnabled><flow:ifEnabled feature="SOAWishlist"><c:if test="${!(userType == 'G' && env_shopOnBehalfSessionEstablished eq 'true')}"><li>
                     <a id="wishListQuickLink" href="${fn:escapeXml(WishListDisplayURL)}"><fmt:message bundle="${storeText}" key="HEADER_SHOPPING_LIST"/></a>
@@ -167,6 +154,23 @@ z-index: 100010 !important;
                 </c:choose>
             <%out.flush();%>
         </li></ul>
+	
+	
+	      <div id="logo">
+            <%out.flush();%>
+            <%-- Note: for any e-Marketing Spots included on the header page, then the parameter --%>
+            <%--       cacheWithParent should be set to true if the header is dynacached         --%>
+            <wcpgl:widgetImport useIBMContextInSeparatedEnv="${isStoreServer}" url="${env_siteWidgetsDir}com.ibm.commerce.store.widgets.ContentRecommendation/ContentRecommendation.jsp">
+                <wcpgl:param name="storeId" value="${storeId}"/>
+                <wcpgl:param name="catalogId" value="${catalogId}"/>
+                <wcpgl:param name="emsName" value="HeaderStoreLogo_Content"/>
+                <wcpgl:param name="contentClickUrl" value="${env_TopCategoriesDisplayURL}"/>
+                <wcpgl:param name="marketingSpotBehavior" value="0"/>
+                <wcpgl:param name="cacheWithParent" value="true"/>
+            </wcpgl:widgetImport>
+            <%out.flush();%>
+        </div>
+	
     </div>
 
     <div id="headerRow2">
