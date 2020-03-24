@@ -72,10 +72,10 @@ xmlns:waistate="http://www.w3.org/2005/07/aaa" lang="${shortLocale}" xml:lang="$
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
 	<flow:ifEnabled feature="SharedShippingBillingPage">
-		<c:out value="${storeName}"/> - <fmt:message bundle="${storeText}" key="TITLE_SHIPMENT_DISPLAY"/>
+		Moores Clothing For Men - <fmt:message bundle="${storeText}" key="TITLE_SHIPMENT_DISPLAY"/>
 	</flow:ifEnabled>
 	<flow:ifDisabled feature="SharedShippingBillingPage">
-		<c:out value="${storeName}"/> - <fmt:message bundle="${storeText}" key="TITLE_SHIPMENT_DISPLAY_SHIPPING_ONLY"/>
+		Moores Clothing For Men - <fmt:message bundle="${storeText}" key="TITLE_SHIPMENT_DISPLAY_SHIPPING_ONLY"/>
 	</flow:ifDisabled>
 </title>
 
