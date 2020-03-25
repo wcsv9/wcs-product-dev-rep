@@ -32,6 +32,16 @@
     });
     </script>
 </flow:ifEnabled>
+<script>
+function myFunction() {
+  var x = document.getElementById("searchBar");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
 <script>var isGuest = ${userType == 'G'};</script>
 
 <script>
@@ -90,11 +100,7 @@ z-index: 100010 !important;
                 <%out.flush();%>
                 </li>
             </c:if>
-            <li class="separator-false">
-            <a id="quickLinksButton" href="#" class="panelLinkSelected" role="button" aria-haspopup="true" data-toggle="quickLinksMenu" aria-label="<fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>">
-                <div class="arrow_button_icon"></div>
-                <fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>
-            </a>
+          <li class="separator-false searchbtn"><button class="searchbtnadd" onclick="myFunction()"></button>
             <div id="quickLinksMenu" class="basicMenu" role="menu" data-parent="header" aria-label="<fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>" tabindex="0">
                 <h3><fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/></h3><a href="#" class="closeButton" role="button" data-toggle="quickLinksMenu"><span role="presentation"></span></a>
                 <ul role="group"><c:if test="${userType != 'G'}"><li>
@@ -184,7 +190,9 @@ z-index: 100010 !important;
 
         <%-- Start Refresh Area --%>
         <div id="drop_down_${department.uniqueID}" aria-labelledby="departmentsButton" >
-        <ul id="departmentsMenu" role="menu" data-parent="header" aria-labelledby="departmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}" end="1"><li class="hidden">
+        <ul id="departmentsMenu" role="menu" data-parent="header" aria-labelledby="departmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}" end="1">
+        <c:if test="${department.name eq 'Apparel' }">
+        <li class="hidden">
 	    <a id="departmentButton_${department.uniqueID}" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_${department.uniqueID}">
 		<span><c:out value="${department.name}"/></span>
 		<div class="arrow_button_icon"></div>
@@ -213,7 +221,19 @@ z-index: 100010 !important;
                     </li></c:if></ul>
                 </c:if>
             </div>
-        </li></c:forEach>
+        </li></c:if></c:forEach>
+          <li class="hidden">
+	    <a id="departmentButton_x12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x12}">
+		<span><c:out value="SUITS"/></span>
+		<div class="arrow_button_icon"></div>
+	    </a>
+	    </li>
+	    <li class="hidden">
+	    <a id="departmentButton_x12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x12}">
+		<span><c:out value=""/></span>
+		<div class="arrow_button_icon"></div>
+	    </a>
+	    </li>
 		</ul></div><%-- End Refresh Area --%>
        <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/Search/Search.jsp"/><%out.flush();%>
     </div>
@@ -231,3 +251,4 @@ $(document).ready(function() {
     }
 });
 </script>
+
