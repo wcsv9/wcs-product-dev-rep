@@ -39,13 +39,13 @@
 						<li id="productAngleProdLi1">
 					<a id="WC_CachedProductOnlyDisplay_prod_links_1_1" href="JavaScript:changeThumbNail('productAngleProdLi1','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
 							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
-			<img id="WC_CachedProductOnlyDisplay_prod_images_1_<c:out value='${aStatus.count}'/>" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_1" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
 								</a>
 							</li>
 						<li id="productAngleProdLi2">
 					<a id="WC_CachedProductOnlyDisplay_prod_links_1_2" href="JavaScript:changeThumbNail('productAngleProdLi2','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
 							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
-			<img id="WC_CachedProductOnlyDisplay_prod_images_1_<c:out value='${aStatus.count}'/>" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_2" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
 								</a>
 							</li>
 					</ul>
