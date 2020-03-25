@@ -154,9 +154,7 @@ z-index: 100010 !important;
                 </c:choose>
             <%out.flush();%>
         </li>
-	<li class="separator-false">
-	 <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/Search/Search.jsp"/><%out.flush();%>
-	</li>
+
 		
 		</ul>
 	
@@ -217,7 +215,7 @@ z-index: 100010 !important;
             </div>
         </li></c:forEach>
 		</ul></div><%-- End Refresh Area --%>
-       
+       <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/Search/Search.jsp"/><%out.flush();%>
     </div>
 </div>
 
