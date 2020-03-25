@@ -90,7 +90,7 @@
 			<a id="departmentToggle_${department.uniqueID}" href="#" class="toggle" role="button" data-toggle="departmentMenu_${department.uniqueID}" aria-labelledby="departmentLink_${department.uniqueID}"><span role="presentation"></span></a>
 		</div>
 		<c:if test="${!empty department.catalogGroupView}">
-			<ul class="categoryList"><c:forEach var="category" items="${department.catalogGroupView}" end="1"><li>
+			<ul class="categoryList"><c:forEach var="category" items="${department.catalogGroupView}" end="${subcategoryLimit - 1}"><li>
 				<c:set var="key" value="${department.uniqueID}_${category.uniqueID}"/>
 				<a id="categoryLink_${key}" href="${fn:escapeXml(categoryURLMap[key])}" aria-label="${category.name}" class="menuLink" role="menuitem" tabindex="-1"><c:out value="${category.name}"/></a>
 				<c:if test="${!empty category.catalogGroupView}">
