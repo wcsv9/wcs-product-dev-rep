@@ -28,14 +28,26 @@
 				<div class="other_views" id="ProductAngleProdImagesArea">
 					<div class="other_views_text"><wcst:message key="FI_OTHER_VIEW" bundle="${widgetText}"/></div>
 					<ul id="ProductAngleProdImagesAreaProdList">
-						<c:forEach items="${angleThumbnailAttachmentMap}" varStatus="aStatus">
+						<!--<c:forEach items="${angleThumbnailAttachmentMap}" varStatus="aStatus">
 							<li id="productAngleProdLi<c:out value='${aStatus.index}'/>">
-								<a id="WC_CachedProductOnlyDisplay_prod_links_1_<c:out value='${aStatus.count}'/>" href="JavaScript:changeThumbNail('productAngleProdLi<c:out value='${aStatus.index}'/>','${angleFullImageAttachmentMap[aStatus.current.key]}');"
-									title="${angleThumbnailAttachmentShortDescMap[aStatus.current.key]}">
-									<img id="WC_CachedProductOnlyDisplay_prod_images_1_<c:out value='${aStatus.count}'/>" src="${angleThumbnailAttachmentMap[aStatus.current.key]}" alt="${angleThumbnailAttachmentShortDescMap[aStatus.current.key]}" />
+					<a id="WC_CachedProductOnlyDisplay_prod_links_1_<c:out value='${aStatus.count}'/>" href="JavaScript:changeThumbNail('productAngleProdLi<c:out value='${aStatus.index}'/>','${angleFullImageAttachmentMap[aStatus.current.key]}');"
+							title="${angleThumbnailAttachmentShortDescMap[aStatus.current.key]}">
+				<img id="WC_CachedProductOnlyDisplay_prod_images_1_<c:out value='${aStatus.count}'/>" src="${angleThumbnailAttachmentMap[aStatus.current.key]}" alt="${angleThumbnailAttachmentShortDescMap[aStatus.current.key]}" />
 								</a>
 							</li>
-						</c:forEach>
+						</c:forEach>-->
+						<li id="productAngleProdLi1">
+					<a id="WC_CachedProductOnlyDisplay_prod_links_1_1" href="JavaScript:changeThumbNail('productAngleProdLi1','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
+							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_<c:out value='${aStatus.count}'/>" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
+								</a>
+							</li>
+						<li id="productAngleProdLi2">
+					<a id="WC_CachedProductOnlyDisplay_prod_links_1_2" href="JavaScript:changeThumbNail('productAngleProdLi2','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
+							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_<c:out value='${aStatus.count}'/>" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
+								</a>
+							</li>
 					</ul>
 				</div>
 			</c:if>
