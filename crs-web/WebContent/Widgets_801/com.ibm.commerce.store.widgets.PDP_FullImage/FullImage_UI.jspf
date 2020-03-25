@@ -24,18 +24,11 @@
 				</div>
 			</div>
 			<c:set var="angledImageCount" value="${fn:length(angleThumbnailAttachmentMap)}" />
-		<!--	<c:if test="${angledImageCount > 0}"> -->
+		
 				<div class="other_views" id="ProductAngleProdImagesArea">
 					<div class="other_views_text"><wcst:message key="FI_OTHER_VIEW" bundle="${widgetText}"/></div>
 					<ul id="ProductAngleProdImagesAreaProdList">
-						<!--<c:forEach items="${angleThumbnailAttachmentMap}" varStatus="aStatus">
-							<li id="productAngleProdLi<c:out value='${aStatus.index}'/>">
-					<a id="WC_CachedProductOnlyDisplay_prod_links_1_<c:out value='${aStatus.count}'/>" href="JavaScript:changeThumbNail('productAngleProdLi<c:out value='${aStatus.index}'/>','${angleFullImageAttachmentMap[aStatus.current.key]}');"
-							title="${angleThumbnailAttachmentShortDescMap[aStatus.current.key]}">
-				<img id="WC_CachedProductOnlyDisplay_prod_images_1_<c:out value='${aStatus.count}'/>" src="${angleThumbnailAttachmentMap[aStatus.current.key]}" alt="${angleThumbnailAttachmentShortDescMap[aStatus.current.key]}" />
-								</a>
-							</li>
-						</c:forEach>-->
+						
 						<li id="productAngleProdLi1">
 					<a id="WC_CachedProductOnlyDisplay_prod_links_1_1" href="JavaScript:changeThumbNail('productAngleProdLi1','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
 							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
@@ -50,7 +43,7 @@
 							</li>
 					</ul>
 				</div>
-			<!--</c:if>-->
+			
 			<div class="other_views nodisplay" id="ProductAngleImagesArea">
 				<div class="other_views_text"><wcst:message key="FI_OTHER_VIEW" bundle="${widgetText}"/></div>
 				<ul id="ProductAngleImagesAreaList"></ul>								
