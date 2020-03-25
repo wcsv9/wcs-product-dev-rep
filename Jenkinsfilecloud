@@ -42,8 +42,8 @@ pipeline {
                 steps { 
                     dir ('/opt/Deploy/CustDeploy') {
 		    sh 'cp /opt/deploy/Dockerfile-$apptype /opt/Deploy/CustDeploy/'
-		    sh 'export PATH=$PATH:/root/google-cloud-sdk/bin:/home/kubernetes/bin:/home/kubernetes/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin/:/root/Vault/y/google-cloud-sdk/bin && gcloud auth configure-docker'
-                    sh 'docker build -f Dockerfile-$apptype . -t  us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
+		    sh 'export PATH=$PATH:/root/google-cloud-sdk/bin:/home/kubernetes/bin:/home/kubernetes/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin/:/root/Vault/y/google-cloud-sdk/bin && gcloud auth configure-docker && docker build -f Dockerfile-$apptype . -t  us.gcr.io/gcpwcs/$apptype-app:9.0.1."$image"'
+                     
                     
                     }
             }
