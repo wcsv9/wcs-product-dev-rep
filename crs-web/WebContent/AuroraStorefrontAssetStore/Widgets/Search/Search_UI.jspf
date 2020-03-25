@@ -29,9 +29,6 @@ var staticContentHeaders = [];
 
 <div id="searchBar" data-parent="header" role="search">
     <c:if test="${_worklightHybridApp eq 'true'}">
-
-<div id="searchBar" data-parent="header" role="search">
-    <c:if test="${_worklightHybridApp eq 'true'}">
     <a id="worklightSearchButton" href="#" role="button" onclick="javascript:NativeSearchJS.startSearchActivity();"><span id="worklightSearchButtonLabel">${SEARCH_CATALOG}</span></a>
     </c:if>
     <form id="searchBox" name="CatalogSearchForm" method="get" action="${env_contextAndServletPath}/${searchView}">
