@@ -153,7 +153,9 @@ z-index: 100010 !important;
                     </c:otherwise>
                 </c:choose>
             <%out.flush();%>
-        </li></ul>
+        </li>
+		<li class="separator-false"><a id="searchButton" href="#" role="button" <c:choose><c:when test="${_worklightHybridApp}">onclick="javascript:NativeSearchJS.startSearchActivity();"</c:when><c:otherwise>data-toggle="searchBar"</c:otherwise></c:choose> aria-label="${SEARCH_CATALOG}" title="${SEARCH_CATALOG}" ><span id="searchButton_ACCE_Label" class="spanacce"><fmt:message bundle="${storeText}" key="SEARCH_CATALOG"/></span></a></li>
+		</ul>
 	
 	
 	      <div id="logo">
