@@ -23,7 +23,7 @@ var staticContentHeaders = [];
 </script>
 
 <fmt:message bundle="${storeText}" key="SEARCH_CATALOG" var="SEARCH_CATALOG"/>
-<a id="searchButton" href="#" role="button" <c:choose><c:when test="${_worklightHybridApp}">onclick="javascript:NativeSearchJS.startSearchActivity();"</c:when><c:otherwise>data-toggle="searchBar"</c:otherwise></c:choose> aria-label="${SEARCH_CATALOG}" title="${SEARCH_CATALOG}" ><span id="searchButton_ACCE_Label" class="spanacce"><fmt:message bundle="${storeText}" key="SEARCH_CATALOG"/></span></a>
+
 
 <div id="searchBar" data-parent="header" role="search">
     <c:if test="${_worklightHybridApp eq 'true'}">
