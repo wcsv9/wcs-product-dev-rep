@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<c:set var="angledImageCount" value="${fn:length(angleThumbnailAttachmentMap)}" />
-			<c:if test="${angledImageCount > 0}">
+		<!--	<c:if test="${angledImageCount > 0}"> -->
 				<div class="other_views" id="ProductAngleProdImagesArea">
 					<div class="other_views_text"><wcst:message key="FI_OTHER_VIEW" bundle="${widgetText}"/></div>
 					<ul id="ProductAngleProdImagesAreaProdList">
@@ -50,7 +50,7 @@
 							</li>
 					</ul>
 				</div>
-			</c:if>
+			<!--</c:if>-->
 			<div class="other_views nodisplay" id="ProductAngleImagesArea">
 				<div class="other_views_text"><wcst:message key="FI_OTHER_VIEW" bundle="${widgetText}"/></div>
 				<ul id="ProductAngleImagesAreaList"></ul>								
