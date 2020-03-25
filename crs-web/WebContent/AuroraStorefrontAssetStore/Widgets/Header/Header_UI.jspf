@@ -229,8 +229,20 @@ z-index: 100010 !important;
 	    </a>
 	    </li>
 	    <li class="hidden">
-	    <a id="departmentButton_x12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x12}">
-		<span><c:out value=""/></span>
+	    <a id="departmentButton_x13" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x13}">
+		<span><c:out value="CUSTOM"/></span>
+		<div class="arrow_button_icon"></div>
+	    </a>
+	    </li>
+	    <li class="hidden">
+	    <a id="departmentButton_x14" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x14}">
+		<span><c:out value="ACCESSORIES"/></span>
+		<div class="arrow_button_icon"></div>
+	    </a>
+	    </li>
+	    <li class="hidden">
+	    <a id="departmentButton_x15" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x15}">
+		<span><c:out value="SALE"/></span>
 		<div class="arrow_button_icon"></div>
 	    </a>
 	    </li>
