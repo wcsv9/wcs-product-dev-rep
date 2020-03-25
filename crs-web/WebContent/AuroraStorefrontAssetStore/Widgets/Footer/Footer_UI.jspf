@@ -95,6 +95,29 @@
 			</ul>
 		</div></flow:ifEnabled>
 	</div>
+	<div class="sign-up rw collapse">
+
+<label for="emailUpdatesEmail">SIGN UP FOR OUR MAILING LIST</label>
+<div class="sm-9 cls">
+<input autocomplete="off" id="emailUpdatesEmail" class="js-email-signup-input" name="emailUpdatesEmail" type="email" required="" aria-required="true" placeholder="Enter email address" title="Sign up for email tips, deals &amp; more">
+</div>
+<div class="sm-3 cls">
+<button class="button primary postfix js-email-signup-footer">
+<span class="visuallyhidden">Press enter to </span>Sign up<span class="visuallyhidden"> for our mailing list</span>
+</button>
+</div>
+<p class="error-message bottom is-hidden" id="errorEmailSignup" role="alert" aria-atomic="true"></p>
+<p class="success-message bottom is-hidden" id="successEmailSignup" role="alert" aria-atomic="true"></p>
+
+</div>
+</div>
+<div class="footer-copyright">
+<ul>
+<li><p>© 2000-2020 The Men's Wearhouse, Inc. All Rights Reserved.</p></li>
+<li><a href="/privacy-policy">Privacy &amp; Security Policy</a></li>
+<li><a href="/terms-conditions">Terms of Use</a></li>
+<li><a href="/ca-transparency-supply-chains-act">CA Transparency in Supply Chains Act</a></li>
+</ul>
 </div>
 <style>
 
