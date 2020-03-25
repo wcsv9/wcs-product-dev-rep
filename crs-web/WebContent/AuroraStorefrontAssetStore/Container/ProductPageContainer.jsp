@@ -73,10 +73,10 @@
 		<c:if test="${!empty tabSlotIds}">
 			<c:choose>
 				<c:when test="${foundCurrentSlot7 == true}">
-					<div class="col12 acol12 ccol4 right tabbedSlots9_10_11">
+					<div class="col12 acol12 ccol5 right tabbedSlots9_10_11">
 				</c:when>
 				<c:otherwise>
-					<div class="col12 acol12 ccol6 right tabbedSlots9_10_11">
+					<div class="col12 acol12 ccol5 right tabbedSlots9_10_11">
 				</c:otherwise>
 			</c:choose>
 			<div class="tabButtonContainer" role="tablist">
