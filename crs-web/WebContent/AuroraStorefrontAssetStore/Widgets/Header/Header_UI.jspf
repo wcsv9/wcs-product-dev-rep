@@ -101,12 +101,7 @@ function myFunction() {
                 </li>
             </c:if>
             <li class="separator-false">
-            <li class="separator-false searchbtn"><button class="searchbtnadd" onclick="myFunction()"></button></li>
-			
-			
-			
-			
-			
+            <li class="separator-false searchbtn"><button class="searchbtnadd" onclick="myFunction()"></button></li>	
             <div id="quickLinksMenu" class="basicMenu" role="menu" data-parent="header" aria-label="<fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>" tabindex="0">
                 <h3><fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/></h3><a href="#" class="closeButton" role="button" data-toggle="quickLinksMenu"><span role="presentation"></span></a>
                 <ul role="group"><c:if test="${userType != 'G'}"><li>
