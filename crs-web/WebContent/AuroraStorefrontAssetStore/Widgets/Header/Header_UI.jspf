@@ -58,16 +58,6 @@ body .hwp-container {
 z-index: 100010 !important;
 }
 </style>
-<script>
-function myFunction() {
-  var x = document.getElementById("searchBar");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-</script>
 <div id="global-a-shipping-message">
 <!-- Canada--><!-- Generic International--><a class="generic js-intl gtm-pushed-link" style="color: rgb(255, 255, 255); text-decoration: none;" href="/webapp/wcs/stores/servlet/ContentAttachmentView?contentName=MW4FAQInternationalOrders.html&amp;catalogId=12004&amp;top=&amp;parent_category_rn=&amp;categoryId=&amp;langId=-1&amp;storeId=12751&amp;cm_sp=2014_02_01-_-Global_Promo-_-Free_Ship "><img style="padding-right: 0px;display: inline-block;width: 19px;height: 13px;float: left;" src="//images.menswearhouse.com/is/image/TMW/Intl_ship_icon_wt?scl=1&amp;fmt=png-alpha">&nbsp;20 USD flat-rate shipping on international orders over 175 USD</a>
 </div>
@@ -101,7 +91,10 @@ function myFunction() {
                 </li>
             </c:if>
             <li class="separator-false">
-            <li class="separator-false searchbtn"><button class="searchbtnadd" onclick="myFunction()"></button></li>	
+            <a id="quickLinksButton" href="#" class="panelLinkSelected" role="button" aria-haspopup="true" data-toggle="quickLinksMenu" aria-label="<fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>">
+                <div class="arrow_button_icon"></div>
+                <fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>
+            </a>
             <div id="quickLinksMenu" class="basicMenu" role="menu" data-parent="header" aria-label="<fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>" tabindex="0">
                 <h3><fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/></h3><a href="#" class="closeButton" role="button" data-toggle="quickLinksMenu"><span role="presentation"></span></a>
                 <ul role="group"><c:if test="${userType != 'G'}"><li>
@@ -161,6 +154,7 @@ function myFunction() {
                 </c:choose>
             <%out.flush();%>
         </li>
+
 		
 		</ul>
 	
@@ -190,9 +184,7 @@ function myFunction() {
 
         <%-- Start Refresh Area --%>
         <div id="drop_down_${department.uniqueID}" aria-labelledby="departmentsButton" >
-        <ul id="departmentsMenu" role="menu" data-parent="header" aria-labelledby="departmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}" end="1">
-	<c:if test="${department.name eq 'Apparel' }">
-	<li class="hidden">
+        <ul id="departmentsMenu" role="menu" data-parent="header" aria-labelledby="departmentsButton"><c:forEach var="department" items="${categoryHierarchy.catalogGroupView}" end="1"><li class="hidden">
 	    <a id="departmentButton_${department.uniqueID}" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_${department.uniqueID}">
 		<span><c:out value="${department.name}"/></span>
 		<div class="arrow_button_icon"></div>
@@ -221,33 +213,9 @@ function myFunction() {
                     </li></c:if></ul>
                 </c:if>
             </div>
-        </li></c:if>/c:forEach>
-	<li class="hidden">
-	    <a id="departmentButton_x12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x12}">
-		<span><c:out value="SUITS"/></span>
-		<div class="arrow_button_icon"></div>
-	    </a>
-	    </li>
-	    <li class="hidden">
-	    <a id="departmentButton_x12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x12}">
-		<span><c:out value="CUSTOM"/></span>
-		<div class="arrow_button_icon"></div>
-	    </a>
-	    </li>
-	    <li class="hidden">
-	    <a id="departmentButton_x12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x12}">
-		<span><c:out value="ACCESSORIES"/></span>
-		<div class="arrow_button_icon"></div>
-	    </a>
-	    </li>
-	    <li class="hidden">
-	    <a id="departmentButton_x12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_x12}">
-		<span><c:out value="SALE"/></span>
-		<div class="arrow_button_icon"></div>
-	    </a>
-	    </li>
+        </li></c:forEach>
 		</ul></div><%-- End Refresh Area --%>
-        <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/Search/Search.jsp"/><%out.flush();%>
+       <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/Search/Search.jsp"/><%out.flush();%>
     </div>
 </div>
 
