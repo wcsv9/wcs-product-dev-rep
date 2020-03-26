@@ -23,9 +23,10 @@ div#page div#contentWrapper .row.margin-true .col4.acol12 img#contentImage_4 {
 }
         
     div#page div#contentWrapper .row.margin-true {
-    max-width: 1444px;
+    max-width: 1800px;
     margin: 0 auto;
     padding: 0 0px;
+    float: none;
 }
 div#page div#contentWrapper .row .col6.acol12 {
     width: 100%;
@@ -34,8 +35,7 @@ div#page div#contentWrapper .row .col6.acol12 {
     float: none;
 }
  .brands .col4.acol12 {
-    border-bottom: solid #e6e6e6 1px;
-    border-top: solid #e6e6e6 1px;
+    
     margin-top: 10px;
 }   
 
