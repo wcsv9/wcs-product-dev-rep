@@ -30,21 +30,21 @@
 					<ul id="ProductAngleProdImagesAreaProdList">
 						
 						<li id="productAngleProdLi1">
-					<a id="WC_CachedProductOnlyDisplay_prod_links_1_1" href="JavaScript:changeThumbNail('productAngleProdLi1','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
-							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
-			<img id="WC_CachedProductOnlyDisplay_prod_images_1_1" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
+					<a id="WC_CachedProductOnlyDisplay_prod_links_1_1" href="JavaScript:changeThumbNail('productAngleProdLi1','/wcsstore/AuroraStorefrontAssetStore//images/thumb1.jpg');"
+							title="/wcsstore/AuroraStorefrontAssetStore//images/thumb1.jpg">
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_1" src="/wcsstore/AuroraStorefrontAssetStore//images/thumb1.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
 								</a>
 							</li>
 						<li id="productAngleProdLi2">
-					<a id="WC_CachedProductOnlyDisplay_prod_links_1_2" href="JavaScript:changeThumbNail('productAngleProdLi2','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
-							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
-			<img id="WC_CachedProductOnlyDisplay_prod_images_1_2" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
+					<a id="WC_CachedProductOnlyDisplay_prod_links_1_2" href="JavaScript:changeThumbNail('productAngleProdLi2','/wcsstore/AuroraStorefrontAssetStore//images/thumb2.jpg');"
+							title="/wcsstore/AuroraStorefrontAssetStore//images/thumb2.jpg">
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_2" src="/wcsstore/AuroraStorefrontAssetStore//images/thumb2.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
 								</a>
 							</li>
 						<li id="productAngleProdLi3">
-					<a id="WC_CachedProductOnlyDisplay_prod_links_1_3" href="JavaScript:changeThumbNail('productAngleProdLi3','/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg');"
-							title="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg">
-			<img id="WC_CachedProductOnlyDisplay_prod_images_1_3" src="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
+					<a id="WC_CachedProductOnlyDisplay_prod_links_1_3" href="JavaScript:changeThumbNail('productAngleProdLi3','/wcsstore/AuroraStorefrontAssetStore//images/thumb3.jpg');"
+							title="/wcsstore/AuroraStorefrontAssetStore//images/thumb3.jpg">
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_3" src="/wcsstore/AuroraStorefrontAssetStore//images/thumb3.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
 								</a>
 							</li>
 					</ul>
