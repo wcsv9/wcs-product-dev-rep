@@ -129,7 +129,7 @@
 
 .social-media {   text-align: left;    max-width: 1100px;    margin: 32px auto 0;}
 .social-media ul {      border-width: 0 1px;    -webkit-transform: translateY(-50%);    transform: translateY(-50%);}
-.social-media ul {   display: inline-block;    padding: 0px 0px;    background: #FFF;    margin: 0 auto;    width: 272px;    text-align: left;}
+.social-media ul {   display: inline-block;    padding: 0px 15px;    background: #FFF;    margin: 0 auto;    width: 272px;    text-align: left;}
 .social-media li {    display: inline-block;}
 .social-media img {    font-size: 25px;    padding: 0 6px;    color: black;}
 </style>
