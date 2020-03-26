@@ -46,7 +46,7 @@ div#page div#contentWrapper .row .col6.acol12 {
                 <div class="col12" data-slot-id="3"><img id="contentImage_1" src="/wcsstore/AuroraStorefrontAssetStore//images/one.jpg" alt="AuroraStorefrontAssetStore"></div>
         </div>
         <div class="row margin-true">
-                <div class="col8 acol12" data-slot-id="4"><img id="contentImage_2" src="/wcsstore/AuroraStorefrontAssetStore//images/two.jpeg" alt="AuroraStorefrontAssetStore"></div>
+                <div class="col8 acol12" data-slot-id="4"><img id="contentImage_2" src="/wcsstore/AuroraStorefrontAssetStore//images/two.jpg" alt="AuroraStorefrontAssetStore"></div>
                 <div class="col4 acol12" data-slot-id="5"><img id="contentImage_3" src="/wcsstore/AuroraStorefrontAssetStore//images/three.jpg" alt="AuroraStorefrontAssetStore"></div>
         </div>
         <div class="row margin-true">
