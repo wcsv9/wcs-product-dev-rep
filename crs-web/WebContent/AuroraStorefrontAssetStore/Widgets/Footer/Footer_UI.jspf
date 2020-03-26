@@ -30,6 +30,7 @@
 				<li><a id="footerContactUsLink" href="${fn:escapeXml(ContactUsPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_CONTACT_US"/></a></li>
 				<li><a id="footerReturnPolicyLink" href="${fn:escapeXml(ReturnPolicyPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_RETURN_POLICY"/></a></li>
 				<li><a id="footerPrivacyPolicyLink" href="${fn:escapeXml(PrivacyPolicyPageViewURL)}"><fmt:message bundle="${storeText}" key="FOOTER_PRIVACY_POLICY"/></a></li>
+			<img id="siqurity" src="/wcsstore/AuroraStorefrontAssetStore//images/sequrity.jpg" >
 			</ul>
 		</div>
 		
