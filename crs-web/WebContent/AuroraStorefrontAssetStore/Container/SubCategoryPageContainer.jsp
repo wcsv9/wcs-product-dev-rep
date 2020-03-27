@@ -27,6 +27,10 @@
     
     margin: 0px -1px;
 }
+	#content .facetWidget.collapsible {
+    padding: 0px 4% 10px 0%;
+   
+}
 	</style>
 <div class="rowContainer" id="container_${pageDesign.layoutId}">
 	<div class="row margin-true">
