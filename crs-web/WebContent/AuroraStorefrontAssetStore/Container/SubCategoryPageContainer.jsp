@@ -23,6 +23,10 @@
     margin: 0 auto;
     float: none;
 }
+	div#widget_breadcrumb {
+    
+    margin: 0px -1px;
+}
 	</style>
 <div class="rowContainer" id="container_${pageDesign.layoutId}">
 	<div class="row margin-true">
