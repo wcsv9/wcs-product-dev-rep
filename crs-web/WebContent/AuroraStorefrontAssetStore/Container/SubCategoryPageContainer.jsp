@@ -30,8 +30,8 @@
 	</div>
 	
 	<div class="row margin-true">
-		<div class="col4 acol12 ccol3" data-slot-id="5"><wcpgl:widgetImport slotId="5"/></div>
-		<div class="col8 acol12 ccol9 right" data-slot-id="6"><wcpgl:widgetImport slotId="6"/></div>
+		<div class="col4 acol12 ccol2" data-slot-id="5"><wcpgl:widgetImport slotId="5"/></div>
+		<div class="col8 acol12 ccol10 right" data-slot-id="6"><wcpgl:widgetImport slotId="6"/></div>
 	</div>
 </div>
 
