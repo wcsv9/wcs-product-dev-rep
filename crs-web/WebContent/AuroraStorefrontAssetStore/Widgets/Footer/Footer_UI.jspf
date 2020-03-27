@@ -67,7 +67,47 @@
 		
 		<div id="footerExploreSection" class="section section4">
 			
-			<img id="contentImage_4" src="/wcsstore/AuroraStorefrontAssetStore//images/signup.jpg" alt="signup">
+			<div class="signupsection md-5 cls">
+
+<div class="sign-up rw collapse">
+<form name="JoinEmailFormFooter" id="JoinEmailFormFooter" action="TMWUserEmailOptIn" method="POST" novalidate="">
+<label id="emailUpdatesEmailLabel" for="emailUpdatesEmail">SIGN UP FOR OUR MAILING LIST</label>
+<div class="sm-9 cls">
+<input autocomplete="email" id="emailUpdatesEmail" aria-describedby="emailUpdatesEmailLabel" class="js-email-signup-input" name="emailUpdatesEmail" type="email" required="" aria-required="true" placeholder="Enter email address" title="Sign up for email tips, deals &amp; more"><button class="button primary postfix js-email-signup-footer">
+Sign up
+</button>
+</div>
+
+
+
+</form>
+</div>
+<div class="mobile-sign-up rw collapse">
+<form name="JoinSMSFormFooter" id="JoinSMSFormFooter" action="TMWTextPromotions" method="POST" novalidate="">
+<label id="pref_mobile_num_footer_label" for="pref_mobile_num_footer">SIGN UP FOR TEXTS AND GET AN EXCLUSIVE OFFER!</label>
+<div class="sm-9 cls">
+<input autocomplete="off" class="js-ontype-showlegal mask-inited" id="pref_mobile_num_footer" aria-describedby="pref_mobile_num_footer_label" name="subscribeSmsPhone" type="tel" maxlength="15" placeholder="ENTER PHONE NUMBER">
+
+</div>
+<div class="sm-3 cls">
+<button class="button primary postfix js-sms-signup">
+Sign up
+</button>
+</div>
+<p class="error-message bottom is-hidden" id="errorMobileSignup" role="alert" aria-atomic="true" aria-live="assertive"></p>
+<p class="success-message bottom is-hidden" id="successMobileSignup" role="alert" aria-atomic="true"></p>
+<div style="display: none;" id="js-mobile-legal" class="legal">
+Message and data rates may apply. By providing my mobile number, I agree to receive recurring marketing text messages at the mobile number provided that may be sent using an automated system. Consent is not required to purchase goods or services from Men's Wearhouse.Text STOP to 66960 to opt out at any time. For info text HELP to 66960. See
+<button type="button" class="btn-text" onclick="window.open('/mobile-alert-terms-conditions','_blank');">
+Mobile Terms.
+</button>
+</div>
+</form>
+</div>
+<div class="share">
+
+</div>
+</div>
 
 			<div class="social-media">
 			<ul class="nav">
@@ -127,9 +167,9 @@
 
 <style>
 
-.social-media {   text-align: left;    max-width: 1100px;    margin: 32px auto 0;}
+.social-media {   text-align: left;    max-width: 1100px;    margin: 69px auto 0 !important;}
 .social-media ul {      border-width: 0 1px;    -webkit-transform: translateY(-50%);    transform: translateY(-50%);}
 .social-media ul {   display: inline-block;    padding: 0px 15px;    background: #FFF;    margin: 0 auto;    width: 272px;    text-align: left;}
 .social-media li {    display: inline-block;}
-.social-media img {    font-size: 25px;    padding: 0 6px;    color: black;}
+.social-media img {    font-size: 25px;    padding: 0 18px 0 0px;    color: black;}
 </style>
