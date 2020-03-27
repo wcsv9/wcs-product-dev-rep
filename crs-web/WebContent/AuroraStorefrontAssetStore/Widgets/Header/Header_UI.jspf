@@ -530,13 +530,13 @@ z-index: 100010 !important;
 		
 		<li class="hidden">
 	    <a id="departmentButton_12" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_12">
-		<span><c:out value="RENTALS"/></span>
+		<span><c:out value="BIG & TALL"/></span>
 		<div class="arrow_button_icon"></div>
 	    </a>
 	    <c:set var="deptDropDownURL" value="${env_absoluteUrl}DepartmentDropdownViewRWD?storeId=${storeId}&catalogId=${catalogId}&langId=${langId}&uniqueID=12"/>
-            <div wcType="RefreshArea" refreshurl="${deptDropDownURL}" declareFunction="declareDeptDropdownRefreshArea('departmentMenu_12')" widgetId="departmentMenu_12" id="departmentMenu_12" class="departmentMenu" role="menu" data-parent="departmentsMenu" data-id="12" aria-label="RENTALS" lazyLoad="${lazyLoad}">
+            <div wcType="RefreshArea" refreshurl="${deptDropDownURL}" declareFunction="declareDeptDropdownRefreshArea('departmentMenu_12')" widgetId="departmentMenu_12" id="departmentMenu_12" class="departmentMenu" role="menu" data-parent="departmentsMenu" data-id="12" aria-label="BIG & TALL" lazyLoad="${lazyLoad}">
                 <div class="header">
-                    <a id="departmentLink_12" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="link menuLink" role="menuitem" tabindex="-1"><c:out value="RENTALS"/></a>
+                    <a id="departmentLink_12" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="link menuLink" role="menuitem" tabindex="-1"><c:out value="BIG & TALL"/></a>
                     <a id="departmentToggle_12" href="#" class="toggle" role="button" data-toggle="departmentMenu_12" aria-labelledby="departmentLink_12"><span role="presentation"></span></a>
                 </div>
                 <c:if test="${!empty department.catalogGroupView}">
@@ -561,13 +561,13 @@ z-index: 100010 !important;
 		
 		<li class="hidden">
 	    <a id="departmentButton_13" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_13">
-		<span><c:out value="RENTALS"/></span>
+		<span><c:out value="FEATURED"/></span>
 		<div class="arrow_button_icon"></div>
 	    </a>
 	    <c:set var="deptDropDownURL" value="${env_absoluteUrl}DepartmentDropdownViewRWD?storeId=${storeId}&catalogId=${catalogId}&langId=${langId}&uniqueID=13"/>
-            <div wcType="RefreshArea" refreshurl="${deptDropDownURL}" declareFunction="declareDeptDropdownRefreshArea('departmentMenu_13')" widgetId="departmentMenu_13" id="departmentMenu_13" class="departmentMenu" role="menu" data-parent="departmentsMenu" data-id="13" aria-label="RENTALS" lazyLoad="${lazyLoad}">
+            <div wcType="RefreshArea" refreshurl="${deptDropDownURL}" declareFunction="declareDeptDropdownRefreshArea('departmentMenu_13')" widgetId="departmentMenu_13" id="departmentMenu_13" class="departmentMenu" role="menu" data-parent="departmentsMenu" data-id="13" aria-label="FEATURED" lazyLoad="${lazyLoad}">
                 <div class="header">
-                    <a id="departmentLink_13" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="link menuLink" role="menuitem" tabindex="-1"><c:out value="RENTALS"/></a>
+                    <a id="departmentLink_13" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="link menuLink" role="menuitem" tabindex="-1"><c:out value="FEATURED"/></a>
                     <a id="departmentToggle_13" href="#" class="toggle" role="button" data-toggle="departmentMenu_13" aria-labelledby="departmentLink_13"><span role="presentation"></span></a>
                 </div>
                 <c:if test="${!empty department.catalogGroupView}">
@@ -589,37 +589,7 @@ z-index: 100010 !important;
                 </c:if>
             </div>
 	    </li>
-		
-		<li class="hidden">
-	    <a id="departmentButton_14" href="#" class="departmentButton" role="menuitem" aria-haspopup="true" data-toggle="departmentMenu_14">
-		<span><c:out value="RENTALS"/></span>
-		<div class="arrow_button_icon"></div>
-	    </a>
-	    <c:set var="deptDropDownURL" value="${env_absoluteUrl}DepartmentDropdownViewRWD?storeId=${storeId}&catalogId=${catalogId}&langId=${langId}&uniqueID=14"/>
-            <div wcType="RefreshArea" refreshurl="${deptDropDownURL}" declareFunction="declareDeptDropdownRefreshArea('departmentMenu_14')" widgetId="departmentMenu_14" id="departmentMenu_14" class="departmentMenu" role="menu" data-parent="departmentsMenu" data-id="14" aria-label="RENTALS" lazyLoad="${lazyLoad}">
-                <div class="header">
-                    <a id="departmentLink_14" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="link menuLink" role="menuitem" tabindex="-1"><c:out value="RENTALS"/></a>
-                    <a id="departmentToggle_14" href="#" class="toggle" role="button" data-toggle="departmentMenu_14" aria-labelledby="departmentLink_14"><span role="presentation"></span></a>
-                </div>
-                <c:if test="${!empty department.catalogGroupView}">
-                    <ul class="categoryList"><c:forEach var="category" items="${department.catalogGroupView}" end="1"><li>
-                        <c:set var="key" value="14_${category.uniqueID}"/>
-                        <a id="categoryLink_${key}" href="${fn:escapeXml(categoryURLMap[key])}" class="menuLink" role="menuitem" tabindex="-1"><c:out value="${category.name}"/></a>
-                        <c:if test="${!empty category.catalogGroupView}">
-                            <ul class="subcategoryList"><c:forEach var="subcategory" items="${category.catalogGroupView}" end="${subcategoryLimit - 1}"><li>
-                                <c:set var="key" value="14_${category.uniqueID}_${subcategory.uniqueID}"/>
-                                <a id="subcategoryLink_${key}" href="${fn:escapeXml(categoryURLMap[key])}" class="menuLink" role="menuitem" tabindex="-1"><c:out value="${subcategory.name}"/></a>
-                            </li></c:forEach><c:if test="${fn:length(category.catalogGroupView) > subcategoryLimit}"><li class="more">
-                                <c:set var="key" value="14_${category.uniqueID}"/>
-                                <a id="moreLink_${key}" href="${fn:escapeXml(categoryURLMap[key])}" class="menuLink" role="menuitem" tabindex="-1"><fmt:message bundle="${storeText}" key="MORE_CATEGORY"/></a>
-                            </li></c:if></ul>
-                        </c:if>
-                    </li></c:forEach><c:if test="${fn:length(department.catalogGroupView) > subcategoryLimit}"><li class="more">
-                        <a id="moreLink_14" href="${fn:escapeXml(categoryURLMap[department.uniqueID])}" class="menuLink" role="menuitem" tabindex="-1"><fmt:message bundle="${storeText}" key="MORE_CATEGORY"/></a>
-                    </li></c:if></ul>
-                </c:if>
-            </div>
-	    </li>
+	
 	    </c:if></c:forEach>
 		</ul></div><%-- End Refresh Area --%>
        <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/Search/Search.jsp"/><%out.flush();%>
