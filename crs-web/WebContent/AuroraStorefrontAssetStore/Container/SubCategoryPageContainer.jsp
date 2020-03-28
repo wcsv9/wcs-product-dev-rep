@@ -25,10 +25,11 @@
 }
 	div#widget_breadcrumb {
     
-    margin: 0px -1px;
+    margin: -1px -5px;
 }
 	#content .facetWidget.collapsible {
     padding: 0px 4% 10px 0%;
+    margin-left: -5px;
    
 }
 	</style>
