@@ -34,11 +34,11 @@
 		<div class="row margin-true ${fn:toLowerCase(pageDesign.pageGroup)}_pageDesign_pageGroup">
 		<c:choose>
 			<c:when test="${foundCurrentSlot7 == true}">
-				<div class="col6 acol6 ccol6 slot4" data-slot-id="4"><wcpgl:widgetImport slotId="4"/></div>
+				<div class="col6 acol6 ccol7 slot4" data-slot-id="4"><wcpgl:widgetImport slotId="4"/></div>
 				<div id="productSlot56" class="acol12 col12 ccol5">
 			</c:when>
 			<c:otherwise>
-				<div class="col6 acol6 ccol6 slot4" data-slot-id="4"><wcpgl:widgetImport slotId="4"/></div>
+				<div class="col6 acol6 ccol7 slot4" data-slot-id="4"><wcpgl:widgetImport slotId="4"/></div>
 				<div id="productSlot56" class="acol12 col12 ccol4">
 			</c:otherwise>
 		</c:choose>
