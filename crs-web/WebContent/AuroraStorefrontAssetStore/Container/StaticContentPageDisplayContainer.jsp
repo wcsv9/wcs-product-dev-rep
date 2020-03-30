@@ -17,7 +17,7 @@
 <%@include file="../Common/EnvironmentSetup.jspf" %>
 <%@taglib uri="http://commerce.ibm.com/pagelayout" prefix="wcpgl"%>
 
-<div class="rowContainer" id="container_${pageDesign.layoutId}">
+<div class="StaticContentPage rowContainer" id="container_${pageDesign.layoutId}">
 	<div class="row">
 		<div class="col12" data-slot-id="1">
 	<div class="left-nav-div">		
