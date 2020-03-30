@@ -69,11 +69,11 @@
 			
 			<div class="signupsection md-5 cls">
 
-<div class="sign-up rw collapse">
+<div class="sign-up rw collapse" style="font-size:12px;">
 
 <label id="emailUpdatesEmailLabel" for="emailUpdatesEmail">SIGN UP FOR OUR MAILING LIST</label>
 <div class="sm-9 cls">
-<input autocomplete="email" id="emailUpdatesEmail" aria-describedby="emailUpdatesEmailLabel" class="js-email-signup-input" name="emailUpdatesEmail" type="email" required="" aria-required="true" placeholder="Enter email address" title="Sign up for email tips, deals &amp; more"><button class="button primary postfix js-email-signup-footer">
+<input autocomplete="email" id="emailUpdatesEmail" aria-describedby="emailUpdatesEmailLabel" class="js-email-signup-input" name="emailUpdatesEmail" type="email" required="" aria-required="true" placeholder="ENTER EMAIL ADDRESS" title="Sign up for email tips, deals &amp; more"><button class="button primary postfix js-email-signup-footer">
 Sign up
 </button>
 </div>
@@ -82,7 +82,7 @@ Sign up
 
 
 </div>
-<div class="mobile-sign-up rw collapse">
+<div class="mobile-sign-up rw collapse" style="font-size:12px;">
 
 <label id="pref_mobile_num_footer_label" for="pref_mobile_num_footer">SIGN UP FOR TEXTS AND GET AN EXCLUSIVE OFFER!</label>
 <div class="sm-9 cls">
