@@ -12,7 +12,22 @@
  =================================================================
 --%>
 <%-- START ShopperActions_UI.jspf --%>
-
+<script>
+function subButton(){
+     var counter= document.getElementById('quantity_<c:out value='${catalogEntryID}'/>').value;
+     if(counter > 0){
+     	counter--;
+        document.getElementById('quantity_<c:out value='${catalogEntryID}'/>').value = counter;
+     }
+    };
+    
+function addButton(){
+       var counter= document.getElementById('quantity_<c:out value='${catalogEntryID}'/>').value;
+     	counter++;
+        document.getElementById('quantity_<c:out value='${catalogEntryID}'/>').value = counter;
+    };
+     
+</script>
 <c:if test="${!empty catalogEntryID}">
 	<div class="shopperActions">
 				
@@ -21,7 +36,9 @@
 					<c:when test="${productAvailable eq 'true'}">
 						<div class="quantity_section">
 							<label for="quantity_<c:out value='${catalogEntryID}'/>" class="header"><wcst:message key="PD_QTY" bundle="${widgetText}"/></label>
+							<input type="Button" id='SubButton' value="-" onClick="javascript:subButton();"/>
 							<input name="quantity_<c:out value='${catalogEntryID}'/>" id="quantity_<c:out value='${catalogEntryID}'/>" type="tel" class="quantity_input" value="1" onchange="javascript:productDisplayJS.notifyQuantityChange(this.value);">
+							<input type="Button" id='AddButton' value="+" onClick="javascript:addButton();"/>
 							<div class="clear_float"></div>
 						</div>
 					
