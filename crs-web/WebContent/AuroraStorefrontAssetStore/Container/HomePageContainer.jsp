@@ -68,7 +68,7 @@ button.gb-close.x {
     letter-spacing: 0.1em;
     border: solid 1px #333333;
     color: #333333;
-    padding: 0.75em 2em;
+    padding: 0.75em 2em; cursor: pointer;
 }
 </style>
 <script type="text/javascript">
