@@ -47,6 +47,12 @@
 			<img id="WC_CachedProductOnlyDisplay_prod_images_1_3" src="/wcsstore/AuroraStorefrontAssetStore//images/thumb3.jpg" alt="/wcsstore/AuroraStorefrontAssetStore//images/NoImageIcon.jpg" />
 								</a>
 							</li>
+						<li id="productAngleProdLi4">
+					<a id="WC_CachedProductOnlyDisplay_prod_links_1_4" href="JavaScript:changeThumbNail('productAngleProdLi4','${productFullImage}');"
+							title="${productFullImage}">
+			<img id="WC_CachedProductOnlyDisplay_prod_images_1_4" src="${productFullImage}" alt="${productFullImage}" />
+								</a>
+							</li>
 					</ul>
 				</div>
 			
