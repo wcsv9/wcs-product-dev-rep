@@ -227,14 +227,14 @@
 
 <c:set var="allContractsValid" value="true" scope="request"/>
 <table id="order_details" cellpadding="0" cellspacing="0" border="0" width="100%" summary="<fmt:message bundle="${storeText}" key="SHOPCART_TABLE_SUMMARY" />">
-	  <tr class="nested">
-		   <%-- <th class="align_left" id="shoppingCart_tableCell_productName"><fmt:message bundle="${storeText}" key="SHOPCART_PRODUCT" /></th>
+	   <%-- <tr class="nested">
+		  <th class="align_left" id="shoppingCart_tableCell_productName"><fmt:message bundle="${storeText}" key="SHOPCART_PRODUCT" /></th>
 		   <th class="align_left" id="shoppingCart_tableCell_availability"><fmt:message bundle="${storeText}" key="SHOPCART_AVAILABILITY" /></th>
 		   <th class="align_center" id="shoppingCart_tableCell_quantity" abbr="<fmt:message bundle="${storeText}" key="QUANTITY1" />"><fmt:message bundle="${storeText}" key="SHOPCART_QTY" /></th>
 		   <th class="align_right" id="shoppingCart_tableCell_each" abbr="<fmt:message bundle="${storeText}" key="UNIT_PRICE" />"><fmt:message bundle="${storeText}" key="SHOPCART_EACH" /></th>
 		  
 		    <th class="align_right" id="shoppingCart_tableCell_total" abbr="<fmt:message bundle="${storeText}" key="TOTAL_PRICE" />"><fmt:message bundle="${storeText}" key="SHOPCART_TOTAL" /></th>
-	 --%>  </tr>
+	  </tr> --%>
 
 	<c:if test="${pagorder.orderItem != null && !empty pagorder.orderItem}">
 		<c:if test="${showDynamicKit eq 'true'}">
