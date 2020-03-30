@@ -17,6 +17,12 @@
 <%@include file="../Common/EnvironmentSetup.jspf"%>
 <%@taglib uri="http://commerce.ibm.com/pagelayout" prefix="wcpgl"%>
 
+<style>
+.row.margin-true.product_pageDesign_pageGroup {
+    margin: 0 auto;
+    max-width: 1005px;
+}
+</style>
 <!--Start Page Content-->
 <div id="contentWrapper">
 	<c:set var="slotNumber" value="7"/>
