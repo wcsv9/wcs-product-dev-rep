@@ -53,11 +53,16 @@
 #orderItemDisplay .breadcrumb_item {
     float: right;
     /* padding: 2px 9px 0 0; */
-    position: absolute;
-    top: 184px !important;
-    right: 209px !important;
+    position: relative;
+    top: 28px !important;
+    right: 29px !important;
     left: auto !important;
     width: 258px;
+    z-index: 1000;
+}
+.container_content_rightsidebar.shop_cart {
+    position: relative;
+    top: -24px;
 }
 </style>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
