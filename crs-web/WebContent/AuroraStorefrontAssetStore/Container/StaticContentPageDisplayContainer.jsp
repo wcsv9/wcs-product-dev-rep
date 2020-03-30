@@ -30,13 +30,13 @@
 <a target="" href="/wcs/shop/en/auroraesite/help" id="link2">Need Help?</a>
 </li>
 <li>
-<a target="" href="/wcs/shop/en/auroraesite/contact-us" id="link3">Contact US</a>
+<a target="" href="/wcs/shop/en/auroraesite/contact-us" id="link3">Contact Us</a>
 </li>
 <li>
 <a target="" href="/wcs/shop/en/auroraesite/privacy-policy" id="link4">Privacy Policy</a>
 </li>
 <li>
-<a target="" href="/wcs/shop/en/auroraesite/return-policy" id="link5">Return's Policy</a>
+<a target="" href="/wcs/shop/en/auroraesite/return-policy" id="link5">Return Policy</a>
 </li>
 </ul>
 
@@ -59,13 +59,13 @@
 <a target="" href="/wcs/shop/en/auroraesite/help" id="link2">Need Help?</a>
 </li>
 <li>
-<a target="" href="/wcs/shop/en/auroraesite/contact-us" id="link3">Contact US</a>
+<a target="" href="/wcs/shop/en/auroraesite/contact-us" id="link3">Contact Us</a>
 </li>
 <li>
 <a target="" href="/wcs/shop/en/auroraesite/privacy-policy" id="link4">Privacy Policy</a>
 </li>
 <li>
-<a target="" href="/wcs/shop/en/auroraesite/return-policy" id="link5">Return's Policy</a>
+<a target="" href="/wcs/shop/en/auroraesite/return-policy" id="link5">Return Policy</a>
 </li>
 </ul>
 
