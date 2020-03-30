@@ -549,28 +549,43 @@
 							<%@ include file="B2BContractSelectExt.jspf" %>
 						</c:if>
 						<br/>
-						<span class="qty-upd">
-						Availability:  <%@ include file="../../ReusableObjects/CatalogEntryAvailabilityDisplay.jspf" %></span>
-						<p class="item-quantity">
-						QTY: 
-					<c:choose>
-						<c:when test="${orderItem.freeGift}">
-							<%-- This is a free item..can't change the qty --%>
-							<input type="hidden" value="-1" id='freeGift_qty_<c:out value="${status.count}"/>' name='qty_<c:out value="${status.count}"/>'/><span><c:out value="${quickCartOrderItemQuantity}"/></span>
-						</c:when>
-						<c:otherwise>
-							<span class="spanacce" id="Quantity_ACCE_Message"><fmt:message bundle="${storeText}" key='ACCE_Quantity_Update_Message' /></span>
-							<label for='qty_<c:out value="${status.count}"/>' style='display:none'><fmt:message bundle="${storeText}" key="QUANTITY1" /></label>
-							<input id='qty_<c:out value="${status.count}"/>' name='qty_<c:out value="${status.count}"/>' type="tel" aria-labelledby="Quantity_ACCE_Message" size="1" style="width:25px;" value='<c:out value="${quickCartOrderItemQuantity}"/>' onkeydown="JavaScript:setCurrentId('qty_<c:out value='${status.count}'/>'); CheckoutHelperJS.updateCartWait(this, '<c:out value='${orderItem.orderItemId}'/>',event)" />
-						</c:otherwise>
-					</c:choose>
-				</p>
-				<span class="price">
-				Each: 
-					<fmt:formatNumber var="formattedUnitPrice" value="${orderItem.unitPrice}" type="currency" maxFractionDigits="${env_currencyDecimal}" currencySymbol="${env_CurrencySymbolToFormat}"/>
-					<c:out value="${formattedUnitPrice}" escapeXml="false" />
-					<c:out value="${CurrencySymbol}"/>
-				</span>
+						<table class="prd-detail-cart">
+							<tr>
+								<td>Availability: </td>
+								<td><%@ include file="../../ReusableObjects/CatalogEntryAvailabilityDisplay.jspf" %></td>	
+							</tr>
+							<tr>
+								<td>QTY: </td>
+								<td>
+									<span class="item-quantity">
+						 
+										<c:choose>
+											<c:when test="${orderItem.freeGift}">
+												<%-- This is a free item..can't change the qty --%>
+												<input type="hidden" value="-1" id='freeGift_qty_<c:out value="${status.count}"/>' name='qty_<c:out value="${status.count}"/>'/><span><c:out value="${quickCartOrderItemQuantity}"/></span>
+											</c:when>
+											<c:otherwise>
+												<span class="spanacce" id="Quantity_ACCE_Message"><fmt:message bundle="${storeText}" key='ACCE_Quantity_Update_Message' /></span>
+												<label for='qty_<c:out value="${status.count}"/>' style='display:none'><fmt:message bundle="${storeText}" key="QUANTITY1" /></label>
+												<input id='qty_<c:out value="${status.count}"/>' name='qty_<c:out value="${status.count}"/>' type="tel" aria-labelledby="Quantity_ACCE_Message" size="1" style="width:25px;" value='<c:out value="${quickCartOrderItemQuantity}"/>' onkeydown="JavaScript:setCurrentId('qty_<c:out value='${status.count}'/>'); CheckoutHelperJS.updateCartWait(this, '<c:out value='${orderItem.orderItemId}'/>',event)" />
+											</c:otherwise>
+										</c:choose>
+									</span>
+								</td>	
+							</tr>
+							
+							<tr>
+								<td>Each: </td>
+								<td>
+									<span class="price">
+				
+										<fmt:formatNumber var="formattedUnitPrice" value="${orderItem.unitPrice}" type="currency" maxFractionDigits="${env_currencyDecimal}" currencySymbol="${env_CurrencySymbolToFormat}"/>
+										<c:out value="${formattedUnitPrice}" escapeXml="false" />
+										<c:out value="${CurrencySymbol}"/>
+									</span>
+								</td>	
+							</tr>
+						</table>
 							<%-- displays move to wish list link if user is a registered shopper --%>
 							<flow:ifEnabled feature="SOAWishlist">
 								<%out.flush();%>
