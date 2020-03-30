@@ -17,7 +17,46 @@
   *****
 --%>
 <!-- BEGIN ShopCartDisplay.jsp -->
-
+<style>
+#breadcrumb .on {
+    color: #000000;
+    font-size: 21px;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    position: relative;
+    color: #222;
+}
+#box .body, #box_1 .body {
+    float: none;
+    border-left: solid 0px #e5e5e5;
+    border-right: solid 0px #e5e5e5;
+    border-bottom: solid 0px #e5e5e5;
+    margin: 0;
+    padding: 0 8px;
+}
+#orderItemDisplay .breadcrumb_item .button_secondary .button_text {
+    display: block;
+    padding-top: 17px;
+    /* height: 46px; */
+    font-size: .8125rem;
+    font-weight: 500;
+}
+	#orderItemDisplay .breadcrumb_item .button_secondary {
+    width: 258px;
+    max-width: 258px;
+    text-align: center;
+}
+	#orderItemDisplay .breadcrumb_item {
+    float: right;
+    /* padding: 2px 9px 0 0; */
+    position: relative;
+    top: 50px;
+    left: -48px;
+}
+</style>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://commerce.ibm.com/base" prefix="wcbase" %>
