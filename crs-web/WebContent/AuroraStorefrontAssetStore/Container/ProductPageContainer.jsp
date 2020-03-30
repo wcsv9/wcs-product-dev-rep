@@ -45,7 +45,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="col6 acol6 ccol7 slot4" data-slot-id="4"><wcpgl:widgetImport slotId="4"/></div>
-				<div id="productSlot56" class="acol12 col12 ccol4">
+				<div id="productSlot56" class="acol12 col12 ccol5">
 			</c:otherwise>
 		</c:choose>
 			<div class="col5 acol6 ccol12 left slot5" data-slot-id="5"><wcpgl:widgetImport slotId="5"/></div>
