@@ -38,11 +38,12 @@
     padding: 0 8px;
 }
 #orderItemDisplay .breadcrumb_item .button_secondary .button_text {
-    display: block;
-    padding-top: 17px;
+        display: block;
+    padding-top: 13px;
     /* height: 46px; */
     font-size: .8125rem;
     font-weight: 500;
+    height: 30px;
 }
 	#orderItemDisplay .breadcrumb_item .button_secondary {
     width: 258px;
