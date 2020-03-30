@@ -35,7 +35,7 @@ function addButton(){
 				<c:choose>
 					<c:when test="${productAvailable eq 'true'}">
 						<div class="quantity_section">
-							<label for="quantity_<c:out value='${catalogEntryID}'/>" class="header"><wcst:message key="PD_QTY" bundle="${widgetText}"/></label>
+							<label for="quantity_<c:out value='${catalogEntryID}'/>" class="header">QTY</label>
 							<input type="Button" id='SubButton' value="-" onClick="javascript:subButton();"/>
 							<input name="quantity_<c:out value='${catalogEntryID}'/>" id="quantity_<c:out value='${catalogEntryID}'/>" type="tel" class="quantity_input" value="1" onchange="javascript:productDisplayJS.notifyQuantityChange(this.value);">
 							<input type="Button" id='AddButton' value="+" onClick="javascript:addButton();"/>
