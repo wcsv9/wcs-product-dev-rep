@@ -49,12 +49,14 @@
     max-width: 258px;
     text-align: center;
 }
-	#orderItemDisplay .breadcrumb_item {
+#orderItemDisplay .breadcrumb_item {
     float: right;
     /* padding: 2px 9px 0 0; */
-    position: relative;
-    top: 50px;
-    left: -48px;
+    position: absolute;
+    top: 173px !important;
+    right: 209px !important;
+    left: auto !important;
+    width: 258px;
 }
 </style>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
