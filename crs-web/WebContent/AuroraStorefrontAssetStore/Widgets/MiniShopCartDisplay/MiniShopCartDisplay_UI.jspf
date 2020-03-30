@@ -39,7 +39,7 @@
 		<div id="widget_minishopcart_popup_1">
 			<div id="cartDropdown">
 				<h3 id="cartDropdownMessage"><fmt:message bundle="${storeText}" key="MSC_ITEM_ADDED"/></h3>
-				<a id="MiniShopCartCloseButton_2" href="#" class="closeButton"><fmt:message bundle="${storeText}" key="CLOSE"/></a>
+				<a id="MiniShopCartCloseButton_2" href="#" class="closeButton"><span> X <span><!--<fmt:message bundle="${storeText}" key="CLOSE"/>--></a>
 				<div class="content">
 					<div class="products added">
 						<c:forEach var="orderItemRecentlyAddedMap" items="${orderItemsRecentlyAddedList}">
