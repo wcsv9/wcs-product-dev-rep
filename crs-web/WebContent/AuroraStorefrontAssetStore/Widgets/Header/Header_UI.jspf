@@ -131,8 +131,8 @@ z-index: 100010 !important;
                 </li>
                     <li>
                     <%out.flush();%><c:import url="${env_jspStoreDir}Widgets/LanguageCurrency/LanguageCurrency.jsp"/><%out.flush();%>
-                </li><flow:ifEnabled feature="StoreLocator"><li class="storeLocatorQuickLink">
-                    <a id="storeLocatorQuickLink" href="${fn:escapeXml(StoreLocatorView)}"><fmt:message bundle="${storeText}" key="HEADER_STORE_LOCATOR"/></a>
+                </li><flow:ifEnabled feature="StoreLocator"><li class="storeLocatorQuickLink"><span class="mystore">MY STORE:<span>
+                    <a id="storeLocatorQuickLink" href="${fn:escapeXml(StoreLocatorView)}"><fmt:message bundle="${storeText}" key="HEADER_STORE_LOCATOR"/> <img id="contentImage_1" src="/wcsstore/AuroraStorefrontAssetStore//images/arrowbtm-header.png" alt=""></a>
                 </li></flow:ifEnabled><flow:ifEnabled feature="SOAWishlist"><c:if test="${!(userType == 'G' && env_shopOnBehalfSessionEstablished eq 'true')}"><li>
                     <a id="wishListQuickLink" href="${fn:escapeXml(WishListDisplayURL)}"><fmt:message bundle="${storeText}" key="HEADER_SHOPPING_LIST"/></a>
                 </li></c:if></flow:ifEnabled>
