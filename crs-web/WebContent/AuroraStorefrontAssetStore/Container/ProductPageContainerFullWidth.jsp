@@ -30,10 +30,7 @@
 		<div class="row margin-true">
 			<div class="col12 slot1" data-slot-id="1"><wcpgl:widgetImport slotId="1"/></div>
 		</div>
-		<div class="row">
-			<div class="col6 acol12 slot2" data-slot-id="2"><wcpgl:widgetImport slotId="2"/></div>
-			<div class="col6 acol12 slot3" data-slot-id="3"><wcpgl:widgetImport slotId="3"/></div>
-		</div>
+		
 		<div class="row margin-true ${fn:toLowerCase(pageDesign.pageGroup)}_pageDesign_pageGroup">
 			<div class="col3 acol3 ccol3 slot4" data-slot-id="4"><wcpgl:widgetImport slotId="4"/></div>
 			<div id="productFullWidthSlot56" class="acol12 col9 ccol9 right">
