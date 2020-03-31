@@ -32,16 +32,16 @@
     });
     </script>
 </flow:ifEnabled>
-<script>
-function myFunction() {
-  var x = document.getElementById("searchBar");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-</script>
+<script>$(function() {
+  $("#searchBarbtntop").on("click", function(e) {
+    $("#searchBar").toggleClass("wide");
+  });
+  $(document).on("click", function(e) {
+    if ($(e.target).is("#searchBar, #searchBarbtntop") === false) {
+      $("#searchBar").removeClass("wide");
+    }
+  });
+});</script>
 <script>var isGuest = ${userType == 'G'};</script>
 
 <script>
@@ -66,6 +66,12 @@ background-color: #000;
 }
 body .hwp-container {
 z-index: 100010 !important;
+}
+#searchBar {
+  display: none;
+}
+#searchBar.wide {
+ display: block;
 }
 </style>
 <div id="global-a-shipping-message">
@@ -100,7 +106,7 @@ z-index: 100010 !important;
                 <%out.flush();%>
                 </li>
             </c:if>
-          <li class="separator-false searchbtn"><button class="searchbtnadd" onclick="myFunction()"></button>
+          <li class="separator-false searchbtn"><button id="searchBarbtntop" class="searchbtnadd" ></button>
             <div id="quickLinksMenu" class="basicMenu" role="menu" data-parent="header" aria-label="<fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/>" tabindex="0">
                 <h3><fmt:message bundle="${storeText}" key="HEADER_QUICK_LINKS"/></h3><a href="#" class="closeButton" role="button" data-toggle="quickLinksMenu"><span role="presentation"></span></a>
                 <ul role="group"><c:if test="${userType != 'G'}"><li>
