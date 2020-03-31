@@ -29,6 +29,7 @@
 </c:if>
 
 <link rel="stylesheet" href="${jspStoreImgDir}${storeStylesheet}" type="text/css" />
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
 <!--[if IE 8]>
 <link rel="stylesheet" href="${jspStoreImgDir}css/stylesIE8.css" type="text/css" />
