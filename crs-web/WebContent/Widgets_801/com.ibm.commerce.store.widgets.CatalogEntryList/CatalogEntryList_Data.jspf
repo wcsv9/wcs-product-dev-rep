@@ -256,7 +256,7 @@ it will become an empty String. If you do not include the space, the forEach wil
         <c:set var="columnCountByWidth_Grid" value='${param.columnCountByWidth}' />
     </c:when>
     <c:otherwise>
-        <c:set var="defaultColumnCountByWidth_Grid" value='{"0":1,"201":2,"488":3,"730":4,"923":5,"1207":6}' />
+        <c:set var="defaultColumnCountByWidth_Grid" value='{"0":1,"201":2,"488":2,"730":3,"923":4,"1207":4}' />
         <c:set var="columnCountByWidth_Grid" value='${defaultColumnCountByWidth_Grid}' />
     </c:otherwise>
 </c:choose>
@@ -278,7 +278,7 @@ it will become an empty String. If you do not include the space, the forEach wil
                 <c:set var="columnCountByWidth_List" value='${param.columnCountByWidth}' />
             </c:when>
             <c:otherwise>
-                <c:set var="defaultColumnCountByWidth_List" value='{"0":1,"900":2}'/>
+                <c:set var="defaultColumnCountByWidth_List" value='{"0":1,"900":1}'/>
                 <c:set var="columnCountByWidth_List" value='${defaultColumnCountByWidth_List}' />
             </c:otherwise>
         </c:choose>
