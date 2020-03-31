@@ -23,14 +23,7 @@
                         <wcpgl:widgetImport slotId="1" />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col6 acol12" data-slot-id="2">
-                        <wcpgl:widgetImport slotId="2" />
-                    </div>
-                    <div class="col6 acol12" data-slot-id="3">
-                        <wcpgl:widgetImport slotId="3" />
-                    </div>
-                </div>
+              
                 <div class="row margin-true">
                     <div class="col4 acol12 ccol3" data-slot-id="4">
                         <wcpgl:widgetImport slotId="4" />
