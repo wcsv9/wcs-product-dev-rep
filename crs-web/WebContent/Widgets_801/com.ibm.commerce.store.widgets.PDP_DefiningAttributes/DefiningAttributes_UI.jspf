@@ -115,8 +115,8 @@
 							<select aria-label="${attributeName}" class="wcSelect" data-widget-type="wc.Select" name="attrValue" id="attrValue_<c:out value='${attributeName}'/>_entitledItem_<c:out value='${catalogEntryID}'/>"
 									onChange='JavaScript:productDisplayJS.setSKUImageId("productMainImage");productDisplayJS.setSelectedAttribute("<c:out value='${attributeName}'/>",this.value, "<c:out value="entitledItem_${catalogEntryID}"/>");
 														productDisplayJS.notifyAttributeChange("${catalogEntryID}","entitledItem_<c:out value='${catalogEntryID}'/>",false,${displayPriceRange});'>
-							<option value="">
-								<wcst:message key="PD_CHOOSE" bundle="${widgetText}"/>
+							<option value="" style = "text-transform:uppercase;">
+								CHOOSE ${attributeName}
 							</option>
 							<c:forEach var="allowedValue" items="${attributeValues}" varStatus="vStatus">
 								<c:set var="index" value="${fn:trim(vStatus.count-1)}" />
@@ -218,30 +218,14 @@
 						<c:set var="currentUsedFiltersClasses" value="currentUsedFilters"/>
 					</c:if>
 				</c:forEach>
-				<div id="currentUsedFilters_<c:out value="entitledItem_${catalogEntryID}"/>" class="${currentUsedFiltersClasses}">
-					<c:forEach var="attribute" items="${definingAttributeList}" varStatus="aStatus">
-						<c:set var="attributeName" value="${attribute[0]}"/>
-						<c:set var="displayName" value="${attribute[3]}" />
-						<c:set var="attributeNameWithoutReplaceStr03" value="${fn:replace(fn:replace(attributeName, replaceStr01, search01),replaceStr ,search)}" />
-						<c:set var="attributeValue" value=""/>
-						<c:set var="usedFilterClasses" value="usedFilter"/>
-						<c:if test="${not empty WCParam[attributeNameWithoutReplaceStr03]}">
-							<c:set var="attributeValue" value="${fn:replace(WCParam[attributeNameWithoutReplaceStr03], replaceStr01, search01)}"/>
-							<c:set var="usedFilterClasses" value="${usedFilterClasses} visible"/>
-						</c:if>
-						<div id="usedFilter_<c:out value="${aStatus.count}"/><c:out value="${widgetSuffix}"/>" class="${usedFilterClasses}">
-							<div class="close" role="button" aria-label="<wcst:message key="LN_SEARCH_FACET_REMOVE" bundle="${widgetText}"/>" id="usedFilterRemove_<c:out value="${aStatus.count}"/><c:out value="${widgetSuffix}"/>" onclick='javascript:productDisplayJS.resetSelectedAttribute("<c:out value="${attributeName}"/>", "<c:out value="entitledItem_${catalogEntryID}"/>", "<c:out value="${ProductDisplayURL}"/>");'></div>
-							<c:out value="${displayName}"/>: <span id="usedFilterValue_<c:out value="${aStatus.count}"/><c:out value="${widgetSuffix}"/>"><c:out value="${attributeValue}"/></span>
-						</div>
-					</c:forEach>
-				</div>
+			
 				<div class="options_dropdown_column mobileVisible">
 					<div class="heading" id="dropdown_filter_label_<c:out value='${catalogEntryID}'/>"><wcst:message key="PD_CHOOSE_FILTER" bundle="${widgetText}"/></div>
 					<div class="options_dropdown selectWrapper" role="menu" id="dropdown_options_filter_<c:out value='${catalogEntryID}'/>">
 						<label for="attrName_<c:out value="${widgetSuffix}"/>" style="display:none;"><wcst:message key="PD_CHOOSE_FILTER" bundle="${widgetText}"/></label>
 						<select aria-label="<wcst:message key="PD_CHOOSE_FILTER" bundle="${widgetText}"/>" role="menuitem" class="wcSelect" data-widget-type="wc.Select" id="attrName_<c:out value="${widgetSuffix}"/>" onChange='JavaScript:productDisplayJS.setSelectedAttributeName(this.value, "<c:out value="entitledItem_${catalogEntryID}"/>");'>
-						<option value="">
-							<wcst:message key="PD_CHOOSE" bundle="${widgetText}"/>
+						<option value="" style = "text-transform:uppercase;">
+									SELECT <c:out value='${attributeName}'/>
 						</option>
 						<c:forEach var="attribute" items="${definingAttributeList}" varStatus="aStatus">
 							<c:set var="attributeName" value="${attribute[0]}" />
@@ -311,17 +295,21 @@
 							productDisplayJS.registerMouseDown("attrValue_<c:out value='${attributeName}'/>_entitledItem_<c:out value='${catalogEntryID}'/>");
 						});
 					</script>
-					<div id="attr_entitledItem_<c:out value='${catalogEntryID}'/>_<c:out value='${attributeName}'/>">
+						<style>
+						.visibile-always {
+							display: block !important;
+						}
+						</style>
+					<div id="attr_entitledItem_<c:out value='${catalogEntryID}'/>_<c:out value='${attributeName}'/>" class="visibile-always">
 						<div class="options_dropdown_column mobileHidden" id="options_dropdown_column_<c:out value="${aStatus.count}"/><c:out value="${widgetSuffix}"/>">
-							<div class="heading mobileVisible" id="dropdown_option_label_<c:out value='${catalogEntryID}'/>"><wcst:message key="PD_CHOOSE_OPTION" bundle="${widgetText}"/></div>
-							<div class="heading mobileHidden" id="dropdown_options_label_entitledItem_<c:out value='${catalogEntryID}'/>_<c:out value='${attributeName}'/>"><c:out value="${displayName}"/></div>
+							
 							<div class="options_dropdown selectWrapper" role="menu" id="dropdown_options_list_entitledItem_<c:out value='${catalogEntryID}'/>_<c:out value='${attributeName}'/>">
 							<label for="attrValue_<c:out value='${attributeName}'/>_entitledItem_<c:out value='${catalogEntryID}'/>" style="display:none;"><c:out value='${attributeName}'/><wcst:message key="PD_ACCE_required" bundle="${widgetText}"/></label>
 							<select aria-label="${attributeName}" class="wcSelect" data-widget-type="wc.Select" name="attrValue" id="attrValue_<c:out value='${attributeName}'/>_entitledItem_<c:out value='${catalogEntryID}'/>" 
 									onChange='JavaScript:productDisplayJS.setSKUImageId("productMainImage");productDisplayJS.setSelectedAttribute("<c:out value='${attributeName}'/>",this.value, "<c:out value="entitledItem_${catalogEntryID}"/>",undefined,undefined,this.value);
 									productDisplayJS.notifyAttributeChange("${catalogEntryID}","entitledItem_<c:out value='${catalogEntryID}'/>",false,${displayPriceRange});'>
-								<option value="">
-									<wcst:message key="PD_CHOOSE" bundle="${widgetText}"/>
+								<option value="" style = "text-transform:uppercase;">
+									SELECT <c:out value='${attributeName}'/>
 								</option>
 								<c:forEach var="allowedValue" items="${attributeValues}" varStatus="bStatus">				
 									<option value='<c:out value="${fn:replace(allowedValue, attrSearch, attrReplaceStr)}"/>' <c:if test="${allowedValue == fn:replace(WCParam[attributeNameWithoutReplaceStr01], search01, replaceStr01)}">selected="selected"</c:if>>
@@ -350,3 +338,4 @@
 </div>
 	
 <!-- END DefiningAttributes_UI.jspf -->
+
