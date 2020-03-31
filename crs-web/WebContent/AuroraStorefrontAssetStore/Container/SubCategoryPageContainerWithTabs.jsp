@@ -54,7 +54,7 @@
 								<c:set var="selectedTabIndex" value="${status.index}" />
 							</c:if>
 						</c:forEach>
-						<div class="tabButtonContainer" role="tablist">
+						<div class="tabButtonContainer" role="tablist" style="display:none;">
 							<div class="tab_header tab_header_double">
 								<c:forEach var="tabSlotId" items="${tabSlotIds}" varStatus="status">
 									<c:set var="tabSlotName" value="Title${tabSlotId}" />
