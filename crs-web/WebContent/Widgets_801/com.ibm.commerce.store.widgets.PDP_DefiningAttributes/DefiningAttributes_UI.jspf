@@ -299,6 +299,11 @@
 						.visibile-always {
 							display: block !important;
 						}
+						.ui-selectmenu-text {
+						    text-transform: uppercase;
+						    font-size: 10px;
+						    color: #999;
+						}
 						</style>
 					<div id="attr_entitledItem_<c:out value='${catalogEntryID}'/>_<c:out value='${attributeName}'/>" class="visibile-always">
 						<div class="options_dropdown_column mobileHidden" id="options_dropdown_column_<c:out value="${aStatus.count}"/><c:out value="${widgetSuffix}"/>">
