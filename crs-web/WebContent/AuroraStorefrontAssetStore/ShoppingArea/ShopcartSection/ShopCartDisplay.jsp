@@ -58,7 +58,7 @@
     right: 29px !important;
     left: auto !important;
     width: 258px;
-    z-index: 1000;
+    z-index: 99;
 }
 .container_content_rightsidebar.shop_cart {
     position: relative;
