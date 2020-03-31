@@ -84,7 +84,7 @@
 										</div>
 									</c:when>
 									<c:otherwise>
-										<div><fmt:message bundle="${storeText}" key="MSC_EMPTY_SHOP_CART"/></div>
+										
 									</c:otherwise>
 								</c:choose>
 							</div>
