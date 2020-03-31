@@ -74,7 +74,35 @@ z-index: 100010 !important;
  display: block;
 }
 </style>
+<div class="top-espot--wrap-outer">
+<div class="top-espot--wrap">
+<div class="top-espot top-espot--a">
+<style>
+body #posSitewideBanner,
+body #holiday-page-espot-container {
+background-color: #000;
+}
+body .hwp-container {
+z-index: 100010 !important;
+}
+</style>
+<div id="global-a-shipping-message">
+<!-- Canada--><!-- Generic International--><a class="generic js-intl gtm-pushed-link" style="color: rgb(255, 255, 255); text-decoration: none;" href="/webapp/wcs/stores/servlet/ContentAttachmentView?contentName=MW4FAQInternationalOrders.html&amp;catalogId=12004&amp;top=&amp;parent_category_rn=&amp;categoryId=&amp;langId=-1&amp;storeId=12751&amp;cm_sp=2014_02_01-_-Global_Promo-_-Free_Ship "><img style="padding-right: 0px;display: inline-block;width: 19px;height: 13px;float: left;" src="//images.menswearhouse.com/is/image/TMW/Intl_ship_icon_wt?scl=1&amp;fmt=png-alpha">&nbsp;20 USD flat-rate shipping on international orders over 175 USD</a>
+</div>
 
+</div>
+<div class="top-espot top-espot--b">
+<ul style="list-style:none;">
+
+<li class="bg-black white" style="text-align: right; top: 18px;"><a style="color:#fff; text-decoration:none;" href="/c/national-hockey-league-custom-lining?cm_sp=2019_10_05-_-GLOBAL_BANNER_B-_-NHL" data-gtm-espot="2019_10_05-_-GLOBAL_BANNER_B-_-NHL">NHL Custom Linings&nbsp;&nbsp;<span aria-hidden="true">|</span>&nbsp;&nbsp;<span class="inline-bold">Learn More</span></a></li>
+
+
+
+
+</ul>
+</div>
+</div>
+</div>
 <div id="header" role="banner">
     <div id="headerRow1">
   
