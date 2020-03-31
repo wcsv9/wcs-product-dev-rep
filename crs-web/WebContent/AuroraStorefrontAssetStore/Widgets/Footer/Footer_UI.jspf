@@ -69,7 +69,7 @@
 			
 			<div class="signupsection md-5 cls">
 
-<div class="sign-up rw collapse" style="font-size:12px;">
+<div class="sign-up rw collapse" >
 
 <label id="emailUpdatesEmailLabel" for="emailUpdatesEmail">SIGN UP FOR OUR MAILING LIST</label>
 <div class="sm-9 cls">
@@ -82,7 +82,7 @@ Sign up
 
 
 </div>
-<div class="mobile-sign-up rw collapse" style="font-size:12px;">
+<div class="mobile-sign-up rw collapse" >
 
 <label id="pref_mobile_num_footer_label" for="pref_mobile_num_footer">SIGN UP FOR TEXTS AND GET AN EXCLUSIVE OFFER!</label>
 <div class="sm-9 cls">
