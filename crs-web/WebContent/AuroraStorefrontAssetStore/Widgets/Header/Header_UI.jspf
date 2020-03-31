@@ -56,9 +56,7 @@
 <c:if test="${env_OnBehalfOf}">
     <c:set var="signInOutAttributes" value="class='nohover default_cursor disabled' aria-disabled='true' " />
 </c:if>
-<div class="top-espot--wrap-outer">
-<div class="top-espot--wrap">
-<div class="top-espot top-espot--a">
+
 <style>
 body #posSitewideBanner,
 body #holiday-page-espot-container {
