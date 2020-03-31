@@ -27,7 +27,7 @@
 				<div id="widget_minishopcart_popup">										
 						<div id="cartDropdown" ${miniCartDropDownOverrideWidthClass}>				
 							<h3><fmt:message bundle="${storeText}" key="MSC_ITEMS_IN_CART"/></h3>
-							<a id="MiniShopCartCloseButton_1" href="#" class="closeButton"><fmt:message bundle="${storeText}" key="CLOSE"/></a>					            					            
+							<a id="MiniShopCartCloseButton_1" href="#" class="closeButton">X</a>					            					            
 							<div class="content">
 								<c:choose>
 									<c:when test="${!empty orderItemsDetailsList}">
