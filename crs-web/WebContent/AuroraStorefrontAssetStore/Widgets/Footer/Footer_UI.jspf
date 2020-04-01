@@ -172,4 +172,5 @@ Mobile Terms.
 .social-media ul {   display: inline-block;    padding: 0px 0px;    background: #FFF;    margin: 0 auto;        text-align: left;}
 .social-media li {    display: inline-block;}
 .social-media img {    font-size: 25px;    padding: 0 20px 0 0px;    color: black;}
+img#siqurity {    margin-top: 32px;}
 </style>
