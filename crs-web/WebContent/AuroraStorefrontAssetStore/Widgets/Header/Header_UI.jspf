@@ -36,11 +36,7 @@
   $("#searchBarbtntop").on("click", function(e) {
     $("#searchBar").toggleClass("wide");
   });
-  $(document).on("click", function(e) {
-    if ($(e.target).is("#searchBar, #searchBarbtntop") === false) {
-      $("#searchBar").removeClass("wide");
-    }
-  });
+ 
 });</script>
 <script>var isGuest = ${userType == 'G'};</script>
 
