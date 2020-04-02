@@ -36,7 +36,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/data/Deploy/CustDeploy/') {
-                    sh 'docker build -f Dockerfile."$apptype" . -t 192.168.17.90:5000/"$apptype"-app:"$image"'
+                    sh 'docker build -f Dockerfile-"$apptype" . -t 192.168.17.90:5000/"$apptype"-app:"$image"'
                     
                     }
             }
