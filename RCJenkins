@@ -26,6 +26,7 @@ pipeline {
                             
                    dir ('/data/wcscode') {
                    sh 'rm -rf /data/Deploy/CustDeploy/CustDeploy/*'
+		   sh  'cp Dockerfile-"$apptype" /data/Deploy/CustDeploy/ '
                   sh 'unzip wcbd-deploy-server-local-"$apptype"-"$label".zip -d /data/Deploy/CustDeploy/CustDeploy'
              
               }
@@ -36,6 +37,7 @@ pipeline {
             agent { label 'wcsv9' }
                 steps { 
                     dir ('/data/Deploy/CustDeploy/') {
+		    
                     sh 'docker build -f Dockerfile-"$apptype" . -t 192.168.17.90:5000/"$apptype"-app:"$image"'
                     
                     }
