@@ -1,4 +1,4 @@
-FROM us.gcr.io/gcpwcs/crs-app:9.0.1.7
+FROM 192.168.17.90:5000/crs-app:9.0.1.7
 COPY CustDeploy /SETUP/Cus
 COPY hystrix.properties /profile/config
 RUN chmod 777 -R  /SETUP/Cus &&\
